@@ -20,10 +20,7 @@ class AppToolbar(ctk.CTkFrame):
         )
 
 
-    def add_button(
-        self,
-        button
-    ):
+    def add_button(self, button):
 
         button.pack(
             side="left",
