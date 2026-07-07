@@ -8,9 +8,16 @@ import customtkinter as ctk
 
 class CompanyPage(ctk.CTkFrame):
 
-    def __init__(self, parent):
+    def __init__(
+        self,
+        parent,
+        controller
+    ):
 
         super().__init__(parent)
+
+        self.controller = controller
+
 
         self.title = ctk.CTkLabel(
             self,
@@ -23,51 +30,20 @@ class CompanyPage(ctk.CTkFrame):
         )
 
 
-        self.toolbar = ctk.CTkFrame(
-            self
+        self.refresh_button = ctk.CTkButton(
+            self,
+            text="Refresh",
+            command=self.load_data
         )
 
-        self.toolbar.pack(
-            fill="x",
-            padx=20
-        )
-
-
-        self.add_button = ctk.CTkButton(
-            self.toolbar,
-            text="Add Company"
-        )
-
-        self.add_button.pack(
-            side="left",
-            padx=5
-        )
-
-
-        self.edit_button = ctk.CTkButton(
-            self.toolbar,
-            text="Edit"
-        )
-
-        self.edit_button.pack(
-            side="left",
-            padx=5
-        )
-
-
-        self.delete_button = ctk.CTkButton(
-            self.toolbar,
-            text="Deactivate"
-        )
-
-        self.delete_button.pack(
-            side="left",
-            padx=5
+        self.refresh_button.pack(
+            pady=5
         )
 
 
         self.table = ctk.CTkTextbox(
-            self
+            self,
+            font=("Consolas", 14)
         )
 
         self.table.pack(
@@ -83,7 +59,24 @@ class CompanyPage(ctk.CTkFrame):
 
     def load_data(self):
 
-        self.table.insert(
-            "end",
-            "Company list will appear here..."
+        self.table.delete(
+            "1.0",
+            "end"
         )
+
+
+        companies = self.controller.get_companies()
+
+
+        for company in companies:
+
+            self.table.insert(
+                "end",
+                f"""
+Code: {company['code']}
+Name: {company['name']}
+Commercial: {company['commercial_name']}
+Phone: {company['phone']}
+-----------------------------
+"""
+            )
