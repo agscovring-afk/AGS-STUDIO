@@ -1,74 +1,89 @@
-"""Simple Company management page (minimal CRUD UI)."""
-try:
-    import customtkinter as ctk
-except Exception:
-    ctk = None
+"""
+AGS ERP V2
+Company Page
+"""
 
-import tkinter as tk
-from app.controllers.company_controller import CompanyController
-from app.repositories.company_repository import CompanyRepository
-import os
+import customtkinter as ctk
 
 
-class CompanyPage:
-    def __init__(self, db_path: str = None):
-        self.db_path = db_path or os.path.join(os.getcwd(), "ags_erp.db")
-        self.repo = CompanyRepository(self.db_path)
-        self.controller = CompanyController(self.repo)
-        self.controller.init_db()
+class CompanyPage(ctk.CTkFrame):
 
-    def show(self):
-        if ctk:
-            self._show_ctk()
-        else:
-            self._show_tk()
+    def __init__(self, parent):
 
-    def _show_ctk(self):
-        app = ctk.CTk()
-        app.title("Companies — AGS ERP V2")
-        app.geometry("480x220")
+        super().__init__(parent)
 
-        lbl1 = ctk.CTkLabel(app, text="Legal name")
-        lbl1.pack(padx=8, pady=4)
-        e1 = ctk.CTkEntry(app)
-        e1.pack(fill="x", padx=8)
+        self.title = ctk.CTkLabel(
+            self,
+            text="Companies",
+            font=("Arial", 24)
+        )
 
-        lbl2 = ctk.CTkLabel(app, text="Commercial name")
-        lbl2.pack(padx=8, pady=4)
-        e2 = ctk.CTkEntry(app)
-        e2.pack(fill="x", padx=8)
-
-        def on_create():
-            legal = e1.get()
-            comm = e2.get()
-            cid = self.controller.create_company(legal, comm, "COM-00001", "DZD", "fr")
-            ctk.CTkLabel(app, text=f"Created company id={cid}").pack(pady=6)
-
-        btn = ctk.CTkButton(app, text="Create", command=on_create)
-        btn.pack(pady=12)
-        app.mainloop()
-
-    def _show_tk(self):
-        root = tk.Tk()
-        root.title("Companies — AGS ERP V2 (tk)")
-
-        tk.Label(root, text="Legal name").pack(padx=8, pady=4)
-        e1 = tk.Entry(root)
-        e1.pack(fill="x", padx=8)
-
-        tk.Label(root, text="Commercial name").pack(padx=8, pady=4)
-        e2 = tk.Entry(root)
-        e2.pack(fill="x", padx=8)
-
-        def on_create():
-            legal = e1.get()
-            comm = e2.get()
-            cid = self.controller.create_company(legal, comm, "COM-00001", "DZD", "fr")
-            tk.Label(root, text=f"Created company id={cid}").pack(pady=6)
-
-        tk.Button(root, text="Create", command=on_create).pack(pady=12)
-        root.mainloop()
+        self.title.pack(
+            pady=20
+        )
 
 
-if __name__ == "__main__":
-    CompanyPage().show()
+        self.toolbar = ctk.CTkFrame(
+            self
+        )
+
+        self.toolbar.pack(
+            fill="x",
+            padx=20
+        )
+
+
+        self.add_button = ctk.CTkButton(
+            self.toolbar,
+            text="Add Company"
+        )
+
+        self.add_button.pack(
+            side="left",
+            padx=5
+        )
+
+
+        self.edit_button = ctk.CTkButton(
+            self.toolbar,
+            text="Edit"
+        )
+
+        self.edit_button.pack(
+            side="left",
+            padx=5
+        )
+
+
+        self.delete_button = ctk.CTkButton(
+            self.toolbar,
+            text="Deactivate"
+        )
+
+        self.delete_button.pack(
+            side="left",
+            padx=5
+        )
+
+
+        self.table = ctk.CTkTextbox(
+            self
+        )
+
+        self.table.pack(
+            fill="both",
+            expand=True,
+            padx=20,
+            pady=20
+        )
+
+
+        self.load_data()
+
+
+    def load_data(self):
+
+        self.table.insert(
+            "end",
+            "Company list will appear here..."
+        )
