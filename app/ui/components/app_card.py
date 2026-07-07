@@ -43,10 +43,7 @@ class AppCard(ctk.CTkFrame):
         )
 
 
-    def update_value(
-        self,
-        value
-    ):
+    def update_value(self, value):
 
         self.value_label.configure(
             text=value
