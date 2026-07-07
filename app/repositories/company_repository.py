@@ -63,7 +63,7 @@ class CompanyRepository(BaseRepository):
         WHERE code = ?
         """
 
-        return self.fetch_one(query, (code,))
+        return self.fetchone(query, (code,))
 
     def list_all(self):
 
@@ -74,4 +74,4 @@ class CompanyRepository(BaseRepository):
         ORDER BY id DESC
         """
 
-        return self.fetch_all(query)
+        return self.fetchall(query)
