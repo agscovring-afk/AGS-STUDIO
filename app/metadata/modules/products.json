@@ -1,0 +1,11 @@
+{
+    "module": "products",
+    "table": "products",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        }
+    ]
+}

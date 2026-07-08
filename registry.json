@@ -1,0 +1,28 @@
+{
+    "modules": {
+        "clients": {
+            "version": "1.0"
+        },
+        "customers": {
+            "version": "1.0"
+        },
+        "invoices": {
+            "version": "1.0"
+        },
+        "orders": {
+            "version": "1.0"
+        },
+        "products": {
+            "version": "1.0"
+        },
+        "suppliers": {
+            "version": "1.0"
+        },
+        "suppliers_payments": {
+            "version": "1.0"
+        },
+        "test_crud": {
+            "version": "1.0"
+        }
+    }
+}

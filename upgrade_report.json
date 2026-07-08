@@ -1,0 +1,15 @@
+{
+    "status": "OK",
+    "modules": [
+        "clients",
+        "customers",
+        "invoices",
+        "orders",
+        "products",
+        "suppliers",
+        "suppliers_payments",
+        "test_crud"
+    ],
+    "metadata_created": [],
+    "pages_found": 8
+}

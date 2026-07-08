@@ -1,0 +1,27 @@
+{
+    "module": "customers",
+    "table": "customers",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        },
+        {
+            "name": "name",
+            "type": "TEXT"
+        },
+        {
+            "name": "phone",
+            "type": "TEXT"
+        },
+        {
+            "name": "email",
+            "type": "TEXT"
+        },
+        {
+            "name": "address",
+            "type": "TEXT"
+        }
+    ]
+}

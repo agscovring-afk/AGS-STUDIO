@@ -1,0 +1,56 @@
+import subprocess
+
+
+class OllamaProvider:
+
+
+    name = "ollama"
+
+
+    def available(self):
+
+        try:
+
+            subprocess.run(
+                [
+                    "ollama",
+                    "--version"
+                ],
+                capture_output=True,
+                check=True
+            )
+
+            return True
+
+
+        except:
+
+            return False
+
+
+
+    def execute(self, task):
+
+        result = subprocess.run(
+
+            [
+                "ollama",
+                "run",
+                "gemma4:latest",
+                task
+            ],
+
+            capture_output=True,
+
+            text=True
+
+        )
+
+
+        return {
+
+            "provider": self.name,
+
+            "response": result.stdout
+
+        }

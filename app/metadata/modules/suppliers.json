@@ -1,0 +1,11 @@
+{
+    "module": "suppliers",
+    "table": "suppliers",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        }
+    ]
+}

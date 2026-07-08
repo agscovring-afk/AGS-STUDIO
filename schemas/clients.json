@@ -1,0 +1,18 @@
+﻿{
+    "module": "clients",
+    "table": "clients",
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "phone",
+            "type": "string"
+        },
+        {
+            "name": "email",
+            "type": "string"
+        }
+    ]
+}

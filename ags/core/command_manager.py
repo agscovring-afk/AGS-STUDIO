@@ -1,0 +1,17 @@
+﻿class CommandManager:
+
+    def __init__(self):
+        self.commands = {}
+
+
+    def register(self, name, handler):
+        self.commands[name] = handler
+
+
+    def execute(self, name, *args):
+
+        if name not in self.commands:
+            print(f"Command not found: {name}")
+            return
+
+        return self.commands[name](*args)

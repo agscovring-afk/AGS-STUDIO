@@ -1,0 +1,1 @@
+notepad ags\plugins\ai.py

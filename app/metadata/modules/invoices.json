@@ -1,0 +1,11 @@
+{
+    "module": "invoices",
+    "table": "invoices",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        }
+    ]
+}
