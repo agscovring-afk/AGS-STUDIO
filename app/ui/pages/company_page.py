@@ -5,6 +5,8 @@ Company Page
 
 import customtkinter as ctk
 
+from app.ui.dialogs.company_dialog import CompanyDialog
+
 
 class CompanyPage(ctk.CTkFrame):
 
@@ -30,14 +32,37 @@ class CompanyPage(ctk.CTkFrame):
         )
 
 
+        self.toolbar = ctk.CTkFrame(
+            self
+        )
+
+        self.toolbar.pack(
+            fill="x",
+            padx=20
+        )
+
+
+        self.add_button = ctk.CTkButton(
+            self.toolbar,
+            text="Add Company",
+            command=self.open_add_dialog
+        )
+
+        self.add_button.pack(
+            side="left",
+            padx=5
+        )
+
+
         self.refresh_button = ctk.CTkButton(
-            self,
+            self.toolbar,
             text="Refresh",
             command=self.load_data
         )
 
         self.refresh_button.pack(
-            pady=5
+            side="left",
+            padx=5
         )
 
 
@@ -55,6 +80,17 @@ class CompanyPage(ctk.CTkFrame):
 
 
         self.load_data()
+
+
+
+    def open_add_dialog(self):
+
+        CompanyDialog(
+            self,
+            self.controller,
+            self.load_data
+        )
+
 
 
     def load_data(self):
@@ -77,6 +113,8 @@ Code: {company['code']}
 Name: {company['name']}
 Commercial: {company['commercial_name']}
 Phone: {company['phone']}
+Email: {company['email']}
 -----------------------------
+
 """
             )
