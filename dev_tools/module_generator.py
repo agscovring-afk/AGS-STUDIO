@@ -1,20 +1,18 @@
 """
 AGS ERP V2
-Module Factory V2
+Module Factory V3
+CRUD Generator
 """
 
 import sys
 from pathlib import Path
-from datetime import datetime
 
 
-def class_name(name):
-
-    return name.capitalize()
-
+def pascal(name):
+    return name.replace("_", " ").title().replace(" ", "")
 
 
-def write_file(path, content):
+def write(path, content):
 
     file = Path(path)
 
@@ -29,26 +27,22 @@ def write_file(path, content):
     )
 
 
-
 def generate(module):
 
-    cls = class_name(module)
+    cls = pascal(module)
+    table = module.lower() + "s"
 
 
     files = {
 
 
-f"app/database/migrations/create_{module}.py":
+f"app/database/migrations/create_{table}.py":
 
 f'''
-"""
-Migration: Create {module} table
-"""
-
 def upgrade(conn):
 
     conn.execute("""
-    CREATE TABLE IF NOT EXISTS {module}s (
+    CREATE TABLE IF NOT EXISTS {table} (
 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -58,11 +52,14 @@ def upgrade(conn):
 
         name TEXT NOT NULL,
 
+        status TEXT DEFAULT 'active',
+
         is_active INTEGER DEFAULT 1,
 
         created_at TEXT,
 
         updated_at TEXT
+
     )
     """)
 ''',
@@ -72,23 +69,16 @@ def upgrade(conn):
 f"app/models/{module}.py":
 
 f'''
-"""
-{cls} Model
-"""
-
-
 class {cls}:
 
 
-    def __init__(
-        self,
-        name
-    ):
+    def __init__(self, name):
 
         self.id = None
+        self.company_id = None
         self.code = None
         self.name = name
-        self.company_id = None
+        self.status = "active"
         self.is_active = 1
         self.created_at = None
         self.updated_at = None
@@ -105,14 +95,46 @@ from app.core.base_repository import BaseRepository
 class {cls}Repository(BaseRepository):
 
 
-    table_name = "{module}s"
+    table_name = "{table}"
 
+
+    def create(self, obj):
+
+        return self.execute(
+            """
+            INSERT INTO {table}
+            (code,name,status,is_active)
+            VALUES (?,?,?,?)
+            """,
+            (
+                obj.code,
+                obj.name,
+                obj.status,
+                obj.is_active
+            )
+        )
+
+
+    def get_by_id(self,id):
+
+        return self.fetchone(
+            "SELECT * FROM {table} WHERE id=?",
+            (id,)
+        )
 
 
     def list_all(self):
 
         return self.fetchall(
-            "SELECT * FROM {module}s WHERE is_active=1"
+            "SELECT * FROM {table}"
+        )
+
+
+    def delete(self,id):
+
+        return self.execute(
+            "UPDATE {table} SET is_active=0 WHERE id=?",
+            (id,)
         )
 ''',
 
@@ -121,13 +143,22 @@ class {cls}Repository(BaseRepository):
 f"app/services/{module}_service.py":
 
 f'''
-from app.core.base_service import BaseService
+class {cls}Service:
 
 
-class {cls}Service(BaseService):
+    def __init__(self, repository):
+
+        self.repository = repository
 
 
-    pass
+    def create(self,obj):
+
+        return self.repository.create(obj)
+
+
+    def list_all(self):
+
+        return self.repository.list_all()
 ''',
 
 
@@ -135,46 +166,44 @@ class {cls}Service(BaseService):
 f"app/controllers/{module}_controller.py":
 
 f'''
-from app.core.base_controller import BaseController
+class {cls}Controller:
 
 
-class {cls}Controller(BaseController):
+    def __init__(self,service):
+
+        self.service = service
 
 
-    pass
+    def create(self,obj):
+
+        return self.service.create(obj)
+
+
+    def list(self):
+
+        return self.service.list_all()
 ''',
 
 
 
-f"app/ui/pages/{module}s_page.py":
+f"app/ui/pages/{table}_page.py":
 
 f'''
 import customtkinter as ctk
 
 
-
-class {cls}sPage(ctk.CTkFrame):
-
-
-    def __init__(
-        self,
-        parent
-    ):
-
-        super().__init__(
-            parent
-        )
+class {cls}Page(ctk.CTkFrame):
 
 
-        title = ctk.CTkLabel(
+    def __init__(self,parent):
+
+        super().__init__(parent)
+
+
+        ctk.CTkLabel(
             self,
-            text="{cls}s"
-        )
-
-
-        title.pack(
-            pady=20
-        )
+            text="{cls}"
+        ).pack()
 ''',
 
 
@@ -185,19 +214,12 @@ f'''
 import customtkinter as ctk
 
 
-
 class {cls}Dialog(ctk.CTkToplevel):
 
 
-    def __init__(
-        self,
-        parent
-    ):
+    def __init__(self,parent):
 
-        super().__init__(
-            parent
-        )
-
+        super().__init__(parent)
 
         self.title(
             "Add {cls}"
@@ -209,45 +231,33 @@ class {cls}Dialog(ctk.CTkToplevel):
 f"tests/test_{module}.py":
 
 f'''
-"""
-Test {cls} module
-"""
-
-
-def test_{module}_creation():
+def test_{module}_crud():
 
     assert True
 '''
     }
 
 
-
     for path,content in files.items():
 
-        write_file(
-            path,
-            content
-        )
+        write(path,content)
 
 
     print(
-        f"{cls} module generated successfully"
+        f"{cls} V3 module generated"
     )
 
 
 
 if __name__ == "__main__":
 
-
     if len(sys.argv) < 2:
 
         print(
-            "Usage: python module_generator.py module_name"
+            "Usage: python module_generator.py module"
         )
 
         exit()
 
 
-    generate(
-        sys.argv[1]
-    )
+    generate(sys.argv[1])
