@@ -1,6 +1,6 @@
 """
 AGS ERP V2
-UI Component - App Table
+Reusable Table Component
 """
 
 import customtkinter as ctk
@@ -11,42 +11,84 @@ class AppTable(ctk.CTkFrame):
     def __init__(
         self,
         parent,
-        columns,
-        **kwargs
+        columns
     ):
 
         super().__init__(
-            parent,
-            **kwargs
+            parent
         )
 
         self.columns = columns
 
-        self.table = ctk.CTkTextbox(
+        self.rows = []
+
+
+        self.header = ctk.CTkFrame(
             self
         )
 
-        self.table.pack(
+        self.header.pack(
+            fill="x"
+        )
+
+
+        for col in columns:
+
+            label = ctk.CTkLabel(
+                self.header,
+                text=col,
+                width=120
+            )
+
+            label.pack(
+                side="left",
+                padx=2
+            )
+
+
+        self.body = ctk.CTkScrollableFrame(
+            self
+        )
+
+        self.body.pack(
             fill="both",
             expand=True
         )
 
 
-    def clear(self):
+    def load_data(
+        self,
+        data
+    ):
 
-        self.table.delete(
-            "0.0",
-            "end"
-        )
+        for widget in self.body.winfo_children():
+
+            widget.destroy()
 
 
-    def insert_row(self, values):
+        for row in data:
 
-        row = " | ".join(
-            str(v) for v in values
-        )
+            frame = ctk.CTkFrame(
+                self.body
+            )
 
-        self.table.insert(
-            "end",
-            row + "\n"
-        )
+            frame.pack(
+                fill="x",
+                pady=2
+            )
+
+
+            for col in self.columns:
+
+                value = row[col.lower()] if col.lower() in row.keys() else ""
+
+                label = ctk.CTkLabel(
+                    frame,
+                    text=str(value),
+                    width=120
+                )
+
+                label.pack(
+                    side="left",
+                    padx=2
+                )
