@@ -1,0 +1,15 @@
+{
+    "module": "test_memory",
+    "table": "test_memory",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        },
+        {
+            "name": "name",
+            "type": "TEXT"
+        }
+    ]
+}

@@ -23,6 +23,9 @@
         },
         "test_crud": {
             "version": "1.0"
+        },
+        "test_memory": {
+            "version": "1.0"
         }
     }
 }

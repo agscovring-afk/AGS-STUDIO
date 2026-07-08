@@ -1,0 +1,20 @@
+ai:
+
+  mode: auto
+
+  providers:
+
+    ollama:
+      enabled: true
+
+    gemini:
+      enabled: false
+
+    deepseek:
+      enabled: false
+
+    openai:
+      enabled: false
+
+    claude:
+      enabled: false

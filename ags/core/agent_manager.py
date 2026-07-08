@@ -5,7 +5,7 @@ from agents.ui import UIAgent
 from agents.testing import TestingAgent
 from agents.documentation import DocumentationAgent
 
-from app.ai.providers.provider_manager import ProviderManager
+from app.ai.memory.memory_manager import MemoryManager
 
 
 
@@ -14,7 +14,7 @@ class AgentManager:
 
     def __init__(self):
 
-        self.provider_manager = ProviderManager()
+        self.memory = MemoryManager()
 
 
         self.agents = {
@@ -32,6 +32,7 @@ class AgentManager:
 
     def run(self, name, module, session=None):
 
+
         agent = self.agents.get(name)
 
 
@@ -42,17 +43,21 @@ class AgentManager:
             )
 
 
-        provider = self.provider_manager.get()
-
-
-        if hasattr(agent, "set_provider"):
-
-            agent.set_provider(
-                provider
-            )
-
-
-        return agent.analyze(
+        result = agent.analyze(
             module,
             session
         )
+
+
+        self.memory.remember(
+
+            module,
+
+            name,
+
+            str(result)
+
+        )
+
+
+        return result

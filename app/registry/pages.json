@@ -6,5 +6,6 @@
     "products": "app.ui.pages.products_page.ProductsPage",
     "suppliers": "app.ui.pages.suppliers_page.SuppliersPage",
     "suppliers_payments": "app.ui.pages.suppliers_payments_page.SuppliersPaymentsPage",
-    "test_crud": "app.ui.pages.test_crud_page.TestCrudPage"
+    "test_crud": "app.ui.pages.test_crud_page.TestCrudPage",
+    "test_memory": "app.ui.pages.test_memory_page.TestMemoryPage"
 }
