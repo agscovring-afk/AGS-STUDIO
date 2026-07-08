@@ -1,9 +1,11 @@
 """
 AGS ERP V2
-Company Dialog
+Company Dialog Extended
 """
 
 import customtkinter as ctk
+
+from app.models.company import Company
 
 
 class CompanyDialog(ctk.CTkToplevel):
@@ -21,13 +23,8 @@ class CompanyDialog(ctk.CTkToplevel):
         self.refresh_callback = refresh_callback
 
 
-        self.title(
-            "Add Company"
-        )
-
-        self.geometry(
-            "450x500"
-        )
+        self.title("Add Company")
+        self.geometry("500x700")
 
 
         self.entries = {}
@@ -36,22 +33,28 @@ class CompanyDialog(ctk.CTkToplevel):
         fields = [
             "name",
             "commercial_name",
+            "rc",
+            "nif",
+            "nis",
+            "ai",
+            "vat",
             "phone",
             "email",
-            "address"
+            "website",
+            "address",
+            "bank",
+            "rib",
+            "iban",
+            "swift"
         ]
 
 
         for field in fields:
 
-            label = ctk.CTkLabel(
+            ctk.CTkLabel(
                 self,
-                text=field.capitalize()
-            )
-
-            label.pack(
-                pady=5
-            )
+                text=field.upper()
+            ).pack()
 
 
             entry = ctk.CTkEntry(
@@ -59,21 +62,18 @@ class CompanyDialog(ctk.CTkToplevel):
             )
 
             entry.pack(
-                padx=20
+                pady=3
             )
-
 
             self.entries[field] = entry
 
 
 
-        self.save_button = ctk.CTkButton(
+        ctk.CTkButton(
             self,
             text="Save",
             command=self.save
-        )
-
-        self.save_button.pack(
+        ).pack(
             pady=20
         )
 
@@ -84,15 +84,22 @@ class CompanyDialog(ctk.CTkToplevel):
 
     def save(self):
 
-        from app.models.company import Company
-
-
         company = Company(
             name=self.entries["name"].get(),
             commercial_name=self.entries["commercial_name"].get(),
+            rc=self.entries["rc"].get(),
+            nif=self.entries["nif"].get(),
+            nis=self.entries["nis"].get(),
+            ai=self.entries["ai"].get(),
+            vat=self.entries["vat"].get(),
             phone=self.entries["phone"].get(),
             email=self.entries["email"].get(),
-            address=self.entries["address"].get()
+            website=self.entries["website"].get(),
+            address=self.entries["address"].get(),
+            bank=self.entries["bank"].get(),
+            rib=self.entries["rib"].get(),
+            iban=self.entries["iban"].get(),
+            swift=self.entries["swift"].get()
         )
 
 
@@ -102,6 +109,5 @@ class CompanyDialog(ctk.CTkToplevel):
 
 
         self.refresh_callback()
-
 
         self.destroy()
