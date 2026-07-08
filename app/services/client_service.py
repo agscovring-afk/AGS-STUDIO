@@ -4,6 +4,7 @@ Client Service
 """
 
 from app.core.base_service import BaseService
+from app.services.numbering_service import NumberingService
 
 
 class ClientService(BaseService):
@@ -17,15 +18,27 @@ class ClientService(BaseService):
             repository
         )
 
+        self.numbering = NumberingService()
+
+
 
     def create_client(
         self,
         client
     ):
 
+        if not client.code:
+
+            client.code = self.numbering.generate(
+                "client",
+                "CLI"
+            )
+
+
         return self.repository.create(
             client
         )
+
 
 
     def list_clients(
@@ -33,6 +46,7 @@ class ClientService(BaseService):
     ):
 
         return self.repository.list_all()
+
 
 
     def get_client(
@@ -43,6 +57,7 @@ class ClientService(BaseService):
         return self.repository.get_by_code(
             code
         )
+
 
 
     def deactivate_client(
