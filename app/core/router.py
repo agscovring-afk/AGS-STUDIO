@@ -11,14 +11,22 @@ class Router:
         self.routes = {}
 
 
-    def register(self, name, page):
+    def register(
+        self,
+        name,
+        page
+    ):
 
         self.routes[name] = page
 
 
-    def navigate(self, name):
+    def navigate(
+        self,
+        name
+    ):
 
         if name in self.routes:
+
             return self.routes[name]
 
         raise Exception(

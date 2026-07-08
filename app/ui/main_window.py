@@ -6,6 +6,7 @@ Main Window
 import customtkinter as ctk
 
 from app.core.router import Router
+from app.ui.pages.clients_page import ClientsPage
 
 
 class MainWindow(ctk.CTk):
@@ -14,15 +15,24 @@ class MainWindow(ctk.CTk):
 
         super().__init__()
 
+
         self.title(
             "AGS ERP V2 Enterprise"
         )
+
 
         self.geometry(
             "1200x700"
         )
 
+
         self.router = Router()
+
+
+        self.router.register(
+            "clients",
+            ClientsPage
+        )
 
 
         self.container = ctk.CTkFrame(
@@ -35,15 +45,31 @@ class MainWindow(ctk.CTk):
         )
 
 
-    def show_page(self, page):
+        self.show_page(
+            "clients"
+        )
+
+
+
+    def show_page(
+        self,
+        name
+    ):
 
         for widget in self.container.winfo_children():
+
             widget.destroy()
+
+
+        page = self.router.navigate(
+            name
+        )
 
 
         frame = page(
             self.container
         )
+
 
         frame.pack(
             fill="both",
