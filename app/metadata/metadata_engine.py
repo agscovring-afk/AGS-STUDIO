@@ -7,92 +7,33 @@ class MetadataEngine:
     BASE = "app/metadata/modules"
 
 
-    TEMPLATES = {
-
-        "customers": [
-            ("name", "TEXT"),
-            ("phone", "TEXT"),
-            ("email", "TEXT"),
-            ("address", "TEXT")
-        ],
-
-
-        "suppliers": [
-            ("name", "TEXT"),
-            ("phone", "TEXT"),
-            ("email", "TEXT"),
-            ("address", "TEXT")
-        ],
-
-
-        "products": [
-            ("name", "TEXT"),
-            ("reference", "TEXT"),
-            ("price", "REAL"),
-            ("quantity", "INTEGER")
-        ],
-
-
-        "invoices": [
-            ("customer_id", "INTEGER"),
-            ("date", "TEXT"),
-            ("total", "REAL"),
-            ("status", "TEXT")
-        ],
-
-
-        "orders": [
-            ("customer_id", "INTEGER"),
-            ("date", "TEXT"),
-            ("total", "REAL")
-        ]
-    }
-
-
-
     @classmethod
     def ensure(cls):
-
         os.makedirs(
             cls.BASE,
             exist_ok=True
         )
 
 
-
     @classmethod
-    def create(cls, module):
+    def create(cls, module, fields=None):
 
         cls.ensure()
 
 
-        fields = [
+        if fields is None:
 
-            {
-                "name": "id",
-                "type": "INTEGER",
-                "primary_key": True
-            }
-
-        ]
-
-
-        template = cls.TEMPLATES.get(
-            module,
-            [
-                ("name","TEXT")
-            ]
-        )
-
-
-        for name, dtype in template:
-
-            fields.append(
+            fields = [
                 {
-                    "name": name,
-                    "type": dtype
+                    "name": "id",
+                    "type": "INTEGER",
+                    "primary_key": True
+                },
+                {
+                    "name": "name",
+                    "type": "TEXT"
                 }
-            )
+            ]
 
 
         data = {
