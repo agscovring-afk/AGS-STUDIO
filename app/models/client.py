@@ -1,32 +1,63 @@
-from dataclasses import dataclass, field
+"""
+AGS ERP V2
+Client Model
+"""
+
 from datetime import datetime
-from typing import Optional
 
 
-@dataclass
 class Client:
-    id: Optional[int] = None
-    company_id: Optional[int] = None
-    code: str = ""
-    name: str = ""
-    contact: str = ""
-    contact_function: str = ""
-    phone: str = ""
-    mobile: str = ""
-    email: str = ""
-    address: str = ""
-    city: str = ""
-    wilaya: str = ""
-    country: str = ""
-    postal_code: str = ""
-    rc: str = ""
-    nif: str = ""
-    nis: str = ""
-    ai: str = ""
-    bank: str = ""
-    rib: str = ""
-    notes: str = ""
-    status: str = "active"
-    is_active: bool = True
-    created_at: datetime = field(default_factory=datetime.utcnow)
-    updated_at: datetime = field(default_factory=datetime.utcnow)
+
+    def __init__(
+        self,
+        name,
+        contact=None,
+        function=None,
+        phone=None,
+        mobile=None,
+        email=None,
+        address=None,
+        city=None,
+        wilaya=None,
+        country=None,
+        rc=None,
+        nif=None,
+        nis=None,
+        ai=None,
+        bank=None,
+        rib=None
+    ):
+
+        self.code = None
+
+        self.name = name
+        self.contact = contact
+        self.function = function
+
+        self.phone = phone
+        self.mobile = mobile
+
+        self.email = email
+
+        self.address = address
+        self.city = city
+        self.wilaya = wilaya
+        self.country = country
+
+        self.rc = rc
+        self.nif = nif
+        self.nis = nis
+        self.ai = ai
+
+        self.bank = bank
+        self.rib = rib
+
+        self.company_id = None
+
+        self.status = "active"
+        self.is_active = 1
+
+        now = datetime.now()
+
+        self.created_at = now
+        self.updated_at = now
