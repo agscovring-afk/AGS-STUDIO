@@ -1,55 +1,78 @@
-from app.ai.providers.ollama_provider import OllamaProvider
+from typing import Dict, Optional
+
+from app.ai.plugins.plugin_manager import plugin_manager
 
 
 class ProviderManager:
+    """
+    Unified AI Provider Manager.
 
+    Connects existing AI providers with Plugin Runtime.
+    """
 
     def __init__(self):
+        self.plugins = plugin_manager
 
-        self.providers = {
+    # ==========================
+    # Load provider plugins
+    # ==========================
 
-            "ollama": OllamaProvider(),
+    def load(
+        self,
+        module: str,
+        class_name: str
+    ):
 
-        }
+        return self.plugins.register(
+            module,
+            class_name
+        )
+
+    # ==========================
+    # Get provider
+    # ==========================
+
+    def get(
+        self,
+        name: str
+    ):
+
+        return self.plugins.get(
+            name
+        )
+
+    # ==========================
+    # Chat
+    # ==========================
+
+    def chat(
+        self,
+        provider: str,
+        prompt: str,
+        **kwargs
+    ):
+
+        instance = self.get(
+            provider
+        )
+
+        if not instance:
+            raise Exception(
+                f"Provider not found: {provider}"
+            )
+
+        return instance.chat(
+            prompt,
+            **kwargs
+        )
+
+    # ==========================
+    # Status
+    # ==========================
+
+    def status(self) -> Dict:
+
+        return self.plugins.status()
 
 
-    def register(self, name, provider):
-
-        self.providers[name] = provider
-
-
-    def get(self, name="ollama"):
-
-        return self.providers.get(name)
-
-
-    def available(self):
-
-        return list(self.providers.keys())
-
-
-    def run(self, prompt, provider=None):
-
-        if provider:
-
-            selected = self.get(provider)
-
-            if selected:
-                return selected.generate(prompt)
-
-
-        for name, service in self.providers.items():
-
-            try:
-
-                return service.generate(prompt)
-
-            except Exception:
-
-                continue
-
-
-        return {
-            "status": "failed",
-            "message": "No AI provider available"
-        }
+provider_manager = ProviderManager()
