@@ -6,6 +6,7 @@ Company Page
 import customtkinter as ctk
 
 from app.ui.dialogs.company_dialog import CompanyDialog
+from app.ui.dialogs.company_edit_dialog import CompanyEditDialog
 
 
 class CompanyPage(ctk.CTkFrame):
@@ -22,52 +23,40 @@ class CompanyPage(ctk.CTkFrame):
         self.selected_company = None
 
 
-        self.title = ctk.CTkLabel(
+        ctk.CTkLabel(
             self,
             text="Companies",
-            font=("Arial", 24)
-        )
-
-        self.title.pack(
-            pady=20
-        )
+            font=("Arial",24)
+        ).pack(pady=20)
 
 
-        self.toolbar = ctk.CTkFrame(self)
-
-        self.toolbar.pack(
-            fill="x",
-            padx=20
-        )
+        toolbar = ctk.CTkFrame(self)
+        toolbar.pack(fill="x", padx=20)
 
 
-        self.add_button = ctk.CTkButton(
-            self.toolbar,
-            text="Add Company",
-            command=self.open_add_dialog
-        )
-
-        self.add_button.pack(
-            side="left",
-            padx=5
-        )
+        ctk.CTkButton(
+            toolbar,
+            text="Add",
+            command=self.add
+        ).pack(side="left", padx=5)
 
 
-        self.refresh_button = ctk.CTkButton(
-            self.toolbar,
-            text="Refresh",
-            command=self.load_data
-        )
+        ctk.CTkButton(
+            toolbar,
+            text="Edit",
+            command=self.edit
+        ).pack(side="left", padx=5)
 
-        self.refresh_button.pack(
-            side="left",
-            padx=5
-        )
+
+        ctk.CTkButton(
+            toolbar,
+            text="Deactivate",
+            command=self.deactivate
+        ).pack(side="left", padx=5)
 
 
         self.table = ctk.CTkTextbox(
-            self,
-            font=("Consolas",14)
+            self
         )
 
         self.table.pack(
@@ -80,25 +69,12 @@ class CompanyPage(ctk.CTkFrame):
 
         self.table.bind(
             "<ButtonRelease-1>",
-            self.select_company
+            self.select
         )
 
 
         self.load_data()
 
-
-    def open_add_dialog(self):
-
-        CompanyDialog(
-            self,
-            self.controller,
-            self.load_data
-        )
-
-
-    def select_company(self,event=None):
-
-        self.selected_company = None
 
 
     def load_data(self):
@@ -109,12 +85,63 @@ class CompanyPage(ctk.CTkFrame):
         )
 
 
-        companies = self.controller.get_companies()
+        self.companies = self.controller.get_companies()
 
 
-        for company in companies:
+        for c in self.companies:
 
             self.table.insert(
                 "end",
-                f"{company['id']} | {company['code']} | {company['name']}\n"
+                f"{c['id']} | {c['code']} | {c['name']}\n"
             )
+
+
+    def select(self,event=None):
+
+        line = self.table.index(
+            "insert"
+        )
+
+        index = int(
+            line.split(".")[0]
+        ) - 1
+
+
+        if index >= 0 and index < len(self.companies):
+
+            self.selected_company = self.companies[index]
+
+
+
+    def add(self):
+
+        CompanyDialog(
+            self,
+            self.controller,
+            self.load_data
+        )
+
+
+
+    def edit(self):
+
+        if self.selected_company:
+
+            CompanyEditDialog(
+                self,
+                self.controller,
+                self.selected_company,
+                self.load_data
+            )
+
+
+
+    def deactivate(self):
+
+        if self.selected_company:
+
+            self.controller.deactivate(
+                self.selected_company["id"]
+            )
+
+            self.load_data()
