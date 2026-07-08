@@ -1,171 +1,237 @@
 """
 AGS ERP V2
-Module Generator
+Module Factory V2
 """
 
 import sys
 from pathlib import Path
+from datetime import datetime
 
 
-BASE = Path(".")
+def class_name(name):
+
+    return name.capitalize()
 
 
 
-TEMPLATES = {
+def write_file(path, content):
+
+    file = Path(path)
+
+    file.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    file.write_text(
+        content,
+        encoding="utf-8"
+    )
 
 
-"model.py":
-'''
-class {name_class}:
 
-    def __init__(self, name):
+def generate(module):
 
-        self.code = None
-        self.name = name
-        self.company_id = None
+    cls = class_name(module)
+
+
+    files = {
+
+
+f"app/database/migrations/create_{module}.py":
+
+f'''
+"""
+Migration: Create {module} table
+"""
+
+def upgrade(conn):
+
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS {module}s (
+
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+        company_id INTEGER,
+
+        code TEXT UNIQUE NOT NULL,
+
+        name TEXT NOT NULL,
+
+        is_active INTEGER DEFAULT 1,
+
+        created_at TEXT,
+
+        updated_at TEXT
+    )
+    """)
 ''',
 
 
 
-"repository.py":
-'''
+f"app/models/{module}.py":
+
+f'''
+"""
+{cls} Model
+"""
+
+
+class {cls}:
+
+
+    def __init__(
+        self,
+        name
+    ):
+
+        self.id = None
+        self.code = None
+        self.name = name
+        self.company_id = None
+        self.is_active = 1
+        self.created_at = None
+        self.updated_at = None
+''',
+
+
+
+f"app/repositories/{module}_repository.py":
+
+f'''
 from app.core.base_repository import BaseRepository
 
 
-class {name_class}Repository(BaseRepository):
+class {cls}Repository(BaseRepository):
 
-    table_name = "{name}"
+
+    table_name = "{module}s"
+
 
 
     def list_all(self):
 
         return self.fetchall(
-            "SELECT * FROM {name}"
+            "SELECT * FROM {module}s WHERE is_active=1"
         )
 ''',
 
 
 
-"service.py":
-'''
+f"app/services/{module}_service.py":
+
+f'''
 from app.core.base_service import BaseService
 
 
-class {name_class}Service(BaseService):
+class {cls}Service(BaseService):
+
 
     pass
 ''',
 
 
 
-"controller.py":
-'''
+f"app/controllers/{module}_controller.py":
+
+f'''
 from app.core.base_controller import BaseController
 
 
-class {name_class}Controller(BaseController):
+class {cls}Controller(BaseController):
+
 
     pass
 ''',
 
 
 
-"page.py":
-'''
+f"app/ui/pages/{module}s_page.py":
+
+f'''
 import customtkinter as ctk
 
 
-class {name_class}sPage(ctk.CTkFrame):
 
-    def __init__(self,parent):
-
-        super().__init__(parent)
+class {cls}sPage(ctk.CTkFrame):
 
 
-        label = ctk.CTkLabel(
-            self,
-            text="{name_class}s"
+    def __init__(
+        self,
+        parent
+    ):
+
+        super().__init__(
+            parent
         )
 
-        label.pack()
+
+        title = ctk.CTkLabel(
+            self,
+            text="{cls}s"
+        )
+
+
+        title.pack(
+            pady=20
+        )
 ''',
 
 
 
-"dialog.py":
-'''
+f"app/ui/dialogs/{module}_dialog.py":
+
+f'''
 import customtkinter as ctk
 
 
-class {name_class}Dialog(ctk.CTkToplevel):
 
-    def __init__(self,parent):
+class {cls}Dialog(ctk.CTkToplevel):
 
-        super().__init__(parent)
+
+    def __init__(
+        self,
+        parent
+    ):
+
+        super().__init__(
+            parent
+        )
+
 
         self.title(
-            "Add {name_class}"
+            "Add {cls}"
         )
+''',
+
+
+
+f"tests/test_{module}.py":
+
+f'''
+"""
+Test {cls} module
+"""
+
+
+def test_{module}_creation():
+
+    assert True
 '''
-
-}
-
-
-
-def create_module(name):
-
-    name_lower = name.lower()
-
-    name_class = name_lower.capitalize()
-
-
-    paths = {
-
-        "model.py":
-        f"app/models/{name_lower}.py",
-
-        "repository.py":
-        f"app/repositories/{name_lower}_repository.py",
-
-        "service.py":
-        f"app/services/{name_lower}_service.py",
-
-        "controller.py":
-        f"app/controllers/{name_lower}_controller.py",
-
-        "page.py":
-        f"app/ui/pages/{name_lower}s_page.py",
-
-        "dialog.py":
-        f"app/ui/dialogs/{name_lower}_dialog.py"
     }
 
 
 
-    for template,path in paths.items():
+    for path,content in files.items():
 
-        file = Path(path)
-
-        file.parent.mkdir(
-            parents=True,
-            exist_ok=True
-        )
-
-
-        content = TEMPLATES[template].format(
-            name=name_lower,
-            name_class=name_class
-        )
-
-
-        file.write_text(
-            content,
-            encoding="utf-8"
+        write_file(
+            path,
+            content
         )
 
 
     print(
-        f"Module created: {name_class}"
+        f"{cls} module generated successfully"
     )
 
 
@@ -182,6 +248,6 @@ if __name__ == "__main__":
         exit()
 
 
-    create_module(
+    generate(
         sys.argv[1]
     )
