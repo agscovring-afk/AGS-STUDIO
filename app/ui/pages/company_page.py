@@ -19,6 +19,7 @@ class CompanyPage(ctk.CTkFrame):
         super().__init__(parent)
 
         self.controller = controller
+        self.selected_company = None
 
 
         self.title = ctk.CTkLabel(
@@ -32,9 +33,7 @@ class CompanyPage(ctk.CTkFrame):
         )
 
 
-        self.toolbar = ctk.CTkFrame(
-            self
-        )
+        self.toolbar = ctk.CTkFrame(self)
 
         self.toolbar.pack(
             fill="x",
@@ -68,7 +67,7 @@ class CompanyPage(ctk.CTkFrame):
 
         self.table = ctk.CTkTextbox(
             self,
-            font=("Consolas", 14)
+            font=("Consolas",14)
         )
 
         self.table.pack(
@@ -79,8 +78,13 @@ class CompanyPage(ctk.CTkFrame):
         )
 
 
-        self.load_data()
+        self.table.bind(
+            "<ButtonRelease-1>",
+            self.select_company
+        )
 
+
+        self.load_data()
 
 
     def open_add_dialog(self):
@@ -91,6 +95,10 @@ class CompanyPage(ctk.CTkFrame):
             self.load_data
         )
 
+
+    def select_company(self,event=None):
+
+        self.selected_company = None
 
 
     def load_data(self):
@@ -108,13 +116,5 @@ class CompanyPage(ctk.CTkFrame):
 
             self.table.insert(
                 "end",
-                f"""
-Code: {company['code']}
-Name: {company['name']}
-Commercial: {company['commercial_name']}
-Phone: {company['phone']}
-Email: {company['email']}
------------------------------
-
-"""
+                f"{company['id']} | {company['code']} | {company['name']}\n"
             )
