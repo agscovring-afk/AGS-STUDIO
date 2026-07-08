@@ -33,7 +33,7 @@ client = Client(
 )
 
 
-client.code = "CLI-00001"
+
 
 
 print("=== CREATE ===")
