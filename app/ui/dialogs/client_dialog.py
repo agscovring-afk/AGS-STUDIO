@@ -27,7 +27,7 @@ class ClientDialog(ctk.CTkToplevel):
         )
 
         self.geometry(
-            "500x500"
+            "400x300"
         )
 
 
@@ -51,30 +51,25 @@ class ClientDialog(ctk.CTkToplevel):
         )
 
 
-        button = ctk.CTkButton(
+        save = ctk.CTkButton(
             self,
             text="Save",
             command=self.save
         )
 
-        button.pack(
+        save.pack(
             pady=20
         )
 
 
+
     def save(self):
 
-        data = {
-
-            "name": self.name.get(),
-
-            "phone": self.phone.get()
-
-        }
-
-
         self.save_callback(
-            data
+            {
+                "name": self.name.get(),
+                "phone": self.phone.get()
+            }
         )
 
         self.destroy()
