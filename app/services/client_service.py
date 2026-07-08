@@ -8,20 +8,48 @@ from app.core.base_service import BaseService
 
 class ClientService(BaseService):
 
-    def __init__(self, repository):
-        super().__init__(repository)
+    def __init__(
+        self,
+        repository
+    ):
 
-    def create_client(self, client):
-        return self.repository.add(client)
+        super().__init__(
+            repository
+        )
 
-    def get_client(self, client_id):
-        return self.repository.get(client_id)
 
-    def list_clients(self):
+    def create_client(
+        self,
+        client
+    ):
+
+        return self.repository.create(
+            client
+        )
+
+
+    def list_clients(
+        self
+    ):
+
         return self.repository.list_all()
 
-    def update_client(self, client):
-        return self.repository.update(client)
 
-    def deactivate_client(self, client_id):
-        return self.repository.deactivate(client_id)
+    def get_client(
+        self,
+        code
+    ):
+
+        return self.repository.get_by_code(
+            code
+        )
+
+
+    def deactivate_client(
+        self,
+        client_id
+    ):
+
+        return self.repository.deactivate(
+            client_id
+        )
