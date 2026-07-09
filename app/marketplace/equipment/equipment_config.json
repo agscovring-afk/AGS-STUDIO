@@ -1,0 +1,14 @@
+﻿{
+ "products": [
+   "machines",
+   "tools",
+   "aluminium",
+   "glass",
+   "construction_materials"
+ ],
+ "seller_types": [
+   "supplier",
+   "manufacturer",
+   "company"
+ ]
+}

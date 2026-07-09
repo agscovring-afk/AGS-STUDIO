@@ -1,0 +1,9 @@
+﻿{
+ "transport": [
+   "truck",
+   "semi_trailer",
+   "delivery",
+   "material_transport"
+ ],
+ "tracking": true
+}

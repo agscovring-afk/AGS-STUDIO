@@ -1,0 +1,7 @@
+﻿{
+ "reviews": {
+   "rating": true,
+   "comments": true,
+   "verified_users": true
+ }
+}
