@@ -1,0 +1,10 @@
+﻿{
+ "user_fields": [
+   "name",
+   "email",
+   "phone",
+   "role",
+   "tenant_id",
+   "subscription"
+ ]
+}

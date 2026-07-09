@@ -1,0 +1,11 @@
+﻿{
+ "tenant_fields": [
+   "company_name",
+   "rc",
+   "nif",
+   "nis",
+   "qualification",
+   "activity",
+   "wilaya"
+ ]
+}
