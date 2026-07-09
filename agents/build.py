@@ -1,9 +1,10 @@
-from agents.base_agent import AIEnabledAgent
+﻿from agents.base_agent import AIEnabledAgent
 
 from app.ai.orchestrator.core.workflow import Workflow
 from app.ai.orchestrator.core.step import WorkflowStep
 from app.ai.orchestrator.queue.task_queue import TaskQueue
 from app.ai.orchestrator.runtime.runtime import OrchestratorRuntime
+from app.ai.orchestrator.executor.executor import WorkflowExecutor
 
 
 class BuildAgent(AIEnabledAgent):
@@ -16,6 +17,8 @@ class BuildAgent(AIEnabledAgent):
 
         self.queue = TaskQueue()
 
+        self.executor = WorkflowExecutor()
+
 
     def create_workflow(self, module):
 
@@ -23,7 +26,6 @@ class BuildAgent(AIEnabledAgent):
             name=f"{module}_build",
             description=f"Build ERP module {module}"
         )
-
 
         tasks = [
 
@@ -43,13 +45,9 @@ class BuildAgent(AIEnabledAgent):
         for name, agent, action in tasks:
 
             step = WorkflowStep(
-
                 name=name,
-
                 agent=agent,
-
                 action=action
-
             )
 
             workflow.add_step(step)
@@ -60,56 +58,33 @@ class BuildAgent(AIEnabledAgent):
         return workflow
 
 
-
     def analyze(self, module, session=None):
 
-        self.runtime.start({
+        workflow = self.create_workflow(module)
 
-            "module": module
-
-        })
-
-
-        workflow = self.create_workflow(
-            module
+        result = self.executor.execute(
+            workflow
         )
-
-
-        plan = {
-
-            "module": module,
-
-            "status": "build_started",
-
-            "workflow": workflow.to_dict()
-
-        }
 
 
         try:
 
-            ai_result = self.ask_ai(
-
-                f"Create a complete implementation plan for ERP module '{module}'",
-
+            result["ai"] = self.ask_ai(
+                f"Create implementation plan for ERP module '{module}'",
                 session
-
             )
-
-            plan["ai"] = ai_result
-
-
-            self.runtime.finish()
-
 
         except Exception as e:
 
-            self.runtime.fail(e)
-
-            plan["ai_error"] = str(e)
+            result["ai_error"] = str(e)
 
 
-        plan["runtime"] = self.runtime.report()
+        return {
 
+            "module": module,
 
-        return plan
+            "status": "build_completed",
+
+            "execution": result
+
+        }
