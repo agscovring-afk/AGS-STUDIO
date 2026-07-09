@@ -6,6 +6,7 @@ from agents.testing import TestingAgent
 from agents.documentation import DocumentationAgent
 
 from app.ai.memory.memory_manager import MemoryManager
+from app.ai.memory.memory_types import MemoryType
 
 
 
@@ -50,13 +51,10 @@ class AgentManager:
 
 
         self.memory.remember(
-
-            module,
-
-            name,
-
-            str(result)
-
+            content=str(result),
+            memory_type=MemoryType.AGENT,
+            module=module,
+            agent=name
         )
 
 
