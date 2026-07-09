@@ -63,7 +63,8 @@ class BuildAgent(AIEnabledAgent):
         workflow = self.create_workflow(module)
 
         result = self.executor.execute(
-            workflow
+            workflow,
+            module
         )
 
 
