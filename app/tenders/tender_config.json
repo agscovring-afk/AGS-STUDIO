@@ -1,0 +1,9 @@
+﻿{
+ "tender_system": {
+   "ocr": true,
+   "qualification_detection": true,
+   "rc_nif_extraction": true,
+   "automatic_matching": true,
+   "notification": true
+ }
+}

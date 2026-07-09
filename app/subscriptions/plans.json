@@ -1,0 +1,25 @@
+﻿{
+  "plans": {
+    "FREE": {
+      "ai_requests_daily": 5,
+      "storage_mb": 500,
+      "projects": 3
+    },
+    "PRO": {
+      "ai_requests_daily": 100,
+      "storage_mb": 10000,
+      "projects": "unlimited"
+    },
+    "BUSINESS": {
+      "users": "multiple",
+      "erp": true,
+      "tenders": true,
+      "ocr": true
+    },
+    "ENTERPRISE": {
+      "private_cloud": true,
+      "api": true,
+      "custom_contract": true
+    }
+  }
+}

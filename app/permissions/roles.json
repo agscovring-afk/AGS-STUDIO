@@ -1,0 +1,15 @@
+﻿{
+ "roles": [
+  "company",
+  "contractor",
+  "small_contractor",
+  "artisan",
+  "workshop",
+  "worker",
+  "supplier",
+  "manufacturer",
+  "client",
+  "rental_company",
+  "transporter"
+ ]
+}
