@@ -1,0 +1,11 @@
+﻿{
+ "documents": [
+   "RC",
+   "NIF",
+   "NIS",
+   "Qualification",
+   "Company_Certificates"
+ ],
+ "ocr": true,
+ "auto_extract": true
+}
