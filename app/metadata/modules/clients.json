@@ -9,8 +9,7 @@
         },
         {
             "name": "name",
-            "type": "TEXT",
-            "nullable": false
+            "type": "TEXT"
         }
     ]
 }
