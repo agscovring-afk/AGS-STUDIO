@@ -1,0 +1,7 @@
+﻿{
+ "plugins":{
+  "auto_discovery":true,
+  "version_control":true,
+  "module_activation":true
+ }
+}

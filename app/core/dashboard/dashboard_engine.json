@@ -1,0 +1,10 @@
+﻿{
+ "dashboards":[
+  "owner",
+  "contractor",
+  "supplier",
+  "worker",
+  "admin"
+ ],
+ "widgets_enabled":true
+}

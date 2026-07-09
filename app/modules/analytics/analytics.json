@@ -1,0 +1,8 @@
+﻿{
+ "analytics":{
+  "reports":true,
+  "kpi":true,
+  "charts":true,
+  "ai_insights":true
+ }
+}
