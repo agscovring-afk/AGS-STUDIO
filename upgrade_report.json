@@ -8,8 +8,9 @@
         "products",
         "suppliers",
         "suppliers_payments",
-        "test_crud"
+        "test_crud",
+        "test_memory"
     ],
     "metadata_created": [],
-    "pages_found": 8
+    "pages_found": 9
 }

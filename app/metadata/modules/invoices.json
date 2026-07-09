@@ -6,6 +6,22 @@
             "name": "id",
             "type": "INTEGER",
             "primary_key": true
+        },
+        {
+            "name": "customer_id",
+            "type": "INTEGER"
+        },
+        {
+            "name": "date",
+            "type": "TEXT"
+        },
+        {
+            "name": "total",
+            "type": "REAL"
+        },
+        {
+            "name": "status",
+            "type": "TEXT"
         }
     ]
 }
