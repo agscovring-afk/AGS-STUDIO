@@ -1,4 +1,5 @@
 import sys
+import pprint
 
 from app.ai.self_developer.pipeline import DevelopmentPipeline
 
@@ -7,29 +8,37 @@ def main():
 
     if len(sys.argv) < 3:
 
-        print("Usage: python dev.py create <module>")
+        print(
+            "Usage: python dev.py create <module description>"
+        )
 
         return
 
 
     command = sys.argv[1]
 
-
-    if command != "create":
-
-        print("Unknown command")
-
-        return
+    requirement = " ".join(
+        sys.argv[2:]
+    )
 
 
-    requirement = " ".join(sys.argv[2:])
+    if command == "create":
 
+        pipeline = DevelopmentPipeline()
 
-    pipeline = DevelopmentPipeline()
+        result = pipeline.create(
+            requirement
+        )
 
-    result = pipeline.create(requirement)
+        pprint.pp(
+            result
+        )
 
-    print(result)
+    else:
+
+        print(
+            "Unknown command"
+        )
 
 
 if __name__ == "__main__":

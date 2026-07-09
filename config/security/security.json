@@ -1,0 +1,9 @@
+﻿{
+    "security_enabled": true,
+    "developer_mode": true,
+    "master_password_hash": "",
+    "developer_key": "",
+    "max_login_attempts": 5,
+    "audit_log": true,
+    "backup_before_changes": true
+}

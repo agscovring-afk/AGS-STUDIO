@@ -1,85 +1,29 @@
-﻿from app.ai.orchestrator.runtime.runtime import OrchestratorRuntime
-from app.ai.orchestrator.executor.agent_resolver import AgentResolver
+﻿from app.ai.orchestrator.core.workflow import Workflow
 
 
 class WorkflowExecutor:
 
     def __init__(self):
-
-        self.runtime = OrchestratorRuntime()
-
-        self.resolver = AgentResolver()
+        self.status = "ready"
 
 
-    def execute(self, workflow, module):
-
-        self.runtime.start(
-            {
-                "workflow": workflow.name,
-                "module": module
-            }
-        )
+    def execute(self, workflow: Workflow):
 
         results = []
 
-
-        try:
-
-            for step in workflow.steps:
-
-                step.start()
-
-
-                agent = self.resolver.resolve(
-                    step.agent
-                )
-
-
-                output = agent.analyze(
-                    module
-                )
-
-
-                step.finish()
-
-
-                results.append({
-
-                    "step": step.name,
-
-                    "agent": step.agent,
-
-                    "action": step.action,
-
-                    "status": "completed",
-
-                    "output": output
-
-                })
-
-
-            self.runtime.finish()
-
-
-        except Exception as e:
-
-            self.runtime.fail(e)
-
-            results.append({
-
-                "status": "failed",
-
-                "error": str(e)
-
-            })
-
+        for step in workflow.steps:
+            result = self.execute_step(step)
+            results.append(result)
 
         return {
+            "status": "completed",
+            "results": results
+        }
 
-            "workflow": workflow.name,
 
-            "steps": results,
+    def execute_step(self, step):
 
-            "runtime": self.runtime.report()
-
+        return {
+            "step": getattr(step, "name", "unknown"),
+            "status": "done"
         }

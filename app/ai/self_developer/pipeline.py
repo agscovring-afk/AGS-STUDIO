@@ -1,8 +1,9 @@
 from app.ai.self_developer.engine import SelfDeveloper
-from app.generators.module_generator import ModuleGenerator
+from app.ai.generator.ags_module_generator import ModuleGenerator
 
 
 class DevelopmentPipeline:
+
 
     def __init__(self):
 
@@ -11,18 +12,31 @@ class DevelopmentPipeline:
         self.generator = ModuleGenerator()
 
 
+
     def create(self, requirement):
 
-        analysis = self.ai.analyze(requirement)
+
+        analysis = self.ai.analyze(
+            requirement
+        )
+
 
         module = analysis["requirement"]["name"]
 
-        generated = self.generator.create(module)
+
+        generated = self.generator.create(
+            module
+        )
+
 
         return {
 
-            "analysis": analysis,
+            "status":"success",
 
-            "generated": generated
+            "requirement":requirement,
+
+            "analysis":analysis,
+
+            "generated":generated
 
         }

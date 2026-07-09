@@ -1,5 +1,10 @@
-﻿from app.ai.orchestrator.executor.executor import WorkflowExecutor
+﻿#
+# app/ai/orchestrator/executor/__init__.py
+#
 
-__all__ = [
-    "WorkflowExecutor"
-]
+class Executor:
+    def __init__(self):
+        self.message = "Hello, World!"
+
+    def execute(self):
+        return self.message
