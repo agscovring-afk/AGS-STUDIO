@@ -1,0 +1,29 @@
+﻿{
+ "modules": [
+  "documents",
+  "vision_ai",
+  "cad_bim",
+  "boq",
+  "estimation",
+  "quotation",
+  "projects",
+  "planning",
+  "hr",
+  "payroll",
+  "equipment",
+  "fleet",
+  "maintenance",
+  "quality",
+  "hse",
+  "accounting",
+  "crm",
+  "api",
+  "mobile",
+  "billing",
+  "reports",
+  "security"
+ ],
+ "architecture": "extensible_plugin_platform",
+ "ai_first": true,
+ "saas_ready": true
+}

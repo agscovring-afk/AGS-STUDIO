@@ -1,0 +1,14 @@
+﻿{
+ "subscriptions": [
+  "free",
+  "starter",
+  "professional",
+  "enterprise",
+  "government"
+ ],
+ "billing": [
+  "invoice",
+  "check",
+  "bank_transfer"
+ ]
+}
