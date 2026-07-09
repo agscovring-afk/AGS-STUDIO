@@ -1,0 +1,3 @@
+class CrmService:
+
+    pass

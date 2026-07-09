@@ -1,0 +1,5 @@
+CREATE TABLE crm (
+
+    id INTEGER PRIMARY KEY
+
+);

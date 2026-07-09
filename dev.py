@@ -1,67 +1,37 @@
-﻿import sys
-import subprocess
+import sys
 
-def run(cmd):
-    print(">>>", " ".join(cmd))
-    subprocess.run(cmd)
+from app.ai.self_developer.pipeline import DevelopmentPipeline
 
-def doctor():
-    run(["python", "ags.py", "doctor"])
 
-def build(module):
-    run(["python", "ags.py", "ai", "build", module])
+def main():
 
-def create(module):
-    run(["python", "ags.py", "ai", "create", module])
+    if len(sys.argv) < 3:
 
-def repair():
-    run(["python", "ags.py", "doctor"])
+        print("Usage: python dev.py create <module>")
 
-def test():
-    run(["python", "-m", "pytest"])
+        return
 
-def release():
-    run(["git", "add", "."])
-    run(["git", "commit", "-m", "Automatic Release"])
 
-def help_menu():
-    print("""
-AGS-STUDIO Developer CLI
+    command = sys.argv[1]
 
-Commands:
-python dev.py doctor
-python dev.py build <module>
-python dev.py create <module>
-python dev.py repair
-python dev.py test
-python dev.py release
-""")
+
+    if command != "create":
+
+        print("Unknown command")
+
+        return
+
+
+    requirement = " ".join(sys.argv[2:])
+
+
+    pipeline = DevelopmentPipeline()
+
+    result = pipeline.create(requirement)
+
+    print(result)
+
 
 if __name__ == "__main__":
 
-    if len(sys.argv) < 2:
-        help_menu()
-        sys.exit()
-
-    cmd = sys.argv[1]
-
-    if cmd == "doctor":
-        doctor()
-
-    elif cmd == "build":
-        build(sys.argv[2])
-
-    elif cmd == "create":
-        create(sys.argv[2])
-
-    elif cmd == "repair":
-        repair()
-
-    elif cmd == "test":
-        test()
-
-    elif cmd == "release":
-        release()
-
-    else:
-        help_menu()
+    main()
