@@ -1,0 +1,3 @@
+class Tenders:
+
+    pass

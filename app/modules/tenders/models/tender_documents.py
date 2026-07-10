@@ -1,0 +1,3 @@
+class TenderDocuments:
+
+    pass

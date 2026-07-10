@@ -1,0 +1,10 @@
+{
+    "agents": [
+        "Tender Analyzer Agent",
+        "Document Reader Agent",
+        "BOQ Extractor Agent",
+        "Pricing Agent",
+        "Risk Agent",
+        "Report Agent"
+    ]
+}

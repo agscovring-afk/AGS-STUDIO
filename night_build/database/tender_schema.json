@@ -1,0 +1,12 @@
+{
+    "tables": [
+        "tenders",
+        "clients",
+        "documents",
+        "boq_items",
+        "suppliers",
+        "supplier_quotes",
+        "evaluations",
+        "contracts"
+    ]
+}

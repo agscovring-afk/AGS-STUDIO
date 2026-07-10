@@ -1,0 +1,8 @@
+{
+    "modules": [
+        "Tender Service",
+        "Document Service",
+        "BOQ Service",
+        "Evaluation Service"
+    ]
+}

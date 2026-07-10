@@ -1,0 +1,3 @@
+class BoqItems:
+
+    pass

@@ -1,0 +1,10 @@
+{
+    "module": "Tender Management",
+    "layers": [
+        "AI Layer",
+        "Business Layer",
+        "Database Layer",
+        "API Layer",
+        "UI Layer"
+    ]
+}

@@ -1,0 +1,3 @@
+class SupplierQuotes:
+
+    pass
