@@ -4,64 +4,62 @@ from app.ai.plugins.base.provider import AIProvider
 
 
 class OllamaPlugin(AIProvider):
-    """
-    Ollama AI Provider Plugin.
-    """
 
     name = "ollama"
     version = "1.0"
-    capabilities = [
-        "chat",
-        "local",
-        "reasoning"
-    ]
+    capabilities = ["chat", "generation"]
 
-    def __init__(self, config=None):
 
-        super().__init__(config)
+    def __init__(self):
+        super().__init__()
 
-        self.url = self.config.get(
-            "url",
-            "http://localhost:11434/api/generate"
-        )
+        self.url = "http://localhost:11434/api/generate"
+        self.model = "qwen2.5:3b"
 
-        self.model_name = self.config.get(
-            "model",
-            "qwen2.5:3b"
-        )
 
-    # ==========================
-    # Chat
-    # ==========================
 
-    def chat(
-        self,
-        prompt,
-        context=None,
-        **kwargs
-    ):
+    def chat(self, prompt, **kwargs):
 
         payload = {
-            "model": self.model_name,
+
+            "model": self.model,
+
             "prompt": prompt,
-            "stream": False
+
+            "stream": False,
+
+            "options": {
+
+                "temperature": 0.3,
+
+                "num_ctx": 4096
+
+            }
+
         }
 
+
         response = requests.post(
+
             self.url,
+
             json=payload,
-            timeout=120
+
+            timeout=600
+
         )
+
 
         response.raise_for_status()
 
+
         data = response.json()
 
-        return {
-            "provider": self.name,
-            "model": self.model_name,
-            "response": data.get(
-                "response",
-                ""
-            )
-        }
+
+        return data.get(
+
+            "response",
+
+            ""
+
+        )

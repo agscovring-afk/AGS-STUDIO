@@ -1,4 +1,4 @@
-from typing import Dict, Optional
+from typing import Dict
 
 from app.ai.plugins.plugin_manager import plugin_manager
 
@@ -6,16 +6,34 @@ from app.ai.plugins.plugin_manager import plugin_manager
 class ProviderManager:
     """
     Unified AI Provider Manager.
-
-    Connects existing AI providers with Plugin Runtime.
+    Loads default AI providers automatically.
     """
 
     def __init__(self):
+
         self.plugins = plugin_manager
 
-    # ==========================
-    # Load provider plugins
-    # ==========================
+        self.load_defaults()
+
+
+    def load_defaults(self):
+
+        try:
+
+            self.plugins.register(
+                "app.ai.plugins.providers.ollama_plugin",
+                "OllamaPlugin"
+            )
+
+            print("[AI] Ollama provider loaded")
+
+        except Exception as e:
+
+            print(
+                "[AI] Ollama loading failed:",
+                e
+            )
+
 
     def load(
         self,
@@ -28,9 +46,6 @@ class ProviderManager:
             class_name
         )
 
-    # ==========================
-    # Get provider
-    # ==========================
 
     def get(
         self,
@@ -41,9 +56,6 @@ class ProviderManager:
             name
         )
 
-    # ==========================
-    # Chat
-    # ==========================
 
     def chat(
         self,
@@ -57,22 +69,22 @@ class ProviderManager:
         )
 
         if not instance:
+
             raise Exception(
                 f"Provider not found: {provider}"
             )
+
 
         return instance.chat(
             prompt,
             **kwargs
         )
 
-    # ==========================
-    # Status
-    # ==========================
 
     def status(self) -> Dict:
 
         return self.plugins.status()
+
 
 
 provider_manager = ProviderManager()

@@ -1,4 +1,4 @@
-﻿import sys
+import sys
 import tkinter as tk
 
 from ags.core.engine import AGSEngine
@@ -12,6 +12,7 @@ from ags.plugins import ai
 from ags.plugins import team
 from ags.plugins import build
 from ags.plugins import help
+from ags.plugins import ask
 
 from app.ui.main_window import MainWindow
 
@@ -30,6 +31,7 @@ def main():
     team.register(command_manager)
     build.register(command_manager)
     help.register(command_manager)
+    ask.register(command_manager)
 
     if len(sys.argv) > 1:
 
