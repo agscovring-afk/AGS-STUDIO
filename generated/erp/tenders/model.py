@@ -1,0 +1,2 @@
+class Erp/TendersModel:
+    pass

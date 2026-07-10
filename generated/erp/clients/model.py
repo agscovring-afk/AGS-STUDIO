@@ -1,0 +1,2 @@
+class Erp/ClientsModel:
+    pass

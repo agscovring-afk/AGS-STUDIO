@@ -1,60 +1,135 @@
-from ags.core.agent_manager import AgentManager
-from app.ai.router.ai_router import ai_router
+import os
+import sys
+
+# Add project root
+PROJECT_ROOT = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
+
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+
+from app.ai.autonomous.engine import AutonomousEngine
+from app.ai.autonomous.task_generator import TaskGenerator
 
 
 class MasterAgent:
+    """
+    AGS Autonomous V2
+
+    Flow:
+
+    User Request
+        |
+        v
+    Task Generator
+        |
+        v
+    Autonomous Context
+        |
+        v
+    Autonomous Brain
+        |
+        v
+    Executor Loop
+    """
+
 
     def __init__(self):
 
-        self.manager = AgentManager()
+        self.name = "AGS MASTER AI"
 
-        ai_router.set_default(
-            "ollama"
+        self.autonomous_engine = AutonomousEngine(
+            "data/autonomous_state.json"
+        )
+
+        self.task_generator = TaskGenerator()
+
+
+
+    def add_tasks(self, tasks):
+
+        self.autonomous_engine.context.snapshot.tasks.extend(
+            tasks
         )
 
 
-    def ask(self, request):
+
+    def process_request(self, user_request: str):
 
         print("\n================================")
-        print(" AGS MASTER AI - ROUTER MODE")
+        print(" MASTER AI PROCESSING REQUEST")
         print("================================")
 
-        print("Request:", request)
+        print(f"Request: {user_request}")
 
 
-        context_prompt = f"""
-You are AGS-STUDIO MASTER AI.
+        # 1 - Generate Tasks
 
-Project:
-AGS ERP Construction Platform.
-
-User Request:
-{request}
-
-Analyze professionally.
-
-Return:
-- Architecture
-- Database design
-- Backend modules
-- UI design
-- Required agents tasks
-- Implementation steps
-"""
-
-
-        print("\nMASTER AI thinking...")
-
-
-        result = ai_router.route(
-            context_prompt,
-            memory_key="AGS"
+        tasks = self.task_generator.generate(
+            user_request
         )
 
 
-        print("\n================================")
-        print(" MASTER RESPONSE COMPLETE")
-        print("================================")
+        print("\n[TASK GENERATOR]")
+
+        for task in tasks:
+            print(
+                f"- {task.name} | priority={task.priority}"
+            )
 
 
-        return result
+        # 2 - Inject Tasks into Autonomous Brain
+
+        self.add_tasks(tasks)
+
+
+
+        # 3 - Run Autonomous Cycle
+
+        result = self.autonomous_engine.run()
+
+
+
+        print("\n[AUTONOMOUS ENGINE STATUS]")
+
+        print(result)
+
+
+
+        return {
+
+            "request": user_request,
+
+            "tasks_created": len(tasks),
+
+            "status": result
+
+        }
+
+
+
+    def status(self):
+
+        return self.autonomous_engine.status()
+
+
+
+if __name__ == "__main__":
+
+
+    agent = MasterAgent()
+
+
+    response = agent.process_request(
+        "حلل نظام تسيير المناقصات لشركة مقاولات"
+    )
+
+
+    print("\n================================")
+    print(" MASTER RESPONSE COMPLETE")
+    print("================================")
+
+
+    print(response)

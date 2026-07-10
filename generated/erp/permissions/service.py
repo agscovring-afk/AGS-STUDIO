@@ -1,0 +1,2 @@
+class Erp/PermissionsService:
+    pass

@@ -1,0 +1,2 @@
+class Erp/ProjectsUI:
+    pass

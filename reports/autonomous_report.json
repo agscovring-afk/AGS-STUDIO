@@ -1,0 +1,22 @@
+{
+    "result": {
+        "success": true,
+        "errors": [],
+        "warnings": [
+            "No project files found.",
+            "No tasks available."
+        ]
+    },
+    "monitor": {
+        "time": "2026-07-10T12:19:03.356918",
+        "tasks": 0,
+        "pending": 0,
+        "failed": 0,
+        "completed": 0,
+        "statistics": {}
+    },
+    "health": {
+        "status": "healthy",
+        "message": "Autonomous system running normally"
+    }
+}

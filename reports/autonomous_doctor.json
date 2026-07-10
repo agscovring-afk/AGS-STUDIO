@@ -1,0 +1,19 @@
+{
+    "diagnostics": {
+        "tasks_loaded": 0,
+        "pending": 0,
+        "failed": 0,
+        "completed": 0,
+        "status": "OK",
+        "engine": "AGS Autonomous V2"
+    },
+    "tests": {
+        "context": true,
+        "tasks": true
+    },
+    "health": {
+        "engine": "AGS Autonomous V2",
+        "status": "running",
+        "ready": true
+    }
+}
