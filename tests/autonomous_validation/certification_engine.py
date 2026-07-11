@@ -1,4 +1,23 @@
-from tests.autonomous_validation.platform_tests import *
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from tests.autonomous_validation.platform_tests import (
+    CloudIntegrationTest,
+    MobileLayerTest,
+    MarketplaceTest,
+    APIEcosystemTest,
+    MultiTenantIsolationTest,
+    AutonomousCompanyTest,
+    UniversalFactoryTest,
+    AIEcosystemTest,
+    AgentMarketplaceTest,
+    AutonomousERPTest,
+    GlobalAIBusinessValidation
+)
+
 
 class AutonomousPlatformCertification:
 
