@@ -15,14 +15,16 @@ class AGSERPV3DesktopApp:
         return "AGS ERP V3 APPLICATION READY"
 
 
+    def list_modules(self):
+        return self.modules.list()
+
+
+    def modules_list(self):
+        return self.modules.list()
+
 
     def open_module(self, module):
         return self.modules.open(module)
-
-
-
-    def list_modules(self):
-        return self.modules.list()
 
 
 
