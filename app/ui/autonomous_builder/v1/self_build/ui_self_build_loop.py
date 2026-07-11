@@ -1,30 +1,28 @@
 class UISelfBuildLoop:
 
-    def __init__(self):
-        self.history = []
+    def __init__(self, generator=None, validator=None):
+        self.generator = generator
+        self.validator = validator
 
 
-    def create(self, specification):
+    def build(self, specification):
 
-        ui = {
-            "specification": specification,
-            "status": "created"
-        }
+        ui = None
 
-        self.history.append(ui)
+        if self.generator:
+            ui = self.generator.generate(specification)
+
+        if self.validator:
+            result = self.validator.validate(ui)
+        else:
+            result = True
+
+        if not result:
+            return self.repair(ui)
 
         return ui
 
 
-    def modify(self, ui, changes):
-
-        ui["changes"] = changes
-
-        return ui
-
-
-    def validate(self, ui):
-
-        ui["validation"] = "passed"
+    def repair(self, ui):
 
         return ui
