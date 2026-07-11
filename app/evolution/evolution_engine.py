@@ -1,4 +1,3 @@
-```python
-def fix_evolution_engine():
-    pass
-```
+class EvolutionEngine:
+    def evolve(self):
+        return {"evolution":"ACTIVE"}
