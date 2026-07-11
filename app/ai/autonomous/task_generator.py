@@ -1,4 +1,4 @@
-"""
+﻿"""
 app/ai/autonomous/task_generator.py
 """
 
@@ -10,6 +10,13 @@ class TaskGenerator:
     Converts user requests into autonomous tasks
     """
 
+
+    def __init__(self, context=None):
+
+        self.context = context
+
+
+
     def generate(self, request: str):
 
         tasks = []
@@ -17,35 +24,37 @@ class TaskGenerator:
         request_lower = request.lower()
 
 
-        if "مناق" in request or "tender" in request_lower:
+        if "tender" in request_lower or "مناق" in request:
+
 
             tasks.extend([
 
                 Task(
                     name="analyze_tender_workflow",
-                    description="تحليل دورة تسيير المناقصات داخل الشركة",
+                    description="Analyze tender workflow",
                     priority=10
                 ),
 
                 Task(
                     name="design_tender_database",
-                    description="تصميم قاعدة بيانات المناقصات والمشاريع",
+                    description="Design tender database",
                     priority=9
                 ),
 
                 Task(
                     name="create_tender_modules",
-                    description="تحديد وحدات النظام المطلوبة",
+                    description="Create tender modules",
                     priority=8
                 ),
 
                 Task(
                     name="generate_system_plan",
-                    description="إنشاء خطة تنفيذ النظام",
+                    description="Generate system plan",
                     priority=7
                 )
 
             ])
+
 
         else:
 
