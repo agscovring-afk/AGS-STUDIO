@@ -123,3 +123,6 @@ for name, agent_class in AGENT_MAP.items():
             name,
             DefaultAgent(name)
         )
+
+
+registry.register('MODULE_BUILDER_AGENT', registry.get('BUILD_AGENT'))

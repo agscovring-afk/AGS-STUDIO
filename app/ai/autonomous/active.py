@@ -1,5 +1,6 @@
-"""
-app/ai/autonomous/active.py
+﻿"""
+AGS Autonomous V2
+Active Intelligence Layer
 """
 
 from __future__ import annotations
@@ -9,6 +10,7 @@ from .task_generator import TaskGenerator
 
 
 class AutonomousActive:
+
 
     def __init__(self, context):
 
@@ -28,8 +30,17 @@ class AutonomousActive:
         return self.scanner.scan()
 
 
+
     def create_tasks(self, objective):
 
-        return self.generator.generate(
+        tasks = self.generator.generate(
             objective
         )
+
+        self.context.snapshot.tasks.extend(
+            tasks
+        )
+
+        self.context.save()
+
+        return tasks

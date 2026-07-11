@@ -1,36 +1,29 @@
-﻿import re
-
-from .base_worker import BaseWorker
-
-
-class ModuleBuilderWorker(BaseWorker):
-
-    name = "MODULE_BUILDER_WORKER"
-
-
-    REMOVE_WORDS = [
-        "build",
-        "create",
-        "generate",
-        "module",
-        "system",
-        "with",
-        "for",
-        "the",
-        "a",
-        "an"
-    ]
-
-
-    MAX_MODULE_NAME_LENGTH = 50
+﻿class ModuleBuilderWorker:
 
 
     def normalize_module_name(self, text):
 
+        import re
+
+
+        remove_words = [
+            "with",
+            "and",
+            "the",
+            "for",
+            "system",
+            "module",
+            "build",
+            "create",
+            "management",
+            "erp",
+        ]
+
+
         text = text.lower()
 
 
-        for word in self.REMOVE_WORDS:
+        for word in remove_words:
             text = text.replace(
                 word,
                 ""
@@ -49,30 +42,27 @@ class ModuleBuilderWorker(BaseWorker):
         )
 
 
-        text = text.strip("_")
-
-
-        if len(text) > self.MAX_MODULE_NAME_LENGTH:
-
-            text = (
-                text[:self.MAX_MODULE_NAME_LENGTH]
-                .rstrip("_")
-            )
-
-
-        return text or "sample"
+        return text[:60].strip("_") or "sample"
 
 
 
     def execute(self, task):
 
-        from .bridge import bridge
 
+        if isinstance(task, dict):
 
-        request = task.get(
-            "request",
-            ""
-        )
+            request = task.get(
+                "request",
+                ""
+            )
+
+        else:
+
+            request = getattr(
+                task,
+                "description",
+                ""
+            )
 
 
         module = self.normalize_module_name(
@@ -80,111 +70,28 @@ class ModuleBuilderWorker(BaseWorker):
         )
 
 
-        files = [
+        return {
 
-            {
-                "path": f"generated/modules/{module}/models/{module}.py",
-                "content":
-f'''class {module.title().replace("_","")}Model:
+            "status": "completed",
 
+            "agent": "MODULE_BUILDER_AGENT",
 
-    def __init__(self):
-        self.table = "{module}"
+            "module": module,
 
-'''
-            },
+            "message": "Module build plan generated",
 
+            "files": [
 
-            {
-                "path": f"generated/modules/{module}/services/{module}_service.py",
-                "content":
-f'''class {module.title().replace("_","")}Service:
+                f"generated/modules/{module}/models/{module}.py",
 
+                f"generated/modules/{module}/services/{module}_service.py",
 
-    def create(self, data):
-        return data
+                f"generated/modules/{module}/controllers/{module}_controller.py",
 
+                f"generated/modules/{module}/ui/{module}_page.py",
 
-    def update(self, data):
-        return data
+                f"generated/modules/{module}/tests/test_{module}.py"
 
+            ]
 
-    def delete(self, item_id):
-        return True
-
-'''
-            },
-
-
-            {
-                "path": f"generated/modules/{module}/controllers/{module}_controller.py",
-                "content":
-f'''class {module.title().replace("_","")}Controller:
-
-
-    def index(self):
-
-        return {{
-            "module": "{module}",
-            "status": "ready"
-        }}
-
-'''
-            },
-
-
-            {
-                "path": f"generated/modules/{module}/ui/{module}_page.py",
-                "content":
-f'''class {module.title().replace("_","")}Page:
-
-
-    def render(self):
-
-        return "{module} UI READY"
-
-'''
-            },
-
-
-            {
-                "path": f"generated/modules/{module}/tests/test_{module}.py",
-                "content":
-'''def test_module():
-
-    assert True
-
-'''
-            },
-
-
-            {
-                "path": f"generated/modules/{module}/metadata.json",
-                "content":
-f'''{{
-    "module": "{module}",
-    "type": "ERP",
-    "status": "generated",
-    "version": "V1"
-}}
-'''
-            }
-
-        ]
-
-
-        result = bridge.dispatch(
-            "file_creator",
-            {
-                "files": files
-            }
-        )
-
-
-        return self.report(
-            {
-                "module": module,
-                "request": request
-            },
-            result
-        )
+        }
