@@ -1,18 +1,18 @@
 {
     "status": "completed",
     "module": "unknown",
-    "time": "2026-07-09 15:56:12.623134",
+    "time": "2026-07-11 03:11:30.328826",
     "validated": [
         {
-            "file": "generated\\modules\\supplier_invoices\\controllers\\supplier_invoices_controller.py",
+            "file": "generated\\modules\\ceo_platform_integration\\controllers\\ceo_platform_integration_controller.py",
             "status": "success"
         },
         {
-            "file": "generated\\modules\\supplier_invoices\\models\\supplier_invoices.py",
+            "file": "generated\\modules\\ceo_platform_integration\\models\\ceo_platform_integration.py",
             "status": "success"
         },
         {
-            "file": "generated\\modules\\supplier_invoices\\services\\supplier_invoices_service.py",
+            "file": "generated\\modules\\ceo_platform_integration\\services\\ceo_platform_integration_service.py",
             "status": "success"
         }
     ],

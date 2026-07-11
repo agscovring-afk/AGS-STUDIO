@@ -1,0 +1,2 @@
+class CeoMarketAnalysisEngineController:
+    pass

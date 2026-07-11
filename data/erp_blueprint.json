@@ -1,0 +1,11 @@
+{
+    "engine": "AGS ERP FACTORY ENGINE V1",
+    "status": "COMPLETED",
+    "erp_modules": [
+        "projects",
+        "finance",
+        "inventory",
+        "hr",
+        "crm"
+    ]
+}

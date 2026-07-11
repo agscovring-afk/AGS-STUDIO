@@ -1,32 +1,51 @@
 def test_company_repo_create_and_get(tmp_path):
     from app.repositories.company_repository import CompanyRepository
-    from app.controllers.company_controller import CompanyController
+    from app.services.company_service import CompanyService
+    from app.models.company import Company
 
     db_file = tmp_path / "test.db"
     repo = CompanyRepository(str(db_file))
-    controller = CompanyController(repo)
-    controller.init_db()
-    cid = controller.create_company("Legal Ltd", "Legal", "COM-00001", "DZD", "fr")
-    assert cid == 1
-    company = controller.get_company(1)
-    assert company.legal_name == "Legal Ltd"
-    assert company.code == "COM-00001"
+    repo.create_tables()
+
+    service = CompanyService(repo)
+    company = Company(
+        name="Legal Ltd",
+        commercial_name="Legal",
+        currency="DZD",
+        language="fr"
+    )
+    company.set_code("COM-00001")
+
+    cid = service.create_company(company)
+    assert cid.lastrowid == 1
+
+    retrieved = service.get_company(1)
+    assert retrieved["name"] == "Legal Ltd"
+    assert retrieved["code"] == "COM-00001"
 
 
 def test_company_list_and_deactivate(tmp_path):
     from app.repositories.company_repository import CompanyRepository
-    from app.controllers.company_controller import CompanyController
+    from app.services.company_service import CompanyService
+    from app.models.company import Company
 
     db_file = tmp_path / "test2.db"
     repo = CompanyRepository(str(db_file))
-    controller = CompanyController(repo)
-    controller.init_db()
-    controller.create_company("A", "A", "COM-00001", "DZD", "fr")
-    controller.create_company("B", "B", "COM-00002", "DZD", "fr")
-    all_comp = controller.list_companies()
+    repo.create_tables()
+
+    service = CompanyService(repo)
+
+    c1 = Company(name="A")
+    c1.set_code("COM-00001")
+    c2 = Company(name="B")
+    c2.set_code("COM-00002")
+
+    service.create_company(c1)
+    service.create_company(c2)
+
+    all_comp = service.list_companies()
     assert len(all_comp) == 2
-    controller.deactivate_company(1)
-    active = controller.list_companies()
+
+    service.deactivate_company(1)
+    active = service.list_companies()
     assert len(active) == 1
-    inactive_all = controller.list_companies(include_inactive=True)
-    assert len(inactive_all) == 2

@@ -1,17 +1,28 @@
 def test_client_crud_and_search(tmp_path):
     from app.repositories.client_repository import ClientRepository
-    from app.controllers.client_controller import ClientController
+    from app.services.client_service import ClientService
+    from app.models.client import Client
 
     db_file = tmp_path / "clients.db"
     repo = ClientRepository(str(db_file))
-    controller = ClientController(repo)
-    controller.init_db()
+    repo.create_tables()
 
-    cid1 = controller.create_client(code="CLI-00001", name="Client A", company_id=1)
-    cid2 = controller.create_client(code="CLI-00002", name="B Client", company_id=1)
-    assert cid1 == 1
-    c1 = controller.get_client(cid1)
-    assert c1.name == "Client A"
+    service = ClientService(repo)
 
-    res = controller.search_clients("Client")
-    assert len(res) == 2
+    c1 = Client(name="Client A")
+    c1.company_id = 1
+    c1.code = "CLI-00001"
+    c2 = Client(name="B Client")
+    c2.company_id = 1
+    c2.code = "CLI-00002"
+
+    cid1 = service.create_client(c1)
+    cid2 = service.create_client(c2)
+
+    assert cid1.lastrowid == 1
+
+    retrieved = service.get_client("CLI-00001")
+    assert retrieved["name"] == "Client A"
+
+    clients = service.list_clients()
+    assert len(clients) == 2

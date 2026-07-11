@@ -1,0 +1,2 @@
+class CeoInnovationEngineService:
+    pass

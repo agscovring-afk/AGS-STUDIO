@@ -1,5 +1,6 @@
-<<<<<<< HEAD
-AGS ERP V2 — Desktop ERP for construction/facade companies
+# AGS ERP V2 - AGS-STUDIO
+ERP Enterprise for Aluminium, Glass and Construction Management.
+Desktop ERP for construction/facade companies.
 
 See `docs/` for project requirements and design.
 
@@ -26,7 +27,3 @@ Create a sample company:
 ```bash
 python -m app.main create-company --legal-name "Legal Ltd" --commercial-name "Legal" --code COM-00001
 ```
-=======
-# AGS-ERP-V2
-ERP Enterprise for Aluminium, Glass and Construction Management
->>>>>>> 6290040b1e0265c7ebd2e46eddd41005327654f1

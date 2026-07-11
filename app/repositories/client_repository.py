@@ -10,6 +10,36 @@ class ClientRepository(BaseRepository):
 
     table_name = "clients"
 
+    def create_tables(self):
+        query = """
+        CREATE TABLE IF NOT EXISTS clients (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            company_id INTEGER,
+            code TEXT UNIQUE NOT NULL,
+            name TEXT NOT NULL,
+            contact TEXT,
+            function TEXT,
+            phone TEXT,
+            mobile TEXT,
+            email TEXT,
+            address TEXT,
+            city TEXT,
+            wilaya TEXT,
+            country TEXT,
+            rc TEXT,
+            nif TEXT,
+            nis TEXT,
+            ai TEXT,
+            bank TEXT,
+            rib TEXT,
+            status TEXT DEFAULT 'active',
+            is_active INTEGER DEFAULT 1,
+            created_at TEXT,
+            updated_at TEXT
+        )
+        """
+        self.execute(query)
+
 
     def create(self, client):
 

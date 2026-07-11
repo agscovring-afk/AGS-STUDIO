@@ -1,0 +1,2 @@
+class CeoDeploymentIntelligenceEngineService:
+    pass

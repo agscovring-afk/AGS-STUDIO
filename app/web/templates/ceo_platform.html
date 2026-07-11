@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGS CEO Platform - عالم البناء الذكي</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --primary-color: #e67e22;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow: #0000000a;
+            --accent-color: #2c3e50;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --text-color: #f5f5f5;
+                --card-bg: #2d2d2d;
+                --border-color: #404040;
+                --shadow: #00000020;
+                --accent-color: #ecf0f1;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 750px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        p.subtitle {
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .prompt-wrapper {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 12px 16px;
+            box-shadow: 0 4px 20px var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            transition: border-color 0.3s;
+        }
+
+        .prompt-wrapper:focus-within {
+            border-color: var(--primary-color);
+        }
+
+        .prompt-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            outline: none;
+            padding: 8px 0;
+            resize: none;
+            font-family: inherit;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        .icon-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
+        }
+
+        .send-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 16px;
+        }
+
+        .send-btn svg {
+            fill: white;
+        }
+
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .suggestion-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .suggestion-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .suggestion-card span {
+            display: block;
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+
+        /* --- نافذة الفرز الديناميكي (Modal) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 24px;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .identity-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .identity-btn {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            color: var(--text-color);
+        }
+
+        .identity-btn:hover {
+            border-color: var(--primary-color);
+            background-color: var(--card-bg);
+            transform: scale(1.01);
+        }
+
+        /* --- واجهة الردود الذكية المعززة (Rich Widgets Layout) --- */
+        .chat-results {
+            display: none;
+            margin-top: 30px;
+            text-align: right;
+            width: 100%;
+        }
+
+        .widget-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .widget-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .widget-table th, .widget-table td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: right;
+        }
+
+        .widget-table th {
+            color: var(--primary-color);
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .action-btn.secondary {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>منصة البناء والمقاولات الذكية</h1>
+        <p class="subtitle">اكتب أو سجل طلبك بلهجتك وسيقوم الذكاء الاصطناعي بتوجيهك فوراً</p>
+
+        <!-- صندوق المحادثة الرئيسي -->
+        <div class="prompt-wrapper">
+            <button class="icon-btn" title="إرفاق صورة أو مخطط">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            </button>
+            
+            <button class="icon-btn" title="تحدث بصوتك">
+                <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+            </button>
+
+            <textarea id="mainPrompt" class="prompt-input" rows="1" placeholder="مثال: نحوس على خدمة مانوفري، شحال تقاملي دالة، حاب نحط مناقصة..."></textarea>
+
+            <button class="icon-btn send-btn" id="sendBtn" title="إرسال">
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
+
+        <!-- شاشة عرض النتائج المعززة (مخفية وتظهر بعد الفرز) -->
+        <div class="chat-results" id="chatResults">
+            <div class="widget-card">
+                <h3>📊 تفصيل حساب الكميات التقديري (كمثال استجابة)</h3>
+                <p>بناءً على طلبك لحساب تكلفة "صب خرسانة (دالة) بمساحة 120م²"، إليك الحسابات الحالية الحركية للسوق:</p>
+                <table class="widget-table">
+                    <thead>
+                        <tr>
+                            <th>المادة / الحرفة</th>
+                            <th>الكمية التقريبية</th>
+                            <th>التكلفة التقديرية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>إسمنت (42.5)</td>
+                            <td>90 قنطار</td>
+                            <td>115,000 د.ج</td>
+                        </tr>
+                        <tr>
+                            <td>حديد تسليح (مختلط)</td>
+                            <td>1.8 طن</td>
+                            <td>240,000 د.ج</td>
+                        </tr>
+                        <tr>
+                            <td>حصى ورمل + خلاطة</td>
+                            <td>حسب الطلب الكلي</td>
+                            <td>85,000 د.ج</td>
+                        </tr>
+                        <tr>
+                            <td>يد عاملة (مقاول فرعي)</td>
+                            <td>ورشة كاملة</td>
+                            <td>120,000 د.ج</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="action-bar">
+                    <button class="action-btn">تحميل كـ PDF</button>
+                    <button class="action-btn secondary">الاتصال بموردين قريبين</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- بطاقات الاقتراحات السريعة -->
+        <div class="suggestions-grid" id="sugGrid">
+            <div class="suggestion-card" onclick="setPrompt('نحوس على خدمة تاشرون أو مانوفري في ورشة قريبة')">
+                <span>👷‍♂️ للعمال والحرفيين</span>
+                نحوس على خدمة تاشرون أو مانوفري في ورشة قريبة
+            </div>
+            <div class="suggestion-card" onclick="setPrompt('شحال تكلفني سلعة ويد عاملة باه نبني دالة 120م²؟')">
+                <span>🏠 للمواطنين</span>
+                شحال تكلفني سلعة ويد عاملة باه نبني دالة 120م²؟
+            </div>
+            <div class="suggestion-card" onclick="setPrompt('تجهيز مسودة عقد قانوني مع بناء لتشطيب فيلا')">
+                <span>🏗️ للمقاولين والورشات</span>
+                تجهيز مسودة عقد قانوني مع بناء لتشطيب فيلا
+            </div>
+            <div class="suggestion-card" onclick="setPrompt('إعداد دفتر شروط كامل ونشره كمناقصة لمشروع سكني')">
+                <span>🏢 للشركات والموردين</span>
+                إعداد دفتر شروط كامل ونشره كمناقصة لمشروع سكني
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الفرز وتحديد الهوية (Modal Overlay) -->
+    <div class="modal-overlay" id="identityModal">
+        <div class="modal-content">
+            <div class="modal-title">مرحباً بك! لكي نستطيع مساعدتك بدقة وتوجيهك للمحرك الصحيح، فضلاً اختر من أنت:</div>
+            <div class="identity-options">
+                <button class="identity-btn" onclick="selectIdentity('عامل / حرفي')">👷‍♂️ عامل يومي / حرفي (بناء، دهان، كهربائي...)</button>
+                <button class="identity-btn" onclick="selectIdentity('مقاول ذاتي')">🏗️ مقاول ذاتي / صاحب ورشة (ألمنيوم، حدادة...)</button>
+                <button class="identity-btn" onclick="selectIdentity('شركة كبرى')">🏢 شركة مقاولات / بناء كبرى</button>
+                <button class="identity-btn" onclick="selectIdentity('مورد سلع')">🚛 مورد / مصنع سلع / محل كراء آلات</button>
+                <button class="identity-btn" onclick="selectIdentity('مواطن عادي')">👤 مواطن عادي (صاحب مشروع خاص)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tx = document.getElementsByClassName('prompt-input');
+        const modal = document.getElementById('identityModal');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatResults = document.getElementById('chatResults');
+        const sugGrid = document.getElementById('sugGrid');
+
+        for (let i = 0; i < tx.length; i++) {
+          tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight - 16) + 'px;overflow-y:hidden;');
+          tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight - 16) + 'px';
+        }
+
+        function setPrompt(text) {
+            document.getElementById('mainPrompt').value = text;
+        }
+
+        // إظهار نافذة الفرز عند الضغط على إرسال
+        sendBtn.addEventListener('click', () => {
+            if(document.getElementById('mainPrompt').value.trim() !== "") {
+                modal.classList.add('active');
+            }
+        });
+
+        // محاكاة اختيار الهوية وإظهار النتيجة التفاعلية
+        function selectIdentity(type) {
+            modal.classList.remove('active');
+            sugGrid.style.display = 'none';
+            chatResults.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

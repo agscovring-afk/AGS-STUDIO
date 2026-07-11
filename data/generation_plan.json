@@ -1,0 +1,9 @@
+{
+    "engine": "AGS CODE GENERATION ENGINE V2",
+    "status": "COMPLETED",
+    "generated": [
+        "modules",
+        "services",
+        "components"
+    ]
+}

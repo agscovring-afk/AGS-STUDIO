@@ -1,0 +1,2 @@
+class CeoFinancialIntelligenceEngineService:
+    pass
