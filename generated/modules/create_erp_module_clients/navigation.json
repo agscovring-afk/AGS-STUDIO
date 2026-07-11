@@ -1,0 +1,6 @@
+{
+    "label": "Create Erp Module Clients",
+    "path": "/create_erp_module_clients",
+    "module": "create_erp_module_clients",
+    "order": 100
+}

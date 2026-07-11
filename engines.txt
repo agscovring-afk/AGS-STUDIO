@@ -1,0 +1,28 @@
+from ..engine_base import EngineBase
+
+
+class MigrationEngine(EngineBase):
+
+    name = "MIGRATION_ENGINE_V1"
+
+from ..engine_base import EngineBase
+
+
+class DatabaseAutonomousEngine(EngineBase):
+
+    name = "DATABASE_AUTONOMOUS_ENGINE_V1"
+
+from ..engine_base import EngineBase
+
+
+class RegistryEngine(EngineBase):
+
+    name = "AUTO_REGISTRY_ENGINE_V1"
+
+from ..engine_base import EngineBase
+
+
+class MenuGenerator(EngineBase):
+
+    name = "MENU_GENERATOR_V1"
+

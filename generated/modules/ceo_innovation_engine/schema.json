@@ -1,0 +1,15 @@
+{
+    "engine": "METADATA_SCHEMA_GENERATOR_V1",
+    "module": "ceo_innovation_engine",
+    "entity": "ceo_innovation_engine",
+    "table": "ceo_innovation_engine",
+    "fields": [
+        {
+            "name": "id",
+            "type": "integer",
+            "primary_key": true
+        }
+    ],
+    "relationships": [],
+    "generated_at": "2026-07-11 17:21:11.923322"
+}

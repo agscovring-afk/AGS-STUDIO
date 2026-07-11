@@ -1,0 +1,21 @@
+{
+    "engine": "BUSINESS_LOGIC_GENERATOR_V1",
+    "module": "create_erp_module_clients",
+    "business_object": "create_erp_module_clients",
+    "rules": [
+        {
+            "name": "default_validation",
+            "enabled": true
+        }
+    ],
+    "operations": [
+        "create",
+        "read",
+        "update",
+        "delete",
+        "validate",
+        "search"
+    ],
+    "workflows": [],
+    "generated_at": "2026-07-11 17:29:26.163501"
+}

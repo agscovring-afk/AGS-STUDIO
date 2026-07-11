@@ -1,0 +1,15 @@
+{
+    "engine": "METADATA_SCHEMA_GENERATOR_V1",
+    "module": "create_erp_module_clients",
+    "entity": "create_erp_module_clients",
+    "table": "create_erp_module_clients",
+    "fields": [
+        {
+            "name": "id",
+            "type": "integer",
+            "primary_key": true
+        }
+    ],
+    "relationships": [],
+    "generated_at": "2026-07-11 17:21:11.932341"
+}

@@ -1,0 +1,6 @@
+{
+    "label": "Ceo Platform Integration",
+    "path": "/ceo_platform_integration",
+    "module": "ceo_platform_integration",
+    "order": 100
+}

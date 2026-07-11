@@ -1,0 +1,21 @@
+{
+    "engine": "BUSINESS_LOGIC_GENERATOR_V1",
+    "module": "ceo_self_improvement_engine",
+    "business_object": "ceo_self_improvement_engine",
+    "rules": [
+        {
+            "name": "default_validation",
+            "enabled": true
+        }
+    ],
+    "operations": [
+        "create",
+        "read",
+        "update",
+        "delete",
+        "validate",
+        "search"
+    ],
+    "workflows": [],
+    "generated_at": "2026-07-11 17:29:26.161488"
+}

@@ -1,97 +1,68 @@
+﻿"""
+AGS Autonomous Runtime V3
+
+Full Runtime:
+Kernel + Memory + Orchestrator + Pipeline
 """
-AGS Autonomous V2
-Runtime V3
 
-Full Component Wiring:
-Router + Executor + Validator + Pipeline
-"""
-
-from app.ai.autonomous.pipeline import AutonomousPipeline
-from app.ai.autonomous.engine_adapter import EngineAdapter
-from app.ai.autonomous.master_bridge import MasterBridge
-
-
-# Router V2
-
-try:
-    from app.ai.autonomous.agent_router import router
-
-except Exception:
-    router = None
-
-
-
-# Executor V2
-
-try:
-    from app.ai.autonomous.executor import executor
-
-except Exception:
-    executor = None
-
-
-
-# Validator Instance
-
-try:
-    from app.ai.autonomous.validator import AutonomousValidator
-
-    validator = AutonomousValidator()
-
-except Exception:
-    validator = None
-
+from app.ai.autonomous.kernel import kernel
+from app.ai.autonomous.memory.memory import memory
+from app.ai.autonomous.orchestrator.orchestrator import orchestrator
 
 
 class AutonomousRuntime:
 
-
     def __init__(self):
 
-        self.engine = None
-        self.planner = None
-
-        self.router = router
-        self.executor = executor
-        self.validator = validator
+        self.kernel = kernel
+        self.memory = memory
+        self.orchestrator = orchestrator
 
 
-        self.pipeline = AutonomousPipeline(
+    def start(self):
 
-            engine=self.engine,
-            planner=self.planner,
-            router=self.router,
-            executor=self.executor,
-            validator=self.validator
-
-        )
-
-
-        self.engine_adapter = EngineAdapter(
-
-            self.engine,
-            self.pipeline
-
-        )
-
-
-        self.master = MasterBridge(
-
-            engine_adapter=self.engine_adapter,
-            router=self.router
-
-        )
-
+        return self.kernel.start()
 
 
     def execute(self, request):
 
-        return self.master.execute_request(
+        self.memory.remember(
+            "last_request",
+            {
+                "request": request,
+                "system": "AGS AUTONOMOUS CORE V3"
+            },
+            "AUTONOMOUS"
+        )
+
+
+        result = self.orchestrator.execute(
             request
         )
 
 
+        self.memory.remember(
+            "last_result",
+            result,
+            "AUTONOMOUS"
+        )
 
-# Global Runtime
+
+        return {
+
+            "system":
+            "AGS AUTONOMOUS V3",
+
+            "mode":
+            "FULL ORCHESTRATOR RUNTIME",
+
+            "request":
+            request,
+
+            "result":
+            result
+
+        }
+
 
 autonomous = AutonomousRuntime()

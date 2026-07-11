@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Ceo Decision Engine",
+            "route": "/ceo_decision_engine",
+            "module": "ceo_decision_engine"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Ceo Self Improvement Engine",
+            "route": "/ceo_self_improvement_engine",
+            "module": "ceo_self_improvement_engine"
+        }
+    ]
+}

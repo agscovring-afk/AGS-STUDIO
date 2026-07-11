@@ -1,0 +1,6 @@
+{
+    "module": "ceo_enterprise_command_center",
+    "route": "/ceo_enterprise_command_center",
+    "controller": "ceo_enterprise_command_center_controller",
+    "service": "ceo_enterprise_command_center_service"
+}

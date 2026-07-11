@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Ceo Innovation Engine",
+            "route": "/ceo_innovation_engine",
+            "module": "ceo_innovation_engine"
+        }
+    ]
+}

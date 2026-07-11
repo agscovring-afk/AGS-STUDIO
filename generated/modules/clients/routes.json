@@ -1,0 +1,6 @@
+{
+    "module": "clients",
+    "route": "/clients",
+    "controller": "clients_controller",
+    "service": "clients_service"
+}

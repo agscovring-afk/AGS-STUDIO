@@ -1,0 +1,6 @@
+{
+    "label": "Ceo Deployment Intelligence Engine",
+    "path": "/ceo_deployment_intelligence_engine",
+    "module": "ceo_deployment_intelligence_engine",
+    "order": 100
+}

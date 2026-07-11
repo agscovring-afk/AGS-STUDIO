@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Ceo Quality Control Engine",
+            "route": "/ceo_quality_control_engine",
+            "module": "ceo_quality_control_engine"
+        }
+    ]
+}

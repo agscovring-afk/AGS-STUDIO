@@ -1,0 +1,6 @@
+{
+    "label": "Ceo Quality Control Engine",
+    "path": "/ceo_quality_control_engine",
+    "module": "ceo_quality_control_engine",
+    "order": 100
+}

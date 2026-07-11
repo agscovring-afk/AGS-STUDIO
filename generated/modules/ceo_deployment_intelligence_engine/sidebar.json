@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Ceo Deployment Intelligence Engine",
+            "route": "/ceo_deployment_intelligence_engine",
+            "module": "ceo_deployment_intelligence_engine"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Clients",
+            "route": "/clients",
+            "module": "clients"
+        }
+    ]
+}

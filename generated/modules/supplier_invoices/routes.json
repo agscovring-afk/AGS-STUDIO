@@ -1,0 +1,6 @@
+{
+    "module": "supplier_invoices",
+    "route": "/supplier_invoices",
+    "controller": "supplier_invoices_controller",
+    "service": "supplier_invoices_service"
+}

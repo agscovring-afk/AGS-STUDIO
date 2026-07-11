@@ -1,0 +1,15 @@
+{
+    "engine": "METADATA_SCHEMA_GENERATOR_V1",
+    "module": "ceo_quality_control_engine",
+    "entity": "ceo_quality_control_engine",
+    "table": "ceo_quality_control_engine",
+    "fields": [
+        {
+            "name": "id",
+            "type": "integer",
+            "primary_key": true
+        }
+    ],
+    "relationships": [],
+    "generated_at": "2026-07-11 17:21:11.927801"
+}

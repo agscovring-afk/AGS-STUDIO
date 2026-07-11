@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Supplier Invoices",
+            "route": "/supplier_invoices",
+            "module": "supplier_invoices"
+        }
+    ]
+}

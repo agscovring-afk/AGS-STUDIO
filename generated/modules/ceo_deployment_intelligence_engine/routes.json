@@ -1,0 +1,6 @@
+{
+    "module": "ceo_deployment_intelligence_engine",
+    "route": "/ceo_deployment_intelligence_engine",
+    "controller": "ceo_deployment_intelligence_engine_controller",
+    "service": "ceo_deployment_intelligence_engine_service"
+}

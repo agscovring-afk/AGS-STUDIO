@@ -1,0 +1,10 @@
+{
+    "section": "modules",
+    "items": [
+        {
+            "label": "Ceo Enterprise Command Center",
+            "route": "/ceo_enterprise_command_center",
+            "module": "ceo_enterprise_command_center"
+        }
+    ]
+}

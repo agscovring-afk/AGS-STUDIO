@@ -1,0 +1,6 @@
+{
+    "label": "Supplier Invoices",
+    "path": "/supplier_invoices",
+    "module": "supplier_invoices",
+    "order": 100
+}

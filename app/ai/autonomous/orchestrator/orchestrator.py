@@ -1,3 +1,5 @@
+﻿from app.ai.autonomous.agent_registry import registry
+
 from app.ai.autonomous.intelligence.erp_intelligence import ERPIntelligenceLayer
 from app.ai.autonomous.database_engine.database_engine import DatabaseAutonomousEngine
 from app.ai.autonomous.metadata_engine.metadata_generator import MetadataSchemaGenerator
@@ -24,51 +26,52 @@ class AutonomousOrchestrator:
 
     def __init__(self):
 
+        self.agents = registry
+
+
         self.engines = [
 
             ERPIntelligenceLayer(),
-
             DatabaseAutonomousEngine(),
-
             MetadataSchemaGenerator(),
-
             MigrationEngine(),
-
             RegistryEngine(),
-
             MenuGenerator(),
-
             BusinessLogicGenerator(),
-
             DomainKnowledgeEngine(),
-
             UIBuilder(),
-
             SecurityEngine(),
-
             TestEngine(),
-
             SelfRepairLoop(),
-
             MultiAgentSystem(),
-
             ERPFullPipeline(),
-
             ERPFactoryV2(),
-
             PluginSystem(),
-
             DeploymentEngine(),
-
             MonitoringEngine()
+
         ]
 
 
 
-    def execute(self, request):
+    def execute_agents(self, request):
+
+        results = {}
+
+        for name in self.agents.list_agents():
+
+            results[name] = self.agents.execute(
+                name,
+                request
+            )
+
+        return results
+
+
+
+    def execute_engines(self, request):
 
         results = []
-
 
         for engine in self.engines:
 
@@ -76,23 +79,35 @@ class AutonomousOrchestrator:
                 engine.run(request)
             )
 
+        return results
+
+
+
+    def execute(self, request):
 
         return {
 
             "system":
-            "AGS AUTONOMOUS V2",
+            "AGS AUTONOMOUS V3",
 
             "mode":
-            "REAL AGENT ENGINE CONNECTED",
+            "AGENT + ENGINE ORCHESTRATION",
 
             "request":
             request,
 
-            "executed_engines":
-            results,
+            "agents":
+            self.execute_agents(request),
 
-            "count":
-            len(results)
+            "engines":
+            self.execute_engines(request),
+
+            "agent_count":
+            len(self.agents.list_agents()),
+
+            "engine_count":
+            len(self.engines)
+
         }
 
 

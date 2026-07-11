@@ -1,0 +1,6 @@
+{
+    "module": "ceo_innovation_engine",
+    "route": "/ceo_innovation_engine",
+    "controller": "ceo_innovation_engine_controller",
+    "service": "ceo_innovation_engine_service"
+}

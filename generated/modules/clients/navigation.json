@@ -1,0 +1,6 @@
+{
+    "label": "Clients",
+    "path": "/clients",
+    "module": "clients",
+    "order": 100
+}

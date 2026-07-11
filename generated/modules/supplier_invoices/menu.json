@@ -1,0 +1,6 @@
+{
+    "module": "supplier_invoices",
+    "title": "Supplier Invoices",
+    "icon": "folder",
+    "enabled": true
+}
