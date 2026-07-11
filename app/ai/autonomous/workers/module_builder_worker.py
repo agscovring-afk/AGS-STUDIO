@@ -1,28 +1,41 @@
-﻿from .base_worker import BaseWorker
-import re
+﻿import re
+
+from .base_worker import BaseWorker
 
 
 class ModuleBuilderWorker(BaseWorker):
 
-    name = "REAL_ERP_MODULE_BUILDER_V1"
+    name = "MODULE_BUILDER_WORKER"
 
 
-    def normalize_module_name(self, request):
+    REMOVE_WORDS = [
+        "build",
+        "create",
+        "generate",
+        "module",
+        "system",
+        "with",
+        "for",
+        "the",
+        "a",
+        "an"
+    ]
 
-        text = request.lower()
 
-        remove_words = [
-            "create",
-            "build",
-            "generate",
-            "erp",
-            "module",
-            "system",
-            "real"
-        ]
+    MAX_MODULE_NAME_LENGTH = 50
 
-        for word in remove_words:
-            text = text.replace(word, "")
+
+    def normalize_module_name(self, text):
+
+        text = text.lower()
+
+
+        for word in self.REMOVE_WORDS:
+            text = text.replace(
+                word,
+                ""
+            )
+
 
         text = re.sub(
             r"[^a-z0-9_ ]",
@@ -30,11 +43,25 @@ class ModuleBuilderWorker(BaseWorker):
             text
         )
 
+
         text = "_".join(
             text.split()
         )
 
-        return text.strip("_") or "sample"
+
+        text = text.strip("_")
+
+
+        if len(text) > self.MAX_MODULE_NAME_LENGTH:
+
+            text = (
+                text[:self.MAX_MODULE_NAME_LENGTH]
+                .rstrip("_")
+            )
+
+
+        return text or "sample"
+
 
 
     def execute(self, task):
@@ -67,6 +94,7 @@ f'''class {module.title().replace("_","")}Model:
 '''
             },
 
+
             {
                 "path": f"generated/modules/{module}/services/{module}_service.py",
                 "content":
@@ -87,6 +115,7 @@ f'''class {module.title().replace("_","")}Service:
 '''
             },
 
+
             {
                 "path": f"generated/modules/{module}/controllers/{module}_controller.py",
                 "content":
@@ -103,6 +132,7 @@ f'''class {module.title().replace("_","")}Controller:
 '''
             },
 
+
             {
                 "path": f"generated/modules/{module}/ui/{module}_page.py",
                 "content":
@@ -116,6 +146,7 @@ f'''class {module.title().replace("_","")}Page:
 '''
             },
 
+
             {
                 "path": f"generated/modules/{module}/tests/test_{module}.py",
                 "content":
@@ -125,6 +156,7 @@ f'''class {module.title().replace("_","")}Page:
 
 '''
             },
+
 
             {
                 "path": f"generated/modules/{module}/metadata.json",
