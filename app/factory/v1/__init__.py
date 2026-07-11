@@ -1,8 +1,5 @@
-from .application_generator import AutonomousApplicationGenerator
-from .full_stack_builder import FullStackAutonomousBuilder
+from .application_factory import ApplicationFactory
 
-
-__all__ = [
-    "AutonomousApplicationGenerator",
-    "FullStackAutonomousBuilder",
+__all__=[
+    "ApplicationFactory",
 ]
