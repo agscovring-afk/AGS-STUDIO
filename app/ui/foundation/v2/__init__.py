@@ -1,13 +1,17 @@
-from .framework import UIFramework
-from .theme.theme_engine import ThemeEngine
-from .components.library import ComponentLibrary
-from .navigation.navigation_manager import NavigationManager
-from .workspace.workspace_manager import WorkspaceManager
+from .responsive.responsive_engine import ResponsiveLayoutEngine
+from .docking.advanced_dock_manager import AdvancedDockManager
+from .workspace.workspace_tabs import WorkspaceTabs
+from .layouts.layout_persistence import LayoutPersistence
+from .events.event_bus import EventBus
+from .state.ui_state_manager import UIStateManager
+from .integration.autonomous_bridge import AutonomousUIBridge
 
 __all__ = [
-    "UIFramework",
-    "ThemeEngine",
-    "ComponentLibrary",
-    "NavigationManager",
-    "WorkspaceManager",
+    "ResponsiveLayoutEngine",
+    "AdvancedDockManager",
+    "WorkspaceTabs",
+    "LayoutPersistence",
+    "EventBus",
+    "UIStateManager",
+    "AutonomousUIBridge",
 ]
