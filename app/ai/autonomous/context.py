@@ -14,6 +14,7 @@ class AutonomousSnapshot:
 
         self.tasks = []
         self.statistics = {}
+        self._files = []
 
 
     @property
@@ -46,7 +47,13 @@ class AutonomousSnapshot:
     @property
     def files(self):
 
-        return []
+        return self._files
+
+
+    @files.setter
+    def files(self, value):
+
+        self._files = value
 
 
 
@@ -70,12 +77,10 @@ class AutonomousContext:
         self.snapshot.statistics = {
 
             "tasks": len(self.snapshot.tasks),
-
             "pending": len(self.snapshot.pending_tasks),
-
             "failed": len(self.snapshot.failed_tasks),
-
             "completed": len(self.snapshot.completed_tasks),
+            "files": len(self.snapshot.files),
 
         }
 
