@@ -1,33 +1,15 @@
-from .shell.desktop_shell import ERPDesktopShell
-from .menu.main_menu import MainMenu
-from .dashboard.dashboard import Dashboard
-from .modules.module_screen import ModuleScreen
+from app.product.ags_erp_v3.ui.modules.erp_module_screens import ERPModuleScreens
 
 
-class AGSERPV3Application:
+class AGSERPV3DesktopApp:
 
     def __init__(self):
-        self.shell = ERPDesktopShell()
-        self.menu = MainMenu()
-        self.dashboard = Dashboard()
+        self.modules = ERPModuleScreens()
+
 
     def boot(self):
+        return "AGS ERP V3 DESKTOP APP READY"
 
-        modules = [
-            "CRM",
-            "PROJECTS",
-            "SUPPLIERS",
-            "INVENTORY",
-            "PURCHASING",
-            "QUOTATIONS",
-            "INVOICES",
-            "ACCOUNTING",
-            "HR",
-            "REPORTS"
-        ]
 
-        for module in modules:
-            self.menu.add(module)
-            self.shell.register_module(module)
-
-        return "AGS ERP V3 APPLICATION READY"
+    def modules_list(self):
+        return self.modules.list()
