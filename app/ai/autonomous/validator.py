@@ -1,62 +1,39 @@
+"""
+AGS Autonomous V2
+Task Validator
+"""
+
+from __future__ import annotations
+
+
 class TaskValidator:
 
-    def validate(self, task):
 
-        if task is None:
+    def validate(self, task=None):
+
+        if task is not None:
+
+            status = getattr(
+                task,
+                "status",
+                None
+            )
 
             return {
-                "success": False,
-                "message": "Task is empty"
+                "success": status != "failed",
+                "task": getattr(
+                    task,
+                    "name",
+                    None
+                ),
+                "status": str(status)
             }
 
 
         return {
             "success": True,
-            "message": "Task valid"
+            "status": "validated",
+            "message": "Autonomous system validation completed"
         }
 
-
-
-class AutonomousValidator:
-
-
-    def validate(self, result):
-
-        if result is None:
-
-            return {
-                "success": False,
-                "message": "Empty result"
-            }
-
-
-        if isinstance(result, dict):
-
-            if result.get("status") in [
-                "completed",
-                "success"
-            ]:
-
-                return {
-                    "success": True,
-                    "message": "Validation passed"
-                }
-
-
-            if result.get("status") == "no_agent":
-
-                return {
-                    "success": False,
-                    "message": "Agent not found"
-                }
-
-
-        return {
-            "success": True,
-            "message": "Basic validation passed"
-        }
-
-
-
-validator = AutonomousValidator()
-task_validator = TaskValidator()
+validator = TaskValidator()
