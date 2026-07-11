@@ -1,4 +1,12 @@
-from tests.enterprise.enterprise_validation import *
+from tests.enterprise.enterprise_validation import (
+    EnterpriseArchitectureValidator,
+    CloudLayerValidator,
+    APILayerValidator,
+    MultiTenantValidator,
+    AutonomousValidator,
+    MarketplaceValidator,
+    GlobalReleaseValidator
+)
 
 class EnterpriseCertification:
 
