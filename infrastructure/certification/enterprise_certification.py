@@ -1,3 +1,9 @@
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
 from tests.enterprise.enterprise_validation import (
     EnterpriseArchitectureValidator,
     CloudLayerValidator,
@@ -8,11 +14,12 @@ from tests.enterprise.enterprise_validation import (
     GlobalReleaseValidator
 )
 
+
 class EnterpriseCertification:
 
     def run(self):
 
-        tests = [
+        validators = [
             EnterpriseArchitectureValidator(),
             CloudLayerValidator(),
             APILayerValidator(),
@@ -24,8 +31,8 @@ class EnterpriseCertification:
 
         results = {}
 
-        for test in tests:
-            results.update(test.validate())
+        for validator in validators:
+            results.update(validator.validate())
 
         results["certification"] = "ENTERPRISE CERTIFIED"
 
