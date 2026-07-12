@@ -1,16 +1,30 @@
-from .windows.login_window import LoginWindow
+﻿import tkinter as tk
+
 from .windows.main_window import MainWindow
-from .components.sidebar_menu import SidebarMenu
-from .components.dashboard_widgets import DashboardWidgets
 
 
 class AGSERPV3DesktopApplication:
 
-    def boot(self):
+    def __init__(self):
+        self.root = tk.Tk()
+        self.window = MainWindow(self.root)
 
-        return {
-            "login": LoginWindow().show(),
-            "main": MainWindow().show(),
-            "menu": SidebarMenu().list(),
-            "dashboard": DashboardWidgets().render()
-        }
+    def start(self):
+
+        print("=" * 60)
+        print(" AGS ERP V3 DESKTOP GUI RUNTIME ")
+        print("=" * 60)
+
+        print("AGS ERP V3 MAIN WINDOW LOADED")
+
+        self.root.mainloop()
+
+
+def main():
+
+    app = AGSERPV3DesktopApplication()
+    app.start()
+
+
+if __name__ == "__main__":
+    main()
