@@ -1,2 +1,0 @@
-class Erp/TendersService:
-    pass

@@ -1,3 +1,64 @@
+﻿# =========================================================
+# AGS-STUDIO
+# =========================================================
+
+# Python
 __pycache__/
-*.pyc
-project_summary.txt
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# SQLite / Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Generated caches
+.pyre/
+.mypy_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+temp/
+
+# Runtime data
+data/*.db
+
+# AI cache
+generated/
+
+# Archives
+_archive_generated/
+_archive_db/
+_pending_review_ags_erp_v3/
+
+# Documentation exports
+*.html
+
+# Bytecode
+*.pyo

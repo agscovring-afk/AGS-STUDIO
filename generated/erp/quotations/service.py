@@ -1,2 +1,0 @@
-class Erp/QuotationsService:
-    pass

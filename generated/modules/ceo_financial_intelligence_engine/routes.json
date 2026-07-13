@@ -1,6 +1,0 @@
-{
-    "module": "ceo_financial_intelligence_engine",
-    "route": "/ceo_financial_intelligence_engine",
-    "controller": "ceo_financial_intelligence_engine_controller",
-    "service": "ceo_financial_intelligence_engine_service"
-}

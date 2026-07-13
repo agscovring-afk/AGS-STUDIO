@@ -1,2 +1,0 @@
-class CeoFinancialIntelligenceEngineController:
-    pass

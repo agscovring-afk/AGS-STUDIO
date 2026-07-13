@@ -1,2 +1,0 @@
-class Erp/PermissionsController:
-    pass

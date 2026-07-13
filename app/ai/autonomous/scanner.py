@@ -1,20 +1,49 @@
-"""
-app/ai/autonomous/scanner.py
+﻿"""
+AGS Autonomous V2
+Project Scanner
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from .models import FileInfo
-
 
 class ProjectScanner:
 
-    def __init__(self, context, root="."):
+
+    EXCLUDED = {
+
+        ".git",
+        ".venv",
+        ".venv-1",
+        "__pycache__",
+        ".pytest_cache",
+        ".idea",
+        ".vscode",
+        "node_modules",
+        "dist",
+        "build"
+
+    }
+
+
+    INCLUDED_EXTENSIONS = {
+
+        ".py",
+        ".json",
+        ".yaml",
+        ".yml",
+        ".md"
+
+    }
+
+
+    def __init__(self, context):
 
         self.context = context
-        self.root = Path(root)
+
+        self.root = Path.cwd()
+
 
 
     def scan(self):
@@ -23,40 +52,38 @@ class ProjectScanner:
 
         for path in self.root.rglob("*"):
 
+
             if not path.is_file():
                 continue
 
-            if "__pycache__" in path.parts:
+
+            if any(
+                part in self.EXCLUDED
+                for part in path.parts
+            ):
                 continue
 
-            try:
-                size = path.stat().st_size
 
-            except Exception:
-
-                size = 0
+            if path.suffix not in self.INCLUDED_EXTENSIONS:
+                continue
 
 
             files.append(
-                FileInfo(
-                    path=str(path),
-                    extension=path.suffix,
-                    size=size,
-                )
+                str(path)
             )
 
 
         self.context.snapshot.files = files
 
+        self.context.save()
+
+
         return {
-            "files_found": len(files),
+
+            "files": len(files),
+
+            "excluded": list(
+                self.EXCLUDED
+            )
+
         }
-
-
-    def python_files(self):
-
-        return [
-            f
-            for f in self.context.snapshot.files
-            if f.extension == ".py"
-        ]

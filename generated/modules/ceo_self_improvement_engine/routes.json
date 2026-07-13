@@ -1,6 +1,0 @@
-{
-    "module": "ceo_self_improvement_engine",
-    "route": "/ceo_self_improvement_engine",
-    "controller": "ceo_self_improvement_engine_controller",
-    "service": "ceo_self_improvement_engine_service"
-}

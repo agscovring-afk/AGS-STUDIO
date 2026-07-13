@@ -1,2 +1,0 @@
-class CeoDeploymentIntelligenceEngineController:
-    pass

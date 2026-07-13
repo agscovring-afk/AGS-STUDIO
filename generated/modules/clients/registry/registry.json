@@ -1,8 +1,0 @@
-{
-    "module": "clients",
-    "controller": "clients_controller",
-    "service": "clients_service",
-    "model": "clients",
-    "ui": "clients_page",
-    "status": "registered"
-}

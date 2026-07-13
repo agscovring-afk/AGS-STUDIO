@@ -1,15 +1,10 @@
-"""
-AGS ERP V2
-Application Entry Point
-"""
-
 from app.ui.main_window import MainWindow
+import tkinter as tk
 
 
 def main():
-
-    app = MainWindow()
-
+    root = tk.Tk()
+    app = MainWindow(root)
     app.mainloop()
 
 

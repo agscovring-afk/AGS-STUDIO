@@ -1,6 +1,0 @@
-{
-    "module": "ceo_decision_engine",
-    "route": "/ceo_decision_engine",
-    "controller": "ceo_decision_engine_controller",
-    "service": "ceo_decision_engine_service"
-}

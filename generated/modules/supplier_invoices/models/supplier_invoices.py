@@ -1,2 +1,0 @@
-class SupplierInvoices:
-    pass

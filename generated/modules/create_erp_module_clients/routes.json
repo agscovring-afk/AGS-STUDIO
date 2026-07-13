@@ -1,6 +1,0 @@
-{
-    "module": "create_erp_module_clients",
-    "route": "/create_erp_module_clients",
-    "controller": "create_erp_module_clients_controller",
-    "service": "create_erp_module_clients_service"
-}

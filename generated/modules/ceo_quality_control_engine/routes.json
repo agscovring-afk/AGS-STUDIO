@@ -1,6 +1,0 @@
-{
-    "module": "ceo_quality_control_engine",
-    "route": "/ceo_quality_control_engine",
-    "controller": "ceo_quality_control_engine_controller",
-    "service": "ceo_quality_control_engine_service"
-}

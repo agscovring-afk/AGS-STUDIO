@@ -1,4 +1,4 @@
-﻿"""
+"""
 app/ai/autonomous/task_generator.py
 """
 
@@ -10,12 +10,18 @@ class TaskGenerator:
     Converts user requests into autonomous tasks
     """
 
-
     def __init__(self, context=None):
-
         self.context = context
 
+    def _exists(self, name, description):
 
+        if not self.context:
+            return False
+
+        return any(
+            t.name == name
+            for t in self.context.snapshot.tasks
+        )
 
     def generate(self, request: str):
 
@@ -23,50 +29,31 @@ class TaskGenerator:
 
         request_lower = request.lower()
 
+        def add_task(name, description, priority):
 
-        if "tender" in request_lower or "مناق" in request:
+            if not self._exists(name, description):
 
-
-            tasks.extend([
-
-                Task(
-                    name="analyze_tender_workflow",
-                    description="Analyze tender workflow",
-                    priority=10
-                ),
-
-                Task(
-                    name="design_tender_database",
-                    description="Design tender database",
-                    priority=9
-                ),
-
-                Task(
-                    name="create_tender_modules",
-                    description="Create tender modules",
-                    priority=8
-                ),
-
-                Task(
-                    name="generate_system_plan",
-                    description="Generate system plan",
-                    priority=7
+                tasks.append(
+                    Task(
+                        name=name,
+                        description=description,
+                        priority=priority
+                    )
                 )
 
-            ])
+        if "tender" in request_lower or "????" in request:
 
+            add_task("analyze_tender_workflow", "Analyze tender workflow", 10)
+            add_task("design_tender_database", "Design tender database", 9)
+            add_task("create_tender_modules", "Create tender modules", 8)
+            add_task("generate_system_plan", "Generate system_plan", 7)
 
         else:
 
-            tasks.append(
-
-                Task(
-                    name="general_analysis",
-                    description=request,
-                    priority=5
-                )
-
+            add_task(
+                "general_analysis",
+                request,
+                5
             )
-
 
         return tasks

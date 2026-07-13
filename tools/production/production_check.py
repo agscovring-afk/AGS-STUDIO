@@ -14,7 +14,7 @@ print("="*32)
 checks = [
     (BASE / "ags.yaml", "CONFIG"),
     (BASE / "ags.py", "CORE"),
-    (BASE / "ags.db", "DATABASE"),
+    (BASE / "ags_studio.db", "DATABASE"),
     (BASE / "app/ai", "AI ENGINE"),
     (BASE / "app/registry", "REGISTRY"),
     (BASE / "app/metadata", "METADATA"),
@@ -27,3 +27,4 @@ for p,n in checks:
 
 print()
 print("STATUS: PRODUCTION VALIDATION COMPLETE")
+

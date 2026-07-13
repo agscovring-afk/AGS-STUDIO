@@ -1,0 +1,5960 @@
+﻿==================== APP ====================
+Structure du dossier
+Le numÚro de sÚrie du volume est 000001DE 0218:3751
+C:\USERS\ADMIN\AGS-STUDIO\APP
+ª   main.py
+ª   
++---advanced_ai_civilization
++---advertising
++---agent_intelligence_grid
++---agent_marketplace
+ª   +---platform
+ª   ª   ª   agent_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           agent_engine.cpython-314.pyc
+ª   ª           
+ª   +---v1
++---agi_business_platform
+ª   ª   phase30.py
+ª   ª   
+ª   +---__pycache__
+ª           phase30.cpython-314.pyc
+ª           
++---ai
+ª   +---agents
+ª   ª   ª   architect.py
+ª   ª   ª   backend.py
+ª   ª   ª   builder.py
+ª   ª   ª   database.py
+ª   ª   ª   tester.py
+ª   ª   ª   ui.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           architect.cpython-314.pyc
+ª   ª           backend.cpython-314.pyc
+ª   ª           builder.cpython-314.pyc
+ª   ª           database.cpython-314.pyc
+ª   ª           tester.cpython-314.pyc
+ª   ª           ui.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---ags_autonomous_company_platform_final
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_ceo_command_center
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_directory_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_master_controller
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_partner_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_production_hardening
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_product_discovery_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_release_build
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_rfq_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ags_vendor_match_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ai_agent_generator_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---api_generator_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---app_generator_engine_v3
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---architect
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---ast_engine
+ª   ª   ª   analyzer.py
+ª   ª   ª   bridge.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           analyzer.cpython-314.pyc
+ª   ª           bridge.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---autobuilder
+ª   ª   ª   code_agent.py
+ª   ª   ª   executor.py
+ª   ª   ª   module_generator.py
+ª   ª   ª   planner.py
+ª   ª   ª   queue.py
+ª   ª   ª   reporter.py
+ª   ª   ª   schema_generator.py
+ª   ª   ª   task_manager.py
+ª   ª   ª   tester.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           code_agent.cpython-314.pyc
+ª   ª           executor.cpython-314.pyc
+ª   ª           module_generator.cpython-314.pyc
+ª   ª           planner.cpython-314.pyc
+ª   ª           queue.cpython-314.pyc
+ª   ª           reporter.cpython-314.pyc
+ª   ª           schema_generator.cpython-314.pyc
+ª   ª           task_manager.cpython-314.pyc
+ª   ª           tester.cpython-314.pyc
+ª   ª           
+ª   +---autocoder
+ª   ª   ª   engine.py
+ª   ª   ª   prompt_factory.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           prompt_factory.cpython-314.pyc
+ª   ª           
+ª   +---autonomous
+ª   ª   ª   active.py
+ª   ª   ª   agent_bridge.py
+ª   ª   ª   agent_intelligence.py
+ª   ª   ª   agent_registry.py
+ª   ª   ª   agent_registry_backup_20260711.py
+ª   ª   ª   agent_registry_backup_before_build_fix.py
+ª   ª   ª   agent_registry_backup_final.py
+ª   ª   ª   agent_router.py
+ª   ª   ª   agent_router.py?
+ª   ª   ª   api.py
+ª   ª   ª   auto_fix_loop.py
+ª   ª   ª   bootstrap.py
+ª   ª   ª   brain.py
+ª   ª   ª   bridge.py
+ª   ª   ª   build_report.py
+ª   ª   ª   command_center.py
+ª   ª   ª   context.py
+ª   ª   ª   controller.py
+ª   ª   ª   decision.py
+ª   ª   ª   decision_integration.py
+ª   ª   ª   dependency_analyzer.py
+ª   ª   ª   diagnostics.py
+ª   ª   ª   doctor.py
+ª   ª   ª   engine.py
+ª   ª   ª   engine_adapter.py
+ª   ª   ª   engine_base.py
+ª   ª   ª   erp_evolution.py
+ª   ª   ª   execution_bridge.py
+ª   ª   ª   execution_pipeline.py
+ª   ª   ª   executor.py
+ª   ª   ª   exporter.py
+ª   ª   ª   factory_connector.py
+ª   ª   ª   final_check.py
+ª   ª   ª   final_release.py
+ª   ª   ª   final_test.py
+ª   ª   ª   fixer.py
+ª   ª   ª   health.py
+ª   ª   ª   knowledge.py
+ª   ª   ª   live_builder.py
+ª   ª   ª   loop.py
+ª   ª   ª   master_bridge.py
+ª   ª   ª   master_controller.py
+ª   ª   ª   master_runtime.py
+ª   ª   ª   memory.py
+ª   ª   ª   models.py
+ª   ª   ª   monitor.py
+ª   ª   ª   pipeline_backup.py
+ª   ª   ª   planner.py
+ª   ª   ª   production_agent.py
+ª   ª   ª   production_guard.py
+ª   ª   ª   production_registry.py
+ª   ª   ª   production_test.py
+ª   ª   ª   project_analyzer.py
+ª   ª   ª   real_agent_bridge.py
+ª   ª   ª   real_agent_engine.py
+ª   ª   ª   reflection.py
+ª   ª   ª   registry.py
+ª   ª   ª   reporter.py
+ª   ª   ª   reports.py
+ª   ª   ª   runner.py
+ª   ª   ª   runtime.py
+ª   ª   ª   runtime.py.backup
+ª   ª   ª   runtime_backup_20260711.py
+ª   ª   ª   runtime_before_full_replace_20260711.py
+ª   ª   ª   runtime_before_memory_fix_20260711.py
+ª   ª   ª   runtime_loop.py
+ª   ª   ª   scanner.py
+ª   ª   ª   self_healing_loop.py
+ª   ª   ª   self_learning_runtime.py
+ª   ª   ª   service.py
+ª   ª   ª   state.py
+ª   ª   ª   task_generator.py
+ª   ª   ª   task_generator_intelligence.py
+ª   ª   ª   task_orchestrator.py
+ª   ª   ª   tester.py
+ª   ª   ª   ultimate_agent_bridge.py
+ª   ª   ª   ultimate_execution_pipeline.py
+ª   ª   ª   validator.py
+ª   ª   ª   workflow_executor.py
+ª   ª   ª   __init__.py
+ª   ª   ª   __main__.py
+ª   ª   ª   
+ª   ª   +---agents
+ª   ª   ª   ª   architect_agent.py
+ª   ª   ª   ª   backend_agent.py
+ª   ª   ª   ª   base_agent.py
+ª   ª   ª   ª   database_agent.py
+ª   ª   ª   ª   documentation_agent.py
+ª   ª   ª   ª   loader.py
+ª   ª   ª   ª   testing_agent.py
+ª   ª   ª   ª   ui_agent.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           architect_agent.cpython-314.pyc
+ª   ª   ª           backend_agent.cpython-314.pyc
+ª   ª   ª           base_agent.cpython-314.pyc
+ª   ª   ª           database_agent.cpython-314.pyc
+ª   ª   ª           documentation_agent.cpython-314.pyc
+ª   ª   ª           loader.cpython-314.pyc
+ª   ª   ª           testing_agent.cpython-314.pyc
+ª   ª   ª           ui_agent.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---agent_bus
+ª   ª   +---agent_memory
+ª   ª   +---api_engine
+ª   ª   +---approval_engine
+ª   ª   +---assistant_engine
+ª   ª   +---audit_engine
+ª   ª   +---auth_engine
+ª   ª   +---backup_engine
+ª   ª   +---business_engine
+ª   ª   ª   ª   business.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           business.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---calendar_engine
+ª   ª   +---cloud_engine
+ª   ª   +---code_review
+ª   ª   +---collaboration
+ª   ª   ª   ª   manager.py
+ª   ª   ª   ª   multi_agent.py
+ª   ª   ª   ª   report.py
+ª   ª   ª   ª   task_share.py
+ª   ª   ª   ª   team.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           manager.cpython-314.pyc
+ª   ª   ª           multi_agent.cpython-314.pyc
+ª   ª   ª           report.cpython-314.pyc
+ª   ª   ª           task_share.cpython-314.pyc
+ª   ª   ª           team.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---communication
+ª   ª   ª   ª   bus.py
+ª   ª   ª   ª   channel.py
+ª   ª   ª   ª   message.py
+ª   ª   ª   ª   protocol.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bus.cpython-314.pyc
+ª   ª   ª           channel.cpython-314.pyc
+ª   ª   ª           message.cpython-314.pyc
+ª   ª   ª           protocol.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---dashboard_engine
+ª   ª   +---database_engine
+ª   ª   ª   ª   database_engine.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           database_engine.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---database_v2
+ª   ª   +---data_relation
+ª   ª   +---debugging
+ª   ª   ª   +---v1
+ª   ª   ª       ª   debugger.py
+ª   ª   ª       ª   __init__.py
+ª   ª   ª       ª   
+ª   ª   ª       +---__pycache__
+ª   ª   ª               debugger.cpython-314.pyc
+ª   ª   ª               __init__.cpython-314.pyc
+ª   ª   ª               
+ª   ª   +---decision
+ª   ª   ª   ª   decision_log.py
+ª   ª   ª   ª   engine.py
+ª   ª   ª   ª   evaluator.py
+ª   ª   ª   ª   strategy.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           decision_log.cpython-314.pyc
+ª   ª   ª           engine.cpython-314.pyc
+ª   ª   ª           evaluator.cpython-314.pyc
+ª   ª   ª           strategy.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---deployment
+ª   ª   ª   ª   deployment.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           deployment.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---documentation_engine
+ª   ª   +---domain_engine
+ª   ª   ª   ª   domain.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           domain.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---domain_v2
+ª   ª   +---erp_executor
+ª   ª   ª   ª   erp_auto_executor.py
+ª   ª   ª   ª   erp_test.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           erp_auto_executor.cpython-314.pyc
+ª   ª   ª           erp_test.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---erp_factory_v2
+ª   ª   +---export_engine
+ª   ª   +---factory
+ª   ª   ª   ª   erp_factory.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           erp_factory.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---factory_v2
+ª   ª   ª   ª   factory.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           factory.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---form_engine
+ª   ª   +---full_pipeline
+ª   ª   ª   ª   erp_full_pipeline.py
+ª   ª   ª   ª   pipeline_test.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           erp_full_pipeline.cpython-314.pyc
+ª   ª   ª           pipeline_test.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---industry_templates
+ª   ª   +---installer_engine
+ª   ª   +---integration_engine
+ª   ª   +---intelligence
+ª   ª   ª   ª   erp_intelligence.py
+ª   ª   ª   ª   pipeline.py
+ª   ª   ª   ª   system.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           erp_intelligence.cpython-314.pyc
+ª   ª   ª           pipeline.cpython-314.pyc
+ª   ª   ª           system.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---kernel
+ª   ª   ª   ª   event_bus.py
+ª   ª   ª   ª   kernel.py
+ª   ª   ª   ª   lifecycle.py
+ª   ª   ª   ª   state_manager.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           event_bus.cpython-314.pyc
+ª   ª   ª           kernel.cpython-314.pyc
+ª   ª   ª           lifecycle.cpython-314.pyc
+ª   ª   ª           state_manager.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---knowledge_packs
+ª   ª   +---marketplace_engine
+ª   ª   +---master_expansion
+ª   ª   ª   ª   base.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           base.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---memory
+ª   ª   ª   ª   context.py
+ª   ª   ª   ª   index.py
+ª   ª   ª   ª   memory.py
+ª   ª   ª   ª   retrieval.py
+ª   ª   ª   ª   store.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           context.cpython-314.pyc
+ª   ª   ª           index.cpython-314.pyc
+ª   ª   ª           memory.cpython-314.pyc
+ª   ª   ª           retrieval.cpython-314.pyc
+ª   ª   ª           store.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---menu_engine
+ª   ª   ª   ª   menu.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           menu.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---metadata_engine
+ª   ª   ª   ª   metadata_generator.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           metadata_generator.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---metadata_v2
+ª   ª   +---migration_engine
+ª   ª   ª   ª   migration.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           migration.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---migration_v2
+ª   ª   +---model_router
+ª   ª   +---monitoring
+ª   ª   ª   ª   monitoring.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           monitoring.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---monitoring_v2
+ª   ª   +---notification_engine
+ª   ª   +---orchestrator
+ª   ª   ª   ª   orchestrator.py
+ª   ª   ª   ª   orchestrator_backup_20260711.py
+ª   ª   ª   ª   test_orchestrator.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           orchestrator.cpython-314.pyc
+ª   ª   ª           orchestrator_backup_20260711.cpython-314.pyc
+ª   ª   ª           test_orchestrator.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---pdf_engine
+ª   ª   +---performance
+ª   ª   ª   ª   metrics.py
+ª   ª   ª   ª   tracker.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           metrics.cpython-314.pyc
+ª   ª   ª           tracker.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---performance_engine
+ª   ª   +---pipeline
+ª   ª   ª   ª   ast_router.py
+ª   ª   ª   ª   ceo_router.py
+ª   ª   ª   ª   erp_pipeline.py
+ª   ª   ª   ª   erp_pipeline_backup.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   __init___backup.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           ast_router.cpython-314.pyc
+ª   ª   ª           ceo_router.cpython-314.pyc
+ª   ª   ª           erp_pipeline.cpython-314.pyc
+ª   ª   ª           erp_pipeline_backup.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           __init___backup.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---planner
+ª   ª   ª   ª   dependency.py
+ª   ª   ª   ª   planner.py
+ª   ª   ª   ª   task_graph.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           dependency.cpython-314.pyc
+ª   ª   ª           planner.cpython-314.pyc
+ª   ª   ª           task_graph.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---plugins
+ª   ª   ª   ª   plugin_system.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           plugin_system.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---plugin_v2
+ª   ª   +---production_security
+ª   ª   +---project_agent
+ª   ª   +---provider_marketplace
+ª   ª   +---quality
+ª   ª   ª   ª   fixer.py
+ª   ª   ª   ª   path_validator.py
+ª   ª   ª   ª   sanitizer.py
+ª   ª   ª   ª   syntax_validator.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           fixer.cpython-314.pyc
+ª   ª   ª           path_validator.cpython-314.pyc
+ª   ª   ª           sanitizer.cpython-314.pyc
+ª   ª   ª           syntax_validator.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---quality_agents
+ª   ª   +---registry_engine
+ª   ª   ª   ª   registry.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           registry.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---registry_v2
+ª   ª   +---repair_engine
+ª   ª   ª   ª   repair.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           repair.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---repair_v3
+ª   ª   +---report_engine
+ª   ª   +---resource_agent
+ª   ª   +---router_engine
+ª   ª   +---safety
+ª   ª   ª   ª   autonomous_policy.py
+ª   ª   ª   ª   change_validator.py
+ª   ª   ª   ª   execution_guard.py
+ª   ª   ª   ª   rollback_manager.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           autonomous_policy.cpython-314.pyc
+ª   ª   ª           change_validator.cpython-314.pyc
+ª   ª   ª           execution_guard.cpython-314.pyc
+ª   ª   ª           rollback_manager.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---schema_intelligence
+ª   ª   +---search_engine
+ª   ª   +---security_engine
+ª   ª   ª   ª   security.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           security.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---table_engine
+ª   ª   +---task_agent
+ª   ª   +---testing_v2
+ª   ª   +---test_engine
+ª   ª   ª   ª   test_engine.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           test_engine.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---ui_builder_v2
+ª   ª   +---ui_engine
+ª   ª   ª   ª   ui_builder.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           ui_builder.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---workers
+ª   ª   ª   ª   architect_worker.py
+ª   ª   ª   ª   backend_worker.py
+ª   ª   ª   ª   base_worker.py
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   database_worker.py
+ª   ª   ª   ª   erp_builder_worker.py
+ª   ª   ª   ª   erp_test.py
+ª   ª   ª   ª   file_creator_worker.py
+ª   ª   ª   ª   fixer_worker.py
+ª   ª   ª   ª   module_builder_worker.py
+ª   ª   ª   ª   module_test.py
+ª   ª   ª   ª   registry.py
+ª   ª   ª   ª   scanner_worker.py
+ª   ª   ª   ª   testing_worker.py
+ª   ª   ª   ª   test_plan.py
+ª   ª   ª   ª   ui_worker.py
+ª   ª   ª   ª   validator_worker.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           architect_worker.cpython-314.pyc
+ª   ª   ª           backend_worker.cpython-314.pyc
+ª   ª   ª           base_worker.cpython-314.pyc
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           database_worker.cpython-314.pyc
+ª   ª   ª           erp_builder_worker.cpython-314.pyc
+ª   ª   ª           erp_test.cpython-314.pyc
+ª   ª   ª           file_creator_worker.cpython-314.pyc
+ª   ª   ª           fixer_worker.cpython-314.pyc
+ª   ª   ª           module_builder_worker.cpython-314.pyc
+ª   ª   ª           module_test.cpython-314.pyc
+ª   ª   ª           registry.cpython-314.pyc
+ª   ª   ª           scanner_worker.cpython-314.pyc
+ª   ª   ª           testing_worker.cpython-314.pyc
+ª   ª   ª           test_plan.cpython-314.pyc
+ª   ª   ª           ui_worker.cpython-314.pyc
+ª   ª   ª           validator_worker.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---workflow
+ª   ª   ª   ª   engine.py
+ª   ª   ª   ª   monitor.py
+ª   ª   ª   ª   workflow.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           engine.cpython-314.pyc
+ª   ª   ª           monitor.cpython-314.pyc
+ª   ª   ª           workflow.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---workflow_engine
+ª   ª   +---__pycache__
+ª   ª           active.cpython-314.pyc
+ª   ª           agent_bridge.cpython-314.pyc
+ª   ª           agent_intelligence.cpython-314.pyc
+ª   ª           agent_registry.cpython-314.pyc
+ª   ª           agent_registry_backup_20260711.cpython-314.pyc
+ª   ª           agent_registry_backup_before_build_fix.cpython-314.pyc
+ª   ª           agent_registry_backup_final.cpython-314.pyc
+ª   ª           agent_router.cpython-314.pyc
+ª   ª           api.cpython-314.pyc
+ª   ª           auto_fix_loop.cpython-314.pyc
+ª   ª           bootstrap.cpython-314.pyc
+ª   ª           brain.cpython-314.pyc
+ª   ª           bridge.cpython-314.pyc
+ª   ª           build_report.cpython-314.pyc
+ª   ª           command_center.cpython-314.pyc
+ª   ª           context.cpython-314.pyc
+ª   ª           controller.cpython-314.pyc
+ª   ª           decision.cpython-314.pyc
+ª   ª           decision_integration.cpython-314.pyc
+ª   ª           dependency_analyzer.cpython-314.pyc
+ª   ª           diagnostics.cpython-314.pyc
+ª   ª           doctor.cpython-314.pyc
+ª   ª           engine.cpython-314.pyc
+ª   ª           engine_adapter.cpython-314.pyc
+ª   ª           engine_base.cpython-314.pyc
+ª   ª           erp_evolution.cpython-314.pyc
+ª   ª           execution_bridge.cpython-314.pyc
+ª   ª           execution_pipeline.cpython-314.pyc
+ª   ª           executor.cpython-314.pyc
+ª   ª           exporter.cpython-314.pyc
+ª   ª           factory_connector.cpython-314.pyc
+ª   ª           final_check.cpython-314.pyc
+ª   ª           final_release.cpython-314.pyc
+ª   ª           final_test.cpython-314.pyc
+ª   ª           fixer.cpython-314.pyc
+ª   ª           health.cpython-314.pyc
+ª   ª           knowledge.cpython-314.pyc
+ª   ª           live_builder.cpython-314.pyc
+ª   ª           loop.cpython-314.pyc
+ª   ª           master_bridge.cpython-314.pyc
+ª   ª           master_controller.cpython-314.pyc
+ª   ª           master_runtime.cpython-314.pyc
+ª   ª           memory.cpython-314.pyc
+ª   ª           models.cpython-314.pyc
+ª   ª           monitor.cpython-314.pyc
+ª   ª           pipeline_backup.cpython-314.pyc
+ª   ª           planner.cpython-314.pyc
+ª   ª           production_agent.cpython-314.pyc
+ª   ª           production_guard.cpython-314.pyc
+ª   ª           production_registry.cpython-314.pyc
+ª   ª           production_test.cpython-314.pyc
+ª   ª           project_analyzer.cpython-314.pyc
+ª   ª           real_agent_bridge.cpython-314.pyc
+ª   ª           real_agent_engine.cpython-314.pyc
+ª   ª           reflection.cpython-314.pyc
+ª   ª           registry.cpython-314.pyc
+ª   ª           reporter.cpython-314.pyc
+ª   ª           reports.cpython-314.pyc
+ª   ª           runner.cpython-314.pyc
+ª   ª           runtime.cpython-314.pyc
+ª   ª           runtime_backup_20260711.cpython-314.pyc
+ª   ª           runtime_before_full_replace_20260711.cpython-314.pyc
+ª   ª           runtime_before_memory_fix_20260711.cpython-314.pyc
+ª   ª           runtime_loop.cpython-314.pyc
+ª   ª           scanner.cpython-314.pyc
+ª   ª           self_healing_loop.cpython-314.pyc
+ª   ª           self_learning_runtime.cpython-314.pyc
+ª   ª           service.cpython-314.pyc
+ª   ª           state.cpython-314.pyc
+ª   ª           task_generator.cpython-314.pyc
+ª   ª           task_generator_intelligence.cpython-314.pyc
+ª   ª           task_orchestrator.cpython-314.pyc
+ª   ª           tester.cpython-314.pyc
+ª   ª           ultimate_agent_bridge.cpython-314.pyc
+ª   ª           ultimate_execution_pipeline.cpython-314.pyc
+ª   ª           validator.cpython-314.pyc
+ª   ª           workflow_executor.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           __main__.cpython-314.pyc
+ª   ª           
+ª   +---autonomous_access
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_action
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_adaptation
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_agent
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_ai_memory_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_ai_router_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_analysis
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_api_factory
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_architect
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_architecture_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_audit
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_backup
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_build
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_business_analyst
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_business_rule_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_capability
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_ci_cd_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_cloud
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_code_intelligence
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_collaboration
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_communication
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_company_brain_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_compliance
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_context
+ª   ª   +---tests
+ª   ª   ª   ª   test_context_engine.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           test_context_engine.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---v1
+ª   ª       ª   dependency.py
+ª   ª       ª   engine.py
+ª   ª       ª   models.py
+ª   ª       ª   scanner.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               dependency.cpython-314.pyc
+ª   ª               engine.cpython-314.pyc
+ª   ª               models.cpython-314.pyc
+ª   ª               scanner.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_continuous_improvement
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_coordination
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_core
+ª   ª   +---tests
+ª   ª   ª   ª   test_autonomous_core.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           test_autonomous_core.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   executor.py
+ª   ª       ª   fixer.py
+ª   ª       ª   memory.py
+ª   ª       ª   planner.py
+ª   ª       ª   reporter.py
+ª   ª       ª   validator.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               executor.cpython-314.pyc
+ª   ª               fixer.cpython-314.pyc
+ª   ª               memory.cpython-314.pyc
+ª   ª               planner.cpython-314.pyc
+ª   ª               reporter.cpython-314.pyc
+ª   ª               validator.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_cost
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_customer
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_dashboard_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_data
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_database_architect
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_decision
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_decision_center_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_decision_matrix
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_deployment
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_deployment_manager
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_design
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_discovery
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_ecosystem
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_engine_registry_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_environment_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_event
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_evolution
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_feedback
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_finance_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_finance_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_form_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_generation
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_goal
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_governance
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_health_manager
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_hr_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_integration
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_integration_hub
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_kernel_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_knowledge
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_knowledge_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_knowledge_graph
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_kpi_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_learning
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_learning_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_market
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_marketing_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_marketplace
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_memory_fusion_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_memory_manager
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_metrics
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_migration
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_mobile_factory
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_model_manager
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_module_factory_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_monitoring
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_monitoring_center
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_multi_agent
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_observability
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_operations_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_optimization
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_orchestration_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_orchestrator
+ª   ª   +---tests
+ª   ª   ª   ª   test_orchestrator.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           test_orchestrator.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   models.py
+ª   ª       ª   orchestrator.py
+ª   ª       ª   workflow.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               models.cpython-314.pyc
+ª   ª               orchestrator.cpython-314.pyc
+ª   ª               workflow.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_performance
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_platform_integration
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_policy
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_prediction
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_pricing_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_priority
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_product
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_project_control_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_project_manager
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_protection
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_purchasing_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_quality
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_reasoning
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_reasoning_core_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_recovery
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_release
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_release_manager
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_reporting_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_report_factory_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_requirements
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_resource
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_revenue
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_risk
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_sales_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_scaling
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_screen_factory_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_security
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_security_center
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_self_evolution_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_self_healing
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_semantic
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_simulation
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_software_factory
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_sprint
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_state
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_strategy
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_strategy_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_supplier_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_support_v2
+ª   ª   +---v1
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_system_controller
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_tender_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_testing
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_test_factory
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_trust
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_ui_factory
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_workflow
+ª   ª   ª   engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           
+ª   +---autonomous_workflow_factory
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---autonomous_workflow_orchestrator_v3
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---auto_repair
+ª   ª   ª   bridge.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---build_orchestrator
+ª   ª   ª   bridge.py
+ª   ª   ª   full_pipeline.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           full_pipeline.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---build_package_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---business_analyst
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---business_intelligence
+ª   ª   ª   engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           
+ª   +---business_intelligence_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---business_logic_generator
+ª   ª   +---v1
+ª   +---capabilities
+ª   ª   ª   capability.py
+ª   ª   ª   coding.py
+ª   ª   ª   embedding.py
+ª   ª   ª   reasoning.py
+ª   ª   ª   registry.py
+ª   ª   ª   resolver.py
+ª   ª   ª   speech.py
+ª   ª   ª   vision.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           capability.cpython-314.pyc
+ª   ª           coding.cpython-314.pyc
+ª   ª           embedding.cpython-314.pyc
+ª   ª           reasoning.cpython-314.pyc
+ª   ª           registry.cpython-314.pyc
+ª   ª           resolver.cpython-314.pyc
+ª   ª           speech.cpython-314.pyc
+ª   ª           vision.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---ceo_ai_advisor_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ceo_mode
+ª   ª   +---v1
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---ceo_platform
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---engines
+ª   ª       +---generator
+ª   ª       ª   ª   ceo_engine_generator.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           ceo_engine_generator.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---cloud_deployment
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---code_generation
+ª   ª   ª   bridge.py
+ª   ª   ª   builder.py
+ª   ª   ª   generator.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---v2
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           builder.cpython-314.pyc
+ª   ª           generator.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---code_generator
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   intelligence.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               intelligence.cpython-314.pyc
+ª   ª               
+ª   +---code_understanding
+ª   ª   ª   bridge.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---v2
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---company_builder
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---config
+ª   ª   ª   ai_config.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           ai_config.cpython-314.pyc
+ª   ª           
+ª   +---construction_erp
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---construction_factory
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---construction_intelligence
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---copilot
+ª   ª   ª   engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           
+ª   +---crud_generator
+ª   ª   ª   crud_binding.py
+ª   ª   ª   crud_generator.py
+ª   ª   ª   crud_templates.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           crud_binding.cpython-314.pyc
+ª   ª           crud_generator.cpython-314.pyc
+ª   ª           crud_templates.cpython-314.pyc
+ª   ª           
+ª   +---database_architect
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---database_intelligence
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---dependency_engine
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---dependency_intelligence
+ª   ª   ª   bridge.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---v2
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---dependency_validation
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---deployment
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---dev_team
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---documentation
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---document_generator_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---engine_registry_scan
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---enterprise
+ª   ª   ª   api_gateway.py
+ª   ª   ª   audit_logger.py
+ª   ª   ª   backup_system.py
+ª   ª   ª   cloud_sync.py
+ª   ª   ª   company_manager.py
+ª   ª   ª   enterprise_engine.py
+ª   ª   ª   permission_engine.py
+ª   ª   ª   user_manager.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           api_gateway.cpython-314.pyc
+ª   ª           audit_logger.cpython-314.pyc
+ª   ª           backup_system.cpython-314.pyc
+ª   ª           cloud_sync.cpython-314.pyc
+ª   ª           company_manager.cpython-314.pyc
+ª   ª           enterprise_engine.cpython-314.pyc
+ª   ª           permission_engine.cpython-314.pyc
+ª   ª           user_manager.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---erp_autonomous
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---erp_factory
+ª   ª   +---v1
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---erp_generator_engine_v3
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---executive_report_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---executor
+ª   ª   ª   code_executor.py
+ª   ª   ª   command_runner.py
+ª   ª   ª   error_capture.py
+ª   ª   ª   execution_engine.py
+ª   ª   ª   file_generator.py
+ª   ª   ª   recovery_system.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           code_executor.cpython-314.pyc
+ª   ª           command_runner.cpython-314.pyc
+ª   ª           error_capture.cpython-314.pyc
+ª   ª           execution_engine.cpython-314.pyc
+ª   ª           file_generator.cpython-314.pyc
+ª   ª           recovery_system.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---factory
+ª   ª   ª   api_generator.py
+ª   ª   ª   controller_generator.py
+ª   ª   ª   database_generator.py
+ª   ª   ª   documentation_generator.py
+ª   ª   ª   factory_engine.py
+ª   ª   ª   model_generator.py
+ª   ª   ª   report_generator.py
+ª   ª   ª   service_generator.py
+ª   ª   ª   test_generator.py
+ª   ª   ª   ui_generator.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           api_generator.cpython-314.pyc
+ª   ª           controller_generator.cpython-314.pyc
+ª   ª           database_generator.cpython-314.pyc
+ª   ª           documentation_generator.cpython-314.pyc
+ª   ª           factory_engine.cpython-314.pyc
+ª   ª           model_generator.cpython-314.pyc
+ª   ª           report_generator.cpython-314.pyc
+ª   ª           service_generator.cpython-314.pyc
+ª   ª           test_generator.cpython-314.pyc
+ª   ª           ui_generator.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---factory_orchestrator
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---full_autonomous_pipeline_test
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---generator
+ª   ª   ª   ags_module_generator.py
+ª   ª   ª   module_generator.py
+ª   ª   ª   templates.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           ags_module_generator.cpython-314.pyc
+ª   ª           module_generator.cpython-314.pyc
+ª   ª           templates.cpython-314.pyc
+ª   ª           
+ª   +---global_engine_registry_audit
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---improvement
+ª   ª   ª   improvement_planner.py
+ª   ª   ª   optimization_engine.py
+ª   ª   ª   performance_analyzer.py
+ª   ª   ª   self_improvement.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           improvement_planner.cpython-314.pyc
+ª   ª           optimization_engine.cpython-314.pyc
+ª   ª           performance_analyzer.cpython-314.pyc
+ª   ª           self_improvement.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---industry
+ª   ª   +---construction
+ª   ª       +---v1
+ª   ª           ª   bridge.py
+ª   ª           ª   
+ª   ª           +---__pycache__
+ª   ª                   bridge.cpython-314.pyc
+ª   ª                   
+ª   +---industry_templates
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---knowledge_graph
+ª   ª   ª   bridge.py
+ª   ª   ª   builder.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---relations
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   engine.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           engine.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           builder.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---knowledge_learning
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---loop
+ª   ª   ª   analyze.py
+ª   ª   ª   autonomous_loop.py
+ª   ª   ª   builder.py
+ª   ª   ª   fixer.py
+ª   ª   ª   planner.py
+ª   ª   ª   rebuild.py
+ª   ª   ª   report.py
+ª   ª   ª   tester.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           analyze.cpython-314.pyc
+ª   ª           autonomous_loop.cpython-314.pyc
+ª   ª           builder.cpython-314.pyc
+ª   ª           fixer.cpython-314.pyc
+ª   ª           planner.cpython-314.pyc
+ª   ª           rebuild.cpython-314.pyc
+ª   ª           report.cpython-314.pyc
+ª   ª           tester.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---marketplace
+ª   ª   ª   ai_provider_store.py
+ª   ª   ª   marketplace_engine.py
+ª   ª   ª   module_marketplace.py
+ª   ª   ª   plugin_system.py
+ª   ª   ª   template_store.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           ai_provider_store.cpython-314.pyc
+ª   ª           marketplace_engine.cpython-314.pyc
+ª   ª           module_marketplace.cpython-314.pyc
+ª   ª           plugin_system.cpython-314.pyc
+ª   ª           template_store.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---master_control
+ª   ª   +---v1
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---v2
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---master_core
+ª   ª   ª   brain.py
+ª   ª   ª   decision.py
+ª   ª   ª   engine.py
+ª   ª   ª   state.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           brain.cpython-314.pyc
+ª   ª           decision.cpython-314.pyc
+ª   ª           engine.cpython-314.pyc
+ª   ª           state.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---master_planner
+ª   ª   +---v1
+ª   ª       ª   api.py
+ª   ª       ª   default_phases.py
+ª   ª       ª   dispatcher.py
+ª   ª       ª   execution_plan.py
+ª   ª       ª   models.py
+ª   ª       ª   phase_registry.py
+ª   ª       ª   planner.py
+ª   ª       ª   production_pipeline.py
+ª   ª       ª   recovery.py
+ª   ª       ª   runner.py
+ª   ª       ª   task_scheduler.py
+ª   ª       ª   validator.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               api.cpython-314.pyc
+ª   ª               default_phases.cpython-314.pyc
+ª   ª               dispatcher.cpython-314.pyc
+ª   ª               execution_plan.cpython-314.pyc
+ª   ª               models.cpython-314.pyc
+ª   ª               phase_registry.cpython-314.pyc
+ª   ª               planner.cpython-314.pyc
+ª   ª               production_pipeline.cpython-314.pyc
+ª   ª               recovery.cpython-314.pyc
+ª   ª               runner.cpython-314.pyc
+ª   ª               task_scheduler.cpython-314.pyc
+ª   ª               validator.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---master_system
+ª   ª   ª   autonomous_core.py
+ª   ª   ª   deployment_engine.py
+ª   ª   ª   erp_generator.py
+ª   ª   ª   factory_controller.py
+ª   ª   ª   master_system.py
+ª   ª   ª   multi_agents.py
+ª   ª   ª   self_improvement.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           autonomous_core.cpython-314.pyc
+ª   ª           deployment_engine.cpython-314.pyc
+ª   ª           erp_generator.cpython-314.pyc
+ª   ª           factory_controller.cpython-314.pyc
+ª   ª           master_system.cpython-314.pyc
+ª   ª           multi_agents.cpython-314.pyc
+ª   ª           self_improvement.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---memory
+ª   ª   ª   agent_memory.py
+ª   ª   ª   decision_memory.py
+ª   ª   ª   knowledge_store.py
+ª   ª   ª   memory_engine.py
+ª   ª   ª   memory_entry.py
+ª   ª   ª   memory_manager.py
+ª   ª   ª   memory_service.py
+ª   ª   ª   memory_types.py
+ª   ª   ª   project_memory.json
+ª   ª   ª   project_memory.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           agent_memory.cpython-314.pyc
+ª   ª           decision_memory.cpython-314.pyc
+ª   ª           knowledge_store.cpython-314.pyc
+ª   ª           memory_engine.cpython-314.pyc
+ª   ª           memory_entry.cpython-314.pyc
+ª   ª           memory_manager.cpython-314.pyc
+ª   ª           memory_service.cpython-314.pyc
+ª   ª           memory_types.cpython-314.pyc
+ª   ª           project_memory.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---menu_generator
+ª   ª   +---v1
+ª   +---metadata_schema_generator
+ª   ª   +---v1
+ª   +---mobile_generator_engine_v2
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---models
+ª   ª   ª   benchmark.py
+ª   ª   ª   catalog.py
+ª   ª   ª   context_window.py
+ª   ª   ª   pricing.py
+ª   ª   ª   router.py
+ª   ª   ª   selector.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           benchmark.cpython-314.pyc
+ª   ª           catalog.cpython-314.pyc
+ª   ª           context_window.cpython-314.pyc
+ª   ª           pricing.cpython-314.pyc
+ª   ª           router.cpython-314.pyc
+ª   ª           selector.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---multi_agent
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   team.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               team.cpython-314.pyc
+ª   ª               
+ª   +---multi_ai_factory
+ª   ª   ª   bridge.py
+ª   ª   ª   project_reference.py
+ª   ª   ª   reference.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---agents
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---architect
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---backend
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---ceo
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---database
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---documentation
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---reviewer
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---security
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---testing
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---ui
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---collaboration
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---coordinator
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---memory
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---monitoring
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---plugins
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---providers
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---claude
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---deepseek
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---gemini
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---lmstudio
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---mistral
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---ollama
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---openai
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---openrouter
+ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---scheduler
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---voting
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---workflows
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           project_reference.cpython-314.pyc
+ª   ª           reference.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---multi_project
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---orchestrator
+ª   ª   ª   agent_dispatcher.py
+ª   ª   ª   business_orchestrator.py
+ª   ª   ª   execution_manager.py
+ª   ª   ª   orchestrator.py
+ª   ª   ª   request_analyzer.py
+ª   ª   ª   result_collector.py
+ª   ª   ª   task_router.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---builders
+ª   ª   ª   ª   builder.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           builder.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---core
+ª   ª   ª   ª   step.py
+ª   ª   ª   ª   workflow.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           step.cpython-314.pyc
+ª   ª   ª           workflow.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---events
+ª   ª   ª   ª   event_bus.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           event_bus.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---executor
+ª   ª   ª   ª   agent_resolver.py
+ª   ª   ª   ª   executor.py
+ª   ª   ª   ª   executor.py.old
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           agent_resolver.cpython-314.pyc
+ª   ª   ª           executor.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---graph
+ª   ª   ª   ª   dependency_graph.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           dependency_graph.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---memory
+ª   ª   ª   ª   context.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           context.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---pipeline
+ª   ª   ª   ª   pipeline.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           pipeline.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---queue
+ª   ª   ª   ª   task_queue.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           task_queue.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---reports
+ª   ª   ª   ª   build_report.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           build_report.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---runtime
+ª   ª   ª   ª   runtime.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           runtime.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---scheduler
+ª   ª   ª   ª   scheduler.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           scheduler.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---sessions
+ª   ª   ª   ª   build_session.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           build_session.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---state
+ª   ª   ª   ª   runtime_state.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           runtime_state.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---utils
+ª   ª   ª   ª   helpers.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           helpers.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---validators
+ª   ª   ª   ª   workflow_validator.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           workflow_validator.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           agent_dispatcher.cpython-314.pyc
+ª   ª           business_orchestrator.cpython-314.pyc
+ª   ª           execution_manager.cpython-314.pyc
+ª   ª           orchestrator.cpython-314.pyc
+ª   ª           request_analyzer.cpython-314.pyc
+ª   ª           result_collector.cpython-314.pyc
+ª   ª           task_router.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---parser
+ª   ª   ª   code_parser.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           code_parser.cpython-314.pyc
+ª   ª           
+ª   +---performance
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---performance_optimization
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---permission_security_engine
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   engine.py
+ª   ª       ª   permission_manager.py
+ª   ª       ª   role_engine.py
+ª   ª       ª   security_validator.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               engine.cpython-314.pyc
+ª   ª               permission_manager.cpython-314.pyc
+ª   ª               role_engine.cpython-314.pyc
+ª   ª               security_validator.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---planner
+ª   ª   ª   dependency_analyzer.py
+ª   ª   ª   priority_engine.py
+ª   ª   ª   task_generator.py
+ª   ª   ª   task_queue.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           dependency_analyzer.cpython-314.pyc
+ª   ª           priority_engine.cpython-314.pyc
+ª   ª           task_generator.cpython-314.pyc
+ª   ª           task_queue.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---plugins
+ª   ª   ª   discovery.py
+ª   ª   ª   exceptions.py
+ª   ª   ª   fallback.py
+ª   ª   ª   health.py
+ª   ª   ª   initializer.py
+ª   ª   ª   plugin_factory.py
+ª   ª   ª   plugin_info.py
+ª   ª   ª   plugin_manager.py
+ª   ª   ª   provider_registry.py
+ª   ª   ª   runtime.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---base
+ª   ª   ª   ª   provider.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           provider.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---config
+ª   ª   ª   ª   plugin_config.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           plugin_config.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---loader
+ª   ª   ª   ª   plugin_loader.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           plugin_loader.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---providers
+ª   ª   ª   ª   claude_plugin.py
+ª   ª   ª   ª   deepseek_plugin.py
+ª   ª   ª   ª   gemini_plugin.py
+ª   ª   ª   ª   lmstudio_plugin.py
+ª   ª   ª   ª   mistral_plugin.py
+ª   ª   ª   ª   ollama_plugin.py
+ª   ª   ª   ª   openai_plugin.py
+ª   ª   ª   ª   openrouter_plugin.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           claude_plugin.cpython-314.pyc
+ª   ª   ª           deepseek_plugin.cpython-314.pyc
+ª   ª   ª           gemini_plugin.cpython-314.pyc
+ª   ª   ª           lmstudio_plugin.cpython-314.pyc
+ª   ª   ª           mistral_plugin.cpython-314.pyc
+ª   ª   ª           ollama_plugin.cpython-314.pyc
+ª   ª   ª           openai_plugin.cpython-314.pyc
+ª   ª   ª           openrouter_plugin.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---registry
+ª   ª   ª   ª   plugin_registry.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           plugin_registry.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           discovery.cpython-314.pyc
+ª   ª           exceptions.cpython-314.pyc
+ª   ª           fallback.cpython-314.pyc
+ª   ª           health.cpython-314.pyc
+ª   ª           initializer.cpython-314.pyc
+ª   ª           plugin_factory.cpython-314.pyc
+ª   ª           plugin_info.cpython-314.pyc
+ª   ª           plugin_manager.cpython-314.pyc
+ª   ª           provider_registry.cpython-314.pyc
+ª   ª           runtime.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---plugin_marketplace
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---predictive_analytics
+ª   ª   ª   engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           
+ª   +---predictive_analytics_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---production
+ª   ª   ª   agent_guard.py
+ª   ª   ª   ai_health_monitor.py
+ª   ª   ª   model_validator.py
+ª   ª   ª   provider_fallback.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           agent_guard.cpython-314.pyc
+ª   ª           ai_health_monitor.cpython-314.pyc
+ª   ª           model_validator.cpython-314.pyc
+ª   ª           provider_fallback.cpython-314.pyc
+ª   ª           
+ª   +---production_architecture_audit
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---project_manager
+ª   ª   ª   manager.py
+ª   ª   ª   
+ª   ª   +---v1
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   dashboard.py
+ª   ª   ª   ª   logs.py
+ª   ª   ª   ª   manager.py
+ª   ª   ª   ª   project.py
+ª   ª   ª   ª   reports.py
+ª   ª   ª   ª   task_manager.py
+ª   ª   ª   ª   tracker.py
+ª   ª   ª   ª   version_control.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           dashboard.cpython-314.pyc
+ª   ª   ª           logs.cpython-314.pyc
+ª   ª   ª           manager.cpython-314.pyc
+ª   ª   ª           project.cpython-314.pyc
+ª   ª   ª           reports.cpython-314.pyc
+ª   ª   ª           task_manager.cpython-314.pyc
+ª   ª   ª           tracker.cpython-314.pyc
+ª   ª   ª           version_control.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           manager.cpython-314.pyc
+ª   ª           
+ª   +---project_memory
+ª   ª   ª   bridge.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---v2
+ª   ª   ª   ª   bridge.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           bridge.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           bridge.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---prompts
+ª   ª   ª   manager.py
+ª   ª   ª   renderer.py
+ª   ª   ª   templates.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           manager.cpython-314.pyc
+ª   ª           renderer.cpython-314.pyc
+ª   ª           templates.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---providers
+ª   ª   ª   base_provider.py
+ª   ª   ª   default_providers.py
+ª   ª   ª   ollama_provider.py
+ª   ª   ª   provider_manager.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           base_provider.cpython-314.pyc
+ª   ª           default_providers.cpython-314.pyc
+ª   ª           ollama_provider.cpython-314.pyc
+ª   ª           provider_manager.cpython-314.pyc
+ª   ª           
+ª   +---registry
+ª   ª   ª   agent_discovery.py
+ª   ª   ª   agent_loader.py
+ª   ª   ª   agent_monitor.py
+ª   ª   ª   agent_registry.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           agent_discovery.cpython-314.pyc
+ª   ª           agent_loader.cpython-314.pyc
+ª   ª           agent_monitor.cpython-314.pyc
+ª   ª           agent_registry.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---release_manager_v1
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---requirements
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---router
+ª   ª   ª   ai_router.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           ai_router.cpython-314.pyc
+ª   ª           
+ª   +---runtime
+ª   ª   ª   agent_flow.py
+ª   ª   ª   factory_trigger.py
+ª   ª   ª   master_runtime.py
+ª   ª   ª   report_generator.py
+ª   ª   ª   request_pipeline.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           agent_flow.cpython-314.pyc
+ª   ª           factory_trigger.cpython-314.pyc
+ª   ª           master_runtime.cpython-314.pyc
+ª   ª           report_generator.cpython-314.pyc
+ª   ª           request_pipeline.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---security_engine
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---security_hardening
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---self_developer
+ª   ª   ª   engine.py
+ª   ª   ª   pipeline.py
+ª   ª   ª   requirement.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---analyzers
+ª   ª   ª   ª   requirement_analyzer.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           requirement_analyzer.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---builders
+ª   ª   ª   ª   prompt_builder.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           prompt_builder.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---compiler
+ª   ª   ª   ª   auto_fix.py
+ª   ª   ª   ª   error_reader.py
+ª   ª   ª   ª   runner.py
+ª   ª   ª   ª   validator.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           auto_fix.cpython-314.pyc
+ª   ª   ª           error_reader.cpython-314.pyc
+ª   ª   ª           runner.cpython-314.pyc
+ª   ª   ª           validator.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---reviewers
+ª   ª   +---templates
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           pipeline.cpython-314.pyc
+ª   ª           requirement.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---self_repair
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---self_update
+ª   ª   ª   update_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           update_engine.cpython-314.pyc
+ª   ª           
+ª   +---software_factory
+ª   ª   +---execution
+ª   ª   ª   +---v2
+ª   ª   ª       ª   bridge.py
+ª   ª   ª       ª   
+ª   ª   ª       +---__pycache__
+ª   ª   ª               bridge.cpython-314.pyc
+ª   ª   ª               
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---strategic_planning_engine
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---system_test_suite
+ª   ª   +---v1
+ª   ª       ª   engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---task_planner
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   intelligence.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               intelligence.cpython-314.pyc
+ª   ª               
+ª   +---templates
+ª   ª   ª   aluminium_factory_erp.py
+ª   ª   ª   construction_erp.py
+ª   ª   ª   facade_erp.py
+ª   ª   ª   manufacturing_erp.py
+ª   ª   ª   template_engine.py
+ª   ª   ª   trading_erp.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           aluminium_factory_erp.cpython-314.pyc
+ª   ª           construction_erp.cpython-314.pyc
+ª   ª           facade_erp.cpython-314.pyc
+ª   ª           manufacturing_erp.cpython-314.pyc
+ª   ª           template_engine.cpython-314.pyc
+ª   ª           trading_erp.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---test_quality
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---test_repair
+ª   ª   +---v2
+ª   ª       ª   bridge.py
+ª   ª       ª   loop.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               loop.cpython-314.pyc
+ª   ª               
+ª   +---ui_autonomous_builder
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   engine.py
+ª   ª       ª   generator.py
+ª   ª       ª   writer.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               engine.cpython-314.pyc
+ª   ª               generator.cpython-314.pyc
+ª   ª               writer.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---ui_builder
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---ui_generation
+ª   ª   +---v3
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---ui_generator
+ª   ª   ª   ui_generator.py
+ª   ª   ª   ui_templates.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           ui_generator.cpython-314.pyc
+ª   ª           ui_templates.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---ui_team
+ª   ª   +---v1
+ª   ª       ª   ui_agents.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               ui_agents.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---validators
+ª   ª   ª   module_validator.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           module_validator.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---version_engine
+ª   ª   +---v1
+ª   ª       ª   bridge.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               bridge.cpython-314.pyc
+ª   ª               
+ª   +---writers
+ª       ª   code_writer.py
+ª       ª   
+ª       +---__pycache__
+ª               code_writer.cpython-314.pyc
+ª               
++---ai_civilization
+ª   ª   phase36.py
+ª   ª   
+ª   +---__pycache__
+ª           phase36.cpython-314.pyc
+ª           
++---ai_company_network
+ª   ª   phase28.py
+ª   ª   
+ª   +---__pycache__
+ª           phase28.cpython-314.pyc
+ª           
++---ai_economic_ecosystem
+ª   ª   phase31.py
+ª   ª   
+ª   +---__pycache__
+ª           phase31.cpython-314.pyc
+ª           
++---ai_ecosystem
+ª   +---platform
+ª       ª   ecosystem_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               ecosystem_engine.cpython-314.pyc
+ª               
++---ai_governance
+ª   ª   phase39.py
+ª   ª   
+ª   +---__pycache__
+ª           phase39.cpython-314.pyc
+ª           
++---ai_marketplace
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---ai_profiles
++---ai_research
++---api
+ª   +---gateway
+ª       ª   api_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               api_engine.cpython-314.pyc
+ª               
++---api_ecosystem
+ª   +---core
+ª       ª   api_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               api_engine.cpython-314.pyc
+ª               
++---artisans
++---autonomous_business
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---autonomous_company
+ª   ª   company_engine.py
+ª   ª   
+ª   +---platform
+ª   ª   ª   company_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           company_engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           company_engine.cpython-314.pyc
+ª           
++---autonomous_erp
+ª   +---platform
+ª       ª   erp_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               erp_engine.cpython-314.pyc
+ª               
++---autonomous_global_factory
+ª   ª   phase29.py
+ª   ª   
+ª   +---__pycache__
+ª           phase29.cpython-314.pyc
+ª           
++---autonomous_intelligence_era
+ª   ª   evolution_manager.py
+ª   ª   
+ª   +---__pycache__
+ª           evolution_manager.cpython-314.pyc
+ª           
++---autonomous_os
+ª   ª   os_engine.py
+ª   ª   
+ª   +---decision
+ª   ª   ª   decision_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           decision_engine.cpython-314.pyc
+ª   ª           
+ª   +---healing
+ª   ª   ª   self_healing.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           self_healing.cpython-314.pyc
+ª   ª           
+ª   +---kernel
+ª   ª   ª   ai_core.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           ai_core.cpython-314.pyc
+ª   ª           
+ª   +---knowledge
+ª   ª   ª   knowledge_graph.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           knowledge_graph.cpython-314.pyc
+ª   ª           
+ª   +---learning
+ª   ª   ª   learning_loop.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           learning_loop.cpython-314.pyc
+ª   ª           
+ª   +---orchestration
+ª   ª   ª   agent_orchestrator.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           agent_orchestrator.cpython-314.pyc
+ª   ª           
+ª   +---scheduler
+ª   ª   ª   task_scheduler.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           task_scheduler.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           os_engine.cpython-314.pyc
+ª           
++---beyond_horizon_era
++---billing
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---builders
+ª   ª   __init__.py
+ª   ª   
+ª   +---professional_main_window
+ª   ª   ª   builder.py
+ª   ª   ª   dashboard_builder.py
+ª   ª   ª   generation_engine.py
+ª   ª   ª   git_builder.py
+ª   ª   ª   integration_engine.py
+ª   ª   ª   layout_builder.py
+ª   ª   ª   pages_builder.py
+ª   ª   ª   router_builder.py
+ª   ª   ª   sidebar_builder.py
+ª   ª   ª   sqlite_binding_builder.py
+ª   ª   ª   toolbar_builder.py
+ª   ª   ª   validator.py
+ª   ª   ª   workspace_builder.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           builder.cpython-314.pyc
+ª   ª           dashboard_builder.cpython-314.pyc
+ª   ª           generation_engine.cpython-314.pyc
+ª   ª           git_builder.cpython-314.pyc
+ª   ª           integration_engine.cpython-314.pyc
+ª   ª           layout_builder.cpython-314.pyc
+ª   ª           pages_builder.cpython-314.pyc
+ª   ª           router_builder.cpython-314.pyc
+ª   ª           sidebar_builder.cpython-314.pyc
+ª   ª           sqlite_binding_builder.cpython-314.pyc
+ª   ª           toolbar_builder.cpython-314.pyc
+ª   ª           validator.cpython-314.pyc
+ª   ª           workspace_builder.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           __init__.cpython-314.pyc
+ª           
++---business
+ª   +---ags_enterprise_operations
+ª   ª   ª   pipeline.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           pipeline.cpython-314.pyc
+ª   ª           
+ª   +---ags_global_operations_v1
+ª   ª   ª   pipeline.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           pipeline.cpython-314.pyc
+ª   ª           
+ª   +---ags_global_scale
+ª   ª   ª   pipeline.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           pipeline.cpython-314.pyc
+ª   ª           
+ª   +---ags_global_scale_engine
+ª       ª   pipeline.py
+ª       ª   
+ª       +---__pycache__
+ª               pipeline.cpython-314.pyc
+ª               
++---business_ai
+ª   +---v1
++---business_creation
++---business_intelligence
+ª   ª   bi_engine.py
+ª   ª   
+ª   +---dashboard
+ª   ª   ª   executive_dashboard.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           executive_dashboard.cpython-314.pyc
+ª   ª           
+ª   +---global_data
+ª   ª   ª   data_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           data_engine.cpython-314.pyc
+ª   ª           
+ª   +---knowledge_graph
+ª   ª   ª   knowledge_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           knowledge_engine.cpython-314.pyc
+ª   ª           
+ª   +---market_analysis
+ª   ª   ª   market_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           market_engine.cpython-314.pyc
+ª   ª           
+ª   +---predictive
+ª   ª   ª   prediction_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           prediction_engine.cpython-314.pyc
+ª   ª           
+ª   +---strategy
+ª   ª   ª   strategy_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           strategy_engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           bi_engine.cpython-314.pyc
+ª           
++---cloud
+ª   ª   erp_platform.py
+ª   ª   
+ª   +---multi_tenant
+ª   ª   +---v1
+ª   +---platform
+ª   ª   ª   cloud_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           cloud_engine.cpython-314.pyc
+ª   ª           
+ª   +---services
+ª   ª   ª   cloud_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           cloud_engine.cpython-314.pyc
+ª   ª           
+ª   +---v1
+ª   ª   ª   cloud_platform.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           cloud_platform.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           erp_platform.cpython-314.pyc
+ª           
++---cloud_scaling
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---commercialization
++---company_builder
+ª   +---v1
++---continuous_evolution
+ª   ª   evolution_engine.py
+ª   ª   future_engine.py
+ª   ª   
+ª   +---platform
+ª   ª   ª   evolution_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           evolution_engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           evolution_engine.cpython-314.pyc
+ª           future_engine.cpython-314.pyc
+ª           
++---controllers
+ª   ª   boq_controller.py
+ª   ª   catalogue_controller.py
+ª   ª   clients_controller.py
+ª   ª   client_controller.py
+ª   ª   company_controller.py
+ª   ª   create_inventory_management_system_controller.py
+ª   ª   customers_controller.py
+ª   ª   employee_controller.py
+ª   ª   expense_controller.py
+ª   ª   financial_controller.py
+ª   ª   inventory_controller.py
+ª   ª   invoices_controller.py
+ª   ª   orders_controller.py
+ª   ª   products_controller.py
+ª   ª   project_controller.py
+ª   ª   purchase_controller.py
+ª   ª   suppliers_controller.py
+ª   ª   suppliers_payments_controller.py
+ª   ª   supplier_controller.py
+ª   ª   test_crud_controller.py
+ª   ª   test_memory_controller.py
+ª   ª   user_controller.py
+ª   ª   
+ª   +---__pycache__
+ª           boq_controller.cpython-314.pyc
+ª           catalogue_controller.cpython-314.pyc
+ª           clients_controller.cpython-314.pyc
+ª           client_controller.cpython-314.pyc
+ª           company_controller.cpython-314.pyc
+ª           create_inventory_management_system_controller.cpython-314.pyc
+ª           customers_controller.cpython-314.pyc
+ª           employee_controller.cpython-314.pyc
+ª           expense_controller.cpython-314.pyc
+ª           financial_controller.cpython-314.pyc
+ª           inventory_controller.cpython-314.pyc
+ª           invoices_controller.cpython-314.pyc
+ª           orders_controller.cpython-314.pyc
+ª           products_controller.cpython-314.pyc
+ª           project_controller.cpython-314.pyc
+ª           purchase_controller.cpython-314.pyc
+ª           suppliers_controller.cpython-314.pyc
+ª           suppliers_payments_controller.cpython-314.pyc
+ª           supplier_controller.cpython-314.pyc
+ª           test_crud_controller.cpython-314.pyc
+ª           test_memory_controller.cpython-314.pyc
+ª           user_controller.cpython-314.pyc
+ª           
++---core
+ª   ª   base_controller.py
+ª   ª   base_entity.py
+ª   ª   base_model.py
+ª   ª   base_repository.py
+ª   ª   base_service.py
+ª   ª   config.py
+ª   ª   events.py
+ª   ª   exceptions.py
+ª   ª   logger.py
+ª   ª   registry.py
+ª   ª   router.py
+ª   ª   session.py
+ª   ª   
+ª   +---dashboard
+ª   ª       dashboard_engine.json
+ª   ª       
+ª   +---integration
+ª   ª       system_manifest.json
+ª   ª       
+ª   +---phase41_50
+ª   ª   ª   engine.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---phase51_60
+ª   ª   ª   engine.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---phase61_70
+ª   ª   ª   engine.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---phase71_80
+ª   ª   ª   engine.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---phase81_200
+ª   ª   ª   phases.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           phases.cpython-314.pyc
+ª   ª           
+ª   +---phase81_200_completion
+ª   ª   ª   phases_161_200.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           phases_161_200.cpython-314.pyc
+ª   ª           
+ª   +---plugins
+ª   ª       plugin_manager.json
+ª   ª       
+ª   +---production
+ª   ª   ª   environment_validator.py
+ª   ª   ª   health_check.py
+ª   ª   ª   runtime_guard.py
+ª   ª   ª   startup_validator.py
+ª   ª   ª   version_check.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           environment_validator.cpython-314.pyc
+ª   ª           health_check.cpython-314.pyc
+ª   ª           runtime_guard.cpython-314.pyc
+ª   ª           startup_validator.cpython-314.pyc
+ª   ª           version_check.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           base_controller.cpython-314.pyc
+ª           base_entity.cpython-314.pyc
+ª           base_model.cpython-314.pyc
+ª           base_repository.cpython-314.pyc
+ª           base_service.cpython-314.pyc
+ª           config.cpython-314.pyc
+ª           events.cpython-314.pyc
+ª           exceptions.cpython-314.pyc
+ª           logger.cpython-314.pyc
+ª           registry.cpython-314.pyc
+ª           router.cpython-314.pyc
+ª           session.cpython-314.pyc
+ª           
++---customer_deployment
++---customer_feedback
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---customer_ready
++---database
+ª   ª   database.py
+ª   ª   migration_manager.py
+ª   ª   run_migrations.py
+ª   ª   __init__.py
+ª   ª   
+ª   +---migrations
+ª   ª   ª   001_create_companies_table.py
+ª   ª   ª   002_extend_companies.py
+ª   ª   ª   003_create_clients.py
+ª   ª   ª   migration.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           001_create_companies_table.cpython-314.pyc
+ª   ª           002_extend_companies.cpython-314.pyc
+ª   ª           003_create_clients.cpython-314.pyc
+ª   ª           migration.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---production
+ª   ª   ª   backup_manager.py
+ª   ª   ª   integrity_checker.py
+ª   ª   ª   migration_guard.py
+ª   ª   ª   recovery_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           backup_manager.cpython-314.pyc
+ª   ª           integrity_checker.cpython-314.pyc
+ª   ª           migration_guard.cpython-314.pyc
+ª   ª           recovery_engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           database.cpython-314.pyc
+ª           migration_manager.cpython-314.pyc
+ª           run_migrations.cpython-314.pyc
+ª           __init__.cpython-314.pyc
+ª           
++---deployment
+ª   +---v1
+ª       ª   deployment_engine.py
+ª       ª   __init__.py
+ª       ª   
+ª       +---__pycache__
+ª               deployment_engine.cpython-314.pyc
+ª               __init__.cpython-314.pyc
+ª               
++---devops
+ª   +---v1
+ª       ª   devops_engine.py
+ª       ª   __init__.py
+ª       ª   
+ª       +---__pycache__
+ª               devops_engine.cpython-314.pyc
+ª               __init__.cpython-314.pyc
+ª               
++---digital_economy
++---digital_society_platform
+ª   ª   phase32.py
+ª   ª   
+ª   +---__pycache__
+ª           phase32.cpython-314.pyc
+ª           
++---digital_twin
+ª   +---v1
++---directory
+ª   ª   ags_directory.py
+ª   ª   
+ª   +---__pycache__
+ª           ags_directory.cpython-314.pyc
+ª           
++---disaster_recovery
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---ecosystem
+ª   +---v1
++---ecosystem_expansion
++---enterprise
+ª   +---deployment
+ª   ª   ª   deployment_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           deployment_engine.cpython-314.pyc
+ª   ª           
+ª   +---v1
++---enterprise_client_ready
++---enterprise_universe
++---erp_generator
+ª   +---v1
++---evolution
+ª   ª   AGS_GLOBAL_LANGUAGE_INTELLIGENCE_VISION.md
+ª   ª   evolution_engine.py
+ª   ª   PHASE_20_EVOLUTION_ENGINE.md
+ª   ª   
+ª   +---engine
+ª   ª   ª   evolution_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           evolution_engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           evolution_engine.cpython-314.pyc
+ª           
++---evolution_control
++---factory
+ª   +---v1
+ª       ª   application_factory.py
+ª       ª   application_generator.py
+ª       ª   full_stack_builder.py
+ª       ª   __init__.py
+ª       ª   
+ª       +---__pycache__
+ª               application_factory.cpython-314.pyc
+ª               application_generator.cpython-314.pyc
+ª               full_stack_builder.cpython-314.pyc
+ª               __init__.cpython-314.pyc
+ª               
++---final_autonomous_intelligence
+ª   ª   phase40.py
+ª   ª   
+ª   +---__pycache__
+ª           phase40.cpython-314.pyc
+ª           
++---generators
+ª   ª   module_generator.py
+ª   ª   
+ª   +---api
+ª   ª   ª   api_generator.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           api_generator.cpython-314.pyc
+ª   ª           
+ª   +---database
+ª   ª   ª   database_generator.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           database_generator.cpython-314.pyc
+ª   ª           
+ª   +---models
+ª   ª   ª   model_generator.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           model_generator.cpython-314.pyc
+ª   ª           
+ª   +---services
+ª   ª   ª   service_generator.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           service_generator.cpython-314.pyc
+ª   ª           
+ª   +---templates
+ª   +---ui
+ª   ª   ª   qt_generator.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           qt_generator.cpython-314.pyc
+ª   ª           
+ª   +---validators
+ª   ª   ª   module_validator.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           module_validator.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           module_generator.cpython-314.pyc
+ª           
++---global_ai_business
+ª   +---platform
+ª       ª   business_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               business_engine.cpython-314.pyc
+ª               
++---global_ai_infrastructure
++---global_ai_platform
+ª   ª   release_engine.py
+ª   ª   
+ª   +---__pycache__
+ª           release_engine.cpython-314.pyc
+ª           
++---global_autonomous_ecosystem
++---global_autonomous_network
+ª   ª   phase35.py
+ª   ª   
+ª   +---__pycache__
+ª           phase35.cpython-314.pyc
+ª           
++---global_collaboration
++---global_factory
+ª   +---v1
+ª       ª   global_factory.py
+ª       ª   __init__.py
+ª       ª   
+ª       +---__pycache__
+ª               global_factory.cpython-314.pyc
+ª               __init__.cpython-314.pyc
+ª               
++---global_market_network
++---global_operations
++---global_partners
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---global_release
+ª   ª   release_engine.py
+ª   ª   
+ª   +---platform
+ª   ª   ª   release_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           release_engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           release_engine.cpython-314.pyc
+ª           
++---high_availability
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---human_ai_collaboration
++---industry_factory
+ª   +---platform
+ª       ª   industry_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               industry_engine.cpython-314.pyc
+ª               
++---industry_packs
+ª   ª   engine.py
+ª   ª   
+ª   +---aluminium_facade
+ª   ª   ª   engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           
+ª   +---construction
+ª   ª   ª   engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---innovation_engine
++---intelligence
+ª   +---v1
++---knowledge_base
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---knowledge_civilization
++---knowledge_graph
+ª   +---v1
++---knowledge_universe
+ª   ª   phase38.py
+ª   ª   
+ª   +---__pycache__
+ª           phase38.cpython-314.pyc
+ª           
++---license
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---long_term_ai_evolution
+ª   ª   evolution_engine.py
+ª   ª   
+ª   +---__pycache__
+ª           evolution_engine.cpython-314.pyc
+ª           
++---marketplace
+ª   ª   construction.json
+ª   ª   marketplace.json
+ª   ª   
+ª   +---advertising
+ª   ª       ads_config.json
+ª   ª       
+ª   +---engines
+ª   ª   ª   marketplace_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           marketplace_engine.cpython-314.pyc
+ª   ª           
+ª   +---equipment
+ª   ª       equipment_config.json
+ª   ª       
+ª   +---platform
+ª   ª   ª   marketplace_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           marketplace_engine.cpython-314.pyc
+ª   ª           
+ª   +---rental
+ª   ª       rental_config.json
+ª   ª       
+ª   +---reviews
+ª   ª       review_config.json
+ª   ª       
+ª   +---transport
+ª   ª       transport_config.json
+ª   ª       
+ª   +---v1
+ª   ª   ª   marketplace_engine.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           marketplace_engine.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---workforce
+ª           profiles.json
+ª           
++---market_expansion
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---master_certification
+ª   ª   master_engine.py
+ª   ª   
+ª   +---__pycache__
+ª           master_engine.cpython-314.pyc
+ª           
++---metadata
+ª   ª   metadata_engine.py
+ª   ª   metadata_engine_backup.py
+ª   ª   
+ª   +---modules
+ª   ª       clients.json
+ª   ª       create_inventory_management_system.json
+ª   ª       customers.json
+ª   ª       inventory.json
+ª   ª       invoices.json
+ª   ª       orders.json
+ª   ª       products.json
+ª   ª       suppliers.json
+ª   ª       suppliers_payments.json
+ª   ª       test_crud.json
+ª   ª       test_memory.json
+ª   ª       
+ª   +---__pycache__
+ª           metadata_engine.cpython-314.pyc
+ª           metadata_engine_backup.cpython-314.pyc
+ª           
++---mobile
+ª   +---command_center
+ª   ª   ª   mobile_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           mobile_engine.cpython-314.pyc
+ª   ª           
+ª   +---gateway
+ª       ª   mobile_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               mobile_engine.cpython-314.pyc
+ª               
++---models
+ª   ª   base_model.py
+ª   ª   boq.py
+ª   ª   boq_line.py
+ª   ª   category.py
+ª   ª   client.py
+ª   ª   clients.py
+ª   ª   company.py
+ª   ª   create_inventory_management_system.py
+ª   ª   customers.py
+ª   ª   employee.py
+ª   ª   expense.py
+ª   ª   expense_category.py
+ª   ª   inventory.py
+ª   ª   invoice.py
+ª   ª   invoices.py
+ª   ª   invoice_line.py
+ª   ª   orders.py
+ª   ª   payment.py
+ª   ª   permission.py
+ª   ª   product.py
+ª   ª   products.py
+ª   ª   project.py
+ª   ª   purchase.py
+ª   ª   purchase_line.py
+ª   ª   quotation.py
+ª   ª   quotation_line.py
+ª   ª   role.py
+ª   ª   service.py
+ª   ª   stock_level.py
+ª   ª   stock_movement.py
+ª   ª   supplier.py
+ª   ª   suppliers.py
+ª   ª   suppliers_payments.py
+ª   ª   task.py
+ª   ª   test_crud.py
+ª   ª   test_memory.py
+ª   ª   unit.py
+ª   ª   user.py
+ª   ª   warehouse.py
+ª   ª   
+ª   +---__pycache__
+ª           base_model.cpython-314.pyc
+ª           boq.cpython-314.pyc
+ª           boq_line.cpython-314.pyc
+ª           category.cpython-314.pyc
+ª           client.cpython-314.pyc
+ª           clients.cpython-314.pyc
+ª           company.cpython-314.pyc
+ª           create_inventory_management_system.cpython-314.pyc
+ª           customers.cpython-314.pyc
+ª           employee.cpython-314.pyc
+ª           expense.cpython-314.pyc
+ª           expense_category.cpython-314.pyc
+ª           inventory.cpython-314.pyc
+ª           invoice.cpython-314.pyc
+ª           invoices.cpython-314.pyc
+ª           invoice_line.cpython-314.pyc
+ª           orders.cpython-314.pyc
+ª           payment.cpython-314.pyc
+ª           permission.cpython-314.pyc
+ª           product.cpython-314.pyc
+ª           products.cpython-314.pyc
+ª           project.cpython-314.pyc
+ª           purchase.cpython-314.pyc
+ª           purchase_line.cpython-314.pyc
+ª           quotation.cpython-314.pyc
+ª           quotation_line.cpython-314.pyc
+ª           role.cpython-314.pyc
+ª           service.cpython-314.pyc
+ª           stock_level.cpython-314.pyc
+ª           stock_movement.cpython-314.pyc
+ª           supplier.cpython-314.pyc
+ª           suppliers.cpython-314.pyc
+ª           suppliers_payments.cpython-314.pyc
+ª           task.cpython-314.pyc
+ª           test_crud.cpython-314.pyc
+ª           test_memory.cpython-314.pyc
+ª           unit.cpython-314.pyc
+ª           user.cpython-314.pyc
+ª           warehouse.cpython-314.pyc
+ª           
++---modules
+ª   ª   modules_registry.json
+ª   ª   
+ª   +---accounting
+ª   +---analytics
+ª   ª       analytics.json
+ª   ª       
+ª   +---boq
+ª   +---custom_module
+ª   ª   +---api
+ª   ª   +---models
+ª   ª   +---schemas
+ª   ª   +---services
+ª   ª   +---tests
+ª   +---hr
+ª   +---mobile
+ª   +---projects
+ª   +---quotation
+ª   +---security
+ª   ª       security.json
+ª   ª       
+ª   +---tenders
+ª   ª   +---api
+ª   ª   +---models
+ª   ª   ª   ª   boq_items.py
+ª   ª   ª   ª   supplier_quotes.py
+ª   ª   ª   ª   tenders.py
+ª   ª   ª   ª   tender_documents.py
+ª   ª   ª   ª   tender_evaluations.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           boq_items.cpython-314.pyc
+ª   ª   ª           supplier_quotes.cpython-314.pyc
+ª   ª   ª           tenders.cpython-314.pyc
+ª   ª   ª           tender_documents.cpython-314.pyc
+ª   ª   ª           tender_evaluations.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---schemas
+ª   ª   +---services
+ª   ª   +---tests
+ª   +---workflow
++---multi_client
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---multi_tenant
+ª   +---core
+ª   ª   ª   tenant_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           tenant_engine.cpython-314.pyc
+ª   ª           
+ª   +---platform
+ª       ª   tenant_engine.py
+ª       ª   
+ª       +---__pycache__
+ª               tenant_engine.cpython-314.pyc
+ª               
++---next_evolution
+ª   ª   evolution_manager.py
+ª   ª   
+ª   +---phase61_autonomous_reality
+ª   +---phase62_knowledge_matrix
+ª   +---phase63_decision_network
+ª   +---phase64_business_planet
+ª   +---phase65_digital_economy
+ª   +---phase66_creation_universe
+ª   +---phase67_universal_factory
+ª   +---phase68_ai_evolution_lab
+ª   +---phase69_global_orchestrator
+ª   +---phase70_ai_operating_ecosystem
+ª   +---__pycache__
+ª           evolution_manager.cpython-314.pyc
+ª           
++---next_horizon_evolution
+ª   ª   horizon_engine.py
+ª   ª   
+ª   +---__pycache__
+ª           horizon_engine.cpython-314.pyc
+ª           
++---nnext_generation
+ª   +---phase71_infrastructure_matrix
+ª   +---phase72_business_simulation
+ª   +---phase73_digital_twin
+ª   +---phase74_strategy_network
+ª   +---phase75_infinite_evolution
++---ocr
++---optimization
+ª   ª   performance.py
+ª   ª   
+ª   +---__pycache__
+ª           performance.cpython-314.pyc
+ª           
++---os
+ª   +---v1
+ª       ª   ags_os.py
+ª       ª   __init__.py
+ª       ª   
+ª       +---__pycache__
+ª               ags_os.cpython-314.pyc
+ª               __init__.cpython-314.pyc
+ª               
++---partners
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---permissions
+ª       roles.json
+ª       
++---phase61_evolution
+ª   ª   evolution.py
+ª   ª   
+ª   +---__pycache__
+ª           evolution.cpython-314.pyc
+ª           
++---planetary_business_network
++---platform
+ª   ª   platform_manifest.json
+ª   ª   
+ª   +---accounting
+ª   +---api
+ª   +---billing
+ª   ª       subscription_plans.json
+ª   ª       
+ª   +---boq
+ª   +---cad_bim
+ª   +---crm
+ª   +---documents
+ª   +---equipment
+ª   +---estimation
+ª   +---fleet
+ª   +---hr
+ª   +---hse
+ª   +---maintenance
+ª   +---mobile
+ª   +---payroll
+ª   +---planning
+ª   +---projects
+ª   +---quality
+ª   +---quotation
+ª   +---reports
+ª   +---security
+ª   ª       security_features.json
+ª   ª       
+ª   +---vision_ai
++---portfolio
+ª   ª   ags_portfolio.py
+ª   ª   
+ª   +---__pycache__
+ª           ags_portfolio.cpython-314.pyc
+ª           
++---post_final_evolution
+ª   ª   evolution_engine.py
+ª   ª   
+ª   +---__pycache__
+ª           evolution_engine.cpython-314.pyc
+ª           
++---product
+ª   +---ags_ai_engine
+ª   ª   +---assistant
+ª   ª   +---module_generator
+ª   ª   +---report_generator
+ª   ª   +---workflow_builder
+ª   +---ags_cloud
+ª   ª   +---backups
+ª   ª   +---deployment
+ª   ª   +---monitoring
+ª   ª   +---tenants
+ª   +---ags_erp_v3
+ª   ª   ª   erp_activation_v1.py
+ª   ª   ª   final_desktop_demo_release_v1.py
+ª   ª   ª   final_release_check.py
+ª   ª   ª   professional_ui_polish_v1.py
+ª   ª   ª   
+ª   ª   +---backup
+ª   ª   ª   ª   backup_manager.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           backup_manager.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---core
+ª   ª   ª   +---controllers
+ª   ª   ª   ª   ª   base_controller.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           base_controller.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---crud
+ª   ª   ª   ª   ª   crud_engine.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           crud_engine.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---repositories
+ª   ª   ª   ª   ª   base_repository.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           base_repository.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---services
+ª   ª   ª       ª   base_service.py
+ª   ª   ª       ª   
+ª   ª   ª       +---__pycache__
+ª   ª   ª               base_service.cpython-314.pyc
+ª   ª   ª               
+ª   ª   +---database
+ª   ª   ª   ª   sqlite_manager.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           sqlite_manager.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---desktop_app
+ª   ª   ª   ª   application.py
+ª   ª   ª   ª   gui_navigation_binding.py
+ª   ª   ª   ª   module_navigation.py
+ª   ª   ª   ª   navigation.py
+ª   ª   ª   ª   router.py
+ª   ª   ª   ª   router_registry.py
+ª   ª   ª   ª   sqlite_binding.py
+ª   ª   ª   ª   
+ª   ª   ª   +---components
+ª   ª   ª   ª   ª   dashboard_widgets.py
+ª   ª   ª   ª   ª   sidebar_menu.py
+ª   ª   ª   ª   ª   toolbar.py
+ª   ª   ª   ª   ª   workspace.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           dashboard_widgets.cpython-314.pyc
+ª   ª   ª   ª           sidebar_menu.cpython-314.pyc
+ª   ª   ª   ª           toolbar.cpython-314.pyc
+ª   ª   ª   ª           workspace.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---modules
+ª   ª   ª   ª   ª   crm_module.py
+ª   ª   ª   ª   ª   inventory_module.py
+ª   ª   ª   ª   ª   invoices_module.py
+ª   ª   ª   ª   ª   projects_module.py
+ª   ª   ª   ª   ª   reports_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           crm_module.cpython-314.pyc
+ª   ª   ª   ª           inventory_module.cpython-314.pyc
+ª   ª   ª   ª           invoices_module.cpython-314.pyc
+ª   ª   ª   ª           projects_module.cpython-314.pyc
+ª   ª   ª   ª           reports_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---screens
+ª   ª   ª   ª   ª   crm_screen.py
+ª   ª   ª   ª   ª   inventory_screen.py
+ª   ª   ª   ª   ª   invoices_screen.py
+ª   ª   ª   ª   ª   projects_screen.py
+ª   ª   ª   ª   ª   reports_screen.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---crm
+ª   ª   ª   ª   ª   ª   activities_screen.py
+ª   ª   ª   ª   ª   ª   clients_screen.py
+ª   ª   ª   ª   ª   ª   contacts_screen.py
+ª   ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   ª   
+ª   ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª   ª           activities_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           clients_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           contacts_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª   ª           
+ª   ª   ª   ª   +---inventory
+ª   ª   ª   ª   ª   ª   movements_screen.py
+ª   ª   ª   ª   ª   ª   products_screen.py
+ª   ª   ª   ª   ª   ª   stock_screen.py
+ª   ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   ª   
+ª   ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª   ª           movements_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           products_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           stock_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª   ª           
+ª   ª   ª   ª   +---invoices
+ª   ª   ª   ª   ª   ª   payments_screen.py
+ª   ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   ª   
+ª   ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª   ª           payments_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª   ª           
+ª   ª   ª   ª   +---projects
+ª   ª   ª   ª   ª   ª   progress_screen.py
+ª   ª   ª   ª   ª   ª   projects_screen.py
+ª   ª   ª   ª   ª   ª   tasks_screen.py
+ª   ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   ª   
+ª   ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª   ª           progress_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           projects_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           tasks_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª   ª           
+ª   ª   ª   ª   +---reports
+ª   ª   ª   ª   ª   ª   analytics_screen.py
+ª   ª   ª   ª   ª   ª   dashboard_screen.py
+ª   ª   ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   ª   ª   
+ª   ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª   ª           analytics_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           dashboard_screen.cpython-314.pyc
+ª   ª   ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª   ª   ª           
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           crm_screen.cpython-314.pyc
+ª   ª   ª   ª           inventory_screen.cpython-314.pyc
+ª   ª   ª   ª           invoices_screen.cpython-314.pyc
+ª   ª   ª   ª           projects_screen.cpython-314.pyc
+ª   ª   ª   ª           reports_screen.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---windows
+ª   ª   ª   ª   ª   login_window.py
+ª   ª   ª   ª   ª   main_window.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           login_window.cpython-314.pyc
+ª   ª   ª   ª           main_window.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           application.cpython-314.pyc
+ª   ª   ª           gui_navigation_binding.cpython-314.pyc
+ª   ª   ª           module_navigation.cpython-314.pyc
+ª   ª   ª           navigation.cpython-314.pyc
+ª   ª   ª           router.cpython-314.pyc
+ª   ª   ª           router_registry.cpython-314.pyc
+ª   ª   ª           sqlite_binding.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---enterprise_evolution
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---full_stack
+ª   ª   ª   ª   stack.py
+ª   ª   ª   ª   
+ª   ª   ª   +---ai
+ª   ª   ª   ª       README.txt
+ª   ª   ª   ª       
+ª   ª   ª   +---cloud
+ª   ª   ª   ª       README.txt
+ª   ª   ª   ª       
+ª   ª   ª   +---crud
+ª   ª   ª   ª       README.txt
+ª   ª   ª   ª       
+ª   ª   ª   +---database
+ª   ª   ª   ª       README.txt
+ª   ª   ª   ª       
+ª   ª   ª   +---gui
+ª   ª   ª   ª       README.txt
+ª   ª   ª   ª       
+ª   ª   ª   +---modules
+ª   ª   ª   ª       README.txt
+ª   ª   ª   ª       
+ª   ª   ª   +---__pycache__
+ª   ª   ª           stack.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---launcher
+ª   ª   ª   ª   production_stack.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           production_stack.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---modules
+ª   ª   ª   ª   base_module.py
+ª   ª   ª   ª   crud_binding.py
+ª   ª   ª   ª   demo_data_loader.py
+ª   ª   ª   ª   module_factory.py
+ª   ª   ª   ª   module_runtime_test.py
+ª   ª   ª   ª   module_test.py
+ª   ª   ª   ª   __init__.py
+ª   ª   ª   ª   
+ª   ª   ª   +---accounting
+ª   ª   ª   ª   ª   accounting_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           accounting_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---base
+ª   ª   ª   ª   ª   module_controller.py
+ª   ª   ª   ª   ª   module_repository.py
+ª   ª   ª   ª   ª   module_service.py
+ª   ª   ª   ª   ª   module_ui.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           module_controller.cpython-314.pyc
+ª   ª   ª   ª           module_repository.cpython-314.pyc
+ª   ª   ª   ª           module_service.cpython-314.pyc
+ª   ª   ª   ª           module_ui.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---crm
+ª   ª   ª   ª   ª   crm_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---controller
+ª   ª   ª   ª   +---model
+ª   ª   ª   ª   +---service
+ª   ª   ª   ª   ª   ª   crm_service.py
+ª   ª   ª   ª   ª   ª   
+ª   ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª   ª           crm_service.cpython-314.pyc
+ª   ª   ª   ª   ª           
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           crm_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---hr
+ª   ª   ª   ª   ª   hr_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           hr_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---inventory
+ª   ª   ª   ª   ª   inventory_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           inventory_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---invoices
+ª   ª   ª   ª   ª   invoices_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           invoices_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---projects
+ª   ª   ª   ª   ª   projects_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---controller
+ª   ª   ª   ª   +---model
+ª   ª   ª   ª   +---service
+ª   ª   ª   ª   ª   ª   project_service.py
+ª   ª   ª   ª   ª   ª   
+ª   ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª   ª           project_service.cpython-314.pyc
+ª   ª   ª   ª   ª           
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           projects_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---purchasing
+ª   ª   ª   ª   ª   purchasing_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           purchasing_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---quotations
+ª   ª   ª   ª   ª   quotations_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           quotations_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---reports
+ª   ª   ª   ª   ª   reports_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           reports_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---suppliers
+ª   ª   ª   ª   ª   suppliers_module.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           suppliers_module.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           base_module.cpython-314.pyc
+ª   ª   ª           crud_binding.cpython-314.pyc
+ª   ª   ª           demo_data_loader.cpython-314.pyc
+ª   ª   ª           module_factory.cpython-314.pyc
+ª   ª   ª           module_runtime_test.cpython-314.pyc
+ª   ª   ª           module_test.cpython-314.pyc
+ª   ª   ª           __init__.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production
+ª   ª   ª   ª   backup_settings.py
+ª   ª   ª   ª   database_production.py
+ª   ª   ª   ª   erp_runtime.py
+ª   ª   ª   ª   final_demo_release.py
+ª   ª   ª   ª   final_pipeline.py
+ª   ª   ª   ª   final_security.py
+ª   ª   ª   ª   performance_monitor.py
+ª   ª   ª   ª   release_test.py
+ª   ª   ª   ª   release_validator.py
+ª   ª   ª   ª   
+ª   ª   ª   +---business
+ª   ª   ª   ª   ª   business_engine.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           business_engine.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---crud
+ª   ª   ª   ª   ª   production_crud.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           production_crud.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---modules
+ª   ª   ª   ª   ª   erp_modules.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           erp_modules.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           backup_settings.cpython-314.pyc
+ª   ª   ª           database_production.cpython-314.pyc
+ª   ª   ª           erp_runtime.cpython-314.pyc
+ª   ª   ª           final_demo_release.cpython-314.pyc
+ª   ª   ª           final_pipeline.cpython-314.pyc
+ª   ª   ª           final_security.cpython-314.pyc
+ª   ª   ª           performance_monitor.cpython-314.pyc
+ª   ª   ª           release_test.cpython-314.pyc
+ª   ª   ª           release_validator.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production_engine
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production_execution
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production_layer
+ª   ª   ª   ª   roadmap.py
+ª   ª   ª   ª   runtime.py
+ª   ª   ª   ª   
+ª   ª   ª   +---crud
+ª   ª   ª   ª   ª   engine.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           engine.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---database
+ª   ª   ª   ª   ª   engine.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           engine.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---modules
+ª   ª   ª   ª   ª   business_modules.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           business_modules.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           roadmap.cpython-314.pyc
+ª   ª   ª           runtime.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production_phase1101_2000
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production_pipeline
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production_release
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---production_runtime
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---release_phase_11_5_30
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---security
+ª   ª   ª   ª   security_manager.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           security_manager.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---services
+ª   ª   ª   ª   crud_engine_v1.py
+ª   ª   ª   ª   database_binding_v1.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           crud_engine_v1.cpython-314.pyc
+ª   ª   ª           database_binding_v1.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---ui
+ª   ª   ª   ª   application.py
+ª   ª   ª   ª   
+ª   ª   ª   +---dashboard
+ª   ª   ª   ª   ª   dashboard.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           dashboard.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---menu
+ª   ª   ª   ª   ª   main_menu.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           main_menu.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---modules
+ª   ª   ª   ª   ª   erp_module_screens.py
+ª   ª   ª   ª   ª   module_screen.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           erp_module_screens.cpython-314.pyc
+ª   ª   ª   ª           module_screen.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---shell
+ª   ª   ª   ª   ª   desktop_shell.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           desktop_shell.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           application.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---__pycache__
+ª   ª           erp_activation_v1.cpython-314.pyc
+ª   ª           final_desktop_demo_release_v1.cpython-314.pyc
+ª   ª           final_release_check.cpython-314.pyc
+ª   ª           professional_ui_polish_v1.cpython-314.pyc
+ª   ª           
+ª   +---ags_marketplace
+ª   ª   +---agents
+ª   ª   +---modules
+ª   ª   +---plugins
+ª   ª   +---templates
+ª   +---ags_platform
+ª   ª   +---build_pipeline
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---enterprise_stack
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---global_enterprise_path
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---global_enterprise_v1
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---global_evolution
+ª   ª   ª   ª   phases.py
+ª   ª   ª   ª   
+ª   ª   ª   +---__pycache__
+ª   ª   ª           phases.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---ultimate_build
+ª   ª       ª   phases.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               phases.cpython-314.pyc
+ª   ª               
+ª   +---ags_platform_release_v1
+ª   +---ags_platform_v1
+ª   ª   ª   product_status.py
+ª   ª   ª   
+ª   ª   +---auth
+ª   ª   +---configuration
+ª   ª   +---core
+ª   ª   ª   ª   platform.py
+ª   ª   ª   ª   
+ª   ª   ª   +---events
+ª   ª   ª   ª   ª   event_dispatcher.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           event_dispatcher.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---registry
+ª   ª   ª   ª   ª   module_registry.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           module_registry.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---runtime
+ª   ª   ª   ª   ª   application_runtime.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           application_runtime.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---security
+ª   ª   ª   ª   ª   permission_engine.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           permission_engine.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---services
+ª   ª   ª   ª   ª   service_container.py
+ª   ª   ª   ª   ª   
+ª   ª   ª   ª   +---__pycache__
+ª   ª   ª   ª           service_container.cpython-314.pyc
+ª   ª   ª   ª           
+ª   ª   ª   +---__pycache__
+ª   ª   ª           platform.cpython-314.pyc
+ª   ª   ª           
+ª   ª   +---database
+ª   ª   +---multi_company
+ª   ª   +---permissions
+ª   ª   +---__pycache__
+ª   ª           product_status.cpython-314.pyc
+ª   ª           
+ª   +---phase201_250
+ª   ª   ª   phases.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           phases.cpython-314.pyc
+ª   ª           
+ª   +---phase251_1000
+ª       ª   phases.py
+ª       ª   
+ª       +---__pycache__
+ª               phases.cpython-314.pyc
+ª               
++---production
+ª   +---certification
+ª   ª       PHASE_10_CERTIFICATION.md
+ª   ª       
+ª   +---execution
+ª   ª       PHASE_3_DATABASE.md
+ª   ª       PHASE_4_AI.md
+ª   ª       PHASE_5_SECURITY.md
+ª   ª       PHASE_6_AUTONOMOUS.md
+ª   ª       PHASE_7_PERFORMANCE.md
+ª   ª       PHASE_8_OBSERVABILITY.md
+ª   ª       PHASE_9_COMMAND_CENTER.md
+ª   ª       
+ª   +---hardening
+ª   ª   ª   ai_hardening.py
+ª   ª   ª   autonomous_safety.py
+ª   ª   ª   backup_manager.py
+ª   ª   ª   certification.py
+ª   ª   ª   integrity_checker.py
+ª   ª   ª   migration_guard.py
+ª   ª   ª   observability.py
+ª   ª   ª   performance.py
+ª   ª   ª   recovery_engine.py
+ª   ª   ª   security_hardening.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           ai_hardening.cpython-314.pyc
+ª   ª           autonomous_safety.cpython-314.pyc
+ª   ª           backup_manager.cpython-314.pyc
+ª   ª           certification.cpython-314.pyc
+ª   ª           integrity_checker.cpython-314.pyc
+ª   ª           migration_guard.cpython-314.pyc
+ª   ª           observability.cpython-314.pyc
+ª   ª           performance.cpython-314.pyc
+ª   ª           recovery_engine.cpython-314.pyc
+ª   ª           security_hardening.cpython-314.pyc
+ª   ª           
+ª   +---phase201
+ª   ª   ª   engine.py
+ª   ª   ª   __init__.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           engine.cpython-314.pyc
+ª   ª           __init__.cpython-314.pyc
+ª   ª           
+ª   +---phases
+ª           PHASE_10_STATUS.md
+ª           PHASE_11_STATUS.md
+ª           PHASE_12_STATUS.md
+ª           PHASE_13_STATUS.md
+ª           PHASE_14_STATUS.md
+ª           PHASE_15_STATUS.md
+ª           PHASE_16_STATUS.md
+ª           PHASE_17_STATUS.md
+ª           PHASE_18_STATUS.md
+ª           PHASE_19_STATUS.md
+ª           PHASE_1_STATUS.md
+ª           PHASE_20_STATUS.md
+ª           PHASE_2_STATUS.md
+ª           PHASE_3_STATUS.md
+ª           PHASE_4_STATUS.md
+ª           PHASE_5_STATUS.md
+ª           PHASE_6_STATUS.md
+ª           PHASE_7_STATUS.md
+ª           PHASE_8_STATUS.md
+ª           PHASE_9_STATUS.md
+ª           
++---production_release
+ª   ª   global_release.py
+ª   ª   
+ª   +---__pycache__
+ª           global_release.cpython-314.pyc
+ª           
++---registry
+ª   ª   menu.json
+ª   ª   menu_generator.py
+ª   ª   model_registry.py
+ª   ª   pages.json
+ª   ª   page_registry.py
+ª   ª   __init__.py
+ª   ª   
+ª   +---__pycache__
+ª           menu_generator.cpython-314.pyc
+ª           model_registry.cpython-314.pyc
+ª           page_registry.cpython-314.pyc
+ª           __init__.cpython-314.pyc
+ª           
++---release
+ª   +---ai_company_mode
+ª   ª       AI_COMPANY_MODE_V1.txt
+ª   ª       
+ª   +---beta
+ª   ª   ª   release.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           release.cpython-314.pyc
+ª   ª           
+ª   +---certification
+ª   ª       RELEASE_CERTIFICATION_V1.txt
+ª   ª       
+ª   +---cloud_platform
+ª   ª       CLOUD_PLATFORM_V1.txt
+ª   ª       
+ª   +---deployment
+ª   ª       DEPLOYMENT_PACKAGE_V1.txt
+ª   ª       
+ª   +---execution
+ª   ª       FINAL_EXECUTION_PIPELINE_V1.txt
+ª   ª       RELEASE_EXECUTION_COMPLETE_V1.txt
+ª   ª       RELEASE_EXECUTION_VALIDATION_V1.txt
+ª   ª       RELEASE_PHASES_2_TO_9_V1.txt
+ª   ª       
+ª   +---final_pipeline
+ª   ª       AGS_STUDIO_RELEASE_PIPELINE_FINAL_V1.txt
+ª   ª       
+ª   +---final_stages
+ª   ª       AGS_STUDIO_FINAL_STAGES_V1.txt
+ª   ª       
+ª   +---global_release
+ª   ª   ª   GLOBAL_RELEASE_V1_0.txt
+ª   ª   ª   release.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           release.cpython-314.pyc
+ª   ª           
+ª   +---launcher
+ª   ª       AUTONOMOUS_LAUNCHER_V1.txt
+ª   ª       
+ª   +---marketplace_engine
+ª   ª       MARKETPLACE_ENGINE_V1.txt
+ª   ª       
+ª   +---master_pipeline
+ª   ª       AGS_STUDIO_MASTER_RELEASE_PIPELINE_V1.txt
+ª   ª       
+ª   +---mobile_command_center
+ª   ª       MOBILE_COMMAND_CENTER_V1.txt
+ª   ª       
+ª   +---phases
+ª   ª       AGS_STUDIO_FINAL_RELEASE_PHASES_V1.txt
+ª   ª       AGS_STUDIO_RELEASE_PHASES_V1.txt
+ª   ª       
+ª   +---roadmap
+ª   ª       FINAL_RELEASE_ROADMAP_V1.txt
+ª   ª       
+ª   +---ultimate_pipeline
+ª   ª       AGS_STUDIO_ULTIMATE_RELEASE_PIPELINE_V1.txt
+ª   ª       
+ª   +---v1
+ª           RELEASE_MANIFEST.txt
+ª           
++---rentals
++---repositories
+ª   ª   base_repository.py
+ª   ª   boq_repository.py
+ª   ª   catalogue_repository.py
+ª   ª   clients_repository.py
+ª   ª   client_repository.py
+ª   ª   company_repository.py
+ª   ª   create_inventory_management_system_repository.py
+ª   ª   customers_repository.py
+ª   ª   employee_repository.py
+ª   ª   expense_repository.py
+ª   ª   financial_repository.py
+ª   ª   inventory_repository.py
+ª   ª   invoices_repository.py
+ª   ª   orders_repository.py
+ª   ª   products_repository.py
+ª   ª   project_repository.py
+ª   ª   purchase_repository.py
+ª   ª   suppliers_payments_repository.py
+ª   ª   suppliers_repository.py
+ª   ª   supplier_repository.py
+ª   ª   test_crud_repository.py
+ª   ª   test_memory_repository.py
+ª   ª   user_repository.py
+ª   ª   
+ª   +---__pycache__
+ª           base_repository.cpython-314.pyc
+ª           boq_repository.cpython-314.pyc
+ª           catalogue_repository.cpython-314.pyc
+ª           clients_repository.cpython-314.pyc
+ª           client_repository.cpython-314.pyc
+ª           company_repository.cpython-314.pyc
+ª           create_inventory_management_system_repository.cpython-314.pyc
+ª           customers_repository.cpython-314.pyc
+ª           employee_repository.cpython-314.pyc
+ª           expense_repository.cpython-314.pyc
+ª           financial_repository.cpython-314.pyc
+ª           inventory_repository.cpython-314.pyc
+ª           invoices_repository.cpython-314.pyc
+ª           orders_repository.cpython-314.pyc
+ª           products_repository.cpython-314.pyc
+ª           project_repository.cpython-314.pyc
+ª           purchase_repository.cpython-314.pyc
+ª           suppliers_payments_repository.cpython-314.pyc
+ª           suppliers_repository.cpython-314.pyc
+ª           supplier_repository.cpython-314.pyc
+ª           test_crud_repository.cpython-314.pyc
+ª           test_memory_repository.cpython-314.pyc
+ª           user_repository.cpython-314.pyc
+ª           
++---roadmap
+ª   +---ags_erp_v3_enterprise_release
+ª   ª   ª   phases.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           phases.cpython-314.pyc
+ª   ª           
+ª   +---ags_phase2001_plus
+ª       ª   phases.py
+ª       ª   
+ª       +---__pycache__
+ª               phases.cpython-314.pyc
+ª               
++---schema
+ª   ª   schema_engine.py
+ª   ª   
+ª   +---__pycache__
+ª           schema_engine.cpython-314.pyc
+ª           
++---science_innovation
++---security
+ª   +---production
+ª   ª   ª   access_audit.py
+ª   ª   ª   permission_guard.py
+ª   ª   ª   secret_manager.py
+ª   ª   ª   security_logger.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           access_audit.cpython-314.pyc
+ª   ª           permission_guard.cpython-314.pyc
+ª   ª           secret_manager.cpython-314.pyc
+ª   ª           security_logger.cpython-314.pyc
+ª   ª           
+ª   +---v1
+ª       ª   security_engine.py
+ª       ª   __init__.py
+ª       ª   
+ª       +---__pycache__
+ª               security_engine.cpython-314.pyc
+ª               __init__.cpython-314.pyc
+ª               
++---security_center
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---self_evolving_architecture
+ª   ª   phase34.py
+ª   ª   
+ª   +---__pycache__
+ª           phase34.cpython-314.pyc
+ª           
++---services
+ª   ª   auth.py
+ª   ª   base_service.py
+ª   ª   clients_service.py
+ª   ª   client_service.py
+ª   ª   company_service.py
+ª   ª   create_inventory_management_system_service.py
+ª   ª   customers_service.py
+ª   ª   employee_service.py
+ª   ª   inventory_service.py
+ª   ª   invoices_service.py
+ª   ª   numbering_service.py
+ª   ª   orders_service.py
+ª   ª   products_service.py
+ª   ª   suppliers_payments_service.py
+ª   ª   suppliers_service.py
+ª   ª   supplier_service.py
+ª   ª   test_crud_service.py
+ª   ª   test_memory_service.py
+ª   ª   
+ª   +---__pycache__
+ª           auth.cpython-314.pyc
+ª           base_service.cpython-314.pyc
+ª           clients_service.cpython-314.pyc
+ª           client_service.cpython-314.pyc
+ª           company_service.cpython-314.pyc
+ª           create_inventory_management_system_service.cpython-314.pyc
+ª           customers_service.cpython-314.pyc
+ª           employee_service.cpython-314.pyc
+ª           inventory_service.cpython-314.pyc
+ª           invoices_service.cpython-314.pyc
+ª           numbering_service.cpython-314.pyc
+ª           orders_service.cpython-314.pyc
+ª           products_service.cpython-314.pyc
+ª           suppliers_payments_service.cpython-314.pyc
+ª           suppliers_service.cpython-314.pyc
+ª           supplier_service.cpython-314.pyc
+ª           test_crud_service.cpython-314.pyc
+ª           test_memory_service.cpython-314.pyc
+ª           
++---stability
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---storage
+ª       storage_config.json
+ª       
++---strategic_command
++---subscription
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---subscriptions
+ª   ª   plans.json
+ª   ª   
+ª   +---services
+ª           subscription_rules.json
+ª           
++---support
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---tenant
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---tenants
+ª   +---models
+ª           tenant_schema.json
+ª           
++---tenders
+ª   ª   tender_config.json
+ª   ª   
+ª   +---matching
+ª   ª       tender_matching.json
+ª   ª       
+ª   +---models
+ª   ª       company_profile.json
+ª   ª       
+ª   +---ocr
+ª   ª       ocr_config.json
+ª   ª       
+ª   +---qualification
+ª           qualification_rules.json
+ª           
++---testing
+ª   +---v1
+ª       ª   testing_platform.py
+ª       ª   __init__.py
+ª       ª   
+ª       +---__pycache__
+ª               testing_platform.cpython-314.pyc
+ª               __init__.cpython-314.pyc
+ª               
++---tests
+ª   ª   ags_erp_v3_module_screens_test.py
+ª   ª   ags_erp_v3_ui_test.py
+ª   ª   ags_platform_v1_full_test.py
+ª   ª   
+ª   +---__pycache__
+ª           ags_erp_v3_module_screens_test.cpython-314.pyc
+ª           ags_erp_v3_ui_test.cpython-314.pyc
+ª           ags_platform_v1_full_test.cpython-314.pyc
+ª           
++---tickets
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---training
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---transcendent_intelligence
++---transport
++---ui
+ª   ª   app.py
+ª   ª   main_window.py
+ª   ª   
+ª   +---autonomous_builder
+ª   ª   +---v1
+ª   ª       ª   builder_controller.py
+ª   ª       ª   builder_session.py
+ª   ª       ª   component_generator.py
+ª   ª       ª   layout_generator.py
+ª   ª       ª   preview_runtime.py
+ª   ª       ª   theme_generator.py
+ª   ª       ª   ui_generator_agent.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---agents
+ª   ª       ª   ª   ui_agent_team.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           ui_agent_team.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---application_generator
+ª   ª       ª   ª   generator.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           generator.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---full_stack
+ª   ª       ª   ª   full_stack_builder.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           full_stack_builder.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---live_runtime
+ª   ª       ª   ª   drag_drop_runtime.py
+ª   ª       ª   ª   live_preview_engine.py
+ª   ª       ª   ª   live_ui_builder.py
+ª   ª       ª   ª   ui_hot_reload.py
+ª   ª       ª   ª   visual_designer_runtime.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           drag_drop_runtime.cpython-314.pyc
+ª   ª       ª           live_preview_engine.cpython-314.pyc
+ª   ª       ª           live_ui_builder.cpython-314.pyc
+ª   ª       ª           ui_hot_reload.cpython-314.pyc
+ª   ª       ª           visual_designer_runtime.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---marketplace
+ª   ª       ª   ª   component_marketplace.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           component_marketplace.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---memory
+ª   ª       ª   ª   ui_memory_engine.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           ui_memory_engine.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---pipeline
+ª   ª       ª   ª   ai_component_planner.py
+ª   ª       ª   ª   ai_layout_planner.py
+ª   ª       ª   ª   ai_theme_planner.py
+ª   ª       ª   ª   build_validator.py
+ª   ª       ª   ª   specification_analyzer.py
+ª   ª       ª   ª   ui_assembler.py
+ª   ª       ª   ª   ui_generation_pipeline.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           ai_component_planner.cpython-314.pyc
+ª   ª       ª           ai_layout_planner.cpython-314.pyc
+ª   ª       ª           ai_theme_planner.cpython-314.pyc
+ª   ª       ª           build_validator.cpython-314.pyc
+ª   ª       ª           specification_analyzer.cpython-314.pyc
+ª   ª       ª           ui_assembler.cpython-314.pyc
+ª   ª       ª           ui_generation_pipeline.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---runtime
+ª   ª       ª   ª   autonomous_runtime.py
+ª   ª       ª   ª   build_pipeline.py
+ª   ª       ª   ª   runtime_state.py
+ª   ª       ª   ª   task_router.py
+ª   ª       ª   ª   ui_execution_context.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           autonomous_runtime.cpython-314.pyc
+ª   ª       ª           build_pipeline.cpython-314.pyc
+ª   ª       ª           runtime_state.cpython-314.pyc
+ª   ª       ª           task_router.cpython-314.pyc
+ª   ª       ª           ui_execution_context.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---self_build
+ª   ª       ª   ª   ui_self_build_loop.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           ui_self_build_loop.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---__pycache__
+ª   ª               builder_controller.cpython-314.pyc
+ª   ª               builder_session.cpython-314.pyc
+ª   ª               component_generator.cpython-314.pyc
+ª   ª               layout_generator.cpython-314.pyc
+ª   ª               preview_runtime.cpython-314.pyc
+ª   ª               theme_generator.cpython-314.pyc
+ª   ª               ui_generator_agent.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---components
+ª   ª   ª   app_button.py
+ª   ª   ª   app_card.py
+ª   ª   ª   app_dialog.py
+ª   ª   ª   app_entry.py
+ª   ª   ª   app_table.py
+ª   ª   ª   app_toolbar.py
+ª   ª   ª   placeholder.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           app_button.cpython-314.pyc
+ª   ª           app_card.cpython-314.pyc
+ª   ª           app_dialog.cpython-314.pyc
+ª   ª           app_entry.cpython-314.pyc
+ª   ª           app_table.cpython-314.pyc
+ª   ª           app_toolbar.cpython-314.pyc
+ª   ª           placeholder.cpython-314.pyc
+ª   ª           
+ª   +---designer
+ª   ª   +---v1
+ª   ª       ª   theme_editor.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---designers
+ª   ª       ª   ª   dashboard_designer.py
+ª   ª       ª   ª   drag_drop_designer.py
+ª   ª       ª   ª   form_designer.py
+ª   ª       ª   ª   menu_designer.py
+ª   ª       ª   ª   report_designer.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           dashboard_designer.cpython-314.pyc
+ª   ª       ª           drag_drop_designer.cpython-314.pyc
+ª   ª       ª           form_designer.cpython-314.pyc
+ª   ª       ª           menu_designer.cpython-314.pyc
+ª   ª       ª           report_designer.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---layouts
+ª   ª       +---preview
+ª   ª       ª   ª   live_preview.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           live_preview.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---properties
+ª   ª       ª   ª   property_inspector.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           property_inspector.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---widgets
+ª   ª       +---__pycache__
+ª   ª               theme_editor.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---dialogs
+ª   ª   ª   clients_dialog.py
+ª   ª   ª   client_dialog.py
+ª   ª   ª   company_dialog.py
+ª   ª   ª   company_edit_dialog.py
+ª   ª   ª   customers_dialog.py
+ª   ª   ª   invoices_dialog.py
+ª   ª   ª   orders_dialog.py
+ª   ª   ª   products_dialog.py
+ª   ª   ª   suppliers_dialog.py
+ª   ª   ª   suppliers_payments_dialog.py
+ª   ª   ª   supplier_dialog.py
+ª   ª   ª   test_crud_dialog.py
+ª   ª   ª   test_memory_dialog.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           clients_dialog.cpython-314.pyc
+ª   ª           client_dialog.cpython-314.pyc
+ª   ª           company_dialog.cpython-314.pyc
+ª   ª           company_edit_dialog.cpython-314.pyc
+ª   ª           customers_dialog.cpython-314.pyc
+ª   ª           invoices_dialog.cpython-314.pyc
+ª   ª           orders_dialog.cpython-314.pyc
+ª   ª           products_dialog.cpython-314.pyc
+ª   ª           suppliers_dialog.cpython-314.pyc
+ª   ª           suppliers_payments_dialog.cpython-314.pyc
+ª   ª           supplier_dialog.cpython-314.pyc
+ª   ª           test_crud_dialog.cpython-314.pyc
+ª   ª           test_memory_dialog.cpython-314.pyc
+ª   ª           
+ª   +---foundation
+ª   ª   +---v2
+ª   ª       ª   command_palette.py
+ª   ª       ª   framework.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---components
+ª   ª       ª   ª   library.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           library.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---docking
+ª   ª       ª   ª   advanced_dock_manager.py
+ª   ª       ª   ª   dock_manager.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           advanced_dock_manager.cpython-314.pyc
+ª   ª       ª           dock_manager.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---events
+ª   ª       ª   ª   event_bus.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           event_bus.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---integration
+ª   ª       ª   ª   autonomous_bridge.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           autonomous_bridge.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---layouts
+ª   ª       ª   ª   layout_persistence.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           layout_persistence.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---navigation
+ª   ª       ª   ª   navigation_manager.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           navigation_manager.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---notifications
+ª   ª       ª   ª   notification_center.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           notification_center.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---panels
+ª   ª       ª   ª   ai_panel.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           ai_panel.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---responsive
+ª   ª       ª   ª   responsive_engine.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           responsive_engine.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---state
+ª   ª       ª   ª   ui_state_manager.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           ui_state_manager.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---statusbar
+ª   ª       ª   ª   status_bar.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           status_bar.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---tests
+ª   ª       ª   ª   test_ui_foundation.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           test_ui_foundation.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---theme
+ª   ª       ª   ª   theme_engine.py
+ª   ª       ª   ª   __init__.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           theme_engine.cpython-314.pyc
+ª   ª       ª           __init__.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---window_manager
+ª   ª       ª   ª   window_manager.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           window_manager.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---workspace
+ª   ª       ª   ª   workspace_manager.py
+ª   ª       ª   ª   workspace_tabs.py
+ª   ª       ª   ª   
+ª   ª       ª   +---__pycache__
+ª   ª       ª           workspace_manager.cpython-314.pyc
+ª   ª       ª           workspace_tabs.cpython-314.pyc
+ª   ª       ª           
+ª   ª       +---__pycache__
+ª   ª               command_palette.cpython-314.pyc
+ª   ª               framework.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---marketplace
+ª   ª   +---v1
+ª   ª       ª   component_marketplace.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               component_marketplace.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---memory
+ª   ª   +---v1
+ª   ª       ª   ui_memory_engine.py
+ª   ª       ª   __init__.py
+ª   ª       ª   
+ª   ª       +---__pycache__
+ª   ª               ui_memory_engine.cpython-314.pyc
+ª   ª               __init__.cpython-314.pyc
+ª   ª               
+ª   +---pages
+ª   ª   ª   clients_page.py
+ª   ª   ª   company_page.py
+ª   ª   ª   customers_page.py
+ª   ª   ª   dashboard_page.py
+ª   ª   ª   employee_page.py
+ª   ª   ª   invoices_page.py
+ª   ª   ª   orders_page.py
+ª   ª   ª   products_page.py
+ª   ª   ª   projects_page.py
+ª   ª   ª   settings_page.py
+ª   ª   ª   suppliers_page.py
+ª   ª   ª   suppliers_payments_page.py
+ª   ª   ª   test_crud_page.py
+ª   ª   ª   test_memory_page.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           clients_page.cpython-314.pyc
+ª   ª           company_page.cpython-314.pyc
+ª   ª           customers_page.cpython-314.pyc
+ª   ª           dashboard_page.cpython-314.pyc
+ª   ª           employee_page.cpython-314.pyc
+ª   ª           invoices_page.cpython-314.pyc
+ª   ª           orders_page.cpython-314.pyc
+ª   ª           products_page.cpython-314.pyc
+ª   ª           projects_page.cpython-314.pyc
+ª   ª           settings_page.cpython-314.pyc
+ª   ª           suppliers_page.cpython-314.pyc
+ª   ª           suppliers_payments_page.cpython-314.pyc
+ª   ª           test_crud_page.cpython-314.pyc
+ª   ª           test_memory_page.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           app.cpython-314.pyc
+ª           main_window.cpython-314.pyc
+ª           
++---ultimate_ai_platform
+ª   ª   evolution_manager.py
+ª   ª   
+ª   +---__pycache__
+ª           evolution_manager.cpython-314.pyc
+ª           
++---universal_ai_os
+ª   ª   phase33.py
+ª   ª   
+ª   +---__pycache__
+ª           phase33.cpython-314.pyc
+ª           
++---universal_ai_platform_era
++---universal_business_grid
+ª   ª   phase37.py
+ª   ª   
+ª   +---__pycache__
+ª           phase37.cpython-314.pyc
+ª           
++---universal_factory
+ª   ª   factory_engine.py
+ª   ª   
+ª   +---platform
+ª   ª   ª   factory_engine.py
+ª   ª   ª   
+ª   ª   +---__pycache__
+ª   ª           factory_engine.cpython-314.pyc
+ª   ª           
+ª   +---__pycache__
+ª           factory_engine.cpython-314.pyc
+ª           
++---universal_factory_network
++---users
+ª   +---auth
+ª   ª       config.json
+ª   ª       
+ª   +---models
+ª   ª       dashboards.json
+ª   ª       user_schema.json
+ª   ª       
+ª   +---services
++---version_1_1
+ª   ª   engine.py
+ª   ª   
+ª   +---__pycache__
+ª           engine.cpython-314.pyc
+ª           
++---web
+ª   +---templates
+ª           ceo_platform.html
+ª           
++---workshops
++---__pycache__
+        main.cpython-314.pyc
+        
+
+==================== RUNTIME ====================
+
+==================== CORE ====================
+
+==================== APP\AI ====================
+
+==================== APP\PRODUCT ====================
+
+==================== APP\REGISTRY ====================

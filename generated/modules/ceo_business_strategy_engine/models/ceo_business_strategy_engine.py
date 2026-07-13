@@ -1,2 +1,0 @@
-class CeoBusinessStrategyEngine:
-    pass

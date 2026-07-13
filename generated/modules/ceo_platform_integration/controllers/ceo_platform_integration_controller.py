@@ -1,2 +1,0 @@
-class CeoPlatformIntegrationController:
-    pass

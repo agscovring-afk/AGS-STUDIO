@@ -1,2 +1,0 @@
-class CeoSelfImprovementEngine:
-    pass

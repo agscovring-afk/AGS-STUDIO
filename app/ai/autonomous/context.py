@@ -7,6 +7,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from app.ai.autonomous.models import Task, TaskStatus
+
 
 class AutonomousSnapshot:
 
@@ -22,7 +24,7 @@ class AutonomousSnapshot:
 
         return [
             t for t in self.tasks
-            if getattr(t, "status", None) == "pending"
+            if t.status == TaskStatus.PENDING
         ]
 
 
@@ -31,7 +33,7 @@ class AutonomousSnapshot:
 
         return [
             t for t in self.tasks
-            if getattr(t, "status", None) == "failed"
+            if t.status == TaskStatus.FAILED
         ]
 
 
@@ -40,7 +42,7 @@ class AutonomousSnapshot:
 
         return [
             t for t in self.tasks
-            if getattr(t, "status", None) == "completed"
+            if t.status == TaskStatus.COMPLETED
         ]
 
 
@@ -70,6 +72,8 @@ class AutonomousContext:
 
         self.snapshot = AutonomousSnapshot()
 
+        self.load()
+
 
 
     def update_statistics(self):
@@ -90,6 +94,33 @@ class AutonomousContext:
 
         self.update_statistics()
 
+        data = {
+
+            "tasks": [
+
+                {
+
+                    "name": t.name,
+                    "description": t.description,
+                    "status": t.status.value,
+                    "priority": t.priority,
+                    "retries": t.retries,
+                    "max_retries": t.max_retries,
+                    "result": t.result
+
+                }
+
+                for t in self.snapshot.tasks
+
+            ],
+
+            "statistics": self.snapshot.statistics,
+
+            "files": self.snapshot.files
+
+        }
+
+
         with open(
             self.path,
             "w",
@@ -97,7 +128,7 @@ class AutonomousContext:
         ) as file:
 
             json.dump(
-                self.snapshot.statistics,
+                data,
                 file,
                 indent=4,
                 ensure_ascii=False
@@ -112,13 +143,64 @@ class AutonomousContext:
             return {}
 
 
-        with open(
-            self.path,
-            "r",
-            encoding="utf-8"
-        ) as file:
+        try:
 
-            return json.load(file)
+            with open(
+                self.path,
+                "r",
+                encoding="utf-8"
+            ) as file:
+
+                data = json.load(file)
+
+
+            self.snapshot.tasks = []
+
+
+            for item in data.get("tasks", []):
+
+                self.snapshot.tasks.append(
+
+                    Task(
+
+                        name=item["name"],
+
+                        status=TaskStatus(
+                            item.get(
+                                "status",
+                                "pending"
+                            )
+                        ),
+
+                        description=item.get("description", ""),
+                        priority=item.get(
+                            "priority",
+                            1
+                        )
+
+                    )
+
+                )
+
+
+            self.snapshot.statistics = data.get(
+                "statistics",
+                {}
+            )
+
+            self.snapshot.files = data.get(
+                "files",
+                []
+            )
+
+
+        except Exception:
+
+            self.snapshot = AutonomousSnapshot()
+
+
+
+        return self.snapshot
 
 
 
