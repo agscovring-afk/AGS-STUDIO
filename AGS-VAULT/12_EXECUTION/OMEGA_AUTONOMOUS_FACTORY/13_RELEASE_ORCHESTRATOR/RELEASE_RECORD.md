@@ -1,0 +1,14 @@
+﻿# OMEGA RELEASE REGISTRY
+
+Project:
+AGS-STUDIO
+
+
+Release:
+
+OMEGA AUTONOMOUS FACTORY
+
+
+Status:
+
+CERTIFIED
