@@ -1,0 +1,75 @@
+﻿=== AGS Validator ===
+
+Checking: clients
+[ OK ] app/models/clients.py
+[ OK ] app/repositories/clients_repository.py
+[ OK ] app/services/clients_service.py
+[ OK ] app/controllers/clients_controller.py
+[ OK ] app/ui/pages/clients_page.py
+[ OK ] app/ui/dialogs/clients_dialog.py
+
+Checking: customers
+[ OK ] app/models/customers.py
+[ OK ] app/repositories/customers_repository.py
+[ OK ] app/services/customers_service.py
+[ OK ] app/controllers/customers_controller.py
+[ OK ] app/ui/pages/customers_page.py
+[ OK ] app/ui/dialogs/customers_dialog.py
+
+Checking: invoices
+[ OK ] app/models/invoices.py
+[ OK ] app/repositories/invoices_repository.py
+[ OK ] app/services/invoices_service.py
+[ OK ] app/controllers/invoices_controller.py
+[ OK ] app/ui/pages/invoices_page.py
+[ OK ] app/ui/dialogs/invoices_dialog.py
+
+Checking: orders
+[ OK ] app/models/orders.py
+[ OK ] app/repositories/orders_repository.py
+[ OK ] app/services/orders_service.py
+[ OK ] app/controllers/orders_controller.py
+[ OK ] app/ui/pages/orders_page.py
+[ OK ] app/ui/dialogs/orders_dialog.py
+
+Checking: products
+[ OK ] app/models/products.py
+[ OK ] app/repositories/products_repository.py
+[ OK ] app/services/products_service.py
+[ OK ] app/controllers/products_controller.py
+[ OK ] app/ui/pages/products_page.py
+[ OK ] app/ui/dialogs/products_dialog.py
+
+Checking: suppliers
+[ OK ] app/models/suppliers.py
+[ OK ] app/repositories/suppliers_repository.py
+[ OK ] app/services/suppliers_service.py
+[ OK ] app/controllers/suppliers_controller.py
+[ OK ] app/ui/pages/suppliers_page.py
+[ OK ] app/ui/dialogs/suppliers_dialog.py
+
+Checking: suppliers_payments
+[ OK ] app/models/suppliers_payments.py
+[ OK ] app/repositories/suppliers_payments_repository.py
+[ OK ] app/services/suppliers_payments_service.py
+[ OK ] app/controllers/suppliers_payments_controller.py
+[ OK ] app/ui/pages/suppliers_payments_page.py
+[ OK ] app/ui/dialogs/suppliers_payments_dialog.py
+
+Checking: test_crud
+[ OK ] app/models/test_crud.py
+[ OK ] app/repositories/test_crud_repository.py
+[ OK ] app/services/test_crud_service.py
+[ OK ] app/controllers/test_crud_controller.py
+[ OK ] app/ui/pages/test_crud_page.py
+[ OK ] app/ui/dialogs/test_crud_dialog.py
+
+Checking: test_memory
+[ OK ] app/models/test_memory.py
+[ OK ] app/repositories/test_memory_repository.py
+[ OK ] app/services/test_memory_service.py
+[ OK ] app/controllers/test_memory_controller.py
+[ OK ] app/ui/pages/test_memory_page.py
+[ OK ] app/ui/dialogs/test_memory_dialog.py
+
+Validation completed

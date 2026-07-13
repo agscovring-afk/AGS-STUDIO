@@ -1,0 +1,8 @@
+﻿=== AGS Studio Doctor ===
+[ OK ] registry.json
+[ OK ] schemas
+[ OK ] templates
+[ OK ] generators
+[ OK ] ags
+Modules: ['clients', 'customers', 'invoices', 'orders', 'products', 'suppliers', 'suppliers_payments', 'test_crud', 'test_memory']
+Doctor completed

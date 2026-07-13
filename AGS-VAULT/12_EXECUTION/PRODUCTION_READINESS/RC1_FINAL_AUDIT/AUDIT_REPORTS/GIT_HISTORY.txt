@@ -1,0 +1,10 @@
+﻿51ca293 production: complete production readiness phases 2-10 stabilization framework
+b26547a production: initialize production readiness stabilization framework
+46dab5a docs: complete architecture hardening professionalization baseline
+5bec2b9 docs: complete dependency validation phase
+05ce298 docs: add layer direction validation
+f15e8e8 docs: add dependency layer validation report
+cb69746 docs: create architecture hardening baseline structure
+8e144ce docs: start architecture rules baseline
+2713dcc docs: add architecture inventory baseline
+d016161 docs: start architecture hardening phase
