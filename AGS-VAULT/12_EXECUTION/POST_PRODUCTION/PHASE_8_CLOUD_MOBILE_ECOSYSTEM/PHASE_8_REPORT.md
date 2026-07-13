@@ -1,15 +1,13 @@
-﻿# POST-PRODUCTION PHASE 8
-
-## Cloud & Mobile Ecosystem
+﻿# PHASE 8 Cloud & Mobile Ecosystem
 
 Scope:
 
 - AGS Cloud
-- Mobile Applications
+- Mobile Apps
 - API Platform
-- External Integrations
+- Integrations
 - Partner Ecosystem
 
 Status:
 
-Framework Created
+Framework Established

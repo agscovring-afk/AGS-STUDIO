@@ -1,18 +1,15 @@
-﻿# POST-PRODUCTION PHASE 7
-
-## ERP Enterprise Expansion
+﻿# PHASE 7 ERP Enterprise Expansion
 
 Scope:
 
-- Construction Management
+- Construction ERP
 - Tender Management
-- BOQ Engine
+- BOQ
 - Procurement
-- HR
-- Accounting
 - Finance
+- HR
 - CRM
 
 Status:
 
-Framework Created
+Framework Established
