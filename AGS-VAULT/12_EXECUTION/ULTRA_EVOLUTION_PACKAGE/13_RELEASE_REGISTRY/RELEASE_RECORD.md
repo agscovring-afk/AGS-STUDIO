@@ -1,0 +1,17 @@
+﻿# RELEASE REGISTRY
+
+Project:
+AGS-STUDIO
+
+Release:
+ULTRA EVOLUTION PACKAGE
+
+
+Status:
+
+CERTIFIED
+
+
+Release Type:
+
+MAJOR PLATFORM EVOLUTION
