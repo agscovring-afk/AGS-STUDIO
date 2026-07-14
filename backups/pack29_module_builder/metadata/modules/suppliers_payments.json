@@ -1,0 +1,11 @@
+{
+    "module": "suppliers_payments",
+    "table": "suppliers_payments",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        }
+    ]
+}

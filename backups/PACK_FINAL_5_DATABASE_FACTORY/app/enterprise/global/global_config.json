@@ -1,0 +1,9 @@
+﻿{
+    "languages":[
+        "en",
+        "fr",
+        "ar"
+    ],
+    "multi_currency":true,
+    "regional_configuration":true
+}

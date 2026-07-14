@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 import tkinter as tk
 
 from ags.core.engine import AGSEngine
@@ -13,8 +13,10 @@ from ags.plugins import team
 from ags.plugins import build
 from ags.plugins import help
 from ags.plugins import ask
+from ags.plugins import help
 
 from app.ui.main_window import MainWindow
+from enterprise_builder.plugins.enterprise_plugin import register as register_enterprise
 
 
 def main():
@@ -23,15 +25,20 @@ def main():
 
     command_manager = CommandManager()
 
-    create.register(command_manager)
-    upgrade.register(command_manager)
-    doctor.register(command_manager)
-    validate.register(command_manager)
-    ai.register(command_manager)
-    team.register(command_manager)
-    build.register(command_manager)
-    help.register(command_manager)
-    ask.register(command_manager)
+    try:
+        ask.register(command_manager)
+        help.register(command_manager)
+    except Exception as e:
+        print("ASK registration error:", e)
+
+
+
+
+    try:
+        register_enterprise(command_manager)
+    except Exception as e:
+        print('Enterprise registration error:', e)
+
 
     if len(sys.argv) > 1:
 
@@ -54,8 +61,10 @@ def main():
 
         MainWindow(root)
 
-        root.mainloop()
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
+
+
+
+

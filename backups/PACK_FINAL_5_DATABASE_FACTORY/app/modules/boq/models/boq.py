@@ -1,0 +1,3 @@
+class Boq:
+
+    pass

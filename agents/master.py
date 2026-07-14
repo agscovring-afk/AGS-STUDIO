@@ -10,6 +10,12 @@ if PROJECT_ROOT not in sys.path:
 
 from app.ai.autonomous.engine import AutonomousEngine
 from app.ai.autonomous.task_generator import TaskGenerator
+from app.ai.intelligence.decision_intelligence import DecisionIntelligence
+from app.ai.memory.knowledge_store import store as knowledge_store
+from app.ai.intelligence.planner.strategic_planner import planner
+from app.ai.intelligence.improvement.self_improvement import improvement_engine
+from app.ai.intelligence.adaptive.adaptive_tasks import adaptive_intelligence
+from enterprise_builder.plugins.ags_ai_enterprise import AGSEnterpriseAIPlugin
 
 
 class MasterAgent:
@@ -20,6 +26,8 @@ class MasterAgent:
             "data/autonomous_state.json"
         )
         self.task_generator = TaskGenerator()
+        self.decision = DecisionIntelligence(knowledge_store)
+        self.enterprise_ai = AGSEnterpriseAIPlugin()
 
     def add_tasks(self, tasks):
         self.autonomous_engine.context.snapshot.tasks.extend(tasks)
@@ -31,15 +39,117 @@ class MasterAgent:
         print("================================")
         print(f"Request: {user_request}")
 
-        tasks = self.task_generator.generate(user_request)
+        enterprise_keywords = (
+            "enterprise",
+            "erp",
+            "platform",
+            "business system",
+            "multi tenant",
+            "multi company",
+            "company",
+            "construction",
+            "contractor",
+            "tender",
+            "project",
+            "projects",
+            "inventory",
+            "stock",
+            "supplier",
+            "suppliers",
+            "facade",
+            "aluminium",
+            "glass",
+            "\u0645\u0642\u0627\u0648\u0644\u0627\u062a",
+            "\u0645\u0646\u0627\u0642\u0635\u0629",
+            "\u0645\u0646\u0627\u0642\u0635\u0627\u062a",
+            "\u0645\u0634\u0627\u0631\u064a\u0639",
+            "\u0645\u062e\u0632\u0648\u0646",
+            "\u0645\u0648\u0631\u062f\u064a\u0646"
+        )
+        if any(k in user_request.lower() for k in enterprise_keywords):
+            return self.enterprise_ai.ask(user_request)
+
+        decision = self.decision.analyze(user_request)
+
+        print('\n[DECISION INTELLIGENCE]')
+        print(decision)
+
+        plan = planner.create_plan(
+            user_request,
+            decision
+        )
+
+        print("\n[STRATEGIC PLAN]")
+        print(plan)
+
+
+        knowledge_store.store(
+            {
+                "type":"strategic_plan",
+                "plan":plan
+            }
+        )
+
+
+        tasks = self.task_generator.generate_enterprise_tasks(user_request)
+
+        if not tasks:
+            tasks = self.task_generator.generate(user_request)
 
         print("\n[TASK GENERATOR]")
         for task in tasks:
             print(f"- {task.name} | priority={task.priority}")
 
+        self.autonomous_engine.context.reset_tasks()
+
         self.add_tasks(tasks)
+        self.autonomous_engine.context.save()
+
+        knowledge_store.store({
+            'type':'user_request',
+            'request':user_request
+        })
 
         result = self.autonomous_engine.run()
+
+
+        lesson = improvement_engine.analyze_execution(
+            user_request,
+            {
+                "status": result
+            }
+        )
+
+
+        print("\n[SELF IMPROVEMENT]")
+        print(lesson)
+
+
+        knowledge_store.store(
+            {
+                "type":"improvement_lesson",
+                "lesson":lesson
+            }
+        )
+
+
+        adaptive = adaptive_intelligence.adapt(
+            user_request,
+            decision,
+            lesson
+        )
+
+
+        print("\n[ADAPTIVE INTELLIGENCE]")
+        print(adaptive)
+
+
+        knowledge_store.store(
+            {
+                "type":"adaptive_strategy",
+                "adaptive":adaptive
+            }
+        )
 
         print("\n[AUTONOMOUS ENGINE STATUS]")
         print(result)
@@ -49,6 +159,9 @@ class MasterAgent:
             "tasks_created": len(tasks),
             "status": result
         }
+
+    def ask(self, user_request: str):
+        return self.process_request(user_request)
 
     def status(self):
         return self.autonomous_engine.status()
@@ -78,3 +191,8 @@ if __name__ == "__main__":
     print("================================")
 
     print(response)
+
+
+
+
+

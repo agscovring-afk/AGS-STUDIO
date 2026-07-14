@@ -1,0 +1,7 @@
+﻿# MULTI TENANT FOUNDATION
+
+STATUS:
+READY
+
+TARGET:
+Enterprise SaaS Architecture

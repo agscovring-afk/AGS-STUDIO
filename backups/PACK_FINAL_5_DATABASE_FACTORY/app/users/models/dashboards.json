@@ -1,0 +1,30 @@
+﻿{
+ "dashboard": {
+   "company": [
+      "projects",
+      "tenders",
+      "employees",
+      "accounting"
+   ],
+   "contractor": [
+      "projects",
+      "quotes",
+      "materials"
+   ],
+   "artisan": [
+      "jobs",
+      "clients",
+      "invoices"
+   ],
+   "supplier": [
+      "products",
+      "orders",
+      "marketplace"
+   ],
+   "client": [
+      "requests",
+      "offers",
+      "documents"
+   ]
+ }
+}

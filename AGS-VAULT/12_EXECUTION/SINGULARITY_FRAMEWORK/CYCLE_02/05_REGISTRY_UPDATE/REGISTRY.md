@@ -1,0 +1,15 @@
+﻿# REGISTRY UPDATE
+
+Framework:
+
+SINGULARITY EXECUTION FRAMEWORK
+
+
+Cycle:
+
+02
+
+
+State:
+
+REGISTERED

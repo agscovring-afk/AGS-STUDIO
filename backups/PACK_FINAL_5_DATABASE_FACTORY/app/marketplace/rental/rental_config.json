@@ -1,0 +1,15 @@
+﻿{
+ "rental_categories": [
+   "excavator",
+   "crane",
+   "truck",
+   "scaffold",
+   "tools",
+   "machines"
+ ],
+ "features": [
+   "availability",
+   "price",
+   "location"
+ ]
+}

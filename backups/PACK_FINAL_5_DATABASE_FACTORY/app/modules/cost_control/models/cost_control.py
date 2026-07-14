@@ -1,0 +1,3 @@
+class CostControl:
+
+    pass

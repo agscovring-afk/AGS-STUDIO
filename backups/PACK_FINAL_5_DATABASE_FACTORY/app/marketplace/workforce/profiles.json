@@ -1,0 +1,14 @@
+﻿{
+ "users": [
+   "artisan",
+   "daily_worker",
+   "small_workshop",
+   "service_provider"
+ ],
+ "profiles": [
+   "skills",
+   "experience",
+   "location",
+   "availability"
+ ]
+}

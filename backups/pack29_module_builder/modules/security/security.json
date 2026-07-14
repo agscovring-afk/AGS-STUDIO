@@ -1,0 +1,10 @@
+﻿{
+ "security":[
+  "authentication",
+  "roles",
+  "permissions",
+  "audit",
+  "backup",
+  "encryption"
+ ]
+}

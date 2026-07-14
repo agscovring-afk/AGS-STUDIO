@@ -1,38 +1,46 @@
 [
     {
-        "name": "Clients",
-        "route": "clients"
+        "name": "Dashboard",
+        "route": "dashboard"
+    },
+    {
+        "name": "Companies",
+        "route": "companies"
+    },
+    {
+        "name": "Users",
+        "route": "users"
     },
     {
         "name": "Customers",
         "route": "customers"
     },
     {
-        "name": "Invoices",
-        "route": "invoices"
-    },
-    {
-        "name": "Orders",
-        "route": "orders"
-    },
-    {
-        "name": "Products",
-        "route": "products"
-    },
-    {
         "name": "Suppliers",
         "route": "suppliers"
     },
     {
-        "name": "Suppliers_payments",
-        "route": "suppliers_payments"
+        "name": "Projects",
+        "route": "projects"
     },
     {
-        "name": "Test_crud",
-        "route": "test_crud"
+        "name": "Inventory",
+        "route": "inventory"
     },
     {
-        "name": "Test_memory",
-        "route": "test_memory"
+        "name": "Finance",
+        "route": "finance"
+    },
+    {
+        "name": "Reports",
+        "route": "reports"
+    },
+    {
+        "name": "AI Builder",
+        "route": "ai_builder"
+    },
+    {
+        "name": "Autonomous Engine",
+        "route": "autonomous"
     }
 ]

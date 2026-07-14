@@ -1,0 +1,88 @@
+import os
+import sys
+
+PROJECT_ROOT = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
+
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from app.ai.autonomous.engine import AutonomousEngine
+from app.ai.autonomous.task_generator import TaskGenerator
+
+
+class MasterAgent:
+
+    def __init__(self):
+        self.name = "AGS MASTER AI"
+        self.autonomous_engine = AutonomousEngine(
+            "data/autonomous_state.json"
+        )
+        self.task_generator = TaskGenerator()
+
+    def add_tasks(self, tasks):
+        self.autonomous_engine.context.snapshot.tasks.extend(tasks)
+
+    def process_request(self, user_request: str):
+
+        print("\n================================")
+        print(" MASTER AI PROCESSING REQUEST")
+        print("================================")
+        print(f"Request: {user_request}")
+
+        tasks = self.task_generator.generate_enterprise_tasks(user_request)
+
+        if not tasks:
+            tasks = self.task_generator.generate(user_request)
+
+        print("\n[TASK GENERATOR]")
+        for task in tasks:
+            print(f"- {task.name} | priority={task.priority}")
+
+        self.add_tasks(tasks)
+
+        result = self.autonomous_engine.run()
+
+        print("\n[AUTONOMOUS ENGINE STATUS]")
+        print(result)
+
+        return {
+            "request": user_request,
+            "tasks_created": len(tasks),
+            "status": result
+        }
+
+    def ask(self, user_request: str):
+        return self.process_request(user_request)
+
+    def status(self):
+        return self.autonomous_engine.status()
+
+
+if __name__ == "__main__":
+
+    import argparse
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "--task",
+        default="Analyze AGS-STUDIO"
+    )
+
+    args = parser.parse_args()
+
+    agent = MasterAgent()
+
+    response = agent.process_request(
+        args.task
+    )
+
+    print("\n================================")
+    print(" MASTER RESPONSE COMPLETE")
+    print("================================")
+
+    print(response)
+
+

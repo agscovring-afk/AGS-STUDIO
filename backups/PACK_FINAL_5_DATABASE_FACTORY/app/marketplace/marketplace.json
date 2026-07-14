@@ -1,0 +1,11 @@
+﻿{
+ "marketplace": [
+   "suppliers",
+   "manufacturers",
+   "equipment_rental",
+   "services",
+   "materials",
+   "machines",
+   "tools"
+ ]
+}

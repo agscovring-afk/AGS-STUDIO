@@ -1,0 +1,166 @@
+{
+    "entities": [
+        {
+            "name": "companies",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        },
+        {
+            "name": "users",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        },
+        {
+            "name": "customers",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        },
+        {
+            "name": "suppliers",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        },
+        {
+            "name": "projects",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        },
+        {
+            "name": "inventory",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        },
+        {
+            "name": "finance",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        },
+        {
+            "name": "reports",
+            "fields": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+            ],
+            "relations": [],
+            "permissions": [
+                "create",
+                "read",
+                "update",
+                "delete"
+            ],
+            "workflows": [
+                "approval",
+                "validation"
+            ]
+        }
+    ],
+    "count": 8,
+    "multi_tenant": true
+}

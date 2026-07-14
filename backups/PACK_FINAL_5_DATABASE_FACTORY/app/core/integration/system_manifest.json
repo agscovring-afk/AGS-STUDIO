@@ -1,0 +1,11 @@
+﻿{
+ "system":"AGS-STUDIO",
+ "architecture":"modular_saas_erp",
+ "ai_core":true,
+ "plugins":true,
+ "multi_tenant":true,
+ "dashboard_dynamic":true,
+ "api_ready":true,
+ "mobile_ready":true,
+ "backup_enabled":true
+}

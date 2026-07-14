@@ -1,0 +1,7 @@
+﻿{
+ "advertising": {
+   "company_ads": true,
+   "service_ads": true,
+   "featured_listing": true
+ }
+}

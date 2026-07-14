@@ -1,0 +1,8 @@
+﻿{
+ "storage": {
+   "type": "object_storage",
+   "documents": true,
+   "images": true,
+   "backup": true
+ }
+}

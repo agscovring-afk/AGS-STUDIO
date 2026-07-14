@@ -1,0 +1,7 @@
+﻿# ENTERPRISE CONFIGURATION
+
+STATUS:
+READY
+
+TARGET:
+Tenant / System Configuration Layer

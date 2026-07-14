@@ -1,0 +1,11 @@
+{
+    "module": "test_crud",
+    "table": "test_crud",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        }
+    ]
+}

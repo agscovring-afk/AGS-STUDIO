@@ -1,0 +1,2 @@
+from enterprise_builder.plugins.enterprise_plugin import register as register_enterprise
+

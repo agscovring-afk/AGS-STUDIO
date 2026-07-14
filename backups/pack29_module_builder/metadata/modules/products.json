@@ -1,0 +1,27 @@
+{
+    "module": "products",
+    "table": "products",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        },
+        {
+            "name": "name",
+            "type": "TEXT"
+        },
+        {
+            "name": "reference",
+            "type": "TEXT"
+        },
+        {
+            "name": "price",
+            "type": "REAL"
+        },
+        {
+            "name": "quantity",
+            "type": "INTEGER"
+        }
+    ]
+}

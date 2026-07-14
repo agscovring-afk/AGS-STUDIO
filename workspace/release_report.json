@@ -1,0 +1,47 @@
+{
+    "generator": {
+        "status": "created",
+        "path": "enterprise_output"
+    },
+    "config": {
+        "name": "AGS_ENTERPRISE",
+        "modules": [],
+        "multi_tenant": true,
+        "version": "1.0"
+    },
+    "modules": [
+        "clients",
+        "create_inventory_management_system",
+        "customers",
+        "inventory",
+        "invoices",
+        "orders",
+        "products",
+        "suppliers",
+        "suppliers_payments",
+        "test_crud",
+        "test_memory"
+    ],
+    "workspace": {
+        "workspace": "created"
+    },
+    "tenant": {
+        "tenant_mode": true,
+        "tenants": []
+    },
+    "manifest": {
+        "enterprise": "AGS_AI_ENTERPRISE",
+        "created": "2026-07-14T19:08:53.849864",
+        "version": "1.0"
+    },
+    "release": {
+        "release": "READY"
+    },
+    "validation": {
+        "generator": true,
+        "registry": true,
+        "config": true,
+        "manifest": true,
+        "status": "READY"
+    }
+}

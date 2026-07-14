@@ -1,0 +1,11 @@
+{
+    "module": "orders",
+    "table": "orders",
+    "fields": [
+        {
+            "name": "id",
+            "type": "INTEGER",
+            "primary_key": true
+        }
+    ]
+}

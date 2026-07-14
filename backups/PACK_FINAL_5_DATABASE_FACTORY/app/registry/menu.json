@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Clients",
+        "route": "clients"
+    },
+    {
+        "name": "Customers",
+        "route": "customers"
+    },
+    {
+        "name": "Invoices",
+        "route": "invoices"
+    },
+    {
+        "name": "Orders",
+        "route": "orders"
+    },
+    {
+        "name": "Products",
+        "route": "products"
+    },
+    {
+        "name": "Suppliers",
+        "route": "suppliers"
+    },
+    {
+        "name": "Suppliers_payments",
+        "route": "suppliers_payments"
+    },
+    {
+        "name": "Test_crud",
+        "route": "test_crud"
+    },
+    {
+        "name": "Test_memory",
+        "route": "test_memory"
+    }
+]

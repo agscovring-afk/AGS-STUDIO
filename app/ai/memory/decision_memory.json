@@ -1,0 +1,889 @@
+[
+    {
+        "timestamp": "2026-07-14 02:51:20.151130",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:51:20.182861",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:51:20.225030",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:51:20.263018",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:51:20.295925",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:51:20.315028",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:53:03.115932",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:53:03.163942",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:53:03.218073",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:53:03.281169",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:53:03.352694",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:53:03.413809",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:55:27.769397",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:55:27.797259",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:55:27.852286",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:55:27.921340",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:55:27.992589",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 02:55:28.039275",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:05.329909",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:05.373719",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:05.432162",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:05.486717",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:05.540664",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:05.582958",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:15.154524",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:15.201985",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:15.258876",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:15.319565",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:15.383729",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:00:15.440470",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:04:41.510188",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:04:41.560091",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:04:41.615715",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:04:41.685063",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:04:41.748662",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:04:41.797262",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:06:37.747996",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:06:37.791283",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:06:37.913748",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:06:37.992339",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:06:38.050748",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:06:38.119676",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:07:54.138370",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:07:54.183375",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:07:54.244754",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:07:54.303720",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:07:54.370497",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:07:54.432314",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:08:57.369101",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:08:57.421995",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:08:57.485649",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:08:57.544071",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:08:57.601423",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:08:57.648038",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:11:23.912895",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:11:23.959814",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_enterprise_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:11:24.020243",
+        "decision": {
+            "event": "task_completed",
+            "task": "create_erp_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:11:24.081888",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tenant_system"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:11:24.147034",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_enterprise_release"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:11:24.206239",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_enterprise"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:29:30.361315",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:29:31.774295",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:29:33.139003",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:29:34.454515",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:29:35.565142",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:29:36.623975",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:36:18.182930",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:36:19.343957",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:36:20.438138",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:36:21.486486",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:36:22.518101",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:36:23.532152",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:38:11.879152",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:38:12.917668",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:38:13.978414",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:38:15.015413",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:38:16.027119",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:38:17.053196",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:41:10.430046",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:41:11.755108",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:41:13.569688",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:41:14.658040",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:41:15.691800",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:41:16.730355",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:42:44.552597",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:42:45.660573",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:42:46.737667",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:42:47.793856",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:42:48.833975",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:42:49.902685",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:57:51.558977",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:57:53.051746",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:57:54.187940",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:57:55.355203",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:57:56.420279",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:57:57.483934",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:59:20.379859",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:59:21.867530",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:59:23.065241",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:59:24.130868",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:59:25.193115",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 03:59:26.249369",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:01:42.643034",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:01:43.860912",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:01:43.971494",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:01:44.083472",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:01:44.163178",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:01:44.255389",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:03:53.673301",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:03:54.784071",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:03:54.894327",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:03:54.986000",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:03:55.070034",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:03:55.180674",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:09:45.164847",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:09:46.469448",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:09:46.615003",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:09:46.746772",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:09:46.893561",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:09:47.029025",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:16:33.444833",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:16:35.249796",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_construction_domain"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:16:35.635835",
+        "decision": {
+            "event": "task_completed",
+            "task": "design_facade_erp_architecture"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:16:35.805096",
+        "decision": {
+            "event": "task_completed",
+            "task": "generate_construction_modules"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:16:35.929799",
+        "decision": {
+            "event": "task_completed",
+            "task": "build_tender_management"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 04:16:36.069625",
+        "decision": {
+            "event": "task_completed",
+            "task": "validate_construction_platform"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 17:19:22.561614",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 17:19:22.664410",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_request"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 17:22:47.096800",
+        "decision": {
+            "event": "autonomous_execution_started"
+        }
+    },
+    {
+        "timestamp": "2026-07-14 17:22:47.249842",
+        "decision": {
+            "event": "task_completed",
+            "task": "analyze_request"
+        }
+    }
+]

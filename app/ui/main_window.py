@@ -1,12 +1,11 @@
-import tkinter as tk
-import json
 
+import tkinter as tk
 from app.core.router import Router
 
 
 class MainWindow(tk.Frame):
 
-    def __init__(self, parent):
+    def __init__(self,parent):
 
         super().__init__(parent)
 
@@ -17,67 +16,92 @@ class MainWindow(tk.Frame):
             expand=True
         )
 
-        self.sidebar = tk.Frame(self)
+        self.create_layout()
 
+
+    def create_layout(self):
+
+        self.topbar=tk.Frame(
+            self,
+            height=50
+        )
+        self.topbar.pack(
+            fill="x"
+        )
+
+        tk.Label(
+            self.topbar,
+            text="AGS-STUDIO | Enterprise Autonomous ERP",
+            font=("Arial",16,"bold")
+        ).pack(
+            pady=10
+        )
+
+
+        self.sidebar=tk.Frame(
+            self,
+            width=200
+        )
         self.sidebar.pack(
             side="left",
             fill="y"
         )
 
 
-        self.content = tk.Frame(self)
-
-        self.content.pack(
+        self.workspace=tk.Frame(
+            self
+        )
+        self.workspace.pack(
             side="right",
             fill="both",
             expand=True
         )
 
 
-        self.load_menu()
+        self.create_menu()
 
 
+    def create_menu(self):
 
-    def load_menu(self):
+        items=[
+            ("Dashboard","dashboard"),
+            ("Companies","companies"),
+            ("Users","users"),
+            ("Customers","customers"),
+            ("Suppliers","suppliers"),
+            ("Projects","projects"),
+            ("Inventory","inventory"),
+            ("Finance","finance"),
+            ("Reports","reports"),
+            ("AI Builder","ai_builder"),
+            ("Autonomous Engine","autonomous")
+        ]
 
-        with open(
-            "app/registry/menu.json",
-            "r",
-            encoding="utf-8"
-        ) as f:
+        for label,route in items:
 
-            menu = json.load(f)
-
-
-        for item in menu:
-
-            btn = tk.Button(
+            tk.Button(
                 self.sidebar,
-                text=item["name"],
-                command=lambda r=item["route"]: self.open_page(r)
+                text=label,
+                width=22,
+                command=lambda r=route:self.open_page(r)
+            ).pack(
+                fill="x",
+                pady=2
             )
 
-            btn.pack(
-                fill="x"
-            )
 
+    def open_page(self,route):
 
-
-    def open_page(self, route):
-
-        for widget in self.content.winfo_children():
-
+        for widget in self.workspace.winfo_children():
             widget.destroy()
 
 
-        page = Router.load(
+        page=Router.load(
             route,
-            self.content
+            self.workspace
         )
 
-
-        if page and hasattr(page, "pack"):
-
+        if page:
             page.pack(
                 fill="both",
                 expand=True

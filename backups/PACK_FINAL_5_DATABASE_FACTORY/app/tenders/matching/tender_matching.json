@@ -1,0 +1,9 @@
+﻿{
+ "matching_rules": {
+   "activity": true,
+   "qualification": true,
+   "location": true,
+   "capacity": true
+ },
+ "notification": true
+}

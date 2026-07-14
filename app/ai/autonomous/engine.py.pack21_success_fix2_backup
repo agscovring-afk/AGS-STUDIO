@@ -1,0 +1,210 @@
+"""
+AGS Autonomous V2
+Real Execution Engine V2 + Memory + Learning Cycle
+"""
+
+from __future__ import annotations
+
+from .context import AutonomousContext
+from .brain import AutonomousBrain
+from .executor import TaskExecutor
+from .models import TaskStatus
+
+from app.ai.memory.memory_service import memory_service
+from app.ai.memory.decision_memory import memory as decision_memory
+from app.ai.memory.knowledge_store import store as knowledge_store
+
+
+
+class AutonomousEngine:
+
+
+    def __init__(self, project_root="."):
+
+
+        self.context = AutonomousContext(project_root)
+
+
+        self.brain = AutonomousBrain(
+            self.context
+        )
+
+
+        self.executor = TaskExecutor(
+            self.context
+        )
+
+
+        self.memory = memory_service
+
+        self.decision_memory = decision_memory
+
+        self.knowledge = knowledge_store
+
+
+
+    def initialize(self):
+
+        self.context.update_statistics()
+
+        self.context.save()
+
+        return True
+
+
+
+    def run(self):
+
+        self.initialize()
+
+
+        self.decision_memory.add(
+            {
+                "event":
+                "autonomous_execution_started"
+            }
+        )
+
+
+        self.knowledge.store(
+            {
+                "type":
+                "execution_cycle",
+
+                "event":
+                "started"
+            }
+        )
+
+
+
+        while self.brain.has_pending_tasks():
+
+
+            task = self.brain.next_task()
+
+
+            if task is None:
+                break
+
+
+
+            self.brain.mark_running(task)
+
+
+
+            try:
+
+
+                result = self.executor.execute(task)
+
+
+                success = False
+
+
+                if isinstance(result, dict):
+
+                    if result.get("status") in [
+                        "completed",
+                        "validated"
+                    ]:
+                        success = True
+
+
+
+                if success:
+
+
+                    task.status = TaskStatus.COMPLETED
+
+                    self.brain.mark_success(
+                        task
+                    )
+
+
+                    self.decision_memory.add(
+                        {
+                            "event":
+                            "task_completed",
+
+                            "task":
+                            task.name
+                        }
+                    )
+
+
+                else:
+
+
+                    task.status = TaskStatus.FAILED
+
+                    self.brain.mark_failed(
+                        task
+                    )
+
+
+                    self.decision_memory.add(
+                        {
+                            "event":
+                            "task_failed",
+
+                            "task":
+                            task.name
+                        }
+                    )
+
+
+
+            except Exception as e:
+
+
+                task.status = TaskStatus.FAILED
+
+                self.brain.mark_failed(
+                    task
+                )
+
+
+                self.decision_memory.add(
+                    {
+                        "event":
+                        "execution_error",
+
+                        "error":
+                        str(e)
+                    }
+                )
+
+
+
+            self.context.update_statistics()
+
+            self.context.save()
+
+
+
+        final = self.context.statistics()
+
+
+
+        self.knowledge.store(
+            {
+                "type":
+                "execution_cycle",
+
+                "event":
+                "finished",
+
+                "statistics":
+                final
+            }
+        )
+
+
+        return final
+
+
+
+    def status(self):
+
+        return self.brain.summary()

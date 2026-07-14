@@ -1,0 +1,13 @@
+﻿{
+ "modules":[
+  "projects",
+  "accounting",
+  "hr",
+  "boq",
+  "quotation",
+  "workflow",
+  "analytics",
+  "mobile",
+  "security"
+ ]
+}

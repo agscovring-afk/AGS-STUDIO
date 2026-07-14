@@ -1,0 +1,7 @@
+﻿# PERMISSION SYSTEM
+
+STATUS:
+READY
+
+TARGET:
+RBAC Enterprise Authorization

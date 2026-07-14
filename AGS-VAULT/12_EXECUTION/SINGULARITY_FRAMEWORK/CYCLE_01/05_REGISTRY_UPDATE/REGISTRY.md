@@ -1,0 +1,15 @@
+﻿# SINGULARITY REGISTRY UPDATE
+
+Cycle:
+
+01
+
+
+State:
+
+REGISTERED
+
+
+Platform:
+
+AGS-STUDIO

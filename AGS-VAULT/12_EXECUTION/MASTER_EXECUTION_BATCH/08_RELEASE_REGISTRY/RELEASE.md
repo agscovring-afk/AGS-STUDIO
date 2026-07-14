@@ -1,0 +1,15 @@
+﻿# MASTER RELEASE REGISTRY
+
+Project:
+
+AGS-STUDIO
+
+
+Release:
+
+MASTER EXECUTION BATCH
+
+
+Status:
+
+REGISTERED

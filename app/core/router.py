@@ -1,54 +1,36 @@
+
 import importlib
-import json
-
-
-REGISTRY_FILE = "app/registry/pages.json"
-
 
 class Router:
 
-    routes = {}
-
-
     @classmethod
     def load_registry(cls):
-
-        with open(
-            REGISTRY_FILE,
-            "r",
-            encoding="utf-8"
-        ) as f:
-
-            cls.routes = json.load(f)
-
-
+        pass
 
     @classmethod
-    def load(cls, name, parent):
+    def load(cls,route,parent):
 
-        if name not in cls.routes:
+        modules={
+        "dashboard":"dashboard_page",
+        "companies":"companies_page",
+        "users":"users_page",
+        "projects":"projects_page",
+        "inventory":"inventory_page",
+        "finance":"finance_page",
+        "reports":"reports_page",
+        "ai_builder":"ai_builder_page",
+        "autonomous":"autonomous_page"
+        }
 
+        if route not in modules:
             return None
 
-
-        module_path, class_name = cls.routes[name].rsplit(".",1)
-
-
-        module = importlib.import_module(
-            module_path
+        m=importlib.import_module(
+            "app.ui.pages."+modules[route]
         )
 
+        for obj in m.__dict__.values():
+            if isinstance(obj,type) and obj.__module__==m.__name__:
+                return obj(parent)
 
-        page_class = getattr(
-            module,
-            class_name
-        )
-
-
-        try:
-
-            return page_class(parent)
-
-        except TypeError:
-
-            return page_class()
+        return None

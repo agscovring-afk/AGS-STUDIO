@@ -1,0 +1,7 @@
+﻿# RELEASE REGISTRY
+
+STATUS:
+READY
+
+TARGET:
+Official Release Registry

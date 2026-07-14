@@ -1,0 +1,6 @@
+﻿{
+    "multi_tenant": true,
+    "tenant_isolation": true,
+    "subscription_enabled": true,
+    "provisioning_enabled": true
+}

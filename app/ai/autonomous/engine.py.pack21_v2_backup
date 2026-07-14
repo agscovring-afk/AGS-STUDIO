@@ -1,0 +1,216 @@
+﻿"""
+AGS Autonomous V2
+Real Execution Engine V2 + Memory Integration
+"""
+
+from __future__ import annotations
+
+from .context import AutonomousContext
+from .brain import AutonomousBrain
+from .executor import TaskExecutor
+from .models import TaskStatus
+
+from app.ai.memory.memory_service import memory_service
+from app.ai.memory.decision_memory import memory as decision_memory
+
+
+class AutonomousEngine:
+
+
+    def __init__(self, project_root="."):
+
+        self.context = AutonomousContext(project_root)
+
+        self.brain = AutonomousBrain(
+            self.context
+        )
+
+        self.executor = TaskExecutor(
+            self.context
+        )
+
+        self.memory = memory_service
+
+        self.decision_memory = decision_memory
+
+
+
+    def initialize(self):
+
+        self.context.update_statistics()
+
+        self.context.save()
+
+        return True
+
+
+
+    def run(self):
+
+        self.initialize()
+
+        self.decision_memory.add({'event':'autonomous_execution_started'})
+
+
+        self.memory.remember_project(
+            {
+                "event": "autonomous_execution_started",
+                "tasks": len(
+                    self.context.snapshot.tasks
+                )
+            }
+        )
+
+
+        while self.brain.has_pending_tasks():
+
+            task = self.brain.next_task()
+
+
+            if task is None:
+
+                break
+
+
+            self.brain.mark_running(
+                task
+            )
+
+
+            self.memory.remember_agent(
+                "AutonomousEngine",
+                {
+                    "task": task.name,
+                    "status": "running"
+                }
+            )
+
+
+            try:
+
+                result = self.executor.execute(
+                    task
+                )
+
+
+                success = False
+
+
+                if isinstance(result, dict):
+
+                    if result.get("status") in [
+                        "completed",
+                        "validated"
+                    ]:
+
+                        success = True
+
+
+                    if result.get(
+                        "release",
+                        {}
+                    ).get(
+                        "release"
+                    ) == "READY":
+
+                        success = True
+
+
+
+                if success:
+
+                    task.status = TaskStatus.COMPLETED
+
+                    self.brain.mark_success(
+                        task
+                    )
+
+
+                else:
+
+                    task.status = TaskStatus.FAILED
+
+                    self.brain.mark_failed(
+                        task
+                    )
+
+
+
+                task.result = result
+
+
+
+                self.memory.remember_agent(
+                    "AutonomousEngine",
+                    {
+                        "task": task.name,
+                        "status": task.status.value,
+                        "result": result
+                    }
+                )
+
+
+
+                print(
+                    "TASK RESULT:",
+                    task.name,
+                    result
+                )
+
+
+
+            except Exception as e:
+
+
+                task.status = TaskStatus.FAILED
+
+
+                task.result = {
+                    "error": str(e)
+                }
+
+
+                self.brain.mark_failed(
+                    task
+                )
+
+
+                self.memory.remember_agent(
+                    "AutonomousEngine",
+                    {
+                        "task": task.name,
+                        "status": "failed",
+                        "error": str(e)
+                    }
+                )
+
+
+                print(
+                    "EXECUTION ERROR:",
+                    task.name,
+                    e
+                )
+
+
+
+            self.context.update_statistics()
+
+            self.context.save()
+
+
+
+        self.memory.remember_project(
+            {
+                "event": "autonomous_execution_finished",
+                "statistics": self.context.statistics()
+            }
+        )
+
+
+        return self.context.statistics()
+
+
+
+    def status(self):
+
+        return self.brain.summary()

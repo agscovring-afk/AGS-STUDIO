@@ -1,0 +1,11 @@
+﻿{
+ "construction_ecosystem": [
+   "facades",
+   "aluminium",
+   "glass",
+   "curtain_wall",
+   "ventilated_facade",
+   "interior",
+   "civil_work"
+ ]
+}

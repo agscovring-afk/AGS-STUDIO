@@ -1,0 +1,10 @@
+﻿{
+ "qualification_levels": {
+   "1": "small",
+   "2": "medium",
+   "3": "large",
+   "4": "very_large",
+   "5": "enterprise"
+ },
+ "auto_detection": true
+}

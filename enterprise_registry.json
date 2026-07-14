@@ -1,0 +1,42 @@
+{
+    "build": {
+        "enterprise": "build",
+        "created": "2026-07-14T00:44:14.591477",
+        "version": "1.0"
+    },
+    "AGS_ARCHITECTURE": {
+        "enterprise": "AGS_ARCHITECTURE",
+        "created": "2026-07-14T04:16:35.391036",
+        "version": "1.0"
+    },
+    "AGS_ERP_MODULES": {
+        "enterprise": "AGS_ERP_MODULES",
+        "created": "2026-07-14T04:16:35.861306",
+        "version": "1.0"
+    },
+    "AGS_MULTI_TENANT": {
+        "enterprise": "AGS_MULTI_TENANT",
+        "created": "2026-07-14T03:11:24.043620",
+        "version": "1.0"
+    },
+    "AGS_RELEASE": {
+        "enterprise": "AGS_RELEASE",
+        "created": "2026-07-14T03:11:24.107127",
+        "version": "1.0"
+    },
+    "--from-pack": {
+        "enterprise": "--from-pack",
+        "created": "2026-07-14T05:07:43.887720",
+        "version": "1.0"
+    },
+    "AGS_ENTERPRISE": {
+        "enterprise": "AGS_ENTERPRISE",
+        "created": "2026-07-14T17:00:09.892622",
+        "version": "1.0"
+    },
+    "AGS_AI_ENTERPRISE": {
+        "enterprise": "AGS_AI_ENTERPRISE",
+        "created": "2026-07-14T19:08:53.849864",
+        "version": "1.0"
+    }
+}

@@ -1,0 +1,7 @@
+﻿# RELEASE NOTES
+
+STATUS:
+READY
+
+TARGET:
+Official Release Notes

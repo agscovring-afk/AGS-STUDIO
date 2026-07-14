@@ -1,0 +1,3 @@
+class Suppliers:
+
+    pass

@@ -1,0 +1,2 @@
+﻿def execute_task():
+    raise RuntimeError("This is a test error")

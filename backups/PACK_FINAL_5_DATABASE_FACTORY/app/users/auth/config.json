@@ -1,0 +1,7 @@
+﻿{
+  "authentication": {
+    "method": "password",
+    "encryption": "bcrypt",
+    "session": true
+  }
+}
