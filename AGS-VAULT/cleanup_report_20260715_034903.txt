@@ -1,0 +1,5 @@
+Cleanup Report
+TS: 20260715_034903
+Backups: 41
+Archives: 3
+FullBackups: 1

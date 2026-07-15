@@ -1,0 +1,5 @@
+{
+  "name": "test_module",
+  "type": "module",
+  "fields": ["name", "code", "active"]
+}

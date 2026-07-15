@@ -1,0 +1,8 @@
+{
+  "modules": [
+    {"name": "client", "fields": ["name", "email", "balance"]},
+    {"name": "project", "fields": ["name", "client_id", "status", "cost"]},
+    {"name": "invoice", "fields": ["client_id", "project_id", "amount", "status", "due_date"]},
+    {"name": "stock", "fields": ["name", "quantity", "threshold"]}
+  ]
+}
