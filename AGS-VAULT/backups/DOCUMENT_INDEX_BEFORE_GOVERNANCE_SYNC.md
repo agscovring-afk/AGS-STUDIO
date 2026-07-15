@@ -28,9 +28,10 @@ No official document exists without an index entry.
 
 | ID | Document | Location | Status |
 |----|----------|----------|--------|
-| 001 | PROJECT_CONSTITUTION | 01_GOVERNANCE/PROJECT_CONSTITUTION.md | OFFICIAL |
-| 002 | PROJECT_SCOPE | NOT_CREATED | PLANNED |
-| 003 | PROJECT_PRINCIPLES | 01_GOVERNANCE/PROJECT_PRINCIPLES.md | REFERENCE |
+| 001 | PROJECT_CONSTITUTION | docs/constitution/001_PROJECT_CONSTITUTION.md | OFFICIAL |
+| 002 | PROJECT_SCOPE | docs/constitution/002_PROJECT_SCOPE.md | OFFICIAL |
+| 003 | PROJECT_PRINCIPLES | docs/constitution/003_PROJECT_PRINCIPLES.md | OFFICIAL |
+
 ---
 
 # 4. AGS-VAULT Mapping

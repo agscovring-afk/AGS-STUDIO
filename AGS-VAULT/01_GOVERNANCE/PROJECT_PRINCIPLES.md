@@ -1,10 +1,12 @@
-﻿# AGS-STUDIO V2
-# PROJECT PRINCIPLES
+﻿# AGS-STUDIO V2 PROJECT PRINCIPLES
 
-Version: 2.0
-Status: OFFICIAL
-Authority: Governance Level
-Phase: Knowledge Consolidation
+Status: REFERENCE
+
+This document has been consolidated into:
+
+AGS-VAULT/01_GOVERNANCE/PROJECT_CONSTITUTION.md
+
+The official source of truth is PROJECT_CONSTITUTION.md.
 
 ---
 

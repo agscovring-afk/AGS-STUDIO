@@ -1,8 +1,8 @@
-# AGS-STUDIO V2
+﻿# AGS-STUDIO V2
 # PROJECT PRINCIPLES
 
 Version: 2.0
-Status: REFERENCE
+Status: OFFICIAL
 Authority: Governance Level
 Phase: Knowledge Consolidation
 
