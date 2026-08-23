@@ -1,0 +1,232 @@
+import { XS, LV, BALCONS, HET, FASCIA, GC, PBH, doors } from './geo.mjs';
+import { txt, dimH, dimV, levelMark, callout, ground } from './svgkit.mjs';
+
+export const PALETTE_A = {
+  name: 'Ivoire & Bronze', paper: '#F1EDE5',
+  wall: '#E8E0D2', wallDeep: '#D2C6B0', pier: '#E4DCCA', plinth: '#BDB09A',
+  aqua: '#FBF9F5', aquaSh: '#E3DCD0',
+  accent: '#8A6E4C', accentDark: '#5A4832',
+  dark: '#2B2724', glass: '#A9BBBE', glassHi: '#DCE6E5', inox: '#BFC5C8',
+  ink: '#23211E', dim: '#8C8478',
+};
+
+export function elevation(P, o = {}) {
+  const S = o.scale ?? 42, X0 = o.x0 ?? 215, Y0 = o.y0 ?? 1092;
+  const px = (m) => +(X0 + m * S).toFixed(2);
+  const py = (h) => +(Y0 - h * S).toFixed(2);
+  const wm = (m) => +(m * S).toFixed(2);
+  const R = (x1, x2, h1, h2, fill, extra = '') =>
+    `<rect x="${px(x1)}" y="${py(h2)}" width="${wm(x2 - x1)}" height="${wm(h2 - h1)}" fill="${fill}" ${extra}/>`;
+
+  const FA = o.fascia ?? FASCIA;
+  const piers = [XS.c1, XS.c2, XS.c3, XS.c4];
+  const bays = [XS.bayA, XS.bayB];
+  // les deux blocs de part et d'autre du vide (ou un ruban continu en variante C)
+  const blocks = o.ribbon ? [[0, 17.50]] : [[0, XS.c2[1]], [XS.c3[0], 17.50]];
+  const doorLevels = [LV.r2, LV.r3, LV.r4, LV.r5, LV.r6];
+  const g = [];
+
+  // ---- defs -------------------------------------------------------------
+  g.push(`<defs>
+    <linearGradient id="gl" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="${P.glassHi}" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="${P.glass}" stop-opacity="0.62"/>
+      <stop offset="1" stop-color="${P.glass}" stop-opacity="0.42"/>
+    </linearGradient>
+    <linearGradient id="aq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${P.aqua}"/>
+      <stop offset="0.62" stop-color="${P.aqua}"/>
+      <stop offset="1" stop-color="${P.aquaSh}"/>
+    </linearGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#4E5A5C"/><stop offset="0.5" stop-color="#33393B"/><stop offset="1" stop-color="#242A2C"/>
+    </linearGradient>
+    <linearGradient id="shd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${P.dark}" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="${P.dark}" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${P.paper}" stop-opacity="0"/>
+      <stop offset="1" stop-color="${P.dim}" stop-opacity="0.10"/>
+    </linearGradient>
+  </defs>`);
+
+  // ---- fond ------------------------------------------------------------
+  g.push(`<rect x="${px(-1.2)}" y="${py(LV.acr) - 46}" width="${wm(19.9)}" height="${py(0) - py(LV.acr) + 46}" fill="url(#sky)"/>`);
+
+  // ---- volume tour (nu de facade, en retrait) ---------------------------
+  g.push(R(0, 17.50, 0, LV.acr, P.wall));
+  // joints creux horizontaux au droit de chaque plancher
+  for (const h of [LV.r3, LV.r4, LV.r5, LV.r6, LV.toit])
+    g.push(`<line x1="${px(0)}" y1="${py(h)}" x2="${px(17.5)}" y2="${py(h)}" stroke="${P.dim}" stroke-width="0.8" opacity="0.35"/>`);
+
+  // ---- baies en retrait + menuiseries -----------------------------------
+  for (const h of doorLevels) {
+    for (const bay of bays) {
+      g.push(R(bay[0], bay[1], h, h + HET - FASCIA, P.wallDeep));
+      g.push(R(bay[0], bay[1], h + HET - FASCIA - 0.95, h + HET - FASCIA, 'url(#shd)'));
+      for (const [a, b] of doors(bay)) {
+        g.push(R(a, b, h, h + PBH, 'url(#pane)'));
+        g.push(R(a, b, h, h + PBH, 'none', `stroke="${P.accent}" stroke-width="2"`));
+        g.push(`<line x1="${px((a + b) / 2)}" y1="${py(h)}" x2="${px((a + b) / 2)}" y2="${py(h + PBH)}" stroke="${P.accent}" stroke-width="1.6"/>`);
+        g.push(`<line x1="${px(a + 0.06)}" y1="${py(h + PBH - 0.12)}" x2="${px(b - 0.06)}" y2="${py(h + PBH - 0.12)}" stroke="${P.glassHi}" stroke-width="1" opacity="0.35"/>`);
+        // poignees
+        g.push(`<rect x="${px((a + b) / 2 - 0.10)}" y="${py(h + 1.15)}" width="${wm(0.06)}" height="${wm(0.34)}" fill="${P.inox}"/>`);
+        g.push(`<rect x="${px((a + b) / 2 + 0.04)}" y="${py(h + 1.15)}" width="${wm(0.06)}" height="${wm(0.34)}" fill="${P.inox}"/>`);
+      }
+      // brise-vue vertical d'intimite en bout de balcon (cote vide central)
+      const bx = bay === XS.bayA ? bay[1] - 0.14 : bay[0];
+      g.push(R(bx, bx + 0.14, h, h + HET - FASCIA, P.accentDark));
+      for (let k = 0.06; k < HET - FASCIA; k += 0.14)
+        g.push(`<line x1="${px(bx)}" y1="${py(h + k)}" x2="${px(bx + 0.14)}" y2="${py(h + k)}" stroke="${P.accent}" stroke-width="1" opacity="0.55"/>`);
+    }
+  }
+
+  // ---- vide central : brise-vue aluminium a lames verticales -------------
+  g.push(R(XS.vide[0], XS.vide[1], LV.r2, LV.toit, P.dark));
+  for (let x = XS.vide[0] + 0.075; x < XS.vide[1]; x += 0.15) {
+    g.push(`<line x1="${px(x)}" y1="${py(LV.r2)}" x2="${px(x)}" y2="${py(LV.toit)}" stroke="${P.accent}" stroke-width="2.4" opacity="0.92"/>`);
+    g.push(`<line x1="${px(x + 0.045)}" y1="${py(LV.r2)}" x2="${px(x + 0.045)}" y2="${py(LV.toit)}" stroke="${P.accentDark}" stroke-width="1.1" opacity="0.9"/>`);
+  }
+  g.push(R(XS.vide[0], XS.vide[1], LV.r2, LV.toit, 'none', `stroke="${P.accentDark}" stroke-width="1.2"`));
+
+  // ---- poteaux / raidisseurs 55 cm --------------------------------------
+  for (const [a, b] of piers) {
+    g.push(R(a, b, LV.r2, LV.acr + 0.50, P.pier));
+    g.push(R(a, a + 0.05, LV.r2, LV.acr + 0.50, '#FFFFFF', 'opacity="0.55"'));
+    g.push(R(b - 0.09, b, LV.r2, LV.acr + 0.50, P.dark, 'opacity="0.22"'));
+    g.push(R(b, b + 0.09, LV.r2, LV.acr + 0.40, P.dark, 'opacity="0.10"'));
+    g.push(R(a, b, LV.acr + 0.40, LV.acr + 0.50, P.accent));      // couvertine alu
+  }
+
+  // ---- balcons ondules : bandeau Aquapanel + garde-corps -----------------
+  const gcParts = (x1, x2, h) => {
+    const s = [];
+    s.push(`<rect x="${px(x1)}" y="${py(h) + 1}" width="${wm(x2 - x1)}" height="${wm(0.16)}" fill="${P.dark}" opacity="0.16"/>`);
+    s.push(R(x1, x2, h + 0.06, h + GC - 0.08, 'url(#gl)'));
+    s.push(R(x1, x2, h + 0.06, h + GC - 0.08, 'none', `stroke="${P.inox}" stroke-width="0.8" opacity="0.8"`));
+    for (let x = x1 + 1.55; x < x2 - 0.4; x += 1.55)
+      s.push(`<line x1="${px(x)}" y1="${py(h + 0.06)}" x2="${px(x)}" y2="${py(h + GC - 0.08)}" stroke="${P.inox}" stroke-width="2.2"/>`);
+    s.push(R(x1, x2, h + GC - 0.08, h + GC, P.inox));            // main courante inox
+    s.push(R(x1, x2, h + GC - 0.08, h + GC - 0.055, '#FFFFFF', 'opacity="0.7"'));
+    return s.join('');
+  };
+
+  for (const h of BALCONS) {
+    for (const [x1, x2] of blocks) {
+      g.push(`<rect x="${px(x1)}" y="${py(h - FA) + 1}" width="${wm(x2 - x1)}" height="${wm(0.30)}" fill="${P.dark}" opacity="0.13"/>`);
+      g.push(R(x1, x2, h - FA, h, 'url(#aq)'));                   // bandeau courbe Aquapanel
+      g.push(R(x1, x2, h - 0.035, h, P.aquaSh, 'opacity="0.7"'));
+      g.push(gcParts(x1, x2, h));
+    }
+  }
+
+  // ---- socle parking : RDC + R+1, en avancee de 4.00 m ------------------
+  g.push(`<rect x="${px(0)}" y="${py(LV.r2)}" width="${wm(17.5)}" height="${wm(LV.r2)}" fill="${P.wall}"/>`);
+  g.push(R(0, 17.50, LV.r2 - 0.06, LV.r2, P.dark, 'opacity="0.10"'));
+  g.push(R(0, 17.50, 0, 0.35, P.plinth));
+  g.push(`<line x1="${px(0)}" y1="${py(LV.r1)}" x2="${px(17.5)}" y2="${py(LV.r1)}" stroke="${P.dim}" stroke-width="1.1" opacity="0.5"/>`);
+
+  // RDC : deux portes de garage + hall d'entree
+  const garages = [[1.40, 6.60], [10.90, 16.10]];
+  for (const [a, b] of garages) {
+    g.push(R(a, b, 0.35, 2.85, P.accentDark));
+    for (let y = 0.35 + 0.42; y < 2.85; y += 0.42)
+      g.push(`<line x1="${px(a)}" y1="${py(y)}" x2="${px(b)}" y2="${py(y)}" stroke="${P.accent}" stroke-width="1.2" opacity="0.75"/>`);
+    g.push(R(a, b, 0.35, 2.85, 'none', `stroke="${P.accent}" stroke-width="1.8"`));
+  }
+  g.push(R(XS.vide[0] - 0.25, XS.vide[1] + 0.25, 0, 3.05, P.dark));
+  g.push(R(XS.vide[0] - 0.25, XS.vide[1] + 0.25, 0, 3.05, 'none', `stroke="${P.accent}" stroke-width="2.2"`));
+  g.push(R(XS.vide[0] - 0.05, XS.vide[1] + 0.05, 0, 2.35, 'url(#pane)'));
+  g.push(txt(px((XS.vide[0] + XS.vide[1]) / 2), py(2.60), 'ENTREE', { size: 9, weight: 700, fill: P.accent, ls: '0.22em' }));
+  g.push(R(0, 17.50, 3.05, 3.20, P.accent, 'opacity="0.85"'));   // auvent / bandeau alu
+
+  // R+1 : brise-vue alu de ventilation du parking
+  for (const [a, b] of [[0.55, 7.30], [XS.vide[0], XS.vide[1]], [10.20, 16.95]]) {
+    g.push(R(a, b, LV.r1 + 0.70, LV.r1 + 2.50, P.dark));
+    for (let y = LV.r1 + 0.70 + 0.11; y < LV.r1 + 2.50; y += 0.16) {
+      g.push(`<line x1="${px(a)}" y1="${py(y)}" x2="${px(b)}" y2="${py(y)}" stroke="${P.accent}" stroke-width="2.6" opacity="0.9"/>`);
+      g.push(`<line x1="${px(a)}" y1="${py(y - 0.045)}" x2="${px(b)}" y2="${py(y - 0.045)}" stroke="${P.accentDark}" stroke-width="1" opacity="0.85"/>`);
+    }
+    g.push(R(a, b, LV.r1 + 0.70, LV.r1 + 2.50, 'none', `stroke="${P.accentDark}" stroke-width="1.2"`));
+  }
+  for (const [a, b] of [XS.c1, XS.c2, XS.c3, XS.c4])
+    g.push(R(a, b, 3.20, LV.r2, P.pier, 'opacity="0.75"'));
+
+  // ---- terrasse R+2 sur toiture parking ---------------------------------
+  g.push(`<rect x="${px(0)}" y="${py(LV.r2 + FA) + 1}" width="${wm(17.5)}" height="${wm(0.22)}" fill="${P.dark}" opacity="0.12"/>`);
+  g.push(R(0, 17.50, LV.r2, LV.r2 + FA, 'url(#aq)'));
+  g.push(gcParts(0, 17.50, LV.r2 + FA));
+
+  // ---- acrotere ---------------------------------------------------------
+  g.push(R(0, 17.50, LV.toit, LV.acr, P.wall));
+  g.push(`<line x1="${px(0)}" y1="${py(LV.toit)}" x2="${px(17.5)}" y2="${py(LV.toit)}" stroke="${P.dim}" stroke-width="0.9" opacity="0.45"/>`);
+  g.push(R(0, 17.50, LV.acr - 0.10, LV.acr, P.accent));
+  g.push(R(0, 17.50, 0, LV.acr, 'none', `stroke="${P.ink}" stroke-width="1.4"`));
+
+  return { svg: g.join('\n'), px, py, wm, S, X0, Y0 };
+}
+
+// Habillage technique : cotes, niveaux, renvois — planche principale seulement
+export function annotations(P, E) {
+  const { px, py } = E;
+  const a = [];
+  a.push(ground(px(-1.6), px(19.1), py(0)));
+
+  // chaine de cotes horizontale
+  const yc = py(0) + 40;
+  const chain = [[0, 0.55], [0.55, 7.30], [7.30, 7.85], [7.85, 9.65], [9.65, 10.20], [10.20, 16.95], [16.95, 17.50]];
+  const lbl = ['0.55', '6.75', '0.55', '1.80', '0.55', '6.75', '0.55'];
+  chain.forEach(([x1, x2], i) => a.push(dimH(px(x1), px(x2), yc, lbl[i], { size: 10.5 })));
+  a.push(dimH(px(0), px(17.5), yc + 58, '17.50', { size: 14, weight: 700 }));
+  a.push(txt(px(8.75), yc + 80, 'LARGEUR TOTALE DE FACADE', { size: 9, fill: P.dim, ls: '0.18em', weight: 600 }));
+  a.push(txt(px(3.925), yc + 27, 'BAIE BALCON A', { size: 8.5, fill: P.dim, ls: '0.14em', weight: 600 }));
+  a.push(txt(px(13.575), yc + 27, 'BAIE BALCON B', { size: 8.5, fill: P.dim, ls: '0.14em', weight: 600 }));
+  a.push(txt(px(8.75), yc + 27, 'VIDE', { size: 8.5, fill: P.dim, ls: '0.14em', weight: 600 }));
+
+  // chaine de cotes verticale
+  const xv = px(0) - 92;
+  const lv = [[LV.rdc, LV.r1, '3.40'], [LV.r1, LV.r2, '3.06'], [LV.r2, LV.r3, '3.06'], [LV.r3, LV.r4, '3.06'],
+              [LV.r4, LV.r5, '3.06'], [LV.r5, LV.r6, '3.06'], [LV.r6, LV.toit, '3.06'], [LV.toit, LV.acr, '1.00']];
+  lv.forEach(([h1, h2, t]) => a.push(dimV(py(h1), py(h2), xv, t, { size: 10.5 })));
+  a.push(dimV(py(0), py(LV.acr), xv - 44, '22.76', { size: 13, weight: 700 }));
+
+  // reperes de niveau
+  const marks = [[LV.rdc, '± 0.00', 'RDC — PARKING'], [LV.r1, '+ 3.40', 'R+1 — PARKING'],
+    [LV.r2, '+ 6.46', 'R+2 — TERRASSE'], [LV.r3, '+ 9.52', 'R+3'], [LV.r4, '+ 12.58', 'R+4'],
+    [LV.r5, '+ 15.64', 'R+5'], [LV.r6, '+ 18.70', 'R+6 — DERNIER NIVEAU'],
+    [LV.toit, '+ 21.76', 'TOITURE'], [LV.acr, '+ 22.76', 'HAUT ACROTERE']];
+  marks.forEach(([h, alt, t]) => a.push(levelMark(px(17.5) + 34, py(h), alt, t)));
+
+  // renvois materiaux
+  const C = [
+    [1, px(1.55), py(17.55), px(0.28), py(17.55)],
+    [2, px(2.30), py(12.34), px(0.90), py(12.34)],
+    [3, px(5.60), py(13.16), px(4.20), py(13.16)],
+    [4, px(8.75), py(20.35), px(8.75), py(19.10)],
+    [5, px(12.35), py(11.30), px(12.00), py(10.60)],
+    [6, px(14.40), py(8.30), px(15.60), py(7.05)],
+    [7, px(6.20), py(5.60), px(4.50), py(4.90)],
+    [8, px(15.10), py(21.05), px(16.30), py(22.71)],
+  ];
+  C.forEach(([n, cx, cy, tx, ty]) => a.push(callout(n, cx, cy, tx, ty, { color: P.ink })));
+
+  // notes de tete de planche : ce que l'elevation orthogonale ne peut pas montrer
+  const wave = (x, y, w, amp) => {
+    let d = `M ${x} ${y}`;
+    for (let i = 1; i <= 60; i++) {
+      const t = i / 60;
+      d += ` L ${(x + t * w).toFixed(2)} ${(y + amp * Math.cos(2 * Math.PI * 2 * t) - amp).toFixed(2)}`;
+    }
+    return `<path d="${d}" fill="none" stroke="${P.ink}" stroke-width="1.4" stroke-linecap="round"/>`;
+  };
+  const nx = px(0), ny = 40;
+  a.push(wave(nx, ny + 4, 74, 5));
+  a.push(txt(nx + 86, ny + 8, 'RIVE DE BALCON ONDULEE EN PLAN — DEVELOPPE ≈ 9.9 ml PAR BALCON · VOIR PLANCHE « PLAN BALCON TYPE »',
+    { size: 9.5, anchor: 'start', fill: P.dim, weight: 600, ls: '0.09em' }));
+  a.push(`<path d="M ${nx} ${ny + 32} l 0 12 M ${nx} ${ny + 38} l 74 0 M ${nx + 74} ${ny + 38} l -6 -3.5 M ${nx + 74} ${ny + 38} l -6 3.5" fill="none" stroke="${P.ink}" stroke-width="1.4"/>`);
+  a.push(txt(nx + 86, ny + 42, 'SOCLE PARKING RDC + R+1 EN AVANCEE DE 4.00 m SUR LE NU DE FACADE · VOIR PLANCHE « COUPE A-A »',
+    { size: 9.5, anchor: 'start', fill: P.dim, weight: 600, ls: '0.09em' }));
+
+  return a.join('\n');
+}
