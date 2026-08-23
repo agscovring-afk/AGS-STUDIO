@@ -1,5 +1,6 @@
 import { writeFileSync } from 'node:fs';
 import { XS, LV, BLOCS, MIROIR, DMIN, DCREUX, DMAX, COL, RETRAIT, PBW, PBH,
+         AXE, BV_EP, JOUE, BALCON_NICHE, PBN,
          depthAt, ondeAt, doors, developpe, gcSegments } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { txt, dimH, dimV } from './svgkit.mjs';
@@ -52,20 +53,32 @@ for (let b = 0; b < 2; b++) {
   }
 }
 
-// ---- niche centrale, creusee de 1,50 m ----------------------------------
-g.push(`<rect x="${px(XS.vide[0])}" y="${py(-RETRAIT)}" width="${wm(1.80)}" height="${wm(RETRAIT)}" fill="${C.niche}"/>`);
-g.push(`<rect x="${px(XS.vide[0])}" y="${py(-RETRAIT)}" width="${wm(1.80)}" height="${wm(0.30)}" fill="${C.beton}"/>`);
-for (const x of [XS.vide[0], XS.vide[1] - 0.30])
-  g.push(`<rect x="${px(x)}" y="${py(-RETRAIT)}" width="${wm(0.30)}" height="${wm(RETRAIT)}" fill="${C.beton}"/>`);
-// deux balcons en vis-a-vis sur les joues de la niche
-for (const [x, s] of [[XS.vide[0] + 0.30, 1], [XS.vide[1] - 0.30, -1]]) {
-  g.push(`<rect x="${px(s > 0 ? x : x - 0.10)}" y="${py(-1.28)}" width="${wm(0.10)}" height="${wm(0.90)}" fill="#FFFFFF"/>`);
-  g.push(`<rect x="${px(s > 0 ? x : x - 0.06)}" y="${py(-1.24)}" width="${wm(0.06)}" height="${wm(0.82)}" fill="${C.accent}"/>`);
+// ---- vide central : deux balcons cote a cote, brise-vue entre eux --------
+// Corrige le 23.08 sur votre annotation : chaque logement a son balcon dans le
+// vide ; le brise-vue n'est pas en facade, il est sur l'axe, entre les deux.
+{
+  const [n1, n2] = XS.vide, a = AXE;
+  g.push(`<rect x="${px(n1)}" y="${py(-RETRAIT)}" width="${wm(1.80)}" height="${wm(RETRAIT)}" fill="${C.niche}"/>`);
+  // joues beton de la niche et refend de fond, avec une porte par logement
+  for (const x of [n1, n2 - JOUE])
+    g.push(`<rect x="${px(x)}" y="${py(-RETRAIT)}" width="${wm(JOUE)}" height="${wm(RETRAIT)}" fill="${C.beton}"/>`);
+  const dw = PBN, half = [[n1 + JOUE, a - BV_EP / 2], [a + BV_EP / 2, n2 - JOUE]];
+  for (const [h1, h2] of half) {
+    const c = (h1 + h2) / 2;
+    g.push(`<rect x="${px(h1)}" y="${py(-RETRAIT)}" width="${wm(h2 - h1)}" height="${wm(JOUE)}" fill="${C.beton}"/>`);
+    g.push(`<rect x="${px(c - dw / 2)}" y="${py(-RETRAIT)}" width="${wm(dw)}" height="${wm(JOUE)}" fill="#FFFFFF"/>`);
+    g.push(`<rect x="${px(c - dw / 2)}" y="${py(-RETRAIT + 0.10)}" width="${wm(dw)}" height="${wm(0.06)}" fill="${C.accent}"/>`);
+    // garde-corps au nu de facade, un par balcon
+    g.push(`<rect x="${px(h1 + 0.04)}" y="${py(0) - wm(0.05)}" width="${wm(h2 - h1 - 0.08)}" height="${wm(0.05)}" fill="${C.glass}"/>`);
+    g.push(txt(px(c), py(-1.02), 'BALCON', { size: 7.5, fill: C.dim, ls: '0.1em', weight: 700 }));
+    g.push(txt(px(c), py(-0.86), `${BALCON_NICHE.toFixed(2)} × 1.50`, { size: 7, fill: C.dim, weight: 600 }));
+  }
+  // le brise-vue : sur l'axe, du fond de la niche au nu de facade
+  g.push(`<rect x="${px(a - BV_EP / 2)}" y="${py(-RETRAIT)}" width="${wm(BV_EP)}" height="${wm(RETRAIT)}" fill="${C.accent}"/>`);
+  for (let d = 0.12; d < RETRAIT - 0.04; d += 0.15)
+    g.push(`<rect x="${px(a - BV_EP / 2 - 0.02)}" y="${py(-RETRAIT + d)}" width="${wm(BV_EP + 0.04)}" height="${wm(0.05)}" fill="#FFFFFF" opacity="0.45"/>`);
+  g.push(txt(0, 0, 'BRISE-VUE RAL 7024 ENTRE LES DEUX BALCONS', { size: 8, fill: C.accent, ls: '0.1em', weight: 700, transform: `translate(${px(a) + 4} ${py(0.30)}) rotate(90)` }));
 }
-g.push(txt(0, 0, 'NICHE 1.80 × 1.50 — 2 LOGEMENTS EN VIS-A-VIS', { size: 8.5, fill: C.dim, ls: '0.1em', weight: 700, transform: `translate(${px(8.75) + 4} ${py(-0.72)}) rotate(90)` }));
-// brise-vue au nu de facade
-for (let x = XS.vide[0] + 0.08; x < XS.vide[1]; x += 0.15)
-  g.push(`<rect x="${px(x)}" y="${py(0) - wm(0.08)}" width="${wm(0.05)}" height="${wm(0.08)}" fill="${C.accent}"/>`);
 
 // ---- mur de facade, poteaux, menuiseries ---------------------------------
 for (const [m1, m2] of BLOCS) {
@@ -102,17 +115,18 @@ const note = (m, dT, dL, label, col) => {
   g.push(`<circle cx="${px(m)}" cy="${py(dT)}" r="2.4" fill="${C.ink}"/>`);
   g.push(txt(px(m), py(dL), label, { size: 8.5, fill: col ?? C.dim, ls: '0.1em', weight: 700 }));
 };
-note(11.61, depthAt(11.85, 1) - 0.06, 0.40, 'GRAND LOBE — PROF. 1.80 m');
-note(13.57, depthAt(13.55, 1) - 0.06, 0.30, 'CREUX MEDIAN — PROF. 0.79 m');
-note(15.29, depthAt(15.90, 1) - 0.06, 0.40, 'GRAND LOBE — PROF. 1.80 m');
+note(11.61, depthAt(11.61, 1) - 0.06, 0.40, 'GRAND LOBE — PROF. 1.80 m');
+note(13.57, depthAt(13.57, 1) - 0.06, 0.30, 'CREUX MEDIAN — PROF. 0.79 m');
+note(15.29, depthAt(15.29, 1) - 0.06, 0.40, 'PETIT LOBE — PROF. 1.10 m');
 note(3.925, depthAt(3.925, 0) - 0.06, 0.66, 'BLOC GAUCHE = MIROIR DU BLOC DROIT');
 g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.5, fill: C.led, ls: '0.1em', weight: 700, anchor: 'start' }));
 
 // legende du garde-corps
 {
   const segs = gcSegments(1);
-  const lv = segs.filter((s) => s.kind === 'verre').reduce((a, s) => a + s.x2 - s.x1, 0);
-  const li = segs.filter((s) => s.kind === 'inox').reduce((a, s) => a + s.x2 - s.x1, 0);
+  const nv = segs.filter((s) => s.kind === 'verre').length;
+  const ni = segs.filter((s) => s.kind === 'inox').length;
+  const pas = segs[0].ml, lv = nv * pas, li = ni * pas;
   const bx = px(0), by = py(DMAX) + 132;
   g.push(txt(bx, by, 'GARDE-CORPS MIXTE', { size: 9.5, anchor: 'start', fill: C.ink, ls: '0.16em', weight: 700 }));
   const row = (dy, draw, t1, t2) => {
@@ -121,15 +135,15 @@ g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.
     g.push(txt(bx + 40, by + dy + 16, t2, { size: 8.5, anchor: 'start', fill: C.dim, weight: 500 }));
   };
   row(26, (x, y) => `<line x1="${x - 10}" y1="${y}" x2="${x + 12}" y2="${y}" stroke="${C.glass}" stroke-width="6.5" stroke-linecap="round"/><line x1="${x - 10}" y1="${y}" x2="${x + 12}" y2="${y}" stroke="#EAF2F3" stroke-width="2"/>`,
-    'Verre feuilleté bombé 8.8.4', `sur les portions droites de la rive — ${lv.toFixed(2)} m par bloc`);
+    'Verre feuilleté 8.8.4 — panneaux de 40 cm', `${nv} panneaux plats de ${(pas * 100).toFixed(0)} cm par bloc — ${lv.toFixed(2)} ml`);
   row(60, (x, y) => `<line x1="${x - 10}" y1="${y}" x2="${x + 12}" y2="${y}" stroke="${C.inox}" stroke-width="2"/>` +
     [0, 6, 12, 18].map((d) => `<circle cx="${x - 9 + d}" cy="${y}" r="2.5" fill="${C.inox}"/>`).join(''),
-    'Barreaudage inox Ø 16', `aux creux et aux crêtes — ${li.toFixed(2)} m par bloc`);
+    'Barreaudage inox Ø 16 — sections de 40 cm', `${ni} sections de ${(pas * 100).toFixed(0)} cm, en alternance — ${li.toFixed(2)} ml`);
 }
 
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Plan · niveau courant R+3 à R+8',
-  title: 'Onde de rive relevée', sub: `Tracé repris de votre croquis du 23.08 : la rive part du nu de façade au droit du poteau, creuse un grand lobe de 1,80 m, remonte à 0,79 m entre les deux portes, creuse un petit lobe de 1,10 m, puis revient au nu. Développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. La niche centrale de 1,80 m se creuse de 1,50 m en arrière du nu de façade.`,
+  title: 'Onde de rive relevée', sub: `Tracé corrigé sur votre trait noir du 23.08 : la rive quitte le poteau perpendiculairement au nu — elle naît sur la façade comme un demi-cercle — creuse un grand lobe de 1,80 m, remonte à 0,79 m entre les deux portes, creuse un petit lobe de 1,10 m, puis revient au nu de la même façon. Développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. Garde-corps en alternance 40 cm de verre / 40 cm d'inox sur tout le développé.`,
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>COTES EN MÈTRES<br>TRACÉ RETENU' })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;

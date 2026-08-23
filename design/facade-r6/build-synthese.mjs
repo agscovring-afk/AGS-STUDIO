@@ -56,21 +56,21 @@ const BLOCS_DATA = [
     ['Profilé', 'aluminium TPR série 65, rupture de pont thermique', REL],
     ['Teinte', 'RAL 7024 gris graphite', REL],
     ['Vitrage', 'double vitrage 4/16/4', SUP],
-    ['Niche centrale', '1 porte-balcon par logement, en vis-à-vis', SUP],
+    ['Vide central', '2 balcons côte à côte, 0,84 × 1,50 m, 1 porte-fenêtre de 0,90 m chacun', REL],
   ]],
   ['Matériaux et teintes', [
     ['Monocouche — fond', 'teinte latte', REL],
     ['Monocouche — poteaux et acrotères', 'blanc', REL],
     ['Bandeaux de rive ondulés', 'Aquapanel cintré, finition blanche', REL],
     ['Garde-corps — remplissage', 'verre feuilleté teinté NOIR', REL],
-    ['Garde-corps — structure', 'barreaudage et main courante inox', REL],
+    ['Garde-corps — structure', 'alternance 40 cm verre / 40 cm inox, main courante inox', REL],
     ['Brise-vue', 'lames aluminium RAL 7024', REL],
     ['Hauteur de garde-corps', '1,10 m', SUP],
   ]],
   ['Éclairage', [
     ['Sous-face des rives', 'gorge LED continue, profil aluminium', REL],
     ['Entre les deux portes-balcon', 'profil LED vertical, éclairage latéral', REL],
-    ['Niche centrale', 'brise-vue rétroéclairé', SUP],
+    ['Vide central', 'brise-vue RAL 7024 entre les deux balcons, sur l’axe', REL],
     ['Entrée et portes de garage', 'bandeau lumineux', SUP],
     ['Température de couleur', '3000 K, IP65', SUP],
   ]],
@@ -82,7 +82,7 @@ const QUESTIONS = [
   ['Acrotère', 'J’ai pris 1,00 m au-dessus de la dalle de toiture. À confirmer.'],
   ['La bande centrale de 1,80 m au R+2', 'Sur votre croquis elle est fermée par un garde-corps de chaque côté, donc elle n’appartient à aucun des deux logements. Local technique ? Simple vide de ventilation ? Terrasse partagée ?'],
   ['Profondeur du bâtiment', 'Inconnue — la coupe est dessinée en coupe partielle. Donnez-la moi si vous voulez une coupe complète.'],
-  ['Niche centrale', 'Vous avez dit 1,80 de large et 1,50 de creux. Combien de portes-balcon donnent dedans, et de quel côté ?'],
+  ['Vide central', 'Réglé le 23.08 : deux balcons côte à côte, une porte par logement au fond, brise-vue entre eux. Reste la largeur exacte des portes — j’ai pris 0,90 m.'],
 ];
 
 const tag = (t) => {

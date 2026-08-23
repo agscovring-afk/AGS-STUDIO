@@ -164,7 +164,7 @@
       "y": 0,
       "w": 330,
       "page": "page-1",
-      "text": "À VALIDER AVANT DE POURSUIVRE\n\nLa première planche récapitule toutes vos données et ce que j'en ai déduit, avec six points qui me manquent encore.\n\nTout le reste du dossier est calé dessus : élévation, plans du niveau courant, des terrasses et du RDC, coupe.\n\nCorrigez ce qui est faux et je relance l'ensemble."
+      "text": "À VALIDER AVANT DE POURSUIVRE\n\nLa première planche récapitule toutes vos données et ce que j’en ai déduit.\n\nRéglé depuis : l’onde, le vide central (deux balcons, brise-vue entre eux), le monocouche blanc, le RAL 7024.\n\nReste surtout : vos 7 m de baie sont-ils l’entraxe des poteaux ou la largeur libre ?"
     },
     {
       "id": "onde",
@@ -172,7 +172,7 @@
       "y": 1550,
       "w": 330,
       "page": "page-1",
-      "text": "L’ONDE\n\nTracé final, relevé sur votre capture annotée : bloc droit ; le bloc gauche en est le miroir.\n\nGrand lobe 1,80 m (trait rouge), petit lobe 1,10 m (trait jaune), creux médian 0,79 m. Développé 9,27 ml par balcon.\n\nSur l’élévation la courbe se lit à l’ombre portée et au trait pointillé : une élévation orthogonale ne peut pas montrer une courbe qui se développe en plan."
+      "text": "L’ONDE — TRACÉ ARRÊTÉ\n\nCorrigé sur votre trait noir du 23.08 : la rive quitte le poteau perpendiculairement au nu, comme un demi-cercle qui naît sur la façade.\n\nGrand lobe 1,80 m, creux médian 0,79 m, petit lobe 1,10 m. Développé 9,63 ml par balcon.\n\nGarde-corps au pas de 40 cm : 40 cm de verre, 40 cm d’inox, en alternance — 12 panneaux de chaque par bloc."
     },
     {
       "id": "amb",

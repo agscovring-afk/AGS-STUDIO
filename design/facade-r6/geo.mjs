@@ -32,6 +32,19 @@ export const MIROIR = [true, false];   // le croquis porte sur le bloc droit ; l
 //   3,06 m de hauteur libre entre dalles + 0,20 m d'epaisseur de dalle
 //   = 3,26 m d'un nu superieur de dalle au suivant.
 // RDC + R+1 en parking, R+2 en terrasses, puis SIX niveaux de balcons ondules.
+// ---------------------------------------------------------------------------
+// Vide central. Precise le 23.08 : ce n'est pas un simple panneau de brise-vue
+// tendu en facade, ce sont DEUX balcons cote a cote, un par logement, et le
+// brise-vue se dresse ENTRE EUX. La niche de 1,80 m se creuse de 1,50 m ; le
+// brise-vue est sur l'axe, du fond de la niche jusqu'au nu de facade, et monte
+// sur toute la hauteur d'etage : chaque voisin est chez lui.
+// ---------------------------------------------------------------------------
+export const AXE = 8.75;              // axe du vide, mitoyen des deux logements
+export const BV_EP = 0.12;            // epaisseur du brise-vue separateur
+export const JOUE = 0.30;             // epaisseur des joues beton de la niche
+export const BALCON_NICHE = (1.80 - BV_EP) / 2;   // 0.84 m de large par balcon
+export const PBN = 0.90;              // porte-fenetre de ces balcons, 0.90 m
+
 export const HSP = 3.06;       // hauteur libre sous dalle, etages courants
 export const HSP_RDC = 2.60;   // hauteur libre du RDC
 export const DALLE = 0.20;     // epaisseur de dalle
@@ -68,8 +81,13 @@ export function doors(bay) {
 // 1,80 m de profondeur, remonte à 0,79 m entre les deux portes, creuse un
 // PETIT lobe de 1,10 m, puis revient au nu au droit du second poteau.
 // Les profondeurs 1,80 et 1,10 sont celles relevées sur le croquis (traits
-// rouge et jaune). Raccord en cosinus relevé : tangente horizontale à chaque
-// extremum, donc une courbe continue, dérivable et de courbure bornée.
+// rouge et jaune). Le trait noir du 23.08 précise la façon dont la rive quitte
+// le poteau : elle en part perpendiculairement au nu, comme un demi-cercle qui
+// prend naissance sur la façade, et non en s'écartant doucement. Les deux
+// portées d'extrémité sont donc des quarts d'ellipse (tangente perpendiculaire
+// au nu, tangente horizontale au sommet du lobe) et les portées intérieures un
+// raccord en cosinus (tangente horizontale aux deux bouts, donc fond de lobe et
+// creux médian bien plats). Courbe continue, dérivable, de courbure bornée.
 // ---------------------------------------------------------------------------
 export const ONDE = [
   [0.00, 0.00],   // au nu de façade, contre le poteau
@@ -80,15 +98,19 @@ export const ONDE = [
 ];
 
 export function ondeAt(u) {
-  const x = Math.min(BLOC, Math.max(0, u));
-  for (let i = 0; i < ONDE.length - 1; i++) {
+  const x = Math.min(BLOC, Math.max(0, u)), n = ONDE.length;
+  for (let i = 0; i < n - 1; i++) {
     const [x0, y0] = ONDE[i], [x1, y1] = ONDE[i + 1];
-    if (x <= x1 || i === ONDE.length - 2) {
-      const t = (x - x0) / (x1 - x0);
-      return y0 + (y1 - y0) * (1 - Math.cos(Math.PI * t)) / 2;
-    }
+    if (x > x1 && i < n - 2) continue;
+    const t = (x - x0) / (x1 - x0);
+    // naissance sur le poteau : quart d'ellipse, la rive part perpendiculaire au nu
+    if (i === 0) return y1 * Math.sqrt(Math.max(0, 1 - (1 - t) * (1 - t)));
+    // retour sur le second poteau : le quart d'ellipse symetrique
+    if (i === n - 2) return y0 * Math.sqrt(Math.max(0, 1 - t * t));
+    // entre deux extremums : raccord en cosinus, fonds plats
+    return y0 + (y1 - y0) * (1 - Math.cos(Math.PI * t)) / 2;
   }
-  return ONDE[ONDE.length - 1][1];
+  return 0;
 }
 
 export const DMIN = 0.00, DCREUX = 0.79, DMAX = 1.80;   // au nu · creux médian · grand lobe
@@ -122,27 +144,43 @@ export function rayonAt(u, h = 0.02) {
 // le rayon reste grand : en dessous de R_VERRE la fleche du panneau devient
 // visible, on passe au barreaudage inox qui epouse n'importe quel rayon.
 // ---------------------------------------------------------------------------
-export const GC_INOX = 0.32;   // demi-largeur du barreaudage autour d'un point de controle
-export const GC_MINI = 0.45;   // longueur mini d'un segment, pour rester posable
+export const GC_PAS = 0.40;   // pas du garde-corps : 40 cm de verre, 40 cm d'inox
 
-// Avec un raccord en cosinus la courbure est nulle au milieu de chaque portee
-// et maximale aux points de controle : barreaudage inox autour de chaque point
-// de controle, verre feuillete plat sur les portions droites entre eux.
+// Table longueur developpee <-> abscisse locale, pour poser le garde-corps au
+// metre lineaire reel de la rive et non a la projection horizontale.
+function arcTable(n = 4000) {
+  const u = [0], s = [0];
+  let px = 0, py = ondeAt(0), L = 0;
+  for (let i = 1; i <= n; i++) {
+    const x = BLOC * i / n, y = ondeAt(x);
+    L += Math.hypot(x - px, y - py); px = x; py = y;
+    u.push(x); s.push(L);
+  }
+  return { u, s, L };
+}
+function uAtArc(T, tab) {
+  const { u, s } = tab, last = s.length - 1;
+  if (T <= 0) return 0;
+  if (T >= s[last]) return BLOC;
+  let lo = 0, hi = last;
+  while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (s[mid] <= T) lo = mid; else hi = mid; }
+  const f = (T - s[lo]) / ((s[hi] - s[lo]) || 1);
+  return u[lo] + (u[hi] - u[lo]) * f;
+}
+
+// Le garde-corps alterne, sur toute la longueur developpee, un panneau de verre
+// feuillete de 40 cm et un panneau de barreaudage inox de 40 cm. Un plat de
+// 40 cm epouse n'importe quel rayon de la rive sans fleche visible : c'est ce
+// qui rend le verre posable sur une courbe. Le pas est ajuste au centimetre
+// pres pour tomber juste sur les deux poteaux.
 export function gcSegmentsLocal() {
-  const zones = ONDE.map(([x]) => ({ kind: 'inox', x1: Math.max(0, x - GC_INOX), x2: Math.min(BLOC, x + GC_INOX) }));
-  const merged = [zones[0]];
-  for (let i = 1; i < zones.length; i++) {
-    const prev = merged[merged.length - 1];
-    if (zones[i].x1 - prev.x2 < GC_MINI) prev.x2 = zones[i].x2;
-    else merged.push(zones[i]);
-  }
+  const tab = arcTable(), L = tab.L;
+  const nb = Math.max(2, 2 * Math.round(L / (2 * GC_PAS)));   // nombre pair : verre aux deux bouts
+  const pas = L / nb;
   const out = [];
-  let cursor = 0;
-  for (const z of merged) {
-    if (z.x1 > cursor + 1e-6) out.push({ kind: 'verre', x1: cursor, x2: z.x1 });
-    out.push(z); cursor = z.x2;
-  }
-  if (cursor < BLOC - 1e-6) out.push({ kind: 'verre', x1: cursor, x2: BLOC });
+  for (let k = 0; k < nb; k++)
+    out.push({ kind: k % 2 ? 'inox' : 'verre', ml: pas,
+               x1: uAtArc(k * pas, tab), x2: uAtArc((k + 1) * pas, tab) });
   return out;
 }
 
@@ -150,8 +188,8 @@ export function gcSegmentsLocal() {
 export function gcSegments(b) {
   const [a, z] = BLOCS[b], loc = gcSegmentsLocal();
   const segs = loc.map((s) => MIROIR[b]
-    ? { kind: s.kind, x1: z - s.x2, x2: z - s.x1 }
-    : { kind: s.kind, x1: a + s.x1, x2: a + s.x2 });
+    ? { kind: s.kind, ml: s.ml, x1: z - s.x2, x2: z - s.x1 }
+    : { kind: s.kind, ml: s.ml, x1: a + s.x1, x2: a + s.x2 });
   return segs.sort((p, q) => p.x1 - q.x1);
 }
 

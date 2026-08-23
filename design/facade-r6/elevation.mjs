@@ -1,4 +1,5 @@
-import { XS, LV, BALCONS, ETAGES, NIVEAUX_LOGEMENT, HET, HSP, FASCIA, GC, PBH, RETRAIT, DMAX, doors, gcSegments, depthAt, BLOCS } from './geo.mjs';
+import { XS, LV, BALCONS, ETAGES, NIVEAUX_LOGEMENT, HET, HSP, FASCIA, GC, PBH, RETRAIT, DMAX,
+         AXE, BV_EP, JOUE, PBN, doors, gcSegments, depthAt, BLOCS } from './geo.mjs';
 import { txt, dimH, dimV, levelMark, callout, ground } from './svgkit.mjs';
 
 export const PALETTE_A = {
@@ -94,21 +95,6 @@ export function elevation(P, o = {}) {
     }
   }
 
-  // ---- vide central : brise-vue aluminium a lames verticales -------------
-  g.push(R(XS.vide[0], XS.vide[1], LV.r2, LV.toit, P.dark));
-  // joues de la niche : le fond est a 1,50 m en arriere, on le lit par l'ombre
-  g.push(R(XS.vide[0], XS.vide[0] + 0.22, LV.r2, LV.toit, '#000000', 'opacity="0.30"'));
-  g.push(R(XS.vide[1] - 0.22, XS.vide[1], LV.r2, LV.toit, '#000000', 'opacity="0.18"'));
-  for (const h of doorLevels) {                                   // planchers vus dans la niche
-    g.push(R(XS.vide[0], XS.vide[1], h - 0.22, h, P.wallDeep, 'opacity="0.55"'));
-    g.push(R(XS.vide[0] + 0.30, XS.vide[1] - 0.30, h + 0.12, h + 1.10, P.inox, 'opacity="0.30"'));
-  }
-  for (let x = XS.vide[0] + 0.075; x < XS.vide[1]; x += 0.15) {
-    g.push(`<line x1="${px(x)}" y1="${py(LV.r2)}" x2="${px(x)}" y2="${py(LV.toit)}" stroke="${P.accent}" stroke-width="2.4" opacity="0.92"/>`);
-    g.push(`<line x1="${px(x + 0.045)}" y1="${py(LV.r2)}" x2="${px(x + 0.045)}" y2="${py(LV.toit)}" stroke="${P.accentDark}" stroke-width="1.1" opacity="0.9"/>`);
-  }
-  g.push(R(XS.vide[0], XS.vide[1], LV.r2, LV.toit, 'none', `stroke="${P.accentDark}" stroke-width="1.2"`));
-
   // ---- poteaux / raidisseurs 55 cm --------------------------------------
   for (const [a, b] of piers) {
     g.push(R(a, b, LV.r2, LV.acr + 0.50, P.pier));
@@ -119,8 +105,10 @@ export function elevation(P, o = {}) {
   }
 
   // ---- balcons ondules : bandeau Aquapanel + garde-corps -----------------
-  // Garde-corps mixte : barreaudage inox aux creux et aux cretes (rayon ~0,35 m),
-  // panneaux de verre feuillete plats sur les portions quasi droites.
+  // Garde-corps mixte au pas de 40 cm : un panneau de verre feuillete plat de
+  // 40 cm, puis 40 cm de barreaudage inox, et ainsi de suite sur tout le
+  // developpe. A 40 cm la fleche d'un plat reste invisible sur n'importe quel
+  // rayon de la rive : c'est ce qui rend le verre posable sur la courbe.
   // garde-corps droit : terrasses du R+2, aucune courbure donc verre continu
   const gcDroit = (x1, x2, h) => {
     const s = [];
@@ -189,6 +177,36 @@ export function elevation(P, o = {}) {
       }
       g.push(gcParts(x1, x2, h, o.ribbon ? 1 : bi));
     }
+  }
+
+  // ---- vide central : deux balcons, le brise-vue ENTRE eux ---------------
+  // Corrige le 23.08 : le brise-vue n'est pas un panneau tendu en facade, c'est
+  // le separateur des deux balcons, sur l'axe. En elevation on n'en voit donc
+  // que la tranche de 12 cm ; le reste du vide s'ouvre sur les deux balcons et
+  // sur le fond de niche, 1,50 m en arriere du nu.
+  {
+    const [n1, n2] = XS.vide, hb = [[n1 + JOUE, AXE - BV_EP / 2], [AXE + BV_EP / 2, n2 - JOUE]];
+    g.push(R(n1, n2, LV.r2, LV.toit, P.wallDeep));                        // fond de niche, en retrait
+    g.push(R(n1, n2, LV.r2, LV.toit, '#000000', 'opacity="0.22"'));       // ombre propre du retrait
+    g.push(R(n1, n1 + JOUE, LV.r2, LV.toit, '#000000', 'opacity="0.16"')); // joues beton
+    g.push(R(n2 - JOUE, n2, LV.r2, LV.toit, '#000000', 'opacity="0.10"'));
+    for (const h of BALCONS) {
+      // portes-fenetres au fond de la niche, une par logement
+      for (const [a, b] of hb) {
+        const c = (a + b) / 2;
+        g.push(R(c - PBN / 2, c + PBN / 2, h + 0.02, h + PBH, P.glass));
+        g.push(R(c - PBN / 2, c + PBN / 2, h + 0.02, h + PBH, 'none', `stroke="${P.accentDark}" stroke-width="1"`));
+      }
+      // dalle de chaque balcon de niche, vue au nu de facade
+      g.push(R(n1 + JOUE, n2 - JOUE, h - 0.20, h, P.wall));
+      g.push(R(n1 + JOUE, n2 - JOUE, h - 0.28, h - 0.20, '#000000', 'opacity="0.18"'));
+      // garde-corps au nu, un par balcon
+      for (const [a, b] of hb) g.push(gcDroit(a + 0.03, b - 0.03, h));
+    }
+    // le brise-vue : sur l'axe, vu par la tranche — 12 cm du R+2 a la toiture
+    g.push(R(AXE - BV_EP / 2, AXE + BV_EP / 2, LV.r2, LV.toit, P.accent));
+    g.push(R(AXE - BV_EP / 2, AXE - BV_EP / 2 + 0.035, LV.r2, LV.toit, P.accentDark));
+    g.push(R(n1, n2, LV.r2, LV.toit, 'none', `stroke="${P.accentDark}" stroke-width="1.2"`));
   }
 
   // ---- socle parking : RDC + R+1, en avancee de 4.00 m ------------------

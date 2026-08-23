@@ -193,7 +193,7 @@ g.push(coupe(1470, 1128, DPETIT, '3 · COUPE B-B — AU PETIT LOBE', 790, false)
 const LEG = [
   ['Bandeau de rive', 'Aquapanel cintré 12,5 mm sur ossature, retombée 0,45 m, finition blanche. Épaisseur d’habillage 0,20 m au nu de la dalle.'],
   ['Gorge LED', 'Profil aluminium encastré de 5 cm en sous-face du bandeau, ruban LED 3000 K IP65 — alimentation à prévoir dans la dalle avant habillage.'],
-  ['Garde-corps', 'Verre feuilleté teinté noir 8.8.4, montants et main courante inox Ø 42, h = 1,10 m au-dessus du sol fini. Barreaudage inox aux creux et aux crêtes.'],
+  ['Garde-corps', 'Alternance 40 cm / 40 cm sur tout le développé : un panneau de verre feuilleté 8.8.4 teinté noir, plat, puis 40 cm de barreaudage inox Ø 16. Main courante inox Ø 42, h = 1,10 m.'],
   ['Porte-balcon', 'Aluminium TPR série 65 à rupture de pont thermique, RAL 7024, 2 vantaux coulissants, 1,80 × 2,20 m, double vitrage 4/16/4.'],
   ['Profil LED vertical', 'Encastré dans le trumeau entre les deux portes, 1,90 m de haut, même circuit que la gorge de rive.'],
   ['Structure', 'Dalle 0,20 m, hauteur libre 3,06 m. Console nulle au nu de façade, 1,80 m au grand lobe, 1,10 m au petit — ferraillage à valider par le BET.'],

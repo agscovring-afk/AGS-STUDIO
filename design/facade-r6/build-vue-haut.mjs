@@ -1,6 +1,6 @@
 import { writeFileSync } from 'node:fs';
 import { XS, LV, BLOCS, FASCIA, GC, PBH, AVANCEE, RETRAIT,
-         depthAt, doors, gcSegments, developpe } from './geo.mjs';
+         AXE, BV_EP, JOUE, PBN, depthAt, doors, gcSegments, developpe } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { txt } from './svgkit.mjs';
 
@@ -42,12 +42,24 @@ g.push(`<rect x="0" y="0" width="${W}" height="${H}" fill="${C.fond}"/>`);
 
 // ---- mur de facade, du R+2 au R+4 ---------------------------------------
 g.push(`<path d="${quad(XS.vide[0], M2, DF, LV.r4 + 0.4, DF, LV.r2)}" fill="url(#murg)"/>`);
-// niche centrale en retrait de 1,50 m, lames brise-vue RAL 7024
+// vide central : deux balcons cote a cote, le brise-vue ENTRE eux
 g.push(`<path d="${quad(XS.vide[0], XS.vide[1], DF + RETRAIT, LV.r4 + 0.4, DF + RETRAIT, LV.r2)}" fill="${C.wallSh}"/>`);
 g.push(`<path d="${quad(XS.vide[0], XS.vide[0], DF, LV.r4 + 0.4, DF + RETRAIT, LV.r2)}" fill="${C.wallSh}" opacity="0.7"/>`);
-for (let m = XS.vide[0] + 0.09; m < XS.vide[1]; m += 0.18)
-  g.push(line(P(m, DF + RETRAIT, LV.r4 + 0.4), P(m, DF + RETRAIT, LV.r2), C.accent, 2.6, 0.5));
-g.push(txt(...P(8.75, DF + RETRAIT, LV.r3 + 1.9), 'RETRAIT 1,50', { size: 8.5, fill: C.dim, ls: '0.12em', weight: 700, anchor: 'middle' }));
+for (const z of [LV.r3]) {
+  for (const [a, b] of [[XS.vide[0] + JOUE, AXE - BV_EP / 2], [AXE + BV_EP / 2, XS.vide[1] - JOUE]]) {
+    const c = (a + b) / 2;
+    g.push(`<path d="${quad(c - PBN / 2, c + PBN / 2, DF + RETRAIT, z + PBH, DF + RETRAIT, z)}" fill="url(#vitg)"/>`);
+    g.push(`<path d="${dalle(a, b, DF, DF + RETRAIT, z)}" fill="${C.dalleB}"/>`);
+    g.push(gcDroit(a, b, DF, DF, z));
+  }
+}
+// le brise-vue separateur : sur l'axe, du fond de la niche au nu de facade
+// sa joue, vue de biais : plan perpendiculaire au nu, de la facade au fond de niche
+g.push(`<path d="${path([P(AXE, DF, LV.r4 + 0.4), P(AXE, DF + RETRAIT, LV.r4 + 0.4), P(AXE, DF + RETRAIT, LV.r2), P(AXE, DF, LV.r2)])} Z" fill="${C.accentD}"/>`);
+g.push(`<path d="${quad(AXE - BV_EP / 2, AXE + BV_EP / 2, DF, LV.r4 + 0.4, DF, LV.r2)}" fill="${C.accent}"/>`);
+for (let z = LV.r2 + 0.2; z < LV.r4 + 0.4; z += 0.2)
+  g.push(line(P(AXE, DF, z), P(AXE, DF + RETRAIT, z), '#FFFFFF', 1, 0.25));
+g.push(txt(...P(AXE + 0.5, DF + RETRAIT, LV.r4 + 0.1), 'BRISE-VUE ENTRE LES 2 BALCONS', { size: 8.5, fill: C.dim, ls: '0.1em', weight: 700, anchor: 'start' }));
 
 // menuiseries du R+2 et du R+3 — alu TPR RAL 7024, verre reflechissant
 for (const [z] of [[LV.r2], [LV.r3]])
@@ -90,7 +102,7 @@ g.push(txt(...P(15.4, DP + 0.45, LV.r2), '7,85 × 4,00 m — dalles sur plots', 
 g.push(txt(...P(8.75, DP + 1.6, LV.r2), 'BANDE DE SÉPARATION 1,80', { size: 9, fill: '#6E6659', ls: '0.14em', weight: 700, anchor: 'middle' }));
 
 // garde-corps droit de la terrasse : verre feuillete + main courante inox
-const gcDroit = (m1, m2, Y1, Y2, Z) => {
+function gcDroit(m1, m2, Y1, Y2, Z) {
   const s = [];
   const a = P(m1, Y1, Z + GC), b = P(m2, Y2, Z + GC), c = P(m2, Y2, Z), d = P(m1, Y1, Z);
   s.push(`<path d="${path([a, b, c, d])} Z" fill="${C.glass}" opacity="0.13"/>`);
@@ -101,7 +113,7 @@ const gcDroit = (m1, m2, Y1, Y2, Z) => {
   }
   s.push(line(a, b, C.inox, 3.4));
   return s.join('');
-};
+}
 g.push(gcDroit(XS.vide[0], XS.vide[0], DF, DP, LV.r2));   // joue gauche du vide
 g.push(gcDroit(XS.vide[1], XS.vide[1], DF, DP, LV.r2));   // joue droite du vide
 g.push(gcDroit(M2, M2, DF, DP, LV.r2));                   // pignon droit
@@ -125,7 +137,7 @@ g.push(gcDroit(XS.vide[0], M2, DP, DP, LV.r2));           // nez de dalle, toute
   g.push(`<path d="${path(rBot)}" fill="none" stroke="${C.ink}" stroke-width="1.6" opacity="0.55"/>`);
   g.push(`<path d="${path(rTop)}" fill="none" stroke="${C.ink}" stroke-width="2"/>`);
   g.push(`<path d="${path(rive(Z, -0.06))}" fill="none" stroke="${C.led}" stroke-width="2.4" stroke-dasharray="12 7"/>`);
-  // garde-corps mixte : verre feuillete sur les parties droites, barreaudage inox dans les courbures
+  // garde-corps mixte au pas de 40 cm : un panneau de verre plat, puis 40 cm d'inox
   const gTop = rive(Z + GC, 0.10), gBot = rive(Z, 0.10);
   for (const seg of gcSegments(1)) {
     const i1 = idx(seg.x1), i2 = idx(seg.x2);
@@ -170,7 +182,7 @@ g.unshift(`<defs>
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Vue plongeante · dans le vide entre la terrasse R+2 et le balcon R+3',
   title: 'La terrasse, et le balcon au-dessus',
-  sub: `Bloc droit vu de dessus, l’œil à 15 m. En bas la terrasse du R+2 posée sur la toiture du parking, ses dalles sur plots et son garde-corps droit ; au milieu la bande de 1,80 m en gravier qui sépare les deux appartements ; au-dessus le balcon du R+3 dont la rive creuse un grand lobe de 1,80 m puis un petit de 1,10 m — ${developpe().toFixed(2)} ml de développé.`,
+  sub: `Bloc droit vu de dessus, l’œil à 15 m. En bas la terrasse du R+2 posée sur la toiture du parking, ses dalles sur plots et son garde-corps droit ; au milieu le vide de 1,80 m, deux balcons côte à côte séparés par le brise-vue ; au-dessus le balcon du R+3 dont la rive creuse un grand lobe de 1,80 m puis un petit de 1,10 m — ${developpe().toFixed(2)} ml de développé.`,
   right: 'VUE D’AMBIANCE<br>NON COTÉE<br>BLOC DROIT' })}
 <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;
