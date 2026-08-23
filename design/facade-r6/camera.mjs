@@ -76,3 +76,50 @@ export function haze(hex, dist, o = {}) {
   const c = hex2rgb(hex);
   return rgb2hex(c.map((v, i) => v * (1 - a) + hz[i] * a));
 }
+
+// ---------------------------------------------------------------------------
+// Le verre.
+//
+// Une texture ne dit rien du verre : ce qui le fait lire, c'est le partage
+// entre ce qu'il RENVOIE et ce qu'il LAISSE PASSER, et ce partage dépend de
+// l'angle. De face un vitrage ne renvoie que 4 % — il paraît sombre parce que
+// l'intérieur derrière est sombre. En incidence rasante il renvoie presque
+// tout et devient miroir. C'est la loi de Fresnel, et c'est elle qui fait que
+// sur un garde-corps courbe chaque panneau n'a pas la même valeur que son
+// voisin : ils ne regardent pas le même bout de ciel.
+// ---------------------------------------------------------------------------
+
+// Ce que voit un rayon qui part vers le haut (rz > 0) ou vers le bas.
+// Deux dégradés : le ciel du zénith à l'horizon, puis la rue.
+export function cielDir(rz, nuit = false) {
+  const t = Math.min(1, Math.max(0, rz));
+  if (nuit) return rgb2hex([
+    0x14 + (0x33 - 0x14) * (1 - t), 0x1E + (0x4A - 0x1E) * (1 - t), 0x30 + (0x68 - 0x30) * (1 - t)]);
+  // horizon pâle -> zénith soutenu
+  const h = hex2rgb('#E6F0F7'), z = hex2rgb('#4E8CC4');
+  return rgb2hex(h.map((v, i) => v + (z[i] - v) * Math.pow(t, 0.62)));
+}
+export function solDir(rz, nuit = false) {
+  const t = Math.min(1, Math.max(0, -rz));
+  if (nuit) return rgb2hex([0x1A + 10 * (1 - t), 0x1C + 8 * (1 - t), 0x20 + 6 * (1 - t)]);
+  const p = hex2rgb('#C9C7C0'), s = hex2rgb('#6E6E68');   // trottoir clair -> bitume
+  return rgb2hex(p.map((v, i) => v + (s[i] - v) * t));
+}
+
+// Couleur d'un fragment de vitrage vu depuis `eye`, de normale `n`, au point p.
+//   interieur : ce qu'on voit à travers (pièce sombre, ou fond de balcon)
+//   gain      : 1 pour un vitrage clair, ~0.55 pour un feuilleté teinté noir
+export function verre(eye, p, n, o = {}) {
+  const nuit = !!o.nuit, gain = o.gain ?? 1, interieur = o.interieur ?? (nuit ? '#0B1116' : '#232C33');
+  const v = norm(sub(p, eye));
+  let nn = n;
+  if (dot(v, nn) > 0) nn = mul(nn, -1);                   // la normale regarde la caméra
+  const cosT = Math.min(1, Math.abs(dot(v, nn)));
+  const R0 = 0.043;
+  const R = Math.min(0.96, (R0 + (1 - R0) * Math.pow(1 - cosT, 5)) * (o.boost ?? 5.2));
+  const r = sub(v, mul(nn, 2 * dot(v, nn)));              // rayon réfléchi
+  const refl = hex2rgb(r[2] > 0 ? cielDir(r[2], nuit) : solDir(r[2], nuit));
+  const tr = hex2rgb(interieur);
+  const k = Math.min(1, R * gain);
+  return { couleur: rgb2hex(tr.map((c, i) => c * (1 - k) + refl[i] * k)), R: k, cosT };
+}

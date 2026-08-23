@@ -18,6 +18,7 @@ const IMG = {
   detailGc: b64('detail-gc.png', 'image/png'),
   mat0: b64('mat-0.jpg','image/jpeg'), mat1: b64('mat-1.jpg','image/jpeg'),
   mat2: b64('mat-2.jpg','image/jpeg'), mat3: b64('mat-3.jpg','image/jpeg'),
+  zoomNuit: b64('zoom-nuit.jpg','image/jpeg'),
 };
 
 // --- le tracé de l'onde, à plat, tel qu'il est construit -------------------
@@ -117,7 +118,7 @@ figcaption{margin-top:14px;font-size:14px;color:var(--muted);max-width:58ch}
 .switch button:focus-visible{outline:2px solid var(--led);outline-offset:2px}
 
 /* ---------- matière ---------- */
-.mats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
+.mats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px;margin-top:44px}
 .mat{border:1px solid var(--line);background:var(--surface)}
 .mat .chip{height:112px;background-color:var(--sunk)}
 .mat .txt{padding:16px 18px 20px}
@@ -239,6 +240,8 @@ footer b{color:var(--ink);font-weight:600}
         <div class="txt"><h3>Aluminium RAL 7024</h3><p>Menuiseries TPR 65 à rupture de pont thermique, cadrage des baies, brise-vue, couvertines.</p></div></div>
       <div class="mat"><div class="chip" style="background-image:url(${IMG.mat3});background-size:cover;background-position:center"></div>
         <div class="txt"><h3>Inox 316 brossé</h3><p>Main courante Ø 42 continue, pinces et platines. Brossé dans le sens de la pièce — le reflet glisse le long de la courbe.</p></div></div>
+      <div class="mat"><div class="chip" style="background:linear-gradient(168deg,#8FB4CE 0%,#3E5060 34%,#232C33 68%,#4A6070 100%)"></div>
+        <div class="txt"><h3>Verre feuilleté 8.8.4</h3><p>Le seul matériau qui n’a pas de texture : il n’a que des reflets. De face il ne renvoie que 4 % et paraît sombre ; en incidence rasante il devient miroir. Sur une rive courbe, chaque panneau attrape donc un autre bout de ciel.</p></div></div>
     </div>
     <div class="duo" style="margin-top:56px">
       <figure><div class="shot"><img src="${IMG.detailGc}" alt="Planche de détail du garde-corps aux échelles 1:20 et 1:5."></div>
@@ -253,6 +256,16 @@ footer b{color:var(--ink);font-weight:600}
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section style="background:var(--sunk)">
+  <div class="wrap">
+    <div class="eyebrow">La nuit</div>
+    <h2 style="font-size:clamp(28px,4vw,44px);margin-top:16px">Le halo, pas le trait.</h2>
+    <p class="lede">La gorge LED n’éclaire pas la rue : elle lave la sous-face du bandeau au-dessus d’elle et le mur au-dessous. C’est ce halo qui dessine la courbe de loin — un simple trait lumineux se lirait comme un néon collé.</p>
+    <figure style="margin-top:36px"><div class="shot"><img src="${IMG.zoomNuit}" alt="Détail de façade la nuit : la gorge LED lave la sous-face et le mur."></div>
+      <figcaption>Le verre feuilleté teinté noir garde sa réflexion la nuit : il renvoie le ciel sombre et les lumières d’en face, ce qui l’empêche de tomber au noir plat.</figcaption></figure>
   </div>
 </section>
 

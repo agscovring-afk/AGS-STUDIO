@@ -5,7 +5,7 @@ import { XS, LV, BLOCS, BALCONS, MIROIR, COL, FASCIA, GC, PBH, PBW, AVANCEE, RET
          depthAt, doors, gcSegments, developpe } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { FILTRES, TEINTE } from './materiaux.mjs';
-import { makeCam, poly, SUN, SUNDIR, shadeN, castY, castZ, haze, norm, dot, sub, rgb2hex, hex2rgb } from './camera.mjs';
+import { makeCam, poly, SUN, SUNDIR, shadeN, castY, castZ, haze, norm, dot, sub, rgb2hex, hex2rgb, verre, cielDir } from './camera.mjs';
 
 const NUIT = process.argv.includes('--nuit');
 const ZOOM = process.argv.includes('--zoom');
@@ -329,9 +329,20 @@ for (const z of BALCONS) for (let b = 0; b < 2; b++) {
       S(MAT.alu7024, NX, { kd: SH.kd * 0.45 })));
     g.push(face([[a, -0.12, z1], [bb, -0.12, z1], [bb, CAD_EP, z1], [a, CAD_EP, z1]],
       S(MAT.alu7024, NZm, { kd: 0, amb: SH.amb * 0.55 })));
-    g.push(face([[a, -0.12, z + 0.03], [bb, -0.12, z + 0.03], [bb, -0.12, z + PBH], [a, -0.12, z + PBH]],
-      NUIT && (Math.round(z * 3 + a)) % 3 ? 'url(#vitreLum)' : 'url(#vitre)'));
-    if (!NUIT) g.push(face([[a, -0.118, z + 0.03], [bb, -0.118, z + 0.03], [bb, -0.118, z + PBH], [a, -0.118, z + PBH]], 'url(#refletCiel)'));
+    // Le vitrage est plan : sa normale ne change pas, mais le rayon réfléchi
+    // monte pour les étages hauts et descend pour les bas. D'où, sans rien
+    // forcer, des fenêtres claires en haut et sombres en bas.
+    const allume = NUIT && (Math.round(z * 3 + a)) % 3 === 0;
+    if (allume) {
+      g.push(face([[a, -0.12, z0], [bb, -0.12, z0], [bb, -0.12, z1], [a, -0.12, z1]], 'url(#vitreLum)'));
+    } else {
+      const V = verre(C.eye, [(a + bb) / 2, -0.12, (z0 + z1) / 2], [0, 1, 0],
+        { nuit: NUIT, gain: 1, interieur: NUIT ? '#0A1015' : '#1E262C', boost: 6.4 });
+      g.push(face([[a, -0.12, z0], [bb, -0.12, z0], [bb, -0.12, z1], [a, -0.12, z1]], V.couleur));
+      // le tableau de la baie se réfléchit dans le bas du vitrage
+      g.push(face([[a, -0.119, z0], [bb, -0.119, z0], [bb, -0.119, z0 + 0.55], [a, -0.119, z0 + 0.55]],
+        NUIT ? '#05090D' : '#161C21', 'opacity="0.35"'));
+    }
     const c = (a + bb) / 2;
     g.push(`<path d="${poly(C, [[c, -0.12, z + 0.03], [c, -0.12, z + PBH]], false)}" stroke="${MAT.alu}" stroke-width="1.8" fill="none" opacity="0.92"/>`);
     g.push(`<path d="${poly(C, [[a, -0.115, z + 0.03], [a, -0.115, z + PBH], [bb, -0.115, z + PBH], [bb, -0.115, z + 0.03]], false)}" stroke="${MAT.alu}" stroke-width="2.2" fill="none" opacity="0.9"/>`);
@@ -400,15 +411,23 @@ for (let li = BALCONS.length - 1; li >= 0; li--) {
         if (!hi[i] || !lo[i]) return;
         g.push(`<path d="${poly(C, [lo[i], hi[i]], false)}" stroke="${col}" stroke-width="${w}" fill="none" opacity="0.95"/>`);
       };
+      // Chaque panneau est un plat de 38 cm posé en corde sur la courbe : il a
+      // donc sa propre normale, et il ne renvoie pas le même bout de ciel que
+      // son voisin. C'est ce désaccord d'un panneau à l'autre qui fait lire le
+      // verre — pas une transparence uniforme.
       const panneauVerre = (x1, x2) => {
         const i1 = idx(Math.min(x1, x2)), i2 = idx(Math.max(x1, x2));
         if (i2 <= i1) return;
-        const n = sunAt((x1 + x2) / 2, b), refl = Math.max(0, dot(n, [0, 1, 0]));
-        g.push(strip(hi.slice(i1, i2 + 1), lo.slice(i1, i2 + 1), NUIT ? '#070D13' : '#1E262D',
-          `opacity="${(0.58 - 0.18 * refl).toFixed(2)}"`));
-        g.push(strip(hi.slice(i1, i2 + 1), hi.slice(i1, i2 + 1).map(([x, y, zz]) => [x, y, zz - 0.34]),
-          NUIT ? '#2A3B4C' : '#B7D2E4', `opacity="${(0.12 + 0.36 * refl).toFixed(2)}"`));
-        // pinces inox aux deux bouts du panneau
+        const mm = (x1 + x2) / 2, n = sunAt(mm, b);
+        const mid = hi[idx(mm)] && lo[idx(mm)]
+          ? [hi[idx(mm)][0], hi[idx(mm)][1], (hi[idx(mm)][2] + lo[idx(mm)][2]) / 2] : null;
+        if (!mid) return;
+        const V = verre(C.eye, mid, n, { nuit: NUIT, gain: 0.62, interieur: NUIT ? '#080E14' : '#28323A' });
+        g.push(strip(hi.slice(i1, i2 + 1), lo.slice(i1, i2 + 1), V.couleur,
+          `opacity="${(0.90 - 0.22 * V.R).toFixed(2)}"`));
+        // le liseré du haut : la tranche du feuilleté prend toute la lumière
+        g.push(strip(hi.slice(i1, i2 + 1), hi.slice(i1, i2 + 1).map(([x, y, zz]) => [x, y, zz - 0.05]),
+          NUIT ? '#8FA4B4' : '#FFFFFF', `opacity="${(0.30 + 0.45 * V.R).toFixed(2)}"`));
         for (const i of [i1 + 1, i2 - 1]) {
           if (!lo[i]) continue;
           const q = P([lo[i][0], lo[i][1], lo[i][2] + 0.06]);
