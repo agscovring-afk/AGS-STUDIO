@@ -35,6 +35,16 @@
       "print": "fixed"
     },
     {
+      "file": "Detail-Balcon.dc.html",
+      "x": 0,
+      "y": 4800,
+      "w": 2244,
+      "h": 1620,
+      "page": "page-1",
+      "title": "Détail — balcon, les quatre vues",
+      "print": "fixed"
+    },
+    {
       "file": "Plan-Terrasse.dc.html",
       "x": 0,
       "y": 2660,
@@ -162,6 +172,14 @@
       "w": 330,
       "page": "page-2",
       "text": "AMBIANCES\n\nVues d'ambiance en perspective à trois points, calées sur la géométrie validée.\n\nÀ regarder après les plans, pas avant : elles ne servent qu'à juger l'effet."
+    },
+    {
+      "id": "detail",
+      "x": -390,
+      "y": 4800,
+      "w": 330,
+      "page": "page-1",
+      "text": "LE BALCON EN DÉTAIL\n\nQuatre vues du même balcon au 1:25 : élévation intérieure avec les deux portes, coupe à la crête (1,60 m), coupe au creux (0,79 m), et plan.\n\nLes deux coupes sont la même construction à ses deux profondeurs extrêmes — c'est là que se lit l'ondulation, qu'une élévation ne peut pas montrer."
     }
   ],
   "launch": {
