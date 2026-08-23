@@ -185,6 +185,24 @@
       "page": "page-1",
       "title": "Détail — garde-corps 1:20 et 1:5",
       "print": "fixed"
+    },
+    {
+      "file": "Photo-Jour.dc.html",
+      "x": 3840,
+      "y": 0,
+      "w": 1280,
+      "h": 2000,
+      "page": "page-2",
+      "title": "Perspective rue — jour"
+    },
+    {
+      "file": "Photo-Nuit.dc.html",
+      "x": 5220,
+      "y": 0,
+      "w": 1280,
+      "h": 2000,
+      "page": "page-2",
+      "title": "Perspective rue — nuit"
     }
   ],
   "annotations": [
@@ -210,7 +228,7 @@
       "y": 0,
       "w": 330,
       "page": "page-2",
-      "text": "AMBIANCES\n\nVues d’ambiance en perspective à trois points, calées sur la géométrie validée : contre-plongée jour, contre-plongée nuit, et vue plongeante entre la terrasse R+2 et le balcon R+3.\n\nÀ regarder après les plans, pas avant : elles ne servent qu’à juger l’effet."
+      "text": "AMBIANCES\n\nDeux perspectives de rue rendues à l’objectif à décentrement : les verticales restent verticales, comme en photo d’architecture.\n\nLe soleil est à 49° de hauteur et 32° à gauche de la normale ; chaque ombre portée sur la façade est calculée depuis la géométrie du balcon qui la jette. Le bandeau cintré est facetté et éclairé facette par facette : c’est de là que vient son relief.\n\nS’y ajoutent les contre-plongées et la vue plongeante entre terrasse et balcon."
     },
     {
       "id": "detail",

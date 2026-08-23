@@ -23,6 +23,15 @@ PNG/   les memes planches en image 2x, pour lire a l'ecran ou envoyer.
 15  Gabarit onde de rive                             419.89 x 297.13 mm
 16  Gabarit terrasses                                419.89 x 297.13 mm
 
+17  Perspective rue - jour   (PNG seulement)
+18  Perspective rue - nuit   (PNG seulement)
+
+Les deux perspectives sont des images, pas des plans : elles ne se cotent pas.
+L'objectif est a decentrement, comme en photo d'architecture, donc les
+verticales restent verticales. Le soleil est place a 49 deg de hauteur et
+32 deg a gauche de la normale de facade ; toutes les ombres portees sont
+calculees depuis la geometrie des balcons.
+
 GEOMETRIE ARRETEE
   Largeur totale de facade      17.50 m       Poteaux 0.55 m
   Baie de balcon                6.75 m libre  Vide central 1.80 m
