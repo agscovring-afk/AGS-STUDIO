@@ -21,16 +21,16 @@ const MAT = [
           'Aux creux et aux crêtes le rayon tombe à 0,35 m : le verre ne s’y cintre pas — 5 sections de barreaudage par bloc, 3,50 m',
           'Sur les portions quasi droites, 4 panneaux de verre plats de 1,09 m par bloc, 4,35 m',
           'Barreaux espacés de 11 cm ; linéaire total ≈ 99 ml, même tracé que les bandeaux Aquapanel'] },
-  { n: 'Brise-vue aluminium', t: 'Bronze anodisé', sw: ['#8A6E4C', '#5A4832'], ref: 'Lames aluminium anodisé bronze, ossature alu, fixation sur poteaux béton',
+  { n: 'Brise-vue aluminium', t: 'RAL 7024 gris graphite', sw: ['#474B4E', '#31353A'], ref: 'Lames aluminium RAL 7024, même teinte que les menuiseries, ossature alu, fixation sur poteaux béton',
     pts: ['Vide central 1,80 m — lames verticales, du R+2 au niveau toiture (≈ 22 m²)',
           'Séparations d’intimité en bout de balcon, 1,30 m de haut',
           'Ventilation du parking R+1 — lames horizontales pare-vue (≈ 34 m²)'] },
-  { n: 'Menuiseries aluminium', t: 'Bronze anodisé', sw: ['#8A6E4C', '#2C3234'], ref: 'Portes-balcon 2 vantaux coulissants à rupture de pont thermique, double vitrage 4/16/4',
-    pts: ['1,80 m de large × 2,40 m de haut',
+  { n: 'Menuiseries aluminium', t: 'TPR série 65 · RAL 7024', sw: ['#474B4E', '#2C3234'], ref: 'Portes-balcon TPR série 65 à rupture de pont thermique, 2 vantaux coulissants, RAL 7024 gris graphite, double vitrage 4/16/4',
+    pts: ['1,80 m de large × 2,20 m de haut',
           '2 par balcon × 2 blocs × 5 niveaux = 20 unités en façade principale',
           '+ 2 par niveau côté vide central = 10 unités',
-          'Couvertine alu bronze en tête d’acrotère et de poteau'] },
-  { n: 'Éclairage architectural', t: 'LED blanc chaud 3000 K', sw: ['#F2C46A', '#8A6E4C'], ref: 'Rubans LED IP65 en gorge aluminium, alimentation depuis les gaines de balcon, gradation par niveau',
+          'Couvertine alu RAL 7024 en tête d’acrotère et de poteau'] },
+  { n: 'Éclairage architectural', t: 'LED blanc chaud 3000 K', sw: ['#F2C46A', '#474B4E'], ref: 'Rubans LED IP65 en gorge aluminium, alimentation depuis les gaines de balcon, gradation par niveau',
     pts: ['Gorge de 5 cm en sous-face de chaque bandeau cintré : la lumière lèche la courbe et la dessine sur toute sa longueur — ≈ 99 ml',
           'Rampe verticale derrière les lames du vide central, du R+2 à la toiture — ≈ 15 ml, la faille devient la seule verticale lumineuse',
           'Bandeau lumineux au-dessus de l’entrée et des portes de garage — 17,50 ml',
@@ -63,7 +63,7 @@ const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #F
 const body = `<div style="width: ${W}px; background: #F1EDE5">
 ${header({ w: W, kicker: 'Matériaux, finitions &amp; hypothèses', title: 'Palette de façade',
   sub: 'Les quatre matériaux demandés, leur mise en œuvre et les quantités qui en découlent — puis le parti dimensionnel arrêté, sur lequel s’appuient toutes les planches.',
-  right: 'VARIANTE A — RETENUE<br>« IVOIRE &amp; BRONZE »<br>QUANTITÉS ESTIMATIVES' })}
+  right: 'VARIANTE A — RETENUE<br>« IVOIRE &amp; GRAPHITE »<br>QUANTITÉS ESTIMATIVES' })}
 <div style="padding: 28px 44px 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
   ${MAT.map((m, i) => card(m, i === MAT.length - 1 && MAT.length % 2 === 1)).join('\n  ')}
 </div>

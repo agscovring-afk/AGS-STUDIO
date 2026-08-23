@@ -2,11 +2,11 @@
   "pages": [
     {
       "id": "page-1",
-      "name": "Façade — Variante A retenue"
+      "name": "Dossier technique"
     },
     {
       "id": "page-2",
-      "name": "Gabarits à dessiner"
+      "name": "Ambiances"
     },
     {
       "id": "page-3",
@@ -15,58 +15,109 @@
   ],
   "artboards": [
     {
-      "file": "Main.dc.html",
+      "file": "Synthese.dc.html",
       "x": 0,
       "y": 0,
+      "w": 1587,
+      "h": 1420,
+      "page": "page-1",
+      "title": "Données du projet — à valider",
+      "print": "fixed"
+    },
+    {
+      "file": "Plan-Balcon.dc.html",
+      "x": 0,
+      "y": 1550,
+      "w": 1587,
+      "h": 980,
+      "page": "page-1",
+      "title": "Plan — onde de rive",
+      "print": "fixed"
+    },
+    {
+      "file": "Plan-Terrasse.dc.html",
+      "x": 0,
+      "y": 2660,
+      "w": 1587,
+      "h": 920,
+      "page": "page-1",
+      "title": "Plan — terrasses R+2",
+      "print": "fixed"
+    },
+    {
+      "file": "Plan-RDC.dc.html",
+      "x": 0,
+      "y": 3710,
+      "w": 1587,
+      "h": 960,
+      "page": "page-1",
+      "title": "Plan — RDC parking",
+      "print": "fixed"
+    },
+    {
+      "file": "Main.dc.html",
+      "x": 1687,
+      "y": 0,
       "w": 1160,
-      "h": 1800,
+      "h": 1930,
       "page": "page-1",
       "title": "Façade principale"
     },
     {
-      "file": "Vue.dc.html",
-      "x": 1260,
-      "y": 0,
-      "w": 1120,
-      "h": 1290,
-      "page": "page-1",
-      "title": "Rives ondulées — jour"
-    },
-    {
-      "file": "Vue-Nuit.dc.html",
-      "x": 2480,
-      "y": 0,
-      "w": 1120,
-      "h": 1290,
-      "page": "page-1",
-      "title": "La courbe allumée — nuit"
-    },
-    {
       "file": "Coupe.dc.html",
-      "x": 0,
-      "y": 1930,
+      "x": 2947,
+      "y": 0,
       "w": 900,
-      "h": 1500,
+      "h": 1560,
       "page": "page-1",
       "title": "Coupe A-A"
     },
     {
-      "file": "Plan-Balcon.dc.html",
-      "x": 1000,
-      "y": 1930,
-      "w": 1120,
-      "h": 1010,
-      "page": "page-1",
-      "title": "Plan balcon type"
-    },
-    {
       "file": "Materiaux.dc.html",
-      "x": 2220,
-      "y": 1930,
+      "x": 3947,
+      "y": 0,
       "w": 940,
       "h": 1700,
       "page": "page-1",
-      "title": "Matériaux & hypothèses"
+      "title": "Matériaux & finitions"
+    },
+    {
+      "file": "Gabarit-Onde.dc.html",
+      "x": 3947,
+      "y": 1830,
+      "w": 1587,
+      "h": 1123,
+      "page": "page-1",
+      "title": "Gabarit — onde (pour un prochain tour)",
+      "print": "fixed"
+    },
+    {
+      "file": "Gabarit-Terrasse.dc.html",
+      "x": 1687,
+      "y": 2060,
+      "w": 1587,
+      "h": 1123,
+      "page": "page-1",
+      "title": "Gabarit — terrasses (pour un prochain tour)",
+      "print": "fixed"
+    },
+    {
+      "file": "Vue.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1180,
+      "h": 1350,
+      "page": "page-2",
+      "title": "Rives ondulées — jour"
+    },
+    {
+      "file": "Vue-Nuit.dc.html",
+      "x": 1280,
+      "y": 0,
+      "w": 1180,
+      "h": 1350,
+      "page": "page-2",
+      "title": "La courbe allumée — nuit"
     },
     {
       "file": "VarianteB.dc.html",
@@ -85,80 +136,36 @@
       "h": 1130,
       "page": "page-3",
       "title": "Variante C — Rubans continus"
-    },
-    {
-      "file": "Gabarit-Onde.dc.html",
-      "x": 0,
-      "y": 0,
-      "w": 1587,
-      "h": 1123,
-      "page": "page-2",
-      "title": "Gabarit — onde de rive",
-      "print": "fixed"
-    },
-    {
-      "file": "Gabarit-Terrasse.dc.html",
-      "x": 1687,
-      "y": 0,
-      "w": 1587,
-      "h": 1123,
-      "page": "page-2",
-      "title": "Gabarit — terrasses R+2",
-      "print": "fixed"
     }
   ],
   "annotations": [
     {
-      "id": "parti-trame",
+      "id": "a-valider",
       "x": -390,
       "y": 0,
       "w": 330,
       "page": "page-1",
-      "text": "PARTI ARRÊTÉ — 23.08.2026\n\n• 17,50 = 0,55 + 6,75 + 0,55 + 1,80 + 0,55 + 6,75 + 0,55\n• Ouverture libre 6,75 m, entraxe de poteaux 7,30 m\n• RDC + R+1 en parking, avancée 4,00 m\n• R+2 à R+6 en logements → 5 lignes ondulées\n• 3,40 m au RDC, 3,06 m aux étages → 22,76 m hors tout\n\nToutes les planches sont calées sur ces cotes."
+      "text": "À VALIDER AVANT DE POURSUIVRE\n\nLa première planche récapitule toutes vos données et ce que j'en ai déduit, avec six points qui me manquent encore.\n\nTout le reste du dossier est calé dessus : élévation, plans du niveau courant, des terrasses et du RDC, coupe.\n\nCorrigez ce qui est faux et je relance l'ensemble."
     },
     {
-      "id": "parti-onde",
+      "id": "onde",
       "x": -390,
-      "y": 560,
+      "y": 1550,
       "w": 330,
       "page": "page-1",
-      "text": "L'ONDE DE RIVE\n\n2 ondes par balcon, profondeur 1,30 m au creux et 3,00 m à la crête → développé 9,92 ml, soit les ~10 ml relevés.\n\nSeule réserve d'exécution : si la console de 3,00 m gêne le ferraillage, on passe à 3 ondes moins creuses — même développé, moins de porte-à-faux."
+      "text": "L'ONDE\n\nTracé relevé sur votre croquis, bloc droit ; le bloc gauche en est le miroir.\n\n0,79 m au creux médian, 1,60 m à la crête, 9,00 ml de développé par balcon.\n\nSur l'élévation la courbe se lit à l'ombre portée et au trait pointillé : une élévation orthogonale ne peut pas montrer une courbe qui se développe en plan."
     },
     {
-      "id": "parti-vide",
-      "x": -390,
-      "y": 980,
-      "w": 330,
-      "page": "page-1",
-      "text": "LE VIDE CENTRAL\n\n1,80 m, avec un balcon de chaque côté qui se font face. Fermé par un brise-vue alu à lames verticales, du R+2 à la toiture : il règle le vis-à-vis et donne à la façade son seul accent vertical.\n\nAu R+2 il est laissé ouvert dans la dalle de toiture du parking : chaque logement a sa propre terrasse de 7,85 m."
-    },
-    {
-      "id": "gc-eclairage",
-      "x": -390,
-      "y": 1420,
-      "w": 330,
-      "page": "page-1",
-      "text": "GARDE-CORPS ET LUMIÈRE\n\nLe garde-corps suit l'onde : barreaudage inox là où le rayon tombe à 0,35 m (5 sections par bloc), verre feuilleté plat de 1,09 m entre les deux (4 panneaux). Voir le plan de balcon.\n\nUne gorge LED de 5 cm court en sous-face de chaque rive — 99 ml. De nuit, la façade se réduit à cinq lignes de lumière qui ondulent."
-    },
-    {
-      "id": "ecartees",
-      "x": -390,
-      "y": 0,
-      "w": 330,
-      "page": "page-3",
-      "text": "POUR MÉMOIRE\n\nDeux directions étudiées puis écartées au profit de la variante A. Elles restent ici comme trace de l'arbitrage — mêmes cotes, mêmes matériaux, parti d'expression différent.\n\nSi un point de l'une des deux vous intéresse encore, il peut être greffé sur la variante A."
-    },
-    {
-      "id": "gabarits",
+      "id": "amb",
       "x": -390,
       "y": 0,
       "w": 330,
       "page": "page-2",
-      "text": "À DESSINER\n\nDeux planches A3 à l'échelle 1:50, un carreau = 0,25 m.\n\nCe qui est en noir est figé : mur, poteaux, portes-balcon, vide central, limite de dalle du parking. Le reste est libre.\n\nImprime, dessine à la main, renvoie une photo — ou dessine directement sur l'image. Je relève les cotes sur ton tracé et je remets tout le dossier à jour."
+      "text": "AMBIANCES\n\nVues d'ambiance en perspective à trois points, calées sur la géométrie validée.\n\nÀ regarder après les plans, pas avant : elles ne servent qu'à juger l'effet."
     }
   ],
   "launch": {
     "view": "canvas",
-    "page": "page-2"
+    "page": "page-1"
   }
 }

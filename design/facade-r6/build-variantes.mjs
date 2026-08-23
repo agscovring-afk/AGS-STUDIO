@@ -9,7 +9,7 @@ const V = {
   B: {
     file: 'VarianteB.dc.html', label: 'Variante B', name: 'Graphite &amp; Verre',
     kicker: 'Direction écartée · B — pour mémoire',
-    sub: 'Corps de bâtiment en monocouche blanc cassé, ossature verticale et vide central en graphite. Le contraste fait lire la trame des poteaux et transforme le vide en faille sombre — plus graphique, plus urbain que la variante A.',
+    sub: 'Corps de bâtiment en monocouche blanc cassé, ossature verticale et vide central en graphite. Le contraste fait lire la trame des poteaux et transforme le vide en faille sombre — plus contrasté que la variante A, qui reste dans un seul registre.',
     tradeoff: 'Ce qu’elle apportait : une trame de poteaux très lisible de loin, et une teinte sombre où la salissure se voit moins. Pourquoi elle n’est pas retenue : le graphite chauffe au soleil sur une façade déjà exposée, et il exige une pose de brise-vue parfaitement régulière — le moindre défaut d’alignement se lit sur toute la hauteur.',
     P: { ...PALETTE_A, paper: '#EEECE8', wall: '#F5F3EE', wallDeep: '#DBD7CE', pier: '#33383A', plinth: '#262B2D',
       aqua: '#FFFFFF', aquaSh: '#E7E7E3', accent: '#5A6265', accentDark: '#2C3134', dark: '#1C2022',

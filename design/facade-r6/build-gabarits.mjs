@@ -1,7 +1,7 @@
 import { writeFileSync } from 'node:fs';
 import { page, header } from './page.mjs';
 import { txt, dimH } from './svgkit.mjs';
-import { XS, LV, DMIN, DMAX, AVANCEE, COL, depthAt, doors, developpe } from './geo.mjs';
+import { XS, LV, BLOCS, DMIN, DMAX, AVANCEE, COL, depthAt, doors, developpe } from './geo.mjs';
 
 // A3 paysage a 96 px/pouce : 420 x 297 mm
 const W = 1587, H = 1123;
@@ -11,7 +11,7 @@ const px = (m) => +(X0 + m * S).toFixed(2);
 const py = (d) => +(YF + d * S).toFixed(2);
 const wm = (m) => +(m * S).toFixed(2);
 const C = { beton: '#4A443B', mur: '#E8E0D2', int: '#EFEAE0', ink: '#23211E', dim: '#8C8478',
-  gridF: '#DCD4C4', gridM: '#BEB29B', ghost: '#B9A98C', accent: '#8A6E4C', vide: '#EDE9E1' };
+  gridF: '#DCD4C4', gridM: '#BEB29B', ghost: '#B9A98C', accent: '#474B4E', vide: '#EDE9E1' };
 const VOID = XS.vide;
 
 function grille(dMax) {
@@ -99,17 +99,16 @@ const foot = (items) => `<div style="padding: 18px 44px 26px">
   g.push(txt(0, 0, 'VIDE CENTRAL 1.80', { size: 9.5, fill: C.dim, ls: '0.14em', weight: 700, transform: `translate(${px(8.75) + 4} ${py(1.9)}) rotate(90)` }));
   g.push(ossature(1.45));
   // trace actuel, en repere leger
-  for (const [b1, b2] of [[0, 7.85], [9.65, 17.5]]) {
-    const pts = [];
+  for (let bi = 0; bi < BLOCS.length; bi++) {
+    const [b1, b2] = BLOCS[bi], pts = [];
     for (let i = 0; i <= 400; i++) {
-      const m = b1 + (b2 - b1) * i / 400, a = b1 + COL, b = b2 - COL;
-      const d = (m < a || m > b) ? DMIN : depthAt((m - a) / (b - a));
-      pts.push(`${i ? 'L' : 'M'} ${px(m)} ${py(d)}`);
+      const m = b1 + (b2 - b1) * i / 400;
+      pts.push(`${i ? 'L' : 'M'} ${px(m)} ${py(depthAt(m, bi))}`);
     }
     g.push(`<path d="${pts.join(' ')}" fill="none" stroke="${C.ghost}" stroke-width="1.6" stroke-dasharray="3 5" opacity="0.9"/>`);
   }
   g.push(`<path d="M ${px(0.75)} ${py(0.42)} l 34 0" stroke="${C.ghost}" stroke-width="1.6" stroke-dasharray="3 5"/>`);
-  g.push(txt(px(0.75) + 42, py(0.42) + 4, 'TRACE ACTUEL — 2 ONDES, 1.30 → 3.00 m · A MODIFIER LIBREMENT',
+  g.push(txt(px(0.75) + 42, py(0.42) + 4, 'TRACE RETENU — RELEVE SUR VOTRE CROQUIS DU 23.08',
     { size: 9.5, fill: C.ghost, ls: '0.08em', weight: 700, anchor: 'start' }));
   g.push(graduations(DMAXG));
   g.push(chaine(py(DMAXG) + 76));
@@ -121,7 +120,7 @@ ${header({ w: W, kicker: 'Gabarit à dessiner · niveau courant R+3 à R+6',
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 ${foot([
   ['Ce qu’il me faut', 'La ligne de rive, d’un poteau à l’autre. Si tu peux, note la profondeur aux crêtes et aux creux en lisant la règle de gauche — sinon je la relève sur ton dessin.'],
-  ['Ce qui est contraint', 'La rive ne peut pas descendre sous ~1,20 m (largeur de passage) ni dépasser ~3,00 m sans reprise du ferraillage. Le développé actuel est de ' + developpe().toFixed(2) + ' ml par balcon.'],
+  ['Ce qui est contraint', 'Le tracé retenu descend à 0,79 m au creux médian et monte à 1,60 m à la crête, pour un développé de ' + developpe().toFixed(2) + ' ml par balcon.'],
   ['Le bloc de droite', 'Dessine seulement le bloc gauche si tu veux : je reporte en symétrie. Si tu veux deux ondes différentes, dessine les deux.'],
 ])}
 </div>`;

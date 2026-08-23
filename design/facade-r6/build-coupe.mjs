@@ -1,16 +1,16 @@
 import { writeFileSync } from 'node:fs';
-import { LV, DMIN, DMAX, FASCIA, GC, AVANCEE, PBH } from './geo.mjs';
+import { LV, ETAGES, BALCONS, DMIN, DCREUX, DMAX, FASCIA, GC, AVANCEE, PBH, HSP, DALLE, RETRAIT } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { txt, dimH, dimV, levelMark } from './svgkit.mjs';
 
-const W = 900, H = 1218, S = 38, X0 = 268, Y0 = 1010;
+const W = 900, H = 1330, S = 33, X0 = 262, Y0 = 1096;
 const XF = 4.20, XP = XF + AVANCEE;                   // nu de facade / nu avant du parking
 const px = (m) => +(X0 + m * S).toFixed(2), py = (h) => +(Y0 - h * S).toFixed(2);
 const wm = (m) => +(m * S).toFixed(2);
 const R = (x1, x2, h1, h2, fill, ex = '') => `<rect x="${px(x1)}" y="${py(h2)}" width="${wm(x2 - x1)}" height="${wm(h2 - h1)}" fill="${fill}" ${ex}/>`;
-const C = { beton: '#4A443B', betonL: '#7B7264', aqua: '#FBF9F5', accent: '#8A6E4C',
+const C = { beton: '#4A443B', betonL: '#7B7264', aqua: '#FBF9F5', accent: '#474B4E',
   inox: '#9FA6AA', ink: '#23211E', dim: '#8C8478', vue: '#D3C9B6', sol: '#CFC3AC' };
-const DALLE = 0.20, LIVING = [LV.r3, LV.r4, LV.r5, LV.r6];
+const LIVING = BALCONS;
 const g = [];
 g.push(`<defs><linearGradient id="gl2" x1="0" y1="0" x2="1" y2="1">
   <stop offset="0" stop-color="#DCE6E5" stop-opacity="0.95"/><stop offset="1" stop-color="#A9BBBE" stop-opacity="0.55"/></linearGradient></defs>`);
@@ -30,7 +30,7 @@ for (let i = 0; i < TP.length - 1; i++) {
 
 // ---- ossature coupee -----------------------------------------------------
 g.push(R(0, XP, -0.30, 0, C.beton));
-for (const [h, b] of [[LV.r1, XP], [LV.r2, XP], [LV.r3, XF], [LV.r4, XF], [LV.r5, XF], [LV.r6, XF], [LV.toit, XF]])
+for (const [h, b] of [[LV.r1, XP], [LV.r2, XP], ...BALCONS.map((h) => [h, XF]), [LV.toit, XF]])
   g.push(R(0, b, h - DALLE, h, C.beton));
 g.push(R(0, 0.28, -0.30, LV.toit, C.beton));
 g.push(R(XF - 0.28, XF, LV.r2, LV.acr, C.beton));
@@ -42,7 +42,7 @@ for (const h of LIVING) {
   g.push(R(XF, XF + DMAX, h - DALLE, h, C.beton));
   g.push(R(XF + DMAX - 0.18, XF + DMAX + 0.02, h - FASCIA, h + 0.02, C.aqua));
   g.push(R(XF + DMAX - 0.18, XF + DMAX + 0.02, h - FASCIA, h + 0.02, 'none', `stroke="${C.betonL}" stroke-width="0.9"`));
-  g.push(`<path d="M ${px(XF)} ${py(h - DALLE)} L ${px(XF + DMIN)} ${py(h - DALLE)} L ${px(XF + DMIN)} ${py(h + 0.02)}" fill="none" stroke="${C.ink}" stroke-width="1.3" stroke-dasharray="7 4"/>`);
+  g.push(`<path d="M ${px(XF)} ${py(h - DALLE)} L ${px(XF + DCREUX)} ${py(h - DALLE)} L ${px(XF + DCREUX)} ${py(h + 0.02)}" fill="none" stroke="${C.ink}" stroke-width="1.3" stroke-dasharray="7 4"/>`);
   // garde-corps : la coupe passe a la crete de l'onde, donc en barreaudage inox
   g.push(R(XF + DMAX - 0.10, XF + DMAX - 0.03, h + 0.08, h + 0.15, C.inox));
   g.push(`<line x1="${px(XF + DMAX - 0.065)}" y1="${py(h + 0.10)}" x2="${px(XF + DMAX - 0.065)}" y2="${py(h + GC)}" stroke="${C.inox}" stroke-width="2.4"/>`);
@@ -67,10 +67,11 @@ g.push(txt(px((XF + XP) / 2) - 16, py(LV.r2) - 50, 'TERRASSE R+2 — 4.00 m', { 
 g.push(txt(px(XF / 2), py(LV.r2) - 50, 'LOGEMENT', { size: 8.5, fill: C.dim, ls: '0.16em', weight: 700 }));
 
 // ---- parking -------------------------------------------------------------
-g.push(R(XP - 0.10, XP, LV.r1 + 0.70, LV.r1 + 2.50, C.accent));
+g.push(R(XP - 0.10, XP, LV.r1 + 1.55, LV.r1 + 2.35, C.accent));
+g.push(R(XP - 0.10, XP, 1.35, 2.15, C.accent));
 const car = (x, h) => `<path d="M ${px(x)} ${py(h)} l ${wm(0.42)} ${-wm(0.38)} l ${wm(1.15)} 0 l ${wm(0.48)} ${wm(0.38)} l ${wm(1.35)} 0 l ${wm(0.26)} ${wm(0.26)} l 0 ${wm(0.48)} l ${-wm(3.66)} 0 l 0 ${-wm(0.48)} z" fill="${C.vue}" stroke="${C.betonL}" stroke-width="0.8"/>`;
 for (const h of [LV.r1 - DALLE, LV.r2 - DALLE]) g.push(car(0.55, h) + car(4.45, h));
-for (const [h, t] of [[1.30, 'PARKING RDC'], [4.70, 'PARKING R+1']])
+for (const [h, t] of [[1.10, 'PARKING RDC'], [4.20, 'PARKING R+1']])
   g.push(txt(px(XP / 2), py(h), t, { size: 9.5, fill: C.dim, ls: '0.16em', weight: 700 }));
 
 // silhouette d'echelle sur le balcon du R+4
@@ -96,29 +97,25 @@ g.push(txt(0, 0, 'COUPE PARTIELLE — PROFONDEUR DU BATIMENT A CONFIRMER', { siz
 
 // ---- cotes et niveaux ----------------------------------------------------
 const yc = py(-0.9) + 42;
-g.push(dimH(px(XF), px(XF + DMIN), yc, '1.30', { size: 10.5 }));
-g.push(dimH(px(XF), px(XF + DMAX), yc + 30, '3.00', { size: 10.5 }));
+g.push(dimH(px(XF), px(XF + DCREUX), yc, DCREUX.toFixed(2), { size: 10.5 }));
+g.push(dimH(px(XF), px(XF + DMAX), yc + 30, DMAX.toFixed(2), { size: 10.5 }));
 g.push(dimH(px(XF), px(XP), yc + 62, '4.00', { size: 13, weight: 700 }));
 g.push(`<line x1="${px(XF)}" y1="${py(-0.9)}" x2="${px(XF)}" y2="${yc + 70}" stroke="${C.dim}" stroke-width="0.7" stroke-dasharray="3 3"/>`);
-g.push(txt(px(XF), yc + 88, 'BALCON 1.30 → 3.00 m  ·  AVANCEE DU PARKING 4.00 m SUR LE NU DE FACADE',
+g.push(txt(px(XF), yc + 88, `BALCON ${DCREUX.toFixed(2)} → ${DMAX.toFixed(2)} m  ·  AVANCEE DU PARKING 4.00 m SUR LE NU DE FACADE`,
   { size: 9, fill: C.dim, ls: '0.13em', weight: 600, anchor: 'start' }));
 g.push(txt(px(0), yc + 110, 'LES DEUX TERRASSES R+2 SONT SEPAREES PAR LE VIDE CENTRAL — VOIR FACADE',
   { size: 9, fill: C.dim, ls: '0.11em', weight: 600, anchor: 'start' }));
 const xv = px(0) - 76;
-[[LV.rdc, LV.r1, '3.40'], [LV.r1, LV.r2, '3.06'], [LV.r2, LV.r3, '3.06'], [LV.r3, LV.r4, '3.06'],
- [LV.r4, LV.r5, '3.06'], [LV.r5, LV.r6, '3.06'], [LV.r6, LV.toit, '3.06'], [LV.toit, LV.acr, '1.00']]
-  .forEach(([a, b, t]) => g.push(dimV(py(a), py(b), xv, t, { size: 10 })));
-g.push(dimV(py(0), py(LV.acr), xv - 44, '22.76', { size: 12.5, weight: 700 }));
-[[LV.rdc, '± 0.00', 'RDC — PARKING'], [LV.r1, '+ 3.40', 'R+1 — PARKING'], [LV.r2, '+ 6.46', 'R+2 — TERRASSE'],
- [LV.r3, '+ 9.52', 'R+3'], [LV.r4, '+ 12.58', 'R+4'], [LV.r5, '+ 15.64', 'R+5'], [LV.r6, '+ 18.70', 'R+6'],
- [LV.toit, '+ 21.76', 'TOITURE'], [LV.acr, '+ 22.76', 'HAUT ACROTERE']]
-  .forEach(([h, alt, t]) => g.push(levelMark(px(XP) + 92, py(h), alt, t)));
+for (let i = 0; i < ETAGES.length - 1; i++)
+  g.push(dimV(py(ETAGES[i][0]), py(ETAGES[i + 1][0]), xv, (ETAGES[i + 1][0] - ETAGES[i][0]).toFixed(2), { size: 9.5 }));
+g.push(dimV(py(0), py(LV.acr), xv - 44, LV.acr.toFixed(2), { size: 12.5, weight: 700 }));
+ETAGES.forEach(([h, alt, t]) => g.push(levelMark(px(XP) + 92, py(h), alt, t)));
 
 const body = `<div style="width: ${W}px; background: #F1EDE5">
 ${header({ w: W, kicker: 'Coupe A-A · transversale', title: 'Avancée parking &amp; terrasse',
-  sub: 'Le socle parking RDC + R+1 avance de 4.00 m sur le nu de façade ; sa toiture devient la terrasse du R+2. Au-dessus, les balcons en console suivent l’onde de rive, de 1.30 m au creux à 3.00 m à la crête.',
+  sub: 'Le socle parking RDC + R+1 avance de 4.00 m sur le nu de façade ; sa toiture devient la terrasse du R+2. Au-dessus, les balcons en console suivent l’onde de rive, de 0,79 m au creux à 1,60 m à la crête — tracé relevé sur votre croquis. Hauteur libre 3,06 m, dalle 0,20 m ; RDC 2,60 m libre.',
   right: 'ÉCHELLE 1:100<br>COTES EN MÈTRES<br>ÉTAT PROJETÉ' })}
 <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;
-writeFileSync('Coupe.dc.html', page({ body, props: JSON.stringify({ $preview: { width: W, height: H + 200 } }) }));
+writeFileSync('Coupe.dc.html', page({ body, props: JSON.stringify({ $preview: { width: W, height: H + 210 } }) }));
 console.log('Coupe.dc.html ok');

@@ -1,20 +1,17 @@
 import { writeFileSync } from 'node:fs';
 import { page, header } from './page.mjs';
 import { txt } from './svgkit.mjs';
-import { LV, XS, BALCONS, FASCIA, GC, PBH, DMIN, DMAX, BAY, COL, depthAt, doors, gcSegments, BLOCS } from './geo.mjs';
+import { LV, XS, BALCONS, FASCIA, GC, PBH, DMIN, DMAX, AVANCEE, depthAt, doors, gcSegments, BLOCS } from './geo.mjs';
 import { CAM, p, path, strip, quad } from './perspective.mjs';
 
-const W = 1120, H = 1086, N = 120;
+const W = 1180, H = 1085, N = 130;
 const DF = CAM.dFacade, DP = CAM.dParking;
 const VOID = [XS.vide[0], XS.vide[1]];
 const PIERS = [XS.c1, XS.c2, XS.c3, XS.c4];
 const LIT = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1];
 
-// profondeur de la rive a l'abscisse m, dans un bloc donne
-const depthOf = (m, [m1, m2]) => {
-  const a = m1 + COL, b = m2 - COL;
-  return (m < a || m > b) ? DMIN : depthAt((m - a) / (b - a));
-};
+const bi = (blk) => (blk[0] === BLOCS[0][0] ? 0 : 1);
+const depthOf = (m, blk) => depthAt(m, bi(blk));
 const sample = (blk, fY, fZ) => {
   const out = [];
   for (let i = 0; i <= N; i++) {
@@ -23,7 +20,6 @@ const sample = (blk, fY, fZ) => {
   }
   return out;
 };
-const at = (blk, m, fY, fZ) => { const d = depthOf(m, blk); return p(m, fY(d), fZ(d)); };
 
 // ---------------------------------------------------------------------------
 function scene(night) {
@@ -33,7 +29,7 @@ function scene(night) {
         inox: '#93A4AA', rail: '#E9F2F4', glass: '#3A4E56', glassO: 0.5, sky: ['#070D18', '#101E32', '#22364C', '#2E4050'],
         podium: '#26272A', podiumT: '#1A1B1E', ground: '#111214', ctx: '#0B0D10', ctxO: 0.85, lbl: '#B9C4CB' }
     : { wall: '#E7DECE', wallSh: '#D3C6AE', bay: '#C7B99F', pier: '#F1EADD', aquaTop: '#FCFAF6',
-        aquaBot: '#DED6C7', soffitN: '#C9BFAD', soffitF: '#9B9080', accent: '#8A6E4C', accentD: '#4E3F2C',
+        aquaBot: '#DED6C7', soffitN: '#C9BFAD', soffitF: '#9B9080', accent: '#474B4E', accentD: '#2E3236',
         inox: '#C8CED0', rail: '#FFFFFF', glass: '#A6BCC1', glassO: 0.55, sky: ['#5C8FBF', '#8FB6D6', '#C7D9E4', '#E5E4DC'],
         podium: '#CFC3AC', podiumT: '#B4A78F', ground: '#9C917E', ctx: '#2E2A24', ctxO: 0.3, lbl: '#3A352E' };
   const g = [];
@@ -59,8 +55,8 @@ function scene(night) {
   for (const blk of BLOCS) g.push(`<path d="${quad(blk[0], blk[1], DF, LV.r2, LV.acr)}" fill="${C.wall}"/>`);
 
   // vide central : fond sombre + lames verticales bronze
-  g.push(`<path d="${quad(VOID[0], VOID[1], DF + 0.9, LV.r2, LV.toit)}" fill="${night ? '#3A2A12' : '#2B2724'}"/>`);
-  if (night) g.push(`<path d="${quad(VOID[0], VOID[1], DF + 0.9, LV.r2, LV.toit)}" fill="#FFB74F" opacity="0.6" filter="url(#bloom)"/>`);
+  g.push(`<path d="${quad(VOID[0], VOID[1], DF + 1.50, LV.r2, LV.toit)}" fill="${night ? '#3A2A12' : '#2B2724'}"/>`);
+  if (night) g.push(`<path d="${quad(VOID[0], VOID[1], DF + 1.50, LV.r2, LV.toit)}" fill="#FFB74F" opacity="0.6" filter="url(#bloom)"/>`);
   for (let m = VOID[0] + 0.075; m < VOID[1]; m += 0.15) {
     g.push(`<path d="${path([p(m, DF, LV.r2), p(m, DF, LV.toit)])}" stroke="${C.accent}" stroke-width="3.2" fill="none"/>`);
     g.push(`<path d="${path([p(m + 0.045, DF, LV.r2), p(m + 0.045, DF, LV.toit)])}" stroke="${C.accentD}" stroke-width="1.5" fill="none"/>`);
@@ -68,9 +64,9 @@ function scene(night) {
 
   // ---- baies en retrait, menuiseries -------------------------------------
   let door = 0;
-  for (const z of [LV.r2, LV.r3, LV.r4, LV.r5, LV.r6]) {
+  for (const z of [LV.r2, ...BALCONS]) {
     for (const bay of [XS.bayA, XS.bayB]) {
-      g.push(`<path d="${quad(bay[0], bay[1], DF + 0.12, z, z + 2.61)}" fill="${C.bay}" opacity="${night ? 1 : 0.55}"/>`);
+      g.push(`<path d="${quad(bay[0], bay[1], DF + 0.12, z, z + 3.06)}" fill="${C.bay}" opacity="${night ? 1 : 0.55}"/>`);
       for (const [a, b] of doors(bay)) {
         const d = quad(a, b, DF + 0.10, z, z + PBH);
         const on = night && LIT[door % LIT.length];
@@ -82,7 +78,7 @@ function scene(night) {
       }
       // brise-vue vertical d'intimite, en bout de balcon cote vide
       const bx = bay === XS.bayA ? bay[1] - 0.14 : bay[0];
-      g.push(`<path d="${quad(bx, bx + 0.14, DF - DMIN, z, z + 2.30)}" fill="${C.accentD}"/>`);
+      g.push(`<path d="${quad(bx, bx + 0.14, DF - DMIN, z, z + 2.20)}" fill="${C.accentD}"/>`);
     }
   }
 
@@ -127,7 +123,7 @@ function scene(night) {
     const low = sample(blk, Yg, () => zs + 0.10);
     const top = sample(blk, Yg, () => zs + GC);
     const idx = (m) => Math.max(0, Math.min(N, Math.round((m - blk[0]) / (blk[1] - blk[0]) * N)));
-    for (const seg of gcSegments(blk[0], blk[1])) {
+    for (const seg of gcSegments(bi(blk))) {
       const i1 = idx(seg.x1), i2 = idx(seg.x2);
       if (i2 <= i1) continue;
       if (seg.kind === 'verre') {
@@ -163,28 +159,41 @@ function scene(night) {
   // ---- socle parking, au premier plan ------------------------------------
   g.push(`<path d="${quad(0, 17.5, DP, -0.30, LV.r2)}" fill="${C.podium}"/>`);
   g.push(`<path d="${quad(0, 17.5, DP, LV.r2 - 0.12, LV.r2)}" fill="${C.podiumT}"/>`);
-  for (const [a, b] of [[0.55, 7.30], [7.85, 9.65], [10.20, 16.95]])
-    for (let z = LV.r1 + 0.80; z < LV.r1 + 2.50; z += 0.30) {
-      g.push(`<path d="${quad(a, b, DP - 0.02, z, z + 0.16)}" fill="${night ? '#6E5636' : C.accent}" opacity="0.92"/>`);
-      g.push(`<path d="${quad(a, b, DP - 0.02, z - 0.06, z)}" fill="${night ? '#101113' : C.accentD}" opacity="0.55"/>`);
+  // maconnerie pleine, ventilee par une seule bande de brise-vue de 0,80 m
+  const bandeVent = (segs, z0) => {
+    for (const [a, b] of segs) {
+      g.push(`<path d="${quad(a, b, DP - 0.02, z0, z0 + 0.80)}" fill="${night ? '#101113' : C.accentD}"/>`);
+      for (let z = z0 + 0.08; z < z0 + 0.80; z += 0.14)
+        g.push(`<path d="${quad(a, b, DP - 0.03, z, z + 0.07)}" fill="${night ? '#5E5646' : C.accent}" opacity="0.92"/>`);
     }
+  };
+  bandeVent([[0.55, 7.30], [7.85, 9.65], [10.20, 16.95]], LV.r1 + 1.55);
+  bandeVent([[0.55, 1.40], [6.60, 7.30], [7.85, 9.65], [10.20, 10.90], [16.10, 16.95]], 1.35);
   // bandeau alu + portes de garage + hall
-  if (night) g.push(`<path d="${quad(-0.3, 17.8, DP - 0.1, 3.05, 3.24)}" fill="#FFCE85" opacity="0.65" filter="url(#bloom)"/>`);
-  g.push(`<path d="${quad(-0.3, 17.8, DP - 0.1, 3.05, 3.22)}" fill="${night ? '#FFD9A2' : C.accent}"/>`);
+  if (night) g.push(`<path d="${quad(-0.3, 17.8, DP - 0.1, 2.44, 2.62)}" fill="#FFCE85" opacity="0.65" filter="url(#bloom)"/>`);
+  g.push(`<path d="${quad(-0.3, 17.8, DP - 0.1, 2.44, 2.58)}" fill="${night ? '#FFD9A2' : C.accent}"/>`);
   for (const [a, b] of [[1.40, 6.60], [10.90, 16.10]]) {
-    g.push(`<path d="${quad(a, b, DP - 0.04, 0.35, 2.85)}" fill="${night ? '#141517' : C.accentD}"/>`);
-    for (let z = 0.77; z < 2.85; z += 0.42)
+    g.push(`<path d="${quad(a, b, DP - 0.04, 0.20, 2.30)}" fill="${night ? '#141517' : C.accentD}"/>`);
+    for (let z = 0.58; z < 2.30; z += 0.38)
       g.push(`<path d="${quad(a, b, DP - 0.05, z, z + 0.04)}" fill="${night ? '#4A3B25' : C.accent}" opacity="0.75"/>`);
   }
-  const hall = quad(VOID[0] - 0.05, VOID[1] + 0.05, DP - 0.04, 0, 2.45);
+  const hall = quad(VOID[0] - 0.05, VOID[1] + 0.05, DP - 0.04, 0, 2.10);
   if (night) g.push(`<path d="${hall}" fill="#FFE0AE" opacity="0.85" filter="url(#bloom)"/>`);
   g.push(`<path d="${hall}" fill="${night ? '#FFEBC6' : '#E8D9BC'}"/>`);
 
-  // ---- les deux terrasses R+2 sur la toiture du parking -------------------
+  // ---- les deux terrasses R+2 : acrotere droit au nu du parking -----------
   for (const blk of BLOCS) {
-    const Yf = (d) => DP + (DMAX - d);
-    g.push(gardeCorps(blk, LV.r2 + FASCIA, Yf));
-    g.push(balcon(blk, LV.r2 + FASCIA, Yf, DP + DMAX - DMIN + 0.9));
+    const zt = LV.r2 + FASCIA;
+    if (night) g.push(`<path d="${quad(blk[0], blk[1], DP, LV.r2, LV.r2 + 0.10)}" fill="#FFD48F" opacity="0.8" filter="url(#bloom)"/>`);
+    g.push(`<path d="${quad(blk[0], blk[1], DP, LV.r2, zt)}" fill="url(#aq)"/>`);
+    g.push(`<path d="${quad(blk[0], blk[1], DP, LV.r2, LV.r2 + 0.07)}" fill="${night ? '#FFF0CE' : C.aquaBot}"/>`);
+    g.push(`<path d="${quad(blk[0] + 0.04, blk[1] - 0.04, DP - 0.10, zt + 0.17, zt + GC - 0.10)}" fill="url(#gl)"/>`);
+    const n = Math.max(2, Math.round((blk[1] - blk[0]) / 1.35));
+    for (let k = 0; k <= n; k++) {
+      const m = blk[0] + (blk[1] - blk[0]) * k / n;
+      g.push(`<path d="${path([p(m, DP - 0.10, zt + 0.08), p(m, DP - 0.10, zt + GC)])}" stroke="${C.inox}" stroke-width="2.2" fill="none"/>`);
+    }
+    g.push(`<path d="${quad(blk[0], blk[1], DP - 0.10, zt + GC - 0.09, zt + GC)}" fill="${C.inox}"/>`);
   }
 
   // ---- contexte : la venelle enserre le pied de l'immeuble ----------------
@@ -192,7 +201,7 @@ function scene(night) {
   g.push(`<path d="M ${W} ${H} L ${W} ${H - 370} C ${W - 40} ${H - 322} ${W - 64} ${H - 148} ${W - 70} ${H} Z" fill="${C.ctx}" opacity="${C.ctxO * 0.92}"/>`);
 
   // ---- reperes de niveau --------------------------------------------------
-  for (const [z, name] of [[LV.r2, 'R+2'], [LV.r3, 'R+3'], [LV.r4, 'R+4'], [LV.r5, 'R+5'], [LV.r6, 'R+6']]) {
+  for (const [z, name] of [[LV.r2, 'R+2'], [LV.r3, 'R+3'], [LV.r4, 'R+4'], [LV.r5, 'R+5'], [LV.r6, 'R+6'], [LV.r7, 'R+7'], [LV.r8, 'R+8']]) {
     const [x, y] = p(17.5, DF, z);
     g.push(`<path d="${path([[x + 4, y], [x + 22, y]])}" stroke="${C.lbl}" stroke-width="0.8" opacity="0.5" fill="none"/>`);
     g.push(txt(x + 28, y + 4, name, { size: 10, anchor: 'start', weight: 600, fill: C.lbl, ls: '0.1em' }));
@@ -202,10 +211,10 @@ function scene(night) {
 
 const PLANCHES = [
   { file: 'Vue.dc.html', night: false, kicker: 'Ambiance · vue depuis la venelle', title: 'Rives ondulées',
-    sub: 'Perspective à trois points depuis le pied de l’immeuble — bandeaux cintrés en Aquapanel, garde-corps mixte inox / verre qui suit l’onde, filtre bronze du vide central.',
+    sub: 'Perspective à trois points depuis le pied de l’immeuble — onde de rive relevée sur votre croquis, garde-corps mixte inox et verre noir, niche centrale creusée de 1,50 m derrière son brise-vue.',
     right: 'VUE D’AMBIANCE · JOUR<br>NON COTÉE<br>VARIANTE A' },
   { file: 'Vue-Nuit.dc.html', night: true, kicker: 'Ambiance · vue de nuit', title: 'La courbe allumée',
-    sub: 'La gorge LED en sous-face lèche les 99 ml de rive cintrée : de nuit, la façade se réduit à cinq lignes de lumière qui ondulent, et à la faille centrale rétroéclairée.',
+    sub: 'La gorge LED en sous-face lèche les 108 ml de rive cintrée : de nuit, la façade se réduit à six lignes de lumière qui ondulent, et à la faille centrale rétroéclairée.',
     right: 'VUE D’AMBIANCE · NUIT<br>NON COTÉE<br>VARIANTE A' },
 ];
 for (const pl of PLANCHES) {

@@ -8,13 +8,13 @@
 // point de fuite unique — c'est ce qui manquait au rendu precedent.
 // ---------------------------------------------------------------------------
 export const CAM = {
-  dFacade: 30,      // recul de la camera par rapport au nu de facade
-  dParking: 26,     // nu avant du socle parking (avancee de 4,00 m)
-  phi: 32 * Math.PI / 180,
-  f: 1400,
+  dFacade: 22,      // recul de la camera par rapport au nu de facade
+  dParking: 18,     // nu avant du socle parking (avancee de 4,00 m)
+  phi: 40 * Math.PI / 180,
+  f: 800,
   eye: 1.60,
-  cx: 560,
-  cy: 200,
+  cx: 590,
+  cy: 271,
 };
 
 const CO = Math.cos(CAM.phi), SI = Math.sin(CAM.phi);
