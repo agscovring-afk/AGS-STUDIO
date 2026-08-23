@@ -6,8 +6,8 @@ const W = 940;
 const dev = developpe();
 
 const MAT = [
-  { n: 'Monocouche gratté', t: 'Ivoire sablé', sw: ['#E8E0D2', '#DCD1BC'], ref: 'Enduit monocouche épaisseur 15 mm, finition grattée fin, sur maçonnerie et voiles béton',
-    pts: ['Teinte ivoire sablé sur l’ensemble des voiles, allèges et acrotères',
+  { n: 'Monocouche gratté', t: 'Blanc', sw: ['#F4F2ED', '#E0DDD5'], ref: 'Enduit monocouche épaisseur 15 mm, finition grattée fin, sur maçonnerie et voiles béton',
+    pts: ['Blanc sur l’ensemble des voiles, poteaux, allèges et acrotères',
           'Joint creux horizontal 15 × 15 mm au droit de chaque plancher',
           'Poteaux de 55 cm laissés en léger relief — nu extérieur +2 cm sur l’allège'] },
   { n: 'Aquapanel cintré', t: 'Blanc pur', sw: ['#FFFFFF', '#E3DCD0'], ref: 'Plaque ciment 12,5 mm cintrée sur ossature, enduit + peinture façade blanc mat',
@@ -63,7 +63,7 @@ const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #F
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Matériaux, finitions &amp; hypothèses', title: 'Palette de façade',
   sub: 'Les quatre matériaux demandés, leur mise en œuvre et les quantités qui en découlent — puis le parti dimensionnel arrêté, sur lequel s’appuient toutes les planches.',
-  right: 'VARIANTE A — RETENUE<br>« IVOIRE &amp; GRAPHITE »<br>QUANTITÉS ESTIMATIVES' })}
+  right: 'VARIANTE A — RETENUE<br>« BLANC &amp; GRAPHITE »<br>QUANTITÉS ESTIMATIVES' })}
 <div style="padding: 28px 44px 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
   ${MAT.map((m, i) => card(m, i === MAT.length - 1 && MAT.length % 2 === 1)).join('\n  ')}
 </div>

@@ -2,10 +2,10 @@ import { XS, LV, BALCONS, ETAGES, NIVEAUX_LOGEMENT, HET, HSP, FASCIA, GC, PBH, R
 import { txt, dimH, dimV, levelMark, callout, ground } from './svgkit.mjs';
 
 export const PALETTE_A = {
-  name: 'Latte & Graphite', paper: '#FFFFFF',
-  wall: '#D5C4AC', wallDeep: '#B9A68B',       // monocouche teinte latte
-  pier: '#F3F0E9', plinth: '#A8967C',         // poteaux et acroteres en blanc
-  aqua: '#FAF8F3', aquaSh: '#E4DED2',
+  name: 'Blanc & Graphite', paper: '#FFFFFF',
+  wall: '#F4F2ED', wallDeep: '#E0DDD5',       // monocouche blanc, fonds de baie en retrait
+  pier: '#FCFBF8', plinth: '#D8D4CA',
+  aqua: '#FFFFFF', aquaSh: '#E9E6DE',
   accent: '#474B4E', accentDark: '#31353A',   // aluminium RAL 7024
   dark: '#22262A', glass: '#1E2224', glassHi: '#5A6468', inox: '#C6CCD0',
   led: '#F0D9A6',
@@ -299,7 +299,7 @@ export function annotations(P, E) {
   };
   const nx = px(0), ny = 26;
   a.push(wave(nx, ny + 4, 74, 5));
-  a.push(txt(nx + 86, ny + 8, 'ONDE DE RIVE : L OMBRE PORTEE ET LE TRAIT POINTILLE SUR CHAQUE BANDEAU DONNENT LA PROFONDEUR — 0.79 m AU CREUX, 1.60 m A LA CRETE',
+  a.push(txt(nx + 86, ny + 8, 'ONDE DE RIVE : L OMBRE PORTEE ET LE TRAIT POINTILLE DONNENT LA PROFONDEUR — GRAND LOBE 1.80 m, CREUX 0.79 m, PETIT LOBE 1.10 m',
     { size: 9.5, anchor: 'start', fill: P.dim, weight: 600, ls: '0.09em' }));
   a.push(`<path d="M ${nx} ${ny + 32} l 0 12 M ${nx} ${ny + 38} l 74 0 M ${nx + 74} ${ny + 38} l -6 -3.5 M ${nx + 74} ${ny + 38} l -6 3.5" fill="none" stroke="${P.ink}" stroke-width="1.4"/>`);
   a.push(txt(nx + 86, ny + 42, 'SOCLE PARKING RDC + R+1 EN AVANCEE DE 4.00 m SUR LE NU DE FACADE · VOIR PLANCHE « COUPE A-A »',

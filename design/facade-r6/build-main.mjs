@@ -4,11 +4,11 @@ import { page, header } from './page.mjs';
 import { developpe } from './geo.mjs';
 
 const W = 1160, SVGH = 1404;
-const P = { ...PALETTE_A, wall: '{{wall}}', accent: '{{accent}}' };
+const P = { ...PALETTE_A };   // couleurs figees : monocouche blanc, alu RAL 7024
 const E = elevation(P, { scale: 37, x0: 244, y0: 1240 });
 
 const LEG = [
-  ['Monocouche bicolore', 'Fond de façade en teinte latte, poteaux et acrotères en blanc. Grain fin gratté, joints creux horizontaux au droit de chaque plancher.'],
+  ['Monocouche blanc', 'Toute la façade en monocouche blanc, grain fin gratté. Joints creux horizontaux au droit de chaque plancher ; fonds de baie en retrait, légèrement plus sourds.'],
   ['Aquapanel cintré', `Bandeaux de rive ondulés, tracé relevé sur votre croquis. ${developpe().toFixed(2)} ml par balcon × 12 balcons (6 niveaux × 2 blocs) : ≈ ${(developpe() * 12).toFixed(0)} ml.`],
   ['Garde-corps mixte inox + verre noir', 'Suit l’onde. Barreaudage inox 304 Ø 16 aux creux et aux crêtes, verre feuilleté teinté noir bombé entre les deux. Main courante inox Ø 42 continue, h = 1,10 m.'],
   ['Brise-vue aluminium', 'Niche centrale 1,80 m de large creusée de 1,50 m — lames verticales RAL 7024 en façade, du R+2 à la toiture. Intimité des deux logements en vis-à-vis.'],
@@ -37,7 +37,7 @@ ${header({
   w: W,
   kicker: 'Immeuble R+8 · logements · Algérie',
   title: 'Façade principale',
-  sub: 'Variante A « Latte &amp; Graphite » — direction retenue. Monocouche teinte latte sur fond, poteaux et bandeaux de rive en blanc, garde-corps mixte inox et verre feuilleté noir suivant l’onde, aluminium RAL 7024 gris graphite.',
+  sub: 'Variante A « Blanc &amp; Graphite » — direction retenue. Monocouche blanc sur toute la façade, bandeaux de rive cintrés en Aquapanel blanc, garde-corps mixte inox et verre feuilleté noir suivant l’onde, aluminium RAL 7024 gris graphite.',
   right: 'ÉCHELLE 1:100<br>COTES EN MÈTRES<br>NIVEAUX / NGF PROJET<br>VARIANTE A — RETENUE',
 })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">

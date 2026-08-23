@@ -113,7 +113,7 @@ ETAGES.forEach(([h, alt, t]) => g.push(levelMark(px(XP) + 92, py(h), alt, t)));
 
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Coupe A-A · transversale', title: 'Avancée parking &amp; terrasse',
-  sub: 'Le socle parking RDC + R+1 avance de 4.00 m sur le nu de façade ; sa toiture devient la terrasse du R+2. Au-dessus, les balcons en console suivent l’onde de rive, de 0 au nu de façade à 0,90 m au grand lobe — rive tracée au compas. Hauteur libre 3,06 m, dalle 0,20 m ; RDC 2,60 m libre.',
+  sub: 'Le socle parking RDC + R+1 avance de 4.00 m sur le nu de façade ; sa toiture devient la terrasse du R+2. Au-dessus, les balcons en console suivent l’onde de rive, de 0 au nu de façade à 1,80 m au grand lobe — tracé arrêté sur votre croquis annoté. Hauteur libre 3,06 m, dalle 0,20 m ; RDC 2,60 m libre.',
   right: 'ÉCHELLE 1:100<br>COTES EN MÈTRES<br>ÉTAT PROJETÉ' })}
 <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;

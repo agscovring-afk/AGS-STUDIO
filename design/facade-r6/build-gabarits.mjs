@@ -120,7 +120,7 @@ ${header({ w: W, kicker: 'Gabarit à dessiner · niveau courant R+3 à R+6',
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 ${foot([
   ['Ce qu’il me faut', 'La ligne de rive, d’un poteau à l’autre. Si tu peux, note la profondeur aux crêtes et aux creux en lisant la règle de gauche — sinon je la relève sur ton dessin.'],
-  ['Ce qui est contraint', 'Le tracé retenu descend à 0,79 m au creux médian et monte à 1,60 m à la crête, pour un développé de ' + developpe().toFixed(2) + ' ml par balcon.'],
+  ['Ce qui est contraint', 'Le tracé retenu sort à 1,80 m au grand lobe, revient à 0,79 m au creux médian, ressort à 1,10 m au petit lobe, pour un développé de ' + developpe().toFixed(2) + ' ml par balcon.'],
   ['Le bloc de droite', 'Dessine seulement le bloc gauche si tu veux : je reporte en symétrie. Si tu veux deux ondes différentes, dessine les deux.'],
 ])}
 </div>`;

@@ -63,34 +63,36 @@ export function doors(bay) {
 }
 
 // ---------------------------------------------------------------------------
-// ONDE DE RIVE — troisieme releve : la rive est tracee AU COMPAS.
-// Elle part du nu de facade au droit du poteau, reste droite jusqu'a la
-// premiere porte, puis decrit trois demi-cercles tangents au nu :
-//   deux GRANDS de diametre 1.80 m — soit exactement la largeur d'une
-//   porte-balcon — un devant chaque porte, et un PETIT de diametre 1.10 m
-//   entre les deux. Elle revient au nu de facade au droit du second poteau.
-// Chaque lobe se trace a la ficelle depuis un centre pose sur le nu.
+// ONDE DE RIVE — tracé arrêté sur le croquis annoté du maître d'ouvrage.
+// La rive part du nu de façade au droit du poteau, creuse un GRAND lobe de
+// 1,80 m de profondeur, remonte à 0,79 m entre les deux portes, creuse un
+// PETIT lobe de 1,10 m, puis revient au nu au droit du second poteau.
+// Les profondeurs 1,80 et 1,10 sont celles relevées sur le croquis (traits
+// rouge et jaune). Raccord en cosinus relevé : tangente horizontale à chaque
+// extremum, donc une courbe continue, dérivable et de courbure bornée.
 // ---------------------------------------------------------------------------
-export const R_GRAND = 0.90;   // demi-cercle de 1.80 m de diametre
-export const R_PETIT = 0.55;   // demi-cercle de 1.10 m de diametre
-
-// centres des lobes, en abscisse locale depuis le bord de bloc
-export const LOBES = [
-  { c: 2.35, r: R_GRAND },   // devant la premiere porte-balcon
-  { c: 3.925, r: R_PETIT },  // entre les deux portes
-  { c: 5.50, r: R_GRAND },   // devant la seconde porte-balcon
+export const ONDE = [
+  [0.00, 0.00],   // au nu de façade, contre le poteau
+  [1.96, 1.80],   // grand lobe
+  [3.92, 0.79],   // creux médian, entre les deux portes
+  [5.64, 1.10],   // petit lobe
+  [7.85, 0.00],   // retour au nu, contre le second poteau
 ];
 
 export function ondeAt(u) {
   const x = Math.min(BLOC, Math.max(0, u));
-  for (const { c, r } of LOBES) {
-    const d = x - c;
-    if (Math.abs(d) <= r) return Math.sqrt(r * r - d * d);
+  for (let i = 0; i < ONDE.length - 1; i++) {
+    const [x0, y0] = ONDE[i], [x1, y1] = ONDE[i + 1];
+    if (x <= x1 || i === ONDE.length - 2) {
+      const t = (x - x0) / (x1 - x0);
+      return y0 + (y1 - y0) * (1 - Math.cos(Math.PI * t)) / 2;
+    }
   }
-  return 0;
+  return ONDE[ONDE.length - 1][1];
 }
 
-export const DMIN = 0.00, DCREUX = 0.55, DMAX = 0.90;   // au nu · lobe petit · lobe grand
+export const DMIN = 0.00, DCREUX = 0.79, DMAX = 1.80;   // au nu · creux médian · grand lobe
+export const DPETIT = 1.10;                            // petit lobe
 
 export function depthAt(m, b) {
   const [a, z] = BLOCS[b];
@@ -120,29 +122,28 @@ export function rayonAt(u, h = 0.02) {
 // le rayon reste grand : en dessous de R_VERRE la fleche du panneau devient
 // visible, on passe au barreaudage inox qui epouse n'importe quel rayon.
 // ---------------------------------------------------------------------------
+export const GC_INOX = 0.32;   // demi-largeur du barreaudage autour d'un point de controle
 export const GC_MINI = 0.45;   // longueur mini d'un segment, pour rester posable
 
-// Le verre feuillete plat ne suit une rive que la ou elle est droite. Les trois
-// lobes sont des arcs de 0.55 et 0.90 m de rayon : trop serres pour du verre,
-// on les fait en barreaudage inox. Les parties droites prennent le verre.
+// Avec un raccord en cosinus la courbure est nulle au milieu de chaque portee
+// et maximale aux points de controle : barreaudage inox autour de chaque point
+// de controle, verre feuillete plat sur les portions droites entre eux.
 export function gcSegmentsLocal() {
-  const cuts = [];
-  for (const { c, r } of LOBES) cuts.push([c - r, c + r]);
+  const zones = ONDE.map(([x]) => ({ kind: 'inox', x1: Math.max(0, x - GC_INOX), x2: Math.min(BLOC, x + GC_INOX) }));
+  const merged = [zones[0]];
+  for (let i = 1; i < zones.length; i++) {
+    const prev = merged[merged.length - 1];
+    if (zones[i].x1 - prev.x2 < GC_MINI) prev.x2 = zones[i].x2;
+    else merged.push(zones[i]);
+  }
   const out = [];
   let cursor = 0;
-  for (const [a, b] of cuts) {
-    if (a > cursor + 1e-6) out.push({ kind: a - cursor < GC_MINI ? 'inox' : 'verre', x1: cursor, x2: a });
-    out.push({ kind: 'inox', x1: a, x2: b });
-    cursor = b;
+  for (const z of merged) {
+    if (z.x1 > cursor + 1e-6) out.push({ kind: 'verre', x1: cursor, x2: z.x1 });
+    out.push(z); cursor = z.x2;
   }
   if (cursor < BLOC - 1e-6) out.push({ kind: 'verre', x1: cursor, x2: BLOC });
-  // fusionner les voisins de meme nature
-  const m = [out[0]];
-  for (let i = 1; i < out.length; i++) {
-    if (out[i].kind === m[m.length - 1].kind) m[m.length - 1].x2 = out[i].x2;
-    else m.push(out[i]);
-  }
-  return m;
+  return out;
 }
 
 // segments d'un bloc, exprimes en abscisses de facade et dans l'ordre croissant

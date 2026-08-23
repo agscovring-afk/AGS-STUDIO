@@ -146,6 +146,15 @@
       "h": 1130,
       "page": "page-3",
       "title": "Variante C — Rubans continus"
+    },
+    {
+      "file": "Vue-Haut.dc.html",
+      "x": 2560,
+      "y": 0,
+      "w": 1180,
+      "h": 960,
+      "page": "page-2",
+      "title": "Vue plongeante — terrasse R+2 et balcon R+3"
     }
   ],
   "annotations": [
@@ -163,7 +172,7 @@
       "y": 1550,
       "w": 330,
       "page": "page-1",
-      "text": "L'ONDE\n\nTracé relevé sur votre croquis, bloc droit ; le bloc gauche en est le miroir.\n\n0,79 m au creux médian, 1,60 m à la crête, 9,00 ml de développé par balcon.\n\nSur l'élévation la courbe se lit à l'ombre portée et au trait pointillé : une élévation orthogonale ne peut pas montrer une courbe qui se développe en plan."
+      "text": "L’ONDE\n\nTracé final, relevé sur votre capture annotée : bloc droit ; le bloc gauche en est le miroir.\n\nGrand lobe 1,80 m (trait rouge), petit lobe 1,10 m (trait jaune), creux médian 0,79 m. Développé 9,27 ml par balcon.\n\nSur l’élévation la courbe se lit à l’ombre portée et au trait pointillé : une élévation orthogonale ne peut pas montrer une courbe qui se développe en plan."
     },
     {
       "id": "amb",
@@ -171,7 +180,7 @@
       "y": 0,
       "w": 330,
       "page": "page-2",
-      "text": "AMBIANCES\n\nVues d'ambiance en perspective à trois points, calées sur la géométrie validée.\n\nÀ regarder après les plans, pas avant : elles ne servent qu'à juger l'effet."
+      "text": "AMBIANCES\n\nVues d’ambiance en perspective à trois points, calées sur la géométrie validée : contre-plongée jour, contre-plongée nuit, et vue plongeante entre la terrasse R+2 et le balcon R+3.\n\nÀ regarder après les plans, pas avant : elles ne servent qu’à juger l’effet."
     },
     {
       "id": "detail",
@@ -179,7 +188,7 @@
       "y": 4800,
       "w": 330,
       "page": "page-1",
-      "text": "LE BALCON EN DÉTAIL\n\nQuatre vues du même balcon au 1:25 : élévation intérieure avec les deux portes, coupe à la crête (1,60 m), coupe au creux (0,79 m), et plan.\n\nLes deux coupes sont la même construction à ses deux profondeurs extrêmes — c'est là que se lit l'ondulation, qu'une élévation ne peut pas montrer."
+      "text": "LE BALCON EN DÉTAIL\n\nQuatre vues du même balcon au 1:25 : élévation intérieure avec les deux portes, coupe au grand lobe (1,80 m), coupe au petit lobe (1,10 m), et plan.\n\nLes deux coupes sont la même construction à ses deux profondeurs : c’est là que se lit l’ondulation, qu’une élévation ne peut pas montrer."
     }
   ],
   "launch": {

@@ -28,10 +28,10 @@ function scene(night) {
         aquaBot: '#F7EBD4', soffitN: '#FFE7B4', soffitF: '#A8783A', accent: '#E8A757', accentD: '#6E4A1C',
         inox: '#93A4AA', rail: '#E9F2F4', glass: '#3A4E56', glassO: 0.5, sky: ['#070D18', '#101E32', '#22364C', '#2E4050'],
         podium: '#26272A', podiumT: '#1A1B1E', ground: '#111214', ctx: '#0B0D10', ctxO: 0.85, lbl: '#B9C4CB' }
-    : { wall: '#E7DECE', wallSh: '#D3C6AE', bay: '#C7B99F', pier: '#F1EADD', aquaTop: '#FCFAF6',
-        aquaBot: '#DED6C7', soffitN: '#C9BFAD', soffitF: '#9B9080', accent: '#474B4E', accentD: '#2E3236',
+    : { wall: '#F2F0EA', wallSh: '#DFDCD3', bay: '#C9C5BA', pier: '#FCFBF8', aquaTop: '#FFFFFF',
+        aquaBot: '#E5E2DA', soffitN: '#CFCCC3', soffitF: '#A19E95', accent: '#474B4E', accentD: '#2E3236',
         inox: '#C8CED0', rail: '#FFFFFF', glass: '#A6BCC1', glassO: 0.55, sky: ['#5C8FBF', '#8FB6D6', '#C7D9E4', '#E5E4DC'],
-        podium: '#CFC3AC', podiumT: '#B4A78F', ground: '#9C917E', ctx: '#2E2A24', ctxO: 0.3, lbl: '#3A352E' };
+        podium: '#E4E1D8', podiumT: '#CBC7BC', ground: '#A8A49A', ctx: '#2E2A24', ctxO: 0.3, lbl: '#3A352E' };
   const g = [];
 
   g.push(`<defs>
