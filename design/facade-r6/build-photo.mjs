@@ -12,10 +12,13 @@ const ZOOM = process.argv.includes('--zoom');
 // Trois garde-corps a comparer, demandes le 24.08 : tout verre, fer forge,
 // tout inox. 'mixte' reste le 40/40 verre-inox du dossier.
 const GCTYPE = (process.argv.find((a) => a.startsWith('--gc=')) || '--gc=verre').slice(5);
-const W = ZOOM ? 1600 : 1280, H = ZOOM ? 1120 : 1780;
+const W = ZOOM ? 1600 : 1320, H = ZOOM ? 1120 : 1720;
 const C = ZOOM
   ? makeCam({ eye: [1.2, 16.5, 9.4], look: [13.5, 0, 9.4], f: 2150, cx: 1075, cy: 1470 })
-  : makeCam({ eye: [-6, 25, 1.60], look: [10, 0, 1.60], f: 1150, cx: 781, cy: 1530 });
+  // Vue d'ensemble : on se rapproche et on coupe le pied. Un immeuble
+  // photographié depuis le trottoir d'en face n'a pas sa base dans le cadre —
+  // et sans base, plus besoin de peupler une rue qu'on ne verra pas.
+  : makeCam({ eye: [-4.2, 21, 1.60], look: [11, 0, 1.60], f: 1160, cx: 800, cy: 1810 });
 const P = C.P;
 const g = [];
 const px = (p) => { const q = P(p); return `${q[0]} ${q[1]}`; };
@@ -50,9 +53,20 @@ const NY = [0, 1, 0], NX = [-1, 0, 0], NZ = [0, 0, 1], NZm = [0, 0, -1];
 // ===========================================================================
 const ECH = ZOOM ? 165 : 46;   // px par metre au nu de facade
 g.push(`<defs>${FILTRES({ ech: ECH })}
-  <linearGradient id="ciel" x1="0" y1="0" x2="0.15" y2="1">
-    <stop offset="0" stop-color="${MAT.ciel0}"/><stop offset="0.55" stop-color="${MAT.ciel1}"/>
-    <stop offset="1" stop-color="${MAT.ciel2}"/></linearGradient>
+  <linearGradient id="ciel" x1="0.1" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="${NUIT ? '#060C1A' : '#2C6BAE'}"/>
+    <stop offset="0.30" stop-color="${NUIT ? '#0D1B33' : '#5B96CE'}"/>
+    <stop offset="0.62" stop-color="${NUIT ? '#1B2E4C' : '#9AC2E0'}"/>
+    <stop offset="0.86" stop-color="${NUIT ? '#2E4665' : '#D9E6EE'}"/>
+    <stop offset="1" stop-color="${NUIT ? '#3C556F' : '#F2E7D6'}"/></linearGradient>
+  <linearGradient id="aerien" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="${NUIT ? '#22344E' : '#C2D6E6'}" stop-opacity="${NUIT ? 0.28 : 0.22}"/>
+    <stop offset="0.55" stop-color="${NUIT ? '#22344E' : '#CBDCE8'}" stop-opacity="0.05"/>
+    <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+  <linearGradient id="gradeChaud" x1="0.15" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#FFE9C8" stop-opacity="${NUIT ? 0.04 : 0.15}"/>
+    <stop offset="0.52" stop-color="#FFDDAE" stop-opacity="${NUIT ? 0.02 : 0.05}"/>
+    <stop offset="1" stop-color="#8FA8C4" stop-opacity="${NUIT ? 0.09 : 0.12}"/></linearGradient>
   <linearGradient id="solG" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="${NUIT ? '#232E3C' : '#A6A8A3'}"/>
     <stop offset="0.15" stop-color="${NUIT ? '#171E27' : '#83837C'}"/>
@@ -68,17 +82,18 @@ g.push(`<defs>${FILTRES({ ech: ECH })}
     <stop offset="0" stop-color="#FFF6E0" stop-opacity="${NUIT ? 0 : 0.95}"/>
     <stop offset="0.45" stop-color="#FFE9BE" stop-opacity="${NUIT ? 0 : 0.35}"/>
     <stop offset="1" stop-color="#FFE9BE" stop-opacity="0"/></radialGradient>
-  <filter id="nuages" x="-20%" y="-20%" width="140%" height="140%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.0016 0.0055" numOctaves="6" seed="7" result="t"/>
+  <filter id="nuages" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.0009 0.0040" numOctaves="6" seed="7" result="t"/>
     <feColorMatrix in="t" type="matrix" result="a"
-      values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.5 0 0 0 -0.42"/>
-    <feGaussianBlur in="a" stdDeviation="2.5"/>
+      values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.30 0 0 0 -0.38"/>
+    <feGaussianBlur in="a" stdDeviation="4.5"/>
   </filter>
-  <linearGradient id="wallwash" x1="0" y1="1" x2="0" y2="0">
-    <stop offset="0" stop-color="#FFD9A0" stop-opacity="${NUIT ? 0.62 : 0.10}"/>
-    <stop offset="0.22" stop-color="#FFCE8C" stop-opacity="${NUIT ? 0.34 : 0.05}"/>
-    <stop offset="0.65" stop-color="#F5BE7C" stop-opacity="${NUIT ? 0.10 : 0}"/>
-    <stop offset="1" stop-color="#F5BE7C" stop-opacity="0"/></linearGradient>
+  <filter id="nuagesHauts" x="-25%" y="-25%" width="150%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.0024 0.012" numOctaves="4" seed="23" result="t"/>
+    <feColorMatrix in="t" type="matrix" result="a"
+      values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2.1 0 0 0 -0.98"/>
+    <feGaussianBlur in="a" stdDeviation="1.4"/>
+  </filter>
   <filter id="flou6"><feGaussianBlur stdDeviation="6"/></filter>
   <filter id="flou14"><feGaussianBlur stdDeviation="14"/></filter>
   <filter id="flou3"><feGaussianBlur stdDeviation="3"/></filter>
@@ -120,7 +135,8 @@ g.push(`<g clip-path="url(#cadre)">`);
 // CIEL
 // ===========================================================================
 g.push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#ciel)"/>`);
-g.push(`<rect x="0" y="0" width="${W}" height="${1560}" filter="url(#nuages)" opacity="${NUIT ? 0.10 : 0.42}"/>`);
+g.push(`<rect x="0" y="0" width="${W}" height="${H}" filter="url(#nuages)" opacity="${NUIT ? 0.09 : 0.50}"/>`);
+g.push(`<rect x="0" y="0" width="${W}" height="${H * 0.62}" filter="url(#nuagesHauts)" opacity="${NUIT ? 0.05 : 0.34}"/>`);
 { // le soleil, hors champ a gauche, mais sa lueur est dans le cadre
   const q = P([-40, 60, 60]);
   if (Number.isFinite(q[0])) g.push(`<ellipse cx="${q[0]}" cy="${q[1]}" rx="620" ry="520" fill="url(#soleil)"/>`);
@@ -131,48 +147,25 @@ if (NUIT) for (let i = 0; i < 90; i++) {
 }
 
 // ===========================================================================
-// CONTEXTE LOINTAIN — la ville derriere, noyee dans la brume
+// CONTEXTE LOINTAIN — des masses noyées dans la brume, sans un seul détail :
+// juste ce qu'il faut pour que le ciel ne soit pas vide derrière l'immeuble.
 // ===========================================================================
 {
-  const blocs = [
-    [-46, -34, -30, 15], [-33, -20, -26, 11], [-19, -30, -22, 18],
-    [24, -26, -34, 14], [36, -34, -28, 19], [50, -22, -24, 12], [64, -30, -30, 16],
-  ];
-  for (const [x0, y0, x1, h] of blocs) {
-    const d = Math.hypot(x0 + 6, y0 - 25);
-    const c = haze(NUIT ? '#2A3A52' : '#C8C3B8', d, { d0: 25, k: 0.011, color: NUIT ? '#1B3050' : '#C6D8E6' });
-    g.push(face([[x0, y0, 0], [x0 + 14, y0 + x1 * 0, 0], [x0 + 14, y0, h], [x0, y0, h]], c));
-    g.push(face([[x0 + 14, y0, 0], [x0 + 14, y0 - 16, 0], [x0 + 14, y0 - 16, h * 0.92], [x0 + 14, y0, h]],
-      haze(NUIT ? '#1E2C40' : '#ABA69B', d + 8, { d0: 25, k: 0.011, color: NUIT ? '#1B3050' : '#C6D8E6' })));
-    if (NUIT) for (let k = 0; k < 26; k++) {
-      const fx = x0 + 1.4 + (k % 6) * 2.1, fz = 2.5 + Math.floor(k / 6) * 3.2;
-      if (fz > h - 1.5 || (k * 7) % 5 === 0) continue;
-      const a = P([fx, y0, fz]), b = P([fx + 1.0, y0, fz + 1.5]);
-      if (!Number.isFinite(a[0])) continue;
-      g.push(`<rect x="${b[0]}" y="${b[1]}" width="${(a[0] - b[0]).toFixed(1)}" height="${(a[1] - b[1]).toFixed(1)}" fill="#FFD79A" opacity="0.5"/>`);
-    }
+  const blocs = [[-52, -40, 17], [-34, -26, 12], [26, -32, 15], [44, -40, 20], [62, -26, 13]];
+  for (const [x0, y0, h] of blocs) {
+    const d = Math.hypot(x0 + 4, y0 - 19);
+    const c = haze(NUIT ? '#22344E' : '#C4C0B6', d, { d0: 12, k: 0.020, color: NUIT ? '#1B3050' : '#CFE0EC' });
+    g.push(face([[x0, y0, 0], [x0 + 16, y0, 0], [x0 + 16, y0, h], [x0, y0, h]], c, 'filter="url(#flou3)"'));
   }
 }
 
 // ===========================================================================
-// SOL — bitume, bordure, trottoir
+// SOL — il ne reste qu'une bande au bas du cadre, sans détail
 // ===========================================================================
 {
   const hz = P([0, 400, 0])[1];
   g.push(`<rect x="0" y="${hz - 2}" width="${W}" height="${H - hz + 2}" fill="url(#solG)"/>`);
-  g.push(`<rect x="0" y="${hz - 2}" width="${W}" height="${H - hz + 2}" filter="url(#mBitume)" opacity="0.20"/>`);
-  // trottoir devant le socle : Y de 4.0 a 7.2, avec sa bordure
-  const TR0 = AVANCEE, TR1 = AVANCEE + 3.2, X0 = -30, X1 = 60;
-  g.push(face([[X0, TR0, 0.16], [X1, TR0, 0.16], [X1, TR1, 0.16], [X0, TR1, 0.16]], S(MAT.trottoir, NZ)));
-  g.push(face([[X0, TR1, 0], [X1, TR1, 0], [X1, TR1, 0.16], [X0, TR1, 0.16]], S(MAT.trottoir, NY, { kd: SH.kd * 0.8 })));
-  for (let x = X0; x < X1; x += 1.2)
-    g.push(`<path d="${poly(C, [[x, TR0, 0.161], [x, TR1, 0.161]], false)}" stroke="${NUIT ? '#2B3038' : '#A29C90'}" stroke-width="1" fill="none" opacity="0.55"/>`);
-  g.push(`<path d="${poly(C, [[X0, TR1, 0.161], [X1, TR1, 0.161]], false)}" stroke="${NUIT ? '#3A4049' : '#CFCABE'}" stroke-width="1.6" fill="none" opacity="0.8"/>`);
-  // marquage au sol de la chaussee
-  for (let x = -26; x < 58; x += 5.5)
-    g.push(face([[x, 15.6, 0.012], [x + 2.6, 15.6, 0.012], [x + 2.6, 15.95, 0.012], [x, 15.95, 0.012]], NUIT ? '#7A776A' : '#E6E2D6', 'opacity="0.85"'));
-  // pied de bordure : la ligne sombre qui pose le trottoir sur la chaussee
-  g.push(`<path d="${poly(C, [[X0, TR1, 0.004], [X1, TR1, 0.004]], false)}" stroke="#1E2228" stroke-width="3" fill="none" opacity="0.42"/>`);
+  g.push(`<rect x="0" y="${hz - 2}" width="${W}" height="${H - hz + 2}" filter="url(#mBitume)" opacity="0.14"/>`);
 }
 
 // ===========================================================================
@@ -564,103 +557,19 @@ for (let li = BALCONS.length - 1; li >= 0; li--) {
 }
 
 // ===========================================================================
-// PREMIER PLAN — echelle humaine, voitures, arbres
+// PAS D'ENTOURAGE.
+// Le palmier, la voiture, les passants et les immeubles voisins étaient des
+// vignettes plates posées à côté d'un bâtiment travaillé en lumière et en
+// ombre. C'est ce désaccord — pas le manque de détail — qui faisait bon
+// marché. Un photographe d'architecture met des découpes crédibles ou ne met
+// rien. Ici : rien, et le pied du bâtiment sort du cadre.
 // ===========================================================================
-const ombreSol = (x, y, rx, ry, op = 0.30) => {
-  const s = castZ([x, y, 0], 0), q = P([s[0], s[1], 0.02]);
-  if (!Number.isFinite(q[0])) return '';
-  const k = P([x + rx, y, 0.02]);
-  return `<ellipse cx="${q[0]}" cy="${q[1]}" rx="${Math.abs(k[0] - P([x, y, 0.02])[0]) * 1.6}" ry="${Math.abs(k[0] - P([x, y, 0.02])[0]) * 0.42}" fill="#12161C" opacity="${op}" filter="url(#flou3)"/>`;
-};
-
-const personne = (x, y, h, col) => {
-  const o = [];
-  if (!NUIT) {
-    const s0 = castZ([x, y, 0.02], 0.02), s1 = castZ([x, y, h], 0.02);
-    o.push(`<path d="${poly(C, [[x - 0.16, y, 0.02], [x + 0.16, y, 0.02], [s1[0] + 0.16, s1[1], 0.02], [s1[0] - 0.16, s1[1], 0.02]])}"
-      fill="#141920" opacity="0.32" filter="url(#flou3)"/>`);
-  }
-  const b0 = P([x, y, 0.16]), t0 = P([x, y, 0.16 + h]);
-  if (!Number.isFinite(b0[0])) return '';
-  const u = Math.abs(P([x + 0.10, y, 0.16])[0] - b0[0]);      // 10 cm en px
-  const hp = b0[1] - t0[1];
-  const X0 = b0[0], Y0 = b0[1];
-  o.push(`<path d="
-    M ${X0 - u * 1.0} ${Y0}
-    L ${X0 - u * 0.9} ${Y0 - hp * 0.46}
-    L ${X0 - u * 1.85} ${Y0 - hp * 0.52}
-    Q ${X0 - u * 2.2} ${Y0 - hp * 0.76} ${X0 - u * 1.5} ${Y0 - hp * 0.80}
-    L ${X0 - u * 0.62} ${Y0 - hp * 0.815}
-    L ${X0 + u * 0.62} ${Y0 - hp * 0.815}
-    L ${X0 + u * 1.5} ${Y0 - hp * 0.80}
-    Q ${X0 + u * 2.2} ${Y0 - hp * 0.76} ${X0 + u * 1.85} ${Y0 - hp * 0.52}
-    L ${X0 + u * 0.9} ${Y0 - hp * 0.46}
-    L ${X0 + u * 1.0} ${Y0}
-    L ${X0 + u * 0.16} ${Y0}
-    L ${X0} ${Y0 - hp * 0.42}
-    L ${X0 - u * 0.16} ${Y0} Z" fill="${col}" opacity="0.94"/>`);
-  o.push(`<ellipse cx="${X0}" cy="${Y0 - hp * 0.905}" rx="${u * 0.78}" ry="${u * 0.95}" fill="${col}" opacity="0.94"/>`);
-  o.push(`<rect x="${X0 - u * 0.28}" y="${Y0 - hp * 0.845}" width="${u * 0.56}" height="${hp * 0.035}" fill="${col}" opacity="0.94"/>`);
-  return o.join('');
-};
-
-const voiture = (x, y, L, col, sens = 1) => {
-  const o = [];
-  const p = (dx, dy, dz) => [x + dx * sens, y + dy, dz];
-  if (!NUIT) o.push(`<path d="${poly(C, [castZ(p(-L / 2, -0.85, 1.45), 0.02), castZ(p(L / 2, -0.85, 1.45), 0.02),
-    castZ(p(L / 2, 0.85, 1.45), 0.02), castZ(p(-L / 2, 0.85, 1.45), 0.02)])}" fill="#101418" opacity="0.34" filter="url(#flou6)"/>`);
-  o.push(face([p(-L / 2, 0.85, 0.28), p(L / 2, 0.85, 0.28), p(L / 2, 0.85, 0.95), p(-L / 2, 0.85, 0.95)], col));
-  o.push(`<path d="${poly(C, [p(-L / 2 + 0.35, 0.85, 0.95), p(-L / 2 + 1.15, 0.85, 1.45),
-    p(L / 2 - 1.25, 0.85, 1.45), p(L / 2 - 0.35, 0.85, 0.95)])}" fill="${NUIT ? '#0A0F14' : '#2A3238'}"/>`);
-  o.push(`<path d="${poly(C, [p(-L / 2 + 0.48, 0.86, 0.99), p(-L / 2 + 1.22, 0.86, 1.40),
-    p(L / 2 - 1.32, 0.86, 1.40), p(L / 2 - 0.48, 0.86, 0.99)])}" fill="${NUIT ? '#141C24' : '#8FA8B6'}" opacity="0.75"/>`);
-  o.push(face([p(-L / 2, 0.85, 0.24), p(L / 2, 0.85, 0.24), p(L / 2, 0.85, 0.30), p(-L / 2, 0.85, 0.30)], '#15181C'));
-  for (const dx of [-L / 2 + 0.9, L / 2 - 0.9]) {
-    const c = P(p(dx, 0.84, 0.32)), r = Math.abs(P(p(dx + 0.32, 0.84, 0.32))[0] - c[0]);
-    o.push(`<circle cx="${c[0]}" cy="${c[1]}" r="${r}" fill="#191C20"/><circle cx="${c[0]}" cy="${c[1]}" r="${r * 0.5}" fill="#4A5057"/>`);
-  }
-  if (NUIT) for (const dx of [-L / 2 + 0.15, L / 2 - 0.15])
-    o.push(`<circle cx="${P(p(dx, 0.85, 0.62))[0]}" cy="${P(p(dx, 0.85, 0.62))[1]}" r="5" fill="#FFE9B0" filter="url(#bloom)"/>`);
-  return o.join('');
-};
-
-const palmier = (x, y, h) => {
-  const o = [];
-  if (!NUIT) o.push(`<path d="${poly(C, [castZ([x - 0.2, y, h], 0.02), castZ([x + 0.2, y, h], 0.02), [x + 0.2, y, 0.02], [x - 0.2, y, 0.02]])}" fill="#141A20" opacity="0.26" filter="url(#flou6)"/>`);
-  const b = P([x, y, 0.16]), t = P([x, y, h]);
-  if (!Number.isFinite(b[0])) return '';
-  const wpx = Math.abs(P([x + 0.16, y, 0.16])[0] - b[0]);
-  o.push(`<path d="M ${b[0] - wpx} ${b[1]} Q ${b[0] - wpx * 0.4} ${(b[1] + t[1]) / 2} ${t[0] - wpx * 0.55} ${t[1]}
-    L ${t[0] + wpx * 0.55} ${t[1]} Q ${b[0] + wpx * 0.4} ${(b[1] + t[1]) / 2} ${b[0] + wpx} ${b[1]} Z"
-    fill="${NUIT ? '#2A2A26' : '#8A7C64'}"/>`);
-  const R = Math.abs(P([x + 2.3, y, h])[0] - t[0]);
-  for (let k = 0; k < 11; k++) {
-    const a = -Math.PI + k * Math.PI / 10, ex = t[0] + Math.cos(a) * R, ey = t[1] + Math.sin(a) * R * 0.5 + R * 0.16;
-    o.push(`<path d="M ${t[0]} ${t[1]} Q ${(t[0] + ex) / 2 + Math.cos(a) * 6} ${(t[1] + ey) / 2 - R * 0.30} ${ex} ${ey}"
-      stroke="${NUIT ? '#1D3026' : ['#4E6B3A', '#5C7A44', '#435E32'][k % 3]}" stroke-width="${(R * 0.10).toFixed(1)}" fill="none" stroke-linecap="round" opacity="0.95"/>`);
-  }
-  return o.join('');
-};
-
-g.push(voiture(24.5, 10.8, 4.5, NUIT ? '#20262C' : '#9AA3AB', 1));
-g.push(voiture(2.0, 9.6, 4.7, NUIT ? '#1B2228' : '#3E4A57', 1));
-g.push(voiture(13.5, 16.5, 4.4, NUIT ? '#171C22' : '#C7C3BC', 1));
-g.push(palmier(-3.4, 6.2, 7.4));
-g.push(palmier(21.8, 6.4, 6.6));
-g.push(personne(6.6, 5.9, 1.74, NUIT ? '#12161B' : '#39404A'));
-g.push(personne(7.35, 6.15, 1.66, NUIT ? '#141920' : '#6B5F62'));
-g.push(personne(15.2, 5.7, 1.78, NUIT ? '#10151A' : '#2C3640'));
-// lampadaire
-{
-  const x = 18.5, y = 6.4, h = 8.2;
-  g.push(`<path d="${poly(C, [[x, y, 0.16], [x, y, h], [x - 1.6, y, h + 0.25]], false)}" stroke="${NUIT ? '#2A2F36' : '#7C818A'}" stroke-width="3" fill="none"/>`);
-  if (NUIT) g.push(`<circle cx="${P([x - 1.6, y, h + 0.25])[0]}" cy="${P([x - 1.6, y, h + 0.25])[1]}" r="9" fill="#FFDDA0" filter="url(#bloom)"/>`);
-}
 
 // ===========================================================================
 // POST — voile atmospherique, vignettage, grain
 // ===========================================================================
-g.push(`<rect x="0" y="0" width="${W}" height="${H}" fill="${NUIT ? '#0E1E38' : '#BFD6E8'}" opacity="${NUIT ? 0.10 : 0.07}"/>`);
+g.push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#aerien)"/>`);
+g.push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#gradeChaud)" style="mix-blend-mode:soft-light"/>`);
 g.push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#vign)"/>`);
 g.push(`<rect x="0" y="0" width="${W}" height="${H}" filter="url(#grain)" opacity="${NUIT ? 0.10 : 0.055}" style="mix-blend-mode:overlay"/>`);
 g.push(`</g>`);
