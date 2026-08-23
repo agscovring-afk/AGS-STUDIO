@@ -24,22 +24,31 @@
       "x": 1260,
       "y": 0,
       "w": 900,
-      "h": 1330,
+      "h": 1380,
       "page": "page-1",
-      "title": "Rives ondulées — ambiance"
+      "title": "Rives ondulées — jour"
     },
     {
-      "file": "Coupe.dc.html",
+      "file": "Vue-Nuit.dc.html",
       "x": 2260,
       "y": 0,
       "w": 900,
-      "h": 1440,
+      "h": 1380,
+      "page": "page-1",
+      "title": "La courbe allumée — nuit"
+    },
+    {
+      "file": "Coupe.dc.html",
+      "x": 0,
+      "y": 1930,
+      "w": 900,
+      "h": 1500,
       "page": "page-1",
       "title": "Coupe A-A"
     },
     {
       "file": "Plan-Balcon.dc.html",
-      "x": 0,
+      "x": 1000,
       "y": 1930,
       "w": 1120,
       "h": 1010,
@@ -48,10 +57,10 @@
     },
     {
       "file": "Materiaux.dc.html",
-      "x": 1260,
+      "x": 2220,
       "y": 1930,
       "w": 940,
-      "h": 1370,
+      "h": 1700,
       "page": "page-1",
       "title": "Matériaux & hypothèses"
     },
@@ -97,7 +106,15 @@
       "y": 980,
       "w": 330,
       "page": "page-1",
-      "text": "LE VIDE CENTRAL\n\n1,80 m, avec un balcon de chaque côté qui se font face. Fermé par un brise-vue alu à lames verticales, du R+2 à la toiture : il règle le vis-à-vis et donne à la façade son seul accent vertical."
+      "text": "LE VIDE CENTRAL\n\n1,80 m, avec un balcon de chaque côté qui se font face. Fermé par un brise-vue alu à lames verticales, du R+2 à la toiture : il règle le vis-à-vis et donne à la façade son seul accent vertical.\n\nAu R+2 il est laissé ouvert dans la dalle de toiture du parking : chaque logement a sa propre terrasse de 7,85 m."
+    },
+    {
+      "id": "gc-eclairage",
+      "x": -390,
+      "y": 1420,
+      "w": 330,
+      "page": "page-1",
+      "text": "GARDE-CORPS ET LUMIÈRE\n\nLe garde-corps suit l'onde : barreaudage inox là où le rayon tombe à 0,35 m (5 sections par bloc), verre feuilleté plat de 1,09 m entre les deux (4 panneaux). Voir le plan de balcon.\n\nUne gorge LED de 5 cm court en sous-face de chaque rive — 99 ml. De nuit, la façade se réduit à cinq lignes de lumière qui ondulent."
     },
     {
       "id": "ecartees",

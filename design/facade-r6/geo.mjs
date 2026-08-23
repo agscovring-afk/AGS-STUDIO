@@ -57,3 +57,38 @@ export function developpe(span = BAY, n = 4000) {
 }
 
 export const fmt = (v, d = 2) => v.toFixed(d);
+
+// ---------------------------------------------------------------------------
+// Garde-corps mixte inox / verre, qui suit l'onde de rive.
+// Aux creux et aux cretes le rayon tombe a ~0,35 m : le verre ne s'y cintre
+// pas, on y met un barreaudage inox. Entre les deux, la rive est presque
+// droite et prend un panneau de verre feuillete plat.
+// Retourne les segments d'un bloc, dans l'ordre, de X1 a X2.
+// ---------------------------------------------------------------------------
+export const GC_INOX = 0.30;      // demi-largeur du barreaudage sur un extremum
+
+export function gcSegments(X1, X2) {
+  const a = X1 + COL, b = X2 - COL, step = (b - a) / (2 * LOBES);
+  const segs = [];
+  let cursor = X1;
+  for (let k = 0; k <= 2 * LOBES; k++) {
+    const x = a + k * step;
+    const s = k === 0 ? X1 : x - GC_INOX;
+    const e = k === 2 * LOBES ? X2 : x + GC_INOX;
+    if (s > cursor + 1e-6) segs.push({ kind: 'verre', x1: cursor, x2: s });
+    segs.push({ kind: 'inox', x1: s, x2: e });
+    cursor = e;
+  }
+  if (cursor < X2 - 1e-6) segs.push({ kind: 'verre', x1: cursor, x2: X2 });
+  return segs;
+}
+
+// Les deux blocs de facade, de part et d'autre du vide central.
+export const BLOCS = [[0, XS.c2[1]], [XS.c3[0], W]];
+
+// Rayon de courbure de la rive au parametre t (m)
+export function rayonAt(t) {
+  const L = BAY, A = (DMAX - DMIN) / 2, w = 2 * Math.PI * LOBES / L;
+  const y1 = A * w * Math.sin(w * t * L), y2 = A * w * w * Math.cos(w * t * L);
+  return Math.pow(1 + y1 * y1, 1.5) / Math.abs(y2);
+}

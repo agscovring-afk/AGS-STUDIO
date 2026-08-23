@@ -1,4 +1,4 @@
-import { XS, LV, BALCONS, HET, FASCIA, GC, PBH, doors } from './geo.mjs';
+import { XS, LV, BALCONS, HET, FASCIA, GC, PBH, doors, gcSegments, BLOCS } from './geo.mjs';
 import { txt, dimH, dimV, levelMark, callout, ground } from './svgkit.mjs';
 
 export const PALETTE_A = {
@@ -100,15 +100,26 @@ export function elevation(P, o = {}) {
   }
 
   // ---- balcons ondules : bandeau Aquapanel + garde-corps -----------------
+  // Garde-corps mixte : barreaudage inox aux creux et aux cretes (rayon ~0,35 m),
+  // panneaux de verre feuillete plats sur les portions quasi droites.
   const gcParts = (x1, x2, h) => {
     const s = [];
     s.push(`<rect x="${px(x1)}" y="${py(h) + 1}" width="${wm(x2 - x1)}" height="${wm(0.16)}" fill="${P.dark}" opacity="0.16"/>`);
-    s.push(R(x1, x2, h + 0.06, h + GC - 0.08, 'url(#gl)'));
-    s.push(R(x1, x2, h + 0.06, h + GC - 0.08, 'none', `stroke="${P.inox}" stroke-width="0.8" opacity="0.8"`));
-    for (let x = x1 + 1.55; x < x2 - 0.4; x += 1.55)
-      s.push(`<line x1="${px(x)}" y1="${py(h + 0.06)}" x2="${px(x)}" y2="${py(h + GC - 0.08)}" stroke="${P.inox}" stroke-width="2.2"/>`);
-    s.push(R(x1, x2, h + GC - 0.08, h + GC, P.inox));            // main courante inox
-    s.push(R(x1, x2, h + GC - 0.08, h + GC - 0.055, '#FFFFFF', 'opacity="0.7"'));
+    for (const seg of gcSegments(x1, x2)) {
+      if (seg.kind === 'verre') {
+        s.push(R(seg.x1 + 0.03, seg.x2 - 0.03, h + 0.17, h + GC - 0.10, 'url(#gl)'));
+        s.push(R(seg.x1 + 0.03, seg.x2 - 0.03, h + 0.17, h + GC - 0.10, 'none', `stroke="${P.inox}" stroke-width="0.7" opacity="0.85"`));
+        s.push(R(seg.x1, seg.x2, h + 0.08, h + 0.17, P.inox));                     // profil U inox en pied
+      } else {
+        s.push(R(seg.x1, seg.x2, h + 0.08, h + 0.15, P.inox));                     // lisse basse
+        for (let x = seg.x1 + 0.055; x < seg.x2 - 0.03; x += 0.11)
+          s.push(`<line x1="${px(x)}" y1="${py(h + 0.10)}" x2="${px(x)}" y2="${py(h + GC - 0.09)}" stroke="${P.inox}" stroke-width="1.5"/>`);
+      }
+      s.push(`<line x1="${px(seg.x2)}" y1="${py(h + 0.08)}" x2="${px(seg.x2)}" y2="${py(h + GC)}" stroke="${P.inox}" stroke-width="2.4"/>`);
+    }
+    s.push(`<line x1="${px(x1)}" y1="${py(h + 0.08)}" x2="${px(x1)}" y2="${py(h + GC)}" stroke="${P.inox}" stroke-width="2.4"/>`);
+    s.push(R(x1, x2, h + GC - 0.09, h + GC, P.inox));                              // main courante continue
+    s.push(R(x1, x2, h + GC - 0.09, h + GC - 0.062, '#FFFFFF', 'opacity="0.72"'));
     return s.join('');
   };
 
@@ -117,6 +128,7 @@ export function elevation(P, o = {}) {
       g.push(`<rect x="${px(x1)}" y="${py(h - FA) + 1}" width="${wm(x2 - x1)}" height="${wm(0.30)}" fill="${P.dark}" opacity="0.13"/>`);
       g.push(R(x1, x2, h - FA, h, 'url(#aq)'));                   // bandeau courbe Aquapanel
       g.push(R(x1, x2, h - 0.035, h, P.aquaSh, 'opacity="0.7"'));
+      g.push(R(x1, x2, h - FA, h - FA + 0.05, P.dark, 'opacity="0.55"'));   // gorge LED en sous-face
       g.push(gcParts(x1, x2, h));
     }
   }
@@ -154,9 +166,12 @@ export function elevation(P, o = {}) {
     g.push(R(a, b, 3.20, LV.r2, P.pier, 'opacity="0.75"'));
 
   // ---- terrasse R+2 sur toiture parking ---------------------------------
-  g.push(`<rect x="${px(0)}" y="${py(LV.r2 + FA) + 1}" width="${wm(17.5)}" height="${wm(0.22)}" fill="${P.dark}" opacity="0.12"/>`);
-  g.push(R(0, 17.50, LV.r2, LV.r2 + FA, 'url(#aq)'));
-  g.push(gcParts(0, 17.50, LV.r2 + FA));
+  for (const [x1, x2] of BLOCS) {
+    g.push(`<rect x="${px(x1)}" y="${py(LV.r2 + FA) + 1}" width="${wm(x2 - x1)}" height="${wm(0.22)}" fill="${P.dark}" opacity="0.12"/>`);
+    g.push(R(x1, x2, LV.r2, LV.r2 + FA, 'url(#aq)'));
+    g.push(R(x1, x2, LV.r2, LV.r2 + 0.05, P.dark, 'opacity="0.55"'));       // gorge LED
+    g.push(gcParts(x1, x2, LV.r2 + FA));
+  }
 
   // ---- acrotere ---------------------------------------------------------
   g.push(R(0, 17.50, LV.toit, LV.acr, P.wall));
@@ -208,6 +223,8 @@ export function annotations(P, E) {
     [6, px(14.40), py(8.30), px(15.60), py(7.05)],
     [7, px(6.20), py(5.60), px(4.50), py(4.90)],
     [8, px(15.10), py(21.05), px(16.30), py(22.71)],
+    [9, px(13.50), py(11.60), px(13.20), py(12.16)],
+    [10, px(10.65), py(17.60), px(8.90), py(17.60)],
   ];
   C.forEach(([n, cx, cy, tx, ty]) => a.push(callout(n, cx, cy, tx, ty, { color: P.ink })));
 
@@ -226,6 +243,9 @@ export function annotations(P, E) {
     { size: 9.5, anchor: 'start', fill: P.dim, weight: 600, ls: '0.09em' }));
   a.push(`<path d="M ${nx} ${ny + 32} l 0 12 M ${nx} ${ny + 38} l 74 0 M ${nx + 74} ${ny + 38} l -6 -3.5 M ${nx + 74} ${ny + 38} l -6 3.5" fill="none" stroke="${P.ink}" stroke-width="1.4"/>`);
   a.push(txt(nx + 86, ny + 42, 'SOCLE PARKING RDC + R+1 EN AVANCEE DE 4.00 m SUR LE NU DE FACADE · VOIR PLANCHE « COUPE A-A »',
+    { size: 9.5, anchor: 'start', fill: P.dim, weight: 600, ls: '0.09em' }));
+  a.push(`<path d="M ${nx} ${ny + 66} l 30 0 M ${nx + 44} ${ny + 66} l 30 0 M ${nx + 30} ${ny + 60} l 0 12 M ${nx + 44} ${ny + 60} l 0 12" fill="none" stroke="${P.ink}" stroke-width="1.4"/>`);
+  a.push(txt(nx + 86, ny + 70, 'TERRASSES R+2 SEPAREES PAR LE VIDE CENTRAL LAISSE OUVERT — UNE TERRASSE PAR LOGEMENT',
     { size: 9.5, anchor: 'start', fill: P.dim, weight: 600, ls: '0.09em' }));
 
   return a.join('\n');

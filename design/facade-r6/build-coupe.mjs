@@ -43,24 +43,28 @@ for (const h of LIVING) {
   g.push(R(XF + DMAX - 0.18, XF + DMAX + 0.02, h - FASCIA, h + 0.02, C.aqua));
   g.push(R(XF + DMAX - 0.18, XF + DMAX + 0.02, h - FASCIA, h + 0.02, 'none', `stroke="${C.betonL}" stroke-width="0.9"`));
   g.push(`<path d="M ${px(XF)} ${py(h - DALLE)} L ${px(XF + DMIN)} ${py(h - DALLE)} L ${px(XF + DMIN)} ${py(h + 0.02)}" fill="none" stroke="${C.ink}" stroke-width="1.3" stroke-dasharray="7 4"/>`);
-  // garde-corps verre + inox, lisible en coupe
-  g.push(R(XF + DMAX - 0.10, XF + DMAX - 0.02, h + 0.05, h + GC - 0.06, 'url(#gl2)'));
-  g.push(`<line x1="${px(XF + DMAX - 0.06)}" y1="${py(h)}" x2="${px(XF + DMAX - 0.06)}" y2="${py(h + GC)}" stroke="${C.inox}" stroke-width="2.6"/>`);
+  // garde-corps : la coupe passe a la crete de l'onde, donc en barreaudage inox
+  g.push(R(XF + DMAX - 0.10, XF + DMAX - 0.03, h + 0.08, h + 0.15, C.inox));
+  g.push(`<line x1="${px(XF + DMAX - 0.065)}" y1="${py(h + 0.10)}" x2="${px(XF + DMAX - 0.065)}" y2="${py(h + GC)}" stroke="${C.inox}" stroke-width="2.4"/>`);
   g.push(R(XF + DMAX - 0.22, XF + DMAX + 0.08, h + GC - 0.09, h + GC, C.inox));
+  // gorge LED en sous-face du bandeau cintre
+  g.push(R(XF + DMAX - 0.20, XF + DMAX - 0.13, h - FASCIA, h - FASCIA + 0.07, '#F2C46A'));
+  g.push(`<path d="M ${px(XF + DMAX - 0.165)} ${py(h - FASCIA)} l ${wm(0.55)} ${wm(0.42)} M ${px(XF + DMAX - 0.165)} ${py(h - FASCIA)} l ${wm(0.16)} ${wm(0.66)} M ${px(XF + DMAX - 0.165)} ${py(h - FASCIA)} l ${-wm(0.28)} ${wm(0.60)}" fill="none" stroke="#C79A3E" stroke-width="1" opacity="0.75"/>`);
   g.push(R(XF - 0.28, XF, h, h + PBH, C.accent, 'opacity="0.92"'));
-  g.push(txt(px(XF + DMAX / 2), py(h) + 22, 'BALCON', { size: 8.5, fill: C.dim, ls: '0.16em', weight: 700 }));
-  g.push(txt(px(XF / 2), py(h) + 26, 'LOGEMENT', { size: 8.5, fill: C.dim, ls: '0.16em', weight: 700 }));
+  g.push(txt(px(XF + DMAX / 2), py(h) - 50, 'BALCON', { size: 8.5, fill: C.dim, ls: '0.16em', weight: 700 }));
+  g.push(txt(px(XF / 2), py(h) - 50, 'LOGEMENT', { size: 8.5, fill: C.dim, ls: '0.16em', weight: 700 }));
 }
 
 // ---- terrasse R+2 --------------------------------------------------------
 g.push(R(XF, XP, LV.r2, LV.r2 + 0.07, '#DED4C1'));
 g.push(R(XP - 0.24, XP + 0.02, LV.r2, LV.r2 + FASCIA, C.aqua));
-g.push(R(XP - 0.16, XP - 0.08, LV.r2 + FASCIA + 0.05, LV.r2 + FASCIA + GC - 0.06, 'url(#gl2)'));
-g.push(`<line x1="${px(XP - 0.12)}" y1="${py(LV.r2 + FASCIA)}" x2="${px(XP - 0.12)}" y2="${py(LV.r2 + FASCIA + GC)}" stroke="${C.inox}" stroke-width="2.6"/>`);
+g.push(R(XP - 0.17, XP - 0.09, LV.r2 + FASCIA + 0.03, LV.r2 + FASCIA + 0.10, C.inox));
+g.push(`<line x1="${px(XP - 0.13)}" y1="${py(LV.r2 + FASCIA + 0.05)}" x2="${px(XP - 0.13)}" y2="${py(LV.r2 + FASCIA + GC)}" stroke="${C.inox}" stroke-width="2.4"/>`);
+g.push(R(XP - 0.20, XP - 0.13, LV.r2, LV.r2 + 0.07, '#F2C46A'));
 g.push(R(XP - 0.28, XP + 0.04, LV.r2 + FASCIA + GC - 0.09, LV.r2 + FASCIA + GC, C.inox));
 g.push(R(XF - 0.28, XF, LV.r2, LV.r2 + PBH, C.accent, 'opacity="0.92"'));
-g.push(txt(px((XF + XP) / 2), py(LV.r2) + 26, 'TERRASSE R+2 — 4.00 m', { size: 9, fill: C.dim, ls: '0.14em', weight: 700 }));
-g.push(txt(px(XF / 2), py(LV.r2) + 26, 'LOGEMENT', { size: 8.5, fill: C.dim, ls: '0.16em', weight: 700 }));
+g.push(txt(px((XF + XP) / 2) - 16, py(LV.r2) - 50, 'TERRASSE R+2 — 4.00 m', { size: 9, fill: C.dim, ls: '0.14em', weight: 700 }));
+g.push(txt(px(XF / 2), py(LV.r2) - 50, 'LOGEMENT', { size: 8.5, fill: C.dim, ls: '0.16em', weight: 700 }));
 
 // ---- parking -------------------------------------------------------------
 g.push(R(XP - 0.10, XP, LV.r1 + 0.70, LV.r1 + 2.50, C.accent));
@@ -71,9 +75,18 @@ for (const [h, t] of [[1.30, 'PARKING RDC'], [4.70, 'PARKING R+1']])
 
 // silhouette d'echelle sur le balcon du R+4
 {
-  const bx = XF + 1.9, bh = LV.r4;
+  const bx = XF + 2.62, bh = LV.r4;
   g.push(`<g fill="${C.betonL}" opacity="0.85"><circle cx="${px(bx)}" cy="${py(bh + 1.62)}" r="${wm(0.11)}"/>
     <path d="M ${px(bx) - wm(0.17)} ${py(bh + 1.48)} l ${wm(0.34)} 0 l ${wm(0.05)} ${wm(0.62)} l ${-wm(0.11)} 0 l ${-wm(0.04)} ${wm(0.86)} l ${-wm(0.14)} 0 l ${-wm(0.04)} ${-wm(0.5)} l ${-wm(0.04)} ${wm(0.5)} l ${-wm(0.14)} 0 l ${-wm(0.04)} ${-wm(0.86)} l ${-wm(0.11)} 0 z"/></g>`);
+}
+
+// renvoi eclairage
+{
+  const h = LV.r5, xa = px(XF + DMAX) + 30, ya = py(h - FASCIA) + 34;
+  g.push(`<line x1="${px(XF + DMAX - 0.13)}" y1="${py(h - FASCIA) + 3}" x2="${xa}" y2="${ya}" stroke="${C.ink}" stroke-width="0.8"/>`);
+  g.push(`<circle cx="${px(XF + DMAX - 0.13)}" cy="${py(h - FASCIA) + 3}" r="2.2" fill="${C.ink}"/>`);
+  g.push(txt(xa + 4, ya + 4, 'GORGE LED 5 cm', { size: 8.5, anchor: 'start', fill: '#B08334', ls: '0.1em', weight: 700 }));
+  g.push(txt(xa + 4, ya + 17, 'EN SOUS-FACE DE RIVE', { size: 8.5, anchor: 'start', fill: C.dim, ls: '0.1em', weight: 700 }));
 }
 
 // ligne de rupture
@@ -89,6 +102,8 @@ g.push(dimH(px(XF), px(XP), yc + 62, '4.00', { size: 13, weight: 700 }));
 g.push(`<line x1="${px(XF)}" y1="${py(-0.9)}" x2="${px(XF)}" y2="${yc + 70}" stroke="${C.dim}" stroke-width="0.7" stroke-dasharray="3 3"/>`);
 g.push(txt(px(XF), yc + 88, 'BALCON 1.30 → 3.00 m  ·  AVANCEE DU PARKING 4.00 m SUR LE NU DE FACADE',
   { size: 9, fill: C.dim, ls: '0.13em', weight: 600, anchor: 'start' }));
+g.push(txt(px(0), yc + 110, 'LES DEUX TERRASSES R+2 SONT SEPAREES PAR LE VIDE CENTRAL — VOIR FACADE',
+  { size: 9, fill: C.dim, ls: '0.11em', weight: 600, anchor: 'start' }));
 const xv = px(0) - 76;
 [[LV.rdc, LV.r1, '3.40'], [LV.r1, LV.r2, '3.06'], [LV.r2, LV.r3, '3.06'], [LV.r3, LV.r4, '3.06'],
  [LV.r4, LV.r5, '3.06'], [LV.r5, LV.r6, '3.06'], [LV.r6, LV.toit, '3.06'], [LV.toit, LV.acr, '1.00']]

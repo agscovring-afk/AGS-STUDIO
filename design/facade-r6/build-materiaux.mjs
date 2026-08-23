@@ -16,11 +16,11 @@ const MAT = [
           'Acrotère de terrasse R+2, onde continue sur 17,50 m → 20 ml',
           'Soit ≈ 99 ml au total ; retombée 45 cm → ≈ ' + (99 * 0.45).toFixed(0) + ' m² développés, sous-face comprise',
           'Rayon de cintrage mini ≈ 0,60 m — compatible plaque cintrée à sec'] },
-  { n: 'Garde-corps verre + inox', t: 'Verre clair / inox brossé', sw: ['#C3D0D2', '#B7BEC2'], ref: 'Verre feuilleté 8.8.4 clair, montants et main courante inox 304 brossé Ø 42 mm',
-    pts: ['Hauteur 1,10 m au-dessus du sol fini',
-          'Le garde-corps suit l’onde de rive, à 5 cm en retrait du nu',
-          'Montants tous les 1,55 m, fixation sur platine dans la dalle',
-          'Linéaire ≈ 99 ml, sur le même tracé que les bandeaux Aquapanel'] },
+  { n: 'Garde-corps mixte inox + verre', t: 'Inox brossé / verre clair', sw: ['#B7BEC2', '#C3D0D2'], ref: 'Barreaudage inox 304 brossé Ø 16 mm et panneaux de verre feuilleté 8.8.4 plats, main courante inox Ø 42 mm continue',
+    pts: ['Hauteur 1,10 m ; le tracé suit exactement l’onde de rive, à 10 cm en retrait du nu',
+          'Aux creux et aux crêtes le rayon tombe à 0,35 m : le verre ne s’y cintre pas — 5 sections de barreaudage par bloc, 3,50 m',
+          'Sur les portions quasi droites, 4 panneaux de verre plats de 1,09 m par bloc, 4,35 m',
+          'Barreaux espacés de 11 cm ; linéaire total ≈ 99 ml, même tracé que les bandeaux Aquapanel'] },
   { n: 'Brise-vue aluminium', t: 'Bronze anodisé', sw: ['#8A6E4C', '#5A4832'], ref: 'Lames aluminium anodisé bronze, ossature alu, fixation sur poteaux béton',
     pts: ['Vide central 1,80 m — lames verticales, du R+2 au niveau toiture (≈ 22 m²)',
           'Séparations d’intimité en bout de balcon, 1,30 m de haut',
@@ -30,13 +30,18 @@ const MAT = [
           '2 par balcon × 2 blocs × 5 niveaux = 20 unités en façade principale',
           '+ 2 par niveau côté vide central = 10 unités',
           'Couvertine alu bronze en tête d’acrotère et de poteau'] },
+  { n: 'Éclairage architectural', t: 'LED blanc chaud 3000 K', sw: ['#F2C46A', '#8A6E4C'], ref: 'Rubans LED IP65 en gorge aluminium, alimentation depuis les gaines de balcon, gradation par niveau',
+    pts: ['Gorge de 5 cm en sous-face de chaque bandeau cintré : la lumière lèche la courbe et la dessine sur toute sa longueur — ≈ 99 ml',
+          'Rampe verticale derrière les lames du vide central, du R+2 à la toiture — ≈ 15 ml, la faille devient la seule verticale lumineuse',
+          'Bandeau lumineux au-dessus de l’entrée et des portes de garage — 17,50 ml',
+          'Spots encastrés en sous-face de balcon pour l’usage courant, sur un circuit séparé de celui de la façade'] },
 ];
 
 const NOTES = [
   ['Découpage horizontal', '0,55 + 6,75 + 0,55 + 1,80 + 0,55 + 6,75 + 0,55 = 17,50 m. L’ouverture libre est arrêtée à 6,75 m entre nus de poteaux, soit 7,30 m d’entraxe — c’est la lecture retenue des ~7,00 m relevés, et elle boucle exactement la largeur de 17,50 m.'],
   ['Niveaux et hauteurs', 'RDC + R+1 en parking, R+2 à R+6 en logements — cinq lignes ondulées en façade : l’acrotère de la terrasse R+2, puis les balcons du R+3 au R+6. Hauteurs sous plancher retenues : 3,40 m au RDC, 3,06 m à chaque étage, acrotère 1,00 m → 22,76 m hors tout.'],
   ['Onde de rive', 'Deux ondes par balcon, profondeur 1,30 m au creux et 3,00 m à la crête — c’est cette amplitude qui produit les 9,92 ml de développé, conformes aux ~10 ml relevés. Variante d’exécution si la console de 3,00 m pose problème au ferraillage : trois ondes moins creuses, à développé équivalent.'],
-  ['Terrasse R+2', 'Toute la toiture du parking, soit 4,00 m de profondeur sur 17,50 m de large. Son acrotère reprend l’onde des balcons, au même pas, pour que la lecture de la façade soit continue du bas vers le haut.'],
+  ['Terrasses R+2', 'Une terrasse par logement : deux plateaux de 7,85 m sur 4,00 m de profondeur, séparés par le vide central de 1,80 m laissé ouvert dans la dalle de toiture du parking. Chaque acrotère reprend l’onde des balcons, au même pas.'],
 ];
 
 const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #F7F4ED; padding: 20px 22px 22px${wide ? '; grid-column: span 2' : ''}">
@@ -60,7 +65,7 @@ ${header({ w: W, kicker: 'Matériaux, finitions &amp; hypothèses', title: 'Pale
   sub: 'Les quatre matériaux demandés, leur mise en œuvre et les quantités qui en découlent — puis le parti dimensionnel arrêté, sur lequel s’appuient toutes les planches.',
   right: 'VARIANTE A — RETENUE<br>« IVOIRE &amp; BRONZE »<br>QUANTITÉS ESTIMATIVES' })}
 <div style="padding: 28px 44px 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
-  ${MAT.map((m, i) => card(m, i === MAT.length - 1)).join('\n  ')}
+  ${MAT.map((m, i) => card(m, i === MAT.length - 1 && MAT.length % 2 === 1)).join('\n  ')}
 </div>
 <div style="padding: 26px 44px 44px">
   <div class="rule" style="margin-bottom: 22px"></div>
@@ -74,5 +79,5 @@ ${header({ w: W, kicker: 'Matériaux, finitions &amp; hypothèses', title: 'Pale
 </div>
 </div>`;
 
-writeFileSync('Materiaux.dc.html', page({ body, props: JSON.stringify({ $preview: { width: W, height: 1320 } }) }));
+writeFileSync('Materiaux.dc.html', page({ body, props: JSON.stringify({ $preview: { width: W, height: 1700 } }) }));
 console.log('Materiaux.dc.html ok');
