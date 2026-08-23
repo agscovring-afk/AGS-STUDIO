@@ -68,38 +68,37 @@ export function doors(bay) {
 // Raccord en cosinus releve : tangente horizontale a chaque extremum, donc
 // une courbe continue, derivable, et de courbure bornee.
 // ---------------------------------------------------------------------------
-// Onde de rive RELEVEE sur le croquis du maitre d'ouvrage (bloc droit,
-// planche « Dessine l'onde de rive », retour du 23.08.2026).
-// 33 profondeurs regulierement reparties du bord gauche au bord droit
-// du bloc, interpolees par un cubique monotone (Fritsch-Carlson) : pas
-// d'oscillation parasite, tangentes continues, longueur developpee preservee.
-export const ONDE_RELEVEE = [0.52, 0.80, 1.12, 1.40, 1.47, 1.50, 1.55, 1.59, 1.60, 1.57, 1.50, 1.39, 1.24, 1.08, 0.94, 0.84, 0.79, 0.80, 0.88, 1.05, 1.25, 1.36, 1.40, 1.41, 1.40, 1.38, 1.35, 1.30, 1.23, 1.12, 0.96, 0.66, 0.38];
-
-const _m = (() => {                       // pentes monotones, calculees une fois
-  const y = ONDE_RELEVEE, n = y.length, h = BLOC / (n - 1);
-  const d = [], m = new Array(n).fill(0);
-  for (let i = 0; i < n - 1; i++) d.push((y[i + 1] - y[i]) / h);
-  m[0] = d[0]; m[n - 1] = d[n - 2];
-  for (let i = 1; i < n - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : (d[i - 1] + d[i]) / 2;
-  for (let i = 0; i < n - 1; i++) {
-    if (d[i] === 0) { m[i] = 0; m[i + 1] = 0; continue; }
-    const a = m[i] / d[i], b = m[i + 1] / d[i], s = a * a + b * b;
-    if (s > 9) { const t = 3 / Math.sqrt(s); m[i] = t * a * d[i]; m[i + 1] = t * b * d[i]; }
-  }
-  return m;
-})();
+// ---------------------------------------------------------------------------
+// ONDE DE RIVE — deuxieme releve, croquis du 23.08 repris sur le plan de detail.
+// La rive part du nu de facade au droit des poteaux, plonge franchement, puis
+// file a plat au fond de chaque lobe avant de remonter au creux median.
+// Points de controle : abscisse depuis le bord de bloc, profondeur.
+// Raccord en cosinus releve : tangente horizontale a chaque point, donc des
+// fonds de lobe VRAIMENT plats et des transitions douces mais franches.
+// ---------------------------------------------------------------------------
+export const ONDE = [
+  [0.00, 0.00],   // depart au nu de facade, contre le poteau
+  [0.90, 1.58],   // plongee du premier lobe
+  [2.45, 1.58],   // fond plat
+  [3.90, 0.79],   // creux median
+  [5.45, 1.42],   // second lobe
+  [7.05, 1.42],   // fond plat
+  [7.85, 0.00],   // retour au nu de facade, contre le poteau
+];
 
 export function ondeAt(u) {
-  const y = ONDE_RELEVEE, n = y.length, h = BLOC / (n - 1);
   const x = Math.min(BLOC, Math.max(0, u));
-  let i = Math.min(n - 2, Math.floor(x / h));
-  const t = (x - i * h) / h, t2 = t * t, t3 = t2 * t;
-  return (2 * t3 - 3 * t2 + 1) * y[i] + (t3 - 2 * t2 + t) * h * _m[i]
-       + (-2 * t3 + 3 * t2) * y[i + 1] + (t3 - t2) * h * _m[i + 1];
+  for (let i = 0; i < ONDE.length - 1; i++) {
+    const [x0, y0] = ONDE[i], [x1, y1] = ONDE[i + 1];
+    if (x <= x1 || i === ONDE.length - 2) {
+      const t = (x - x0) / (x1 - x0);
+      return y0 + (y1 - y0) * (1 - Math.cos(Math.PI * t)) / 2;
+    }
+  }
+  return ONDE[ONDE.length - 1][1];
 }
 
-
-export const DMIN = 0.38, DCREUX = 0.79, DMAX = 1.61;   // bords · creux median · crete
+export const DMIN = 0.00, DCREUX = 0.79, DMAX = 1.58;   // au droit des poteaux · creux median · fond de lobe
 
 export function depthAt(m, b) {
   const [a, z] = BLOCS[b];
@@ -129,40 +128,31 @@ export function rayonAt(u, h = 0.02) {
 // le rayon reste grand : en dessous de R_VERRE la fleche du panneau devient
 // visible, on passe au barreaudage inox qui epouse n'importe quel rayon.
 // ---------------------------------------------------------------------------
-export const R_VERRE = 3.00;
+export const GC_INOX = 0.30;   // demi-largeur du barreaudage autour d'un point de controle
 export const GC_MINI = 0.45;   // longueur mini d'un segment, pour rester posable
 
+// Le verre feuillete plat ne suit une rive que la ou elle est droite. Avec un
+// raccord en cosinus la courbure est nulle au milieu de chaque portee et
+// maximale aux points de controle : on met donc du barreaudage inox autour de
+// chaque point de controle, du verre entre les deux.
 export function gcSegmentsLocal() {
-  const step = 0.025, n = Math.round(BLOC / step);
-  const raw = [];
-  for (let i = 0; i < n; i++) raw.push(rayonAt((i + 0.5) * step) < R_VERRE ? 'inox' : 'verre');
-  // regrouper
   let segs = [];
-  let cur = { kind: raw[0], x1: 0, x2: step };
-  for (let i = 1; i < n; i++) {
-    if (raw[i] === cur.kind) cur.x2 = (i + 1) * step;
-    else { segs.push(cur); cur = { kind: raw[i], x1: i * step, x2: (i + 1) * step }; }
-  }
-  cur.x2 = BLOC; segs.push(cur);
-  // absorber les segments trop courts dans le voisin
-  let changed = true;
-  while (changed && segs.length > 1) {
-    changed = false;
-    for (let i = 0; i < segs.length; i++) {
-      if (segs[i].x2 - segs[i].x1 >= GC_MINI) continue;
-      const prev = segs[i - 1], next = segs[i + 1];
-      const host = !prev ? next : !next ? prev
-        : (prev.x2 - prev.x1) >= (next.x2 - next.x1) ? prev : next;
-      if (host === prev) host.x2 = segs[i].x2; else host.x1 = segs[i].x1;
-      segs.splice(i, 1); changed = true; break;
-    }
-  }
-  // fusionner les voisins de meme nature
-  const out = [segs[0]];
+  for (const [x] of ONDE) segs.push({ kind: 'inox', x1: Math.max(0, x - GC_INOX), x2: Math.min(BLOC, x + GC_INOX) });
+  // fusionner les zones inox qui se chevauchent ou laissent un verre trop court
+  const merged = [segs[0]];
   for (let i = 1; i < segs.length; i++) {
-    if (segs[i].kind === out[out.length - 1].kind) out[out.length - 1].x2 = segs[i].x2;
-    else out.push(segs[i]);
+    const prev = merged[merged.length - 1];
+    if (segs[i].x1 - prev.x2 < GC_MINI) prev.x2 = segs[i].x2;
+    else merged.push(segs[i]);
   }
+  // intercaler le verre
+  const out = [];
+  let cursor = 0;
+  for (const seg of merged) {
+    if (seg.x1 > cursor + 1e-6) out.push({ kind: 'verre', x1: cursor, x2: seg.x1 });
+    out.push(seg); cursor = seg.x2;
+  }
+  if (cursor < BLOC - 1e-6) out.push({ kind: 'verre', x1: cursor, x2: BLOC });
   return out;
 }
 

@@ -8,7 +8,7 @@ const XF = 4.20, XP = XF + AVANCEE;                   // nu de facade / nu avant
 const px = (m) => +(X0 + m * S).toFixed(2), py = (h) => +(Y0 - h * S).toFixed(2);
 const wm = (m) => +(m * S).toFixed(2);
 const R = (x1, x2, h1, h2, fill, ex = '') => `<rect x="${px(x1)}" y="${py(h2)}" width="${wm(x2 - x1)}" height="${wm(h2 - h1)}" fill="${fill}" ${ex}/>`;
-const C = { beton: '#4A443B', betonL: '#7B7264', aqua: '#FBF9F5', accent: '#474B4E',
+const C = { beton: '#4A443B', betonL: '#7B7264', aqua: '#FFFFFF', accent: '#474B4E',
   inox: '#9FA6AA', ink: '#23211E', dim: '#8C8478', vue: '#D3C9B6', sol: '#CFC3AC' };
 const LIVING = BALCONS;
 const g = [];
@@ -111,7 +111,7 @@ for (let i = 0; i < ETAGES.length - 1; i++)
 g.push(dimV(py(0), py(LV.acr), xv - 44, LV.acr.toFixed(2), { size: 12.5, weight: 700 }));
 ETAGES.forEach(([h, alt, t]) => g.push(levelMark(px(XP) + 92, py(h), alt, t)));
 
-const body = `<div style="width: ${W}px; background: #F1EDE5">
+const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Coupe A-A · transversale', title: 'Avancée parking &amp; terrasse',
   sub: 'Le socle parking RDC + R+1 avance de 4.00 m sur le nu de façade ; sa toiture devient la terrasse du R+2. Au-dessus, les balcons en console suivent l’onde de rive, de 0,79 m au creux à 1,60 m à la crête — tracé relevé sur votre croquis. Hauteur libre 3,06 m, dalle 0,20 m ; RDC 2,60 m libre.',
   right: 'ÉCHELLE 1:100<br>COTES EN MÈTRES<br>ÉTAT PROJETÉ' })}

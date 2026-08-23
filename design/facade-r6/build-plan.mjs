@@ -1,6 +1,6 @@
 import { writeFileSync } from 'node:fs';
 import { XS, LV, BLOCS, MIROIR, DMIN, DCREUX, DMAX, COL, RETRAIT, PBW, PBH,
-         depthAt, ondeAt, doors, developpe, gcSegments, rayonAt, R_VERRE } from './geo.mjs';
+         depthAt, ondeAt, doors, developpe, gcSegments } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { txt, dimH, dimV } from './svgkit.mjs';
 
@@ -102,9 +102,9 @@ const note = (m, dT, dL, label, col) => {
   g.push(`<circle cx="${px(m)}" cy="${py(dT)}" r="2.4" fill="${C.ink}"/>`);
   g.push(txt(px(m), py(dL), label, { size: 8.5, fill: col ?? C.dim, ls: '0.1em', weight: 700 }));
 };
-note(11.55, depthAt(11.55, 1) - 0.06, 0.40, 'CRETE 1.60 m');
-note(13.70, depthAt(13.70, 1) - 0.06, 0.66, 'CREUX 0.79 m');
-note(15.45, depthAt(15.45, 1) - 0.06, 0.40, 'CRETE 1.40 m');
+note(11.85, depthAt(11.85, 1) - 0.06, 0.40, 'FOND PLAT 1.58 m');
+note(13.55, depthAt(13.55, 1) - 0.06, 0.30, 'CREUX MEDIAN 0.79 m');
+note(15.90, depthAt(15.90, 1) - 0.06, 0.40, 'FOND PLAT 1.42 m');
 note(3.925, depthAt(3.925, 0) - 0.06, 0.66, 'BLOC GAUCHE = MIROIR DU BLOC DROIT');
 g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.5, fill: C.led, ls: '0.1em', weight: 700, anchor: 'start' }));
 
@@ -121,15 +121,15 @@ g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.
     g.push(txt(bx + 40, by + dy + 16, t2, { size: 8.5, anchor: 'start', fill: C.dim, weight: 500 }));
   };
   row(26, (x, y) => `<line x1="${x - 10}" y1="${y}" x2="${x + 12}" y2="${y}" stroke="${C.glass}" stroke-width="6.5" stroke-linecap="round"/><line x1="${x - 10}" y1="${y}" x2="${x + 12}" y2="${y}" stroke="#EAF2F3" stroke-width="2"/>`,
-    'Verre feuilleté bombé 8.8.4', `là où le rayon dépasse ${R_VERRE.toFixed(2)} m — ${lv.toFixed(2)} m par bloc`);
+    'Verre feuilleté bombé 8.8.4', `sur les portions droites de la rive — ${lv.toFixed(2)} m par bloc`);
   row(60, (x, y) => `<line x1="${x - 10}" y1="${y}" x2="${x + 12}" y2="${y}" stroke="${C.inox}" stroke-width="2"/>` +
     [0, 6, 12, 18].map((d) => `<circle cx="${x - 9 + d}" cy="${y}" r="2.5" fill="${C.inox}"/>`).join(''),
     'Barreaudage inox Ø 16', `aux creux et aux crêtes — ${li.toFixed(2)} m par bloc`);
 }
 
-const body = `<div style="width: ${W}px; background: #F1EDE5">
+const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Plan · niveau courant R+3 à R+8',
-  title: 'Onde de rive relevée', sub: `Tracé repris de votre croquis du 23.08 : profondeur 1,60 m à la crête, 0,79 m au creux médian, développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. La niche centrale de 1,80 m se creuse de 1,50 m en arrière du nu de façade.`,
+  title: 'Onde de rive relevée', sub: `Tracé repris de votre croquis du 23.08 : la rive part du nu de façade au droit des poteaux, plonge, file à plat au fond de chaque lobe puis remonte au creux médian — 1,58 m et 1,42 m aux fonds, 0,79 m au creux, développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. La niche centrale de 1,80 m se creuse de 1,50 m en arrière du nu de façade.`,
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>COTES EN MÈTRES<br>TRACÉ RETENU' })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;

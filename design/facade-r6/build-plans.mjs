@@ -65,7 +65,7 @@ const chaine = (px, y) => [[0, 0.55, '0.55'], [0.55, 7.30, '6.75'], [7.30, 7.85,
   g.push(txt(px(3.925), py(-1.05), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18em', weight: 700 }));
   g.push(txt(px(13.575), py(-1.05), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18em', weight: 700 }));
 
-  const body = `<div style="width: ${W}px; background: #F1EDE5">
+  const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Plan · niveau R+2, sur la toiture du parking', title: 'Terrasses',
   sub: 'Tracé relevé sur votre croquis : deux terrasses rectangulaires de 7,85 × 4,00 m, garde-corps droit sur les trois côtés ouverts, séparées par la bande centrale de 1,80 m fermée de chaque côté.',
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>COTES EN MÈTRES<br>TRACÉ RETENU' })}
@@ -113,7 +113,7 @@ ${header({ w: W, kicker: 'Plan · niveau R+2, sur la toiture du parking', title:
   g.push(dimV(py(0), py(AVANCEE), px(-0.45), '4.00', { size: 11, weight: 700 }));
   g.push(chaine(px, py(AVANCEE) + 78));
 
-  const body = `<div style="width: ${W}px; background: #F1EDE5">
+  const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Plan · RDC, niveau parking', title: 'Socle parking',
   sub: 'Le parking avance de 4,00 m sur le nu de façade et occupe toute la largeur, bande centrale comprise. Façade en maçonnerie pleine, ventilée par une bande de brise-vue aluminium de 0,80 m en partie haute. Le R+1 reprend le même plan sans les portes de garage.',
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>COTES EN MÈTRES<br>PLAN PARTIEL' })}

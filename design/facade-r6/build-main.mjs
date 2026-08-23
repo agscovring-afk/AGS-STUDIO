@@ -32,7 +32,7 @@ const legend = `<div style="padding: 26px 44px 40px">
   </div>
 </div>`;
 
-const body = `<div style="width: ${W}px; background: #F1EDE5">
+const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({
   w: W,
   kicker: 'Immeuble R+8 · logements · Algérie',
@@ -49,7 +49,7 @@ ${legend}
 </div>`;
 
 const props = JSON.stringify({
-  $preview: { width: W, height: 1930 },
+  $preview: { width: W, height: 2030 },
   wall: { editor: 'color', default: '#E8E0D2', section: 'Teintes', options: ['#E8E0D2', '#EFEDE8', '#D9CDB6', '#C9BCA4'] },
   accent: { editor: 'color', default: '#8A6E4C', section: 'Teintes', options: ['#8A6E4C', '#3A3E41', '#6E7A6B', '#9A5B3E'] },
 }).replace(/&/g, '&amp;').replace(/'/g, '&#39;');

@@ -218,7 +218,7 @@ const PLANCHES = [
     right: 'VUE D’AMBIANCE · NUIT<br>NON COTÉE<br>VARIANTE A' },
 ];
 for (const pl of PLANCHES) {
-  const body = `<div style="width: ${W}px; background: #F1EDE5">
+  const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: pl.kicker, title: pl.title, sub: pl.sub, right: pl.right })}
 <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${scene(pl.night)}</svg>
 </div>`;

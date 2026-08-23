@@ -2,7 +2,7 @@ import { XS, LV, BALCONS, ETAGES, NIVEAUX_LOGEMENT, HET, HSP, FASCIA, GC, PBH, R
 import { txt, dimH, dimV, levelMark, callout, ground } from './svgkit.mjs';
 
 export const PALETTE_A = {
-  name: 'Latte & Graphite', paper: '#F1EDE5',
+  name: 'Latte & Graphite', paper: '#FFFFFF',
   wall: '#D5C4AC', wallDeep: '#B9A68B',       // monocouche teinte latte
   pier: '#F3F0E9', plinth: '#A8967C',         // poteaux et acroteres en blanc
   aqua: '#FAF8F3', aquaSh: '#E4DED2',

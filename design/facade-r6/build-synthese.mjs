@@ -99,7 +99,7 @@ const bloc = ([titre, lignes]) => `<div style="break-inside: avoid; margin-botto
   </div>`).join('\n  ')}
 </div>`;
 
-const body = `<div style="width: ${W}px; background: #F1EDE5">
+const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Immeuble R+8 · logements · Algérie',
   title: 'Données du projet — à valider',
   sub: 'Tout ce que vous m’avez donné, plus ce que j’en ai déduit. Corrigez ce qui est faux et je relance le dessin sur cette base ; rien n’est dessiné tant que cette page n’est pas validée.',

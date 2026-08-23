@@ -59,7 +59,7 @@ export function callout(n, cx, cy, tx, ty, o = {}) {
   return `<g>
     <line x1="${tx}" y1="${ty}" x2="${cx}" y2="${cy}" stroke="${c}" stroke-width="0.7"/>
     <circle cx="${tx}" cy="${ty}" r="2" fill="${c}"/>
-    <circle cx="${cx}" cy="${cy}" r="10.5" fill="#FBF9F5" stroke="${c}" stroke-width="1"/>
+    <circle cx="${cx}" cy="${cy}" r="10.5" fill="#FFFFFF" stroke="${c}" stroke-width="1"/>
     ${txt(cx, cy + 4, String(n), { size: 11, weight: 700, fill: c })}
   </g>`;
 }

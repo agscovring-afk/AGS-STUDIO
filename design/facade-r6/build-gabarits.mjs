@@ -91,7 +91,7 @@ const foot = (items) => `<div style="padding: 18px 44px 26px">
 {
   const DMAXG = 3.60, SVGH = 640;
   const g = [];
-  g.push(`<rect x="${px(0)}" y="${py(0)}" width="${wm(17.5)}" height="${wm(DMAXG)}" fill="#FDFCFA"/>`);
+  g.push(`<rect x="${px(0)}" y="${py(0)}" width="${wm(17.5)}" height="${wm(DMAXG)}" fill="#FFFFFF"/>`);
   g.push(grille(DMAXG));
   // vide central, traverse tout le niveau
   g.push(`<rect x="${px(VOID[0])}" y="${py(-1.45)}" width="${wm(1.80)}" height="${wm(1.45 + DMAXG)}" fill="${C.vide}"/>`);
@@ -113,7 +113,7 @@ const foot = (items) => `<div style="padding: 18px 44px 26px">
   g.push(graduations(DMAXG));
   g.push(chaine(py(DMAXG) + 76));
 
-  const body = `<div style="width: ${W}px; background: #F1EDE5">
+  const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Gabarit à dessiner · niveau courant R+3 à R+6',
   title: 'Dessine l’onde de rive', sub: 'Tout ce qui est en noir est figé : mur, poteaux de 0,55 m, portes-balcon de 1,80 m, vide central. La zone quadrillée est libre — trace la rive du balcon dedans. Un carreau = 0,25 m.',
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>UN CARREAU = 0,25 m<br>COTES EN MÈTRES' })}
@@ -134,7 +134,7 @@ ${foot([
 {
   const DMAXG = 4.60, SVGH = 700;
   const g = [];
-  g.push(`<rect x="${px(0)}" y="${py(0)}" width="${wm(17.5)}" height="${wm(DMAXG)}" fill="#FDFCFA"/>`);
+  g.push(`<rect x="${px(0)}" y="${py(0)}" width="${wm(17.5)}" height="${wm(DMAXG)}" fill="#FFFFFF"/>`);
   g.push(grille(DMAXG));
   // nu avant du parking : limite dure de la dalle
   g.push(`<line x1="${px(0)}" y1="${py(AVANCEE)}" x2="${px(17.5)}" y2="${py(AVANCEE)}" stroke="${C.ink}" stroke-width="2.4"/>`);
@@ -154,7 +154,7 @@ ${foot([
   g.push(graduations(DMAXG));
   g.push(chaine(py(DMAXG) + 76));
 
-  const body = `<div style="width: ${W}px; background: #F1EDE5">
+  const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Gabarit à dessiner · niveau R+2, sur la toiture du parking',
   title: 'Dessine les deux terrasses', sub: 'La dalle du parking s’arrête à 4,00 m : c’est la seule limite dure. Le vide central de 1,80 m est laissé ouvert. Dessine ce que tu veux dedans — ligne de garde-corps, jardinières, cloison de séparation, auvent. Un carreau = 0,25 m.',
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>UN CARREAU = 0,25 m<br>COTES EN MÈTRES' })}

@@ -174,7 +174,7 @@ g.push(coupe(1470, 1128, DCREUX, '3 · COUPE B-B — AU CREUX MEDIAN', 790, fals
   for (const [m, lab] of [[11.55, 'A'], [13.70, 'B']]) {
     g.push(`<path d="M ${px(m)} ${py(-1.30)} L ${px(m)} ${py(DMAX + 0.42)}" stroke="${C.ink}" stroke-width="1.4" stroke-dasharray="14 5 3 5"/>`);
     for (const yy of [py(-1.30), py(DMAX + 0.42)]) {
-      g.push(`<circle cx="${px(m)}" cy="${yy}" r="12" fill="#F1EDE5" stroke="${C.ink}" stroke-width="1.6"/>`);
+      g.push(`<circle cx="${px(m)}" cy="${yy}" r="12" fill="#FFFFFF" stroke="${C.ink}" stroke-width="1.6"/>`);
       g.push(txt(px(m), yy + 5, lab, { size: 13, weight: 700, fill: C.ink }));
     }
   }
@@ -199,7 +199,7 @@ const LEG = [
   ['Structure', 'Dalle 0,20 m, hauteur libre 3,06 m. Console de balcon 0,79 m au creux, 1,60 m à la crête — ferraillage à valider par le BET.'],
 ];
 
-const body = `<div style="width: ${W}px; background: #F1EDE5">
+const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Détail · balcon type, niveau courant R+3 à R+8',
   title: 'Balcon — les quatre vues',
   sub: 'Le même balcon vu de face depuis l’intérieur, coupé à la crête et au creux de l’onde, et en plan. Les deux coupes montrent la même construction à ses deux profondeurs extrêmes : c’est là que se lit l’ondulation.',

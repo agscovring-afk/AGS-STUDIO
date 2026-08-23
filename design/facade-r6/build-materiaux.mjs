@@ -10,7 +10,7 @@ const MAT = [
     pts: ['Teinte ivoire sablé sur l’ensemble des voiles, allèges et acrotères',
           'Joint creux horizontal 15 × 15 mm au droit de chaque plancher',
           'Poteaux de 55 cm laissés en léger relief — nu extérieur +2 cm sur l’allège'] },
-  { n: 'Aquapanel cintré', t: 'Blanc pur', sw: ['#FBF9F5', '#E3DCD0'], ref: 'Plaque ciment 12,5 mm cintrée sur ossature, enduit + peinture façade blanc mat',
+  { n: 'Aquapanel cintré', t: 'Blanc pur', sw: ['#FFFFFF', '#E3DCD0'], ref: 'Plaque ciment 12,5 mm cintrée sur ossature, enduit + peinture façade blanc mat',
     pts: [`Bandeaux de rive ondulés, développé ${dev.toFixed(2)} ml par balcon`,
           'Balcons R+3 à R+6 × 2 blocs = 8 rives → ' + (dev * 8).toFixed(0) + ' ml',
           'Acrotère de terrasse R+2, onde continue sur 17,50 m → 20 ml',
@@ -44,7 +44,7 @@ const NOTES = [
   ['Terrasses R+2', 'Une terrasse par logement : deux plateaux de 7,85 m sur 4,00 m de profondeur, séparés par le vide central de 1,80 m laissé ouvert dans la dalle de toiture du parking. Chaque acrotère reprend l’onde des balcons, au même pas.'],
 ];
 
-const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #F7F4ED; padding: 20px 22px 22px${wide ? '; grid-column: span 2' : ''}">
+const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #FBFAF7; padding: 20px 22px 22px${wide ? '; grid-column: span 2' : ''}">
   <div style="display: flex; gap: 14px; align-items: center">
     <div style="display: flex; gap: 0; flex: 0 0 auto">
       ${m.sw.map((c, i) => `<div style="width: 34px; height: 34px; background: ${c}; border: 1px solid rgba(35,33,30,.18); ${i ? 'margin-left: -1px' : ''}"></div>`).join('')}
@@ -60,7 +60,7 @@ const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #F
   </ul>
 </div>`;
 
-const body = `<div style="width: ${W}px; background: #F1EDE5">
+const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Matériaux, finitions &amp; hypothèses', title: 'Palette de façade',
   sub: 'Les quatre matériaux demandés, leur mise en œuvre et les quantités qui en découlent — puis le parti dimensionnel arrêté, sur lequel s’appuient toutes les planches.',
   right: 'VARIANTE A — RETENUE<br>« IVOIRE &amp; GRAPHITE »<br>QUANTITÉS ESTIMATIVES' })}

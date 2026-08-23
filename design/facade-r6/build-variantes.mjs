@@ -36,7 +36,7 @@ for (const key of ['B', 'C']) {
   ${ground(E.px(-1.4), E.px(18.9), E.py(0))}
   ${txt(E.px(8.75), E.py(0) + 44, '17.50 m · MEMES COTES, MEME GEOMETRIE QUE LA VARIANTE A', { size: 9, fill: v.P.dim, ls: '0.16em', weight: 600 })}
   </svg>`;
-  const body = `<div style="width: ${W}px; background: #F1EDE5">
+  const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: v.kicker, title: v.name, sub: v.sub, right: `${v.label.toUpperCase()} — NON RETENUE<br>ÉLÉVATION NON COTÉE<br>ÉCHELLE 1:150` })}
 ${svg}
 <div style="padding: 0 44px 40px">
