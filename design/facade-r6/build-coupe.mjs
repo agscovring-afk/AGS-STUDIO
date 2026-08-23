@@ -101,7 +101,7 @@ g.push(dimH(px(XF), px(XF + DCREUX), yc, DCREUX.toFixed(2), { size: 10.5 }));
 g.push(dimH(px(XF), px(XF + DMAX), yc + 30, DMAX.toFixed(2), { size: 10.5 }));
 g.push(dimH(px(XF), px(XP), yc + 62, '4.00', { size: 13, weight: 700 }));
 g.push(`<line x1="${px(XF)}" y1="${py(-0.9)}" x2="${px(XF)}" y2="${yc + 70}" stroke="${C.dim}" stroke-width="0.7" stroke-dasharray="3 3"/>`);
-g.push(txt(px(XF), yc + 88, `BALCON ${DCREUX.toFixed(2)} → ${DMAX.toFixed(2)} m  ·  AVANCEE DU PARKING 4.00 m SUR LE NU DE FACADE`,
+g.push(txt(px(XF), yc + 88, `BALCON 0 AU NU → ${DMAX.toFixed(2)} m AU GRAND LOBE  ·  AVANCEE DU PARKING 4.00 m SUR LE NU DE FACADE`,
   { size: 9, fill: C.dim, ls: '0.13em', weight: 600, anchor: 'start' }));
 g.push(txt(px(0), yc + 110, 'LES DEUX TERRASSES R+2 SONT SEPAREES PAR LE VIDE CENTRAL — VOIR FACADE',
   { size: 9, fill: C.dim, ls: '0.11em', weight: 600, anchor: 'start' }));
@@ -113,7 +113,7 @@ ETAGES.forEach(([h, alt, t]) => g.push(levelMark(px(XP) + 92, py(h), alt, t)));
 
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Coupe A-A · transversale', title: 'Avancée parking &amp; terrasse',
-  sub: 'Le socle parking RDC + R+1 avance de 4.00 m sur le nu de façade ; sa toiture devient la terrasse du R+2. Au-dessus, les balcons en console suivent l’onde de rive, de 0,79 m au creux à 1,60 m à la crête — tracé relevé sur votre croquis. Hauteur libre 3,06 m, dalle 0,20 m ; RDC 2,60 m libre.',
+  sub: 'Le socle parking RDC + R+1 avance de 4.00 m sur le nu de façade ; sa toiture devient la terrasse du R+2. Au-dessus, les balcons en console suivent l’onde de rive, de 0 au nu de façade à 0,90 m au grand lobe — rive tracée au compas. Hauteur libre 3,06 m, dalle 0,20 m ; RDC 2,60 m libre.',
   right: 'ÉCHELLE 1:100<br>COTES EN MÈTRES<br>ÉTAT PROJETÉ' })}
 <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;

@@ -84,7 +84,7 @@ g.push(txt(px(3.925), py(-1.15), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18e
 g.push(txt(px(13.575), py(-1.15), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18em', weight: 700 }));
 
 // ---- cotes ---------------------------------------------------------------
-const yc = py(DMAX) + 60;
+const yc = py(DMAX) + 78;
 [[0, 0.55, '0.55'], [0.55, 1.45, '0.90'], [1.45, 3.25, '1.80'], [3.25, 4.60, '1.35'],
  [4.60, 6.40, '1.80'], [6.40, 7.30, '0.90'], [7.30, 7.85, '0.55'], [7.85, 9.65, '1.80'],
  [9.65, 10.20, '0.55'], [10.20, 11.10, '0.90'], [11.10, 12.90, '1.80'], [12.90, 14.25, '1.35'],
@@ -102,9 +102,9 @@ const note = (m, dT, dL, label, col) => {
   g.push(`<circle cx="${px(m)}" cy="${py(dT)}" r="2.4" fill="${C.ink}"/>`);
   g.push(txt(px(m), py(dL), label, { size: 8.5, fill: col ?? C.dim, ls: '0.1em', weight: 700 }));
 };
-note(11.85, depthAt(11.85, 1) - 0.06, 0.40, 'FOND PLAT 1.58 m');
-note(13.55, depthAt(13.55, 1) - 0.06, 0.30, 'CREUX MEDIAN 0.79 m');
-note(15.90, depthAt(15.90, 1) - 0.06, 0.40, 'FOND PLAT 1.42 m');
+note(11.99, depthAt(11.85, 1) - 0.06, 0.40, 'GRAND LOBE Ø 1.80 — PROF. 0.90');
+note(13.575, depthAt(13.55, 1) - 0.06, 0.30, 'PETIT LOBE Ø 1.10 — PROF. 0.55');
+note(15.14, depthAt(15.90, 1) - 0.06, 0.40, 'GRAND LOBE Ø 1.80 — PROF. 0.90');
 note(3.925, depthAt(3.925, 0) - 0.06, 0.66, 'BLOC GAUCHE = MIROIR DU BLOC DROIT');
 g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.5, fill: C.led, ls: '0.1em', weight: 700, anchor: 'start' }));
 
@@ -129,7 +129,7 @@ g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.
 
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Plan · niveau courant R+3 à R+8',
-  title: 'Onde de rive relevée', sub: `Tracé repris de votre croquis du 23.08 : la rive part du nu de façade au droit des poteaux, plonge, file à plat au fond de chaque lobe puis remonte au creux médian — 1,58 m et 1,42 m aux fonds, 0,79 m au creux, développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. La niche centrale de 1,80 m se creuse de 1,50 m en arrière du nu de façade.`,
+  title: 'Onde de rive relevée', sub: `Tracé repris de votre croquis du 23.08 : la rive est tracée au compas : elle part du nu de façade au droit du poteau et décrit trois demi-cercles tangents — deux grands de Ø 1,80 m devant chaque porte-balcon, un petit de Ø 1,10 m entre les deux. Développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. La niche centrale de 1,80 m se creuse de 1,50 m en arrière du nu de façade.`,
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>COTES EN MÈTRES<br>TRACÉ RETENU' })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;

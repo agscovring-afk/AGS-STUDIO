@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs';
-import { XS, BLOCS, DMIN, DCREUX, DMAX, FASCIA, GC, PBW, PBH, HSP, DALLE,
+import { XS, BLOCS, LOBES, DMIN, DCREUX, DMAX, FASCIA, GC, PBW, PBH, HSP, DALLE,
          depthAt, ondeAt, doors, developpe, gcSegments } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { txt, dimH, dimV } from './svgkit.mjs';
@@ -124,8 +124,8 @@ function coupe(x0, sol, prof, titre, titreY, full) {
   }
   return s.join('\n');
 }
-g.push(coupe(1470, 610, DMAX, '2 · COUPE A-A — A LA CRETE', 58, true));
-g.push(coupe(1470, 1128, DCREUX, '3 · COUPE B-B — AU CREUX MEDIAN', 790, false));
+g.push(coupe(1470, 610, DMAX, '2 · COUPE A-A — AU GRAND LOBE (Ø 1.80)', 58, true));
+g.push(coupe(1470, 1128, DCREUX, '3 · COUPE B-B — AU PETIT LOBE (Ø 1.10)', 790, false));
 
 // ===========================================================================
 // 4 — PLAN DU BALCON
@@ -171,23 +171,32 @@ g.push(coupe(1470, 1128, DCREUX, '3 · COUPE B-B — AU CREUX MEDIAN', 790, fals
   const xm = (D[0][1] + D[1][0]) / 2;
   g.push(`<rect x="${px(xm - 0.05)}" y="${py(-0.30)}" width="${wm(0.10)}" height="${wm(0.10)}" fill="${C.led}"/>`);
   // reperes de coupe
-  for (const [m, lab] of [[11.55, 'A'], [13.70, 'B']]) {
-    g.push(`<path d="M ${px(m)} ${py(-1.30)} L ${px(m)} ${py(DMAX + 0.42)}" stroke="${C.ink}" stroke-width="1.4" stroke-dasharray="14 5 3 5"/>`);
-    for (const yy of [py(-1.30), py(DMAX + 0.42)]) {
+  for (const [m, lab] of [[11.99, 'A'], [13.575, 'B']]) {
+    g.push(`<path d="M ${px(m)} ${py(-1.30)} L ${px(m)} ${py(DMAX + 0.22)}" stroke="${C.ink}" stroke-width="1.4" stroke-dasharray="14 5 3 5"/>`);
+    for (const yy of [py(-1.30), py(DMAX + 0.22)]) {
       g.push(`<circle cx="${px(m)}" cy="${yy}" r="12" fill="#FFFFFF" stroke="${C.ink}" stroke-width="1.6"/>`);
       g.push(txt(px(m), yy + 5, lab, { size: 13, weight: 700, fill: C.ink }));
     }
   }
   // cotes
-  const yc = py(DMAX) + 74;
+  const yc = py(DMAX) + 88;
   [[M1, 10.20, '0.55'], [10.20, 11.10, '0.90'], [11.10, 12.90, '1.80'], [12.90, 14.25, '1.35'],
    [14.25, 16.05, '1.80'], [16.05, 16.95, '0.90'], [16.95, M2, '0.55']]
     .forEach(([a, b, t]) => g.push(dimH(px(a), px(b), yc, t, { size: 11 })));
   g.push(dimH(px(M1), px(M2), yc + 48, '7.85', { size: 13, weight: 700 }));
-  g.push(dimV(py(0), py(DMAX), px(M1) - 50, '1.60', { size: 11 }));
-  g.push(dimV(py(0), py(DCREUX), px(M1) - 104, '0.79', { size: 11 }));
+  g.push(dimV(py(0), py(DMAX), px(M1) - 50, DMAX.toFixed(2), { size: 11 }));
+  g.push(dimV(py(0), py(DCREUX), px(M1) - 104, DCREUX.toFixed(2), { size: 11 }));
   g.push(txt(0, 0, 'PROFONDEUR', { size: 9, fill: C.dim, ls: '0.14em', weight: 700, transform: `translate(${px(M1) - 128} ${py(0.9)}) rotate(-90)` }));
-  g.push(txt(px(12.4), py(0.42), `DEVELOPPE DE LA RIVE ${developpe().toFixed(2)} ml`, { size: 10, fill: C.ink, ls: '0.12em', weight: 700 }));
+  g.push(txt(px(10.35), py(0.34), `DEVELOPPE ${developpe().toFixed(2)} ml`, { size: 10, fill: C.ink, ls: '0.12em', weight: 700, anchor: 'start' }));
+  // trace au compas : centre et rayon de chaque lobe, poses sur le nu de facade
+  for (const { c, r } of LOBES) {
+    const cx = px(M1 + c), cy = py(0), d = r * S * 0.7071;
+    g.push(`<circle cx="${cx}" cy="${cy}" r="3.6" fill="#FFFFFF" stroke="${C.ink}" stroke-width="1.5"/>`);
+    g.push(`<path d="M ${cx - 9} ${cy} l 18 0 M ${cx} ${cy - 9} l 0 18" stroke="${C.ink}" stroke-width="1"/>`);
+    g.push(`<path d="M ${cx} ${cy} l ${d.toFixed(1)} ${d.toFixed(1)}" stroke="${C.ink}" stroke-width="1" stroke-dasharray="5 4"/>`);
+    g.push(txt(cx + d * 0.55, cy + d * 0.55 - 7, 'R ' + r.toFixed(2), { size: 9.5, fill: C.ink, weight: 700, anchor: 'start' }));
+    g.push(txt(cx, cy - 16, 'Ø ' + (2 * r).toFixed(2), { size: 9.5, fill: C.ink, weight: 700 }));
+  }
 }
 
 const LEG = [
@@ -196,13 +205,13 @@ const LEG = [
   ['Garde-corps', 'Verre feuilleté teinté noir 8.8.4, montants et main courante inox Ø 42, h = 1,10 m au-dessus du sol fini. Barreaudage inox aux creux et aux crêtes.'],
   ['Porte-balcon', 'Aluminium TPR série 65 à rupture de pont thermique, RAL 7024, 2 vantaux coulissants, 1,80 × 2,20 m, double vitrage 4/16/4.'],
   ['Profil LED vertical', 'Encastré dans le trumeau entre les deux portes, 1,90 m de haut, même circuit que la gorge de rive.'],
-  ['Structure', 'Dalle 0,20 m, hauteur libre 3,06 m. Console de balcon 0,79 m au creux, 1,60 m à la crête — ferraillage à valider par le BET.'],
+  ['Structure', 'Dalle 0,20 m, hauteur libre 3,06 m. Console nulle au nu de façade, 0,90 m au grand lobe, 0,55 m au petit — ferraillage à valider par le BET.'],
 ];
 
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Détail · balcon type, niveau courant R+3 à R+8',
   title: 'Balcon — les quatre vues',
-  sub: 'Le même balcon vu de face depuis l’intérieur, coupé à la crête et au creux de l’onde, et en plan. Les deux coupes montrent la même construction à ses deux profondeurs extrêmes : c’est là que se lit l’ondulation.',
+  sub: 'Le même balcon vu de face depuis l’intérieur, coupé au grand lobe et au petit lobe, et en plan. Les deux coupes montrent la même construction à ses deux profondeurs extrêmes : c’est là que se lit l’ondulation.',
   right: 'A2 PAYSAGE · ÉCHELLE 1:25<br>COTES EN MÈTRES<br>BLOC DROIT — GAUCHE EN MIROIR' })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 <div style="padding: 10px 44px 34px">
