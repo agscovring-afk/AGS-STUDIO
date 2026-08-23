@@ -16,6 +16,8 @@ const IMG = {
   elevation: b64('elevation.png', 'image/png'),
   plan: b64('plan.png', 'image/png'),
   detailGc: b64('detail-gc.png', 'image/png'),
+  mat0: b64('mat-0.jpg','image/jpeg'), mat1: b64('mat-1.jpg','image/jpeg'),
+  mat2: b64('mat-2.jpg','image/jpeg'), mat3: b64('mat-3.jpg','image/jpeg'),
 };
 
 // --- le tracé de l'onde, à plat, tel qu'il est construit -------------------
@@ -117,7 +119,7 @@ figcaption{margin-top:14px;font-size:14px;color:var(--muted);max-width:58ch}
 /* ---------- matière ---------- */
 .mats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
 .mat{border:1px solid var(--line);background:var(--surface)}
-.mat .chip{height:104px}
+.mat .chip{height:112px;background-color:var(--sunk)}
 .mat .txt{padding:16px 18px 20px}
 .mat h3{font-size:15.5px;font-stretch:106%}
 .mat p{font-size:13.5px;color:var(--muted);margin-top:7px;line-height:1.5}
@@ -227,15 +229,16 @@ footer b{color:var(--ink);font-weight:600}
   <div class="wrap">
     <div class="eyebrow">La matière</div>
     <h2 style="font-size:clamp(28px,4vw,44px);margin-top:16px">Quatre matériaux, pas un de plus.</h2>
+    <p class="lede">Les pastilles ci-dessous ne sont pas des aplats : chaque matière est construite d’après sa structure réelle, à l’échelle réelle. Les lits de sédimentation du travertin font 5 cm, ses pores 3 à 8 mm ; le grain du monocouche gratté fait 3 mm.</p>
     <div class="mats">
-      <div class="mat"><div class="chip" style="background:linear-gradient(160deg,#FFFFFF,#EDEAE3)"></div>
+      <div class="mat"><div class="chip" style="background-image:url(${IMG.mat1});background-size:cover;background-position:center"></div>
         <div class="txt"><h3>Monocouche blanc</h3><p>Grain fin gratté, joint creux de 15 mm au droit de chaque plancher. C’est lui qui dessine la ligne d’étage.</p></div></div>
-      <div class="mat"><div class="chip" style="background:linear-gradient(160deg,#D9C6A4,#B79E76 60%,#C9B695)"></div>
+      <div class="mat"><div class="chip" style="background-image:url(${IMG.mat0});background-size:cover;background-position:center"></div>
         <div class="txt"><h3>Travertin</h3><p>Façade ventilée sur les quatre poteaux. Saillie 13 cm, lame d’air, panneaux de 1,20 m à joints creux ouverts.</p></div></div>
-      <div class="mat"><div class="chip" style="background:linear-gradient(160deg,#5A6065,#31353A 65%,#474B4E)"></div>
+      <div class="mat"><div class="chip" style="background-image:url(${IMG.mat2});background-size:cover;background-position:center"></div>
         <div class="txt"><h3>Aluminium RAL 7024</h3><p>Menuiseries TPR 65 à rupture de pont thermique, cadrage des baies, brise-vue, couvertines.</p></div></div>
-      <div class="mat"><div class="chip" style="background:linear-gradient(160deg,#8FB4CE,#232E36 55%,#1A222A)"></div>
-        <div class="txt"><h3>Verre feuilleté</h3><p>8.8.4 teinté noir pour les garde-corps, double vitrage 4/16/4 pour les portes-balcon.</p></div></div>
+      <div class="mat"><div class="chip" style="background-image:url(${IMG.mat3});background-size:cover;background-position:center"></div>
+        <div class="txt"><h3>Inox 316 brossé</h3><p>Main courante Ø 42 continue, pinces et platines. Brossé dans le sens de la pièce — le reflet glisse le long de la courbe.</p></div></div>
     </div>
     <div class="duo" style="margin-top:56px">
       <figure><div class="shot"><img src="${IMG.detailGc}" alt="Planche de détail du garde-corps aux échelles 1:20 et 1:5."></div>

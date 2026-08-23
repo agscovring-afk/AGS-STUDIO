@@ -4,6 +4,7 @@ import { XS, LV, BLOCS, BALCONS, MIROIR, COL, FASCIA, GC, PBH, PBW, AVANCEE, RET
          FV_EP, FV_PANNEAU, FV_JOINT, CAD_L, CAD_EP, POTEAUX,
          depthAt, doors, gcSegments, developpe } from './geo.mjs';
 import { page, header } from './page.mjs';
+import { FILTRES, TEINTE } from './materiaux.mjs';
 import { makeCam, poly, SUN, SUNDIR, shadeN, castY, castZ, haze, norm, dot, sub, rgb2hex, hex2rgb } from './camera.mjs';
 
 const NUIT = process.argv.includes('--nuit');
@@ -38,16 +39,17 @@ const MAT = NUIT ? {
   alu: '#474B4E', verre: '#20272B', inox: '#C2C9CE', asphalte: '#8C8B85',
   trottoir: '#CFC9BC', ciel0: '#3D7FBE', ciel1: '#8FC0E4', ciel2: '#E4EFF6',
   led: '#F3D9A4', fenetre: '#2B3236', horizon: '#D8E6F0',
-  trav: '#C9B695', alu7024: '#474B4E',
+  trav: TEINTE.travertin, alu7024: TEINTE.laque7024,
 };
-const SH = NUIT ? { amb: 0.46, kd: 0.20, sky: 0.12, bounce: 0.07 } : { amb: 0.52, kd: 0.80, sky: 0.14, bounce: 0.11 };
+const SH = NUIT ? { amb: 0.46, kd: 0.20, sky: 0.12, bounce: 0.07 } : { amb: 0.57, kd: 0.76, sky: 0.14, bounce: 0.13 };
 const S = (base, n, o = {}) => shadeN(base, n, { ...SH, ...o });
 const NY = [0, 1, 0], NX = [-1, 0, 0], NZ = [0, 0, 1], NZm = [0, 0, -1];
 
 // ===========================================================================
 // DEFS — textures et filtres
 // ===========================================================================
-g.push(`<defs>
+const ECH = ZOOM ? 165 : 46;   // px par metre au nu de facade
+g.push(`<defs>${FILTRES({ ech: ECH })}
   <linearGradient id="ciel" x1="0" y1="0" x2="0.15" y2="1">
     <stop offset="0" stop-color="${MAT.ciel0}"/><stop offset="0.55" stop-color="${MAT.ciel1}"/>
     <stop offset="1" stop-color="${MAT.ciel2}"/></linearGradient>
@@ -72,39 +74,11 @@ g.push(`<defs>
       values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.5 0 0 0 -0.42"/>
     <feGaussianBlur in="a" stdDeviation="2.5"/>
   </filter>
-  <filter id="crepi" x="0%" y="0%" width="100%" height="100%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="4" seed="3" result="n"/>
-    <feDiffuseLighting in="n" lighting-color="#ffffff" surfaceScale="1.05" result="l">
-      <feDistantLight azimuth="215" elevation="58"/>
-    </feDiffuseLighting>
-    <feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.06" k2="0" k3="0" k4="-0.05"/>
-  </filter>
-  <filter id="travertin" x="0%" y="0%" width="100%" height="100%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.035 1.25" numOctaves="5" seed="13" result="n"/>
-    <feDiffuseLighting in="n" lighting-color="#ffffff" surfaceScale="1.6" result="l">
-      <feDistantLight azimuth="212" elevation="48"/>
-    </feDiffuseLighting>
-    <feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.14" k2="0" k3="0" k4="-0.10"/>
-  </filter>
   <linearGradient id="wallwash" x1="0" y1="1" x2="0" y2="0">
     <stop offset="0" stop-color="#FFD9A0" stop-opacity="${NUIT ? 0.62 : 0.10}"/>
     <stop offset="0.22" stop-color="#FFCE8C" stop-opacity="${NUIT ? 0.34 : 0.05}"/>
     <stop offset="0.65" stop-color="#F5BE7C" stop-opacity="${NUIT ? 0.10 : 0}"/>
     <stop offset="1" stop-color="#F5BE7C" stop-opacity="0"/></linearGradient>
-  <filter id="beton2" x="0%" y="0%" width="100%" height="100%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.22" numOctaves="3" seed="11" result="n"/>
-    <feDiffuseLighting in="n" lighting-color="#ffffff" surfaceScale="0.8" result="l">
-      <feDistantLight azimuth="215" elevation="60"/>
-    </feDiffuseLighting>
-    <feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.03" k2="0" k3="0" k4="-0.02"/>
-  </filter>
-  <filter id="bitume" x="0%" y="0%" width="100%" height="100%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.9 0.35" numOctaves="4" seed="19" result="n"/>
-    <feDiffuseLighting in="n" lighting-color="#ffffff" surfaceScale="0.9" result="l">
-      <feDistantLight azimuth="215" elevation="52"/>
-    </feDiffuseLighting>
-    <feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.10" k2="0" k3="0" k4="-0.08"/>
-  </filter>
   <filter id="flou6"><feGaussianBlur stdDeviation="6"/></filter>
   <filter id="flou14"><feGaussianBlur stdDeviation="14"/></filter>
   <filter id="flou3"><feGaussianBlur stdDeviation="3"/></filter>
@@ -186,7 +160,7 @@ if (NUIT) for (let i = 0; i < 90; i++) {
 {
   const hz = P([0, 400, 0])[1];
   g.push(`<rect x="0" y="${hz - 2}" width="${W}" height="${H - hz + 2}" fill="url(#solG)"/>`);
-  g.push(`<rect x="0" y="${hz - 2}" width="${W}" height="${H - hz + 2}" filter="url(#bitume)" opacity="0.20"/>`);
+  g.push(`<rect x="0" y="${hz - 2}" width="${W}" height="${H - hz + 2}" filter="url(#mBitume)" opacity="0.20"/>`);
   // trottoir devant le socle : Y de 4.0 a 7.2, avec sa bordure
   const TR0 = AVANCEE, TR1 = AVANCEE + 3.2, X0 = -30, X1 = 60;
   g.push(face([[X0, TR0, 0.16], [X1, TR0, 0.16], [X1, TR1, 0.16], [X0, TR1, 0.16]], S(MAT.trottoir, NZ)));
@@ -226,7 +200,7 @@ const rive = (b, z, off = 0, dz = 0) => {
 const nu = (b, z, y = 0) => { const [m1, m2] = BLOCS[b]; return [[m1, y, z], [m2, y, z]]; };
 
 // --- pignon gauche (X = 0), il fuit vers l'arriere -------------------------
-g.push(face([[0, 0, 0], [0, -PROF, 0], [0, -PROF, LV.acr], [0, 0, LV.acr]], S(MAT.mono, NX), 'filter="url(#crepi)"'));
+g.push(face([[0, 0, 0], [0, -PROF, 0], [0, -PROF, LV.acr], [0, 0, LV.acr]], S(MAT.mono, NX), 'filter="url(#mMonocouche)"'));
 g.push(face([[0, 0, 0], [0, -PROF, 0], [0, -PROF, LV.acr], [0, 0, LV.acr]], 'url(#gradPignon)'));
 for (let k = 2; k <= 8; k++) {                       // baies de pignon
   const z = LV['r' + k] + 0.95;
@@ -241,7 +215,7 @@ for (let k = 2; k <= 8; k++) {                       // baies de pignon
 
 // --- masse de la tour : nu de facade du R+2 a l'acrotere -------------------
 const murTour = S(MAT.mono, NY);
-g.push(face([[0, 0, LV.r2 - 0.4], [17.5, 0, LV.r2 - 0.4], [17.5, 0, LV.acr], [0, 0, LV.acr]], murTour, 'filter="url(#crepi)"'));
+g.push(face([[0, 0, LV.r2 - 0.4], [17.5, 0, LV.r2 - 0.4], [17.5, 0, LV.acr], [0, 0, LV.acr]], murTour, 'filter="url(#mMonocouche)"'));
 g.push(face([[0, 0, LV.r2 - 0.4], [17.5, 0, LV.r2 - 0.4], [17.5, 0, LV.acr], [0, 0, LV.acr]], 'url(#gradFacade)'));
 // occlusion douce en pied de tour et le long du pignon
 g.push(`<linearGradient id="aoV" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2B3138" stop-opacity="0.22"/><stop offset="1" stop-color="#2B3138" stop-opacity="0"/></linearGradient>`);
@@ -259,10 +233,10 @@ g.push(face([[0, 0, LV.r2], [2.2, 0, LV.r2], [2.2, 0, LV.acr], [0, 0, LV.acr]], 
     const a = Math.max(0, pa - 0.15), b = Math.min(17.5, pb + 0.15);
     // face du parement, au nu + 9 cm
     g.push(face([[a, FV_EP, z0], [b, FV_EP, z0], [b, FV_EP, z1], [a, FV_EP, z1]],
-      S(MAT.trav, NY), 'filter="url(#travertin)"'));
+      S(MAT.trav, NY), 'filter="url(#mTravertin)"'));
     // retour gauche, seul visible depuis ce point de vue
     g.push(face([[a, 0, z0], [a, FV_EP, z0], [a, FV_EP, z1], [a, 0, z1]],
-      S(MAT.trav, NX), 'filter="url(#travertin)"'));
+      S(MAT.trav, NX), 'filter="url(#mTravertin)"'));
     // joints creux ouverts entre panneaux de 1,20 m
     for (let z = z0 + FV_PANNEAU; z < z1; z += FV_PANNEAU) {
       g.push(`<path d="${poly(C, [[a, FV_EP, z], [b, FV_EP, z]], false)}" stroke="${NUIT ? '#0B0F14' : '#5E574A'}" stroke-width="2" fill="none" opacity="0.72"/>`);
@@ -495,7 +469,7 @@ for (let li = BALCONS.length - 1; li >= 0; li--) {
 // ===========================================================================
 {
   const zt = LV.toit, za = LV.acr;
-  g.push(face([[0, 0, zt], [17.5, 0, zt], [17.5, 0, za], [0, 0, za]], S(MAT.mono, NY), 'filter="url(#crepi)"'));
+  g.push(face([[0, 0, zt], [17.5, 0, zt], [17.5, 0, za], [0, 0, za]], S(MAT.mono, NY), 'filter="url(#mMonocouche)"'));
   g.push(face([[0, 0.06, za], [17.5, 0.06, za], [17.5, -0.11, za + 0.04], [0, -0.11, za + 0.04]], S(MAT.alu, NZ, { kd: SH.kd * 0.9 })));
   g.push(face([[0, 0.06, za], [17.5, 0.06, za], [17.5, 0.06, za - 0.05], [0, 0.06, za - 0.05]], S(MAT.alu, NY, { kd: SH.kd * 0.7 })));
   g.push(`<path d="${poly(C, [[0, 0.06, za + 0.002], [17.5, 0.06, za + 0.002]], false)}" stroke="${NUIT ? '#7E8A96' : '#FFFFFF'}" stroke-width="1.4" fill="none" opacity="0.6"/>`);
@@ -509,9 +483,9 @@ for (let li = BALCONS.length - 1; li >= 0; li--) {
 {
   const zt = LV.r2;
   // pignon gauche du socle
-  g.push(face([[0, AVANCEE, 0], [0, -PROF, 0], [0, -PROF, zt], [0, AVANCEE, zt]], S(MAT.mono, NX), 'filter="url(#crepi)"'));
+  g.push(face([[0, AVANCEE, 0], [0, -PROF, 0], [0, -PROF, zt], [0, AVANCEE, zt]], S(MAT.mono, NX), 'filter="url(#mMonocouche)"'));
   // face avant du socle
-  g.push(face([[0, AVANCEE, 0], [17.5, AVANCEE, 0], [17.5, AVANCEE, zt], [0, AVANCEE, zt]], S(MAT.mono, NY), 'filter="url(#crepi)"'));
+  g.push(face([[0, AVANCEE, 0], [17.5, AVANCEE, 0], [17.5, AVANCEE, zt], [0, AVANCEE, zt]], S(MAT.mono, NY), 'filter="url(#mMonocouche)"'));
   // arete verticale de l'angle
   g.push(`<path d="${poly(C, [[0, AVANCEE, 0], [0, AVANCEE, zt]], false)}" stroke="${NUIT ? '#0B121B' : '#FFFFFF'}" stroke-width="1.6" fill="none" opacity="0.55"/>`);
   // plinthe : 60 cm de beton lisse teinte, elle encaisse les projections
