@@ -5,7 +5,7 @@ project_summary.txt
 design/facade-r6/facade-immeuble-r6.html
 
 # livrable : le zip se regenere, le canvas seede est deja ignore
-design/facade-r6/KASSI.zip
+design/facade-r6/KASSI*.zip
 design/facade-r6/KASSI/Dossier interactif - canvas.html
 design/facade-r6/photo-jour.html
 design/facade-r6/photo-nuit.html
