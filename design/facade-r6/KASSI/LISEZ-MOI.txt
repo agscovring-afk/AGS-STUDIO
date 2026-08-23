@@ -1,0 +1,63 @@
+IMMEUBLE R+8 — FACADE PRINCIPALE
+Dossier KASSI — 2026-08-23
+
+PDF/   les planches a l'echelle vraie. Imprimer a 100 %, sans "ajuster a la page",
+       sinon les cotes ne sont plus justes. Le format de chaque feuille est
+       indique ci-dessous.
+PNG/   les memes planches en image 2x, pour lire a l'ecran ou envoyer.
+
+01  Donnees du projet a valider                      419.89 x 375.71 mm
+02  Facade principale 1-100                          306.92 x 537.1 mm
+03  Plan niveau courant - onde de rive 1-50          419.89 x 259.29 mm
+04  Plan terrasses R+2 1-50                          419.89 x 243.42 mm
+05  Plan RDC parking 1-50                            419.89 x 254 mm
+06  Coupe A-A 1-100                                  238.13 x 412.75 mm
+07  Detail balcon - les quatre vues 1-25             593.73 x 428.63 mm
+08  Details coupes verticales 1-10                   593.73 x 330.73 mm
+09  Details coupes horizontales 1-10                 593.73 x 473.6 mm
+10  Detail garde-corps 1-20 et 1-5                   593.73 x 558.27 mm
+11  Materiaux et finitions                           248.71 x 449.79 mm
+12  Ambiance - rives ondulees jour                   312.21 x 357.19 mm
+13  Ambiance - la courbe allumee nuit                312.21 x 357.19 mm
+14  Ambiance - vue plongeante terrasse et balcon     312.21 x 328.08 mm
+15  Gabarit onde de rive                             419.89 x 297.13 mm
+16  Gabarit terrasses                                419.89 x 297.13 mm
+
+GEOMETRIE ARRETEE
+  Largeur totale de facade      17.50 m       Poteaux 0.55 m
+  Baie de balcon                6.75 m libre  Vide central 1.80 m
+  Hauteur d'etage               3.26 m        dont dalle 0.20 m
+  RDC                           2.60 m sous plafond
+  Niveaux                       RDC et R+1 parking, R+2 terrasses,
+                                R+3 a R+8 balcons, acrotere +29.88
+
+  ONDE DE RIVE (bloc droit ; bloc gauche en miroir)
+  Elle part du poteau perpendiculairement au nu.
+  Grand lobe 1.80 m a 1.96 m du poteau
+  Creux median 0.79 m a 3.92 m
+  Petit lobe 1.10 m a 5.64 m
+  Developpe 9.63 ml par balcon, 12 balcons
+
+  GARDE-CORPS
+  Alternance 40 cm de verre feuillete 8.8.4 et 40 cm de barreaudage inox O16,
+  24 panneaux par balcon, main courante inox O42 a 1.10 m.
+  Voir planche 10 : la fleche d'un panneau plat atteint 23 mm dans les deux
+  zones les plus serrees.
+
+  VIDE CENTRAL
+  Fente de 1.80 m creusee de 1.50 m. Au fond, deux balcons de 0.70 x 0.80 m,
+  un par logement, porte-fenetre de 0.70 m depuis le logement.
+  Brise-vue aluminium RAL 7024 de 40 cm sur l'axe, entre les deux.
+  Garde-corps verre a 0.70 m en arriere du nu.
+
+  MATERIAUX
+  Monocouche blanc, grain fin gratte, joint creux 15x15 a chaque plancher
+  Bandeaux de rive Aquapanel Outdoor 12.5 mm sur ossature cintree, retombee 0.45
+  Gorge LED 50x50 en sous-face de chaque bandeau, 3000 K IP65
+  Menuiseries aluminium TPR serie 65 a rupture de pont thermique, RAL 7024
+  Brise-vue et couvertines aluminium RAL 7024
+  Garde-corps verre feuillete teinte noir et inox 316 brosse
+
+RESTE A CONFIRMER
+  Vos 7 m de baie : entraxe des poteaux (retenu, donne 6.75 libre et 17.50
+  au total) ou largeur libre (la facade passerait a 18.00) ?

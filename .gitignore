@@ -3,3 +3,7 @@ __pycache__/
 project_summary.txt
 # canvas Claude Design généré (2 Mo d'éditeur embarqué)
 design/facade-r6/facade-immeuble-r6.html
+
+# livrable : le zip se regenere, le canvas seede est deja ignore
+design/facade-r6/KASSI.zip
+design/facade-r6/KASSI/Dossier interactif - canvas.html
