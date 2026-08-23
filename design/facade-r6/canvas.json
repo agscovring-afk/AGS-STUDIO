@@ -155,6 +155,36 @@
       "h": 960,
       "page": "page-2",
       "title": "Vue plongeante — terrasse R+2 et balcon R+3"
+    },
+    {
+      "file": "Details-Verticaux.dc.html",
+      "x": 0,
+      "y": 6500,
+      "w": 2244,
+      "h": 1250,
+      "page": "page-1",
+      "title": "Détails — coupes verticales 1:10",
+      "print": "fixed"
+    },
+    {
+      "file": "Details-Horizontaux.dc.html",
+      "x": 0,
+      "y": 7850,
+      "w": 2244,
+      "h": 1790,
+      "page": "page-1",
+      "title": "Détails — coupes horizontales 1:10",
+      "print": "fixed"
+    },
+    {
+      "file": "Detail-Garde-Corps.dc.html",
+      "x": 0,
+      "y": 9740,
+      "w": 2244,
+      "h": 2110,
+      "page": "page-1",
+      "title": "Détail — garde-corps 1:20 et 1:5",
+      "print": "fixed"
     }
   ],
   "annotations": [
@@ -189,6 +219,14 @@
       "w": 330,
       "page": "page-1",
       "text": "LE BALCON EN DÉTAIL\n\nQuatre vues du même balcon au 1:25 : élévation intérieure avec les deux portes, coupe au grand lobe (1,80 m), coupe au petit lobe (1,10 m), et plan.\n\nLes deux coupes sont la même construction à ses deux profondeurs : c’est là que se lit l’ondulation, qu’une élévation ne peut pas montrer."
+    },
+    {
+      "id": "carnet",
+      "x": -390,
+      "y": 6500,
+      "w": 330,
+      "page": "page-1",
+      "text": "LE CARNET DE DÉTAILS\n\nTrois planches d’exécution : coupes verticales au 1:10 (rive, seuil, plancher, acrotère), coupes horizontales au 1:10 (poteau, trumeau, vide central), et le garde-corps au 1:20 et 1:5.\n\nLa dernière planche dit franchement ce que coûte un panneau plat de 40 cm sur la courbe : 23 mm de flèche au plus défavorable, et la parade si vous la voulez plus franche."
     }
   ],
   "launch": {
