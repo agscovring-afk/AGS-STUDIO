@@ -12,14 +12,15 @@ const MAT = [
           'Poteaux de 55 cm laissés en léger relief — nu extérieur +2 cm sur l’allège'] },
   { n: 'Aquapanel cintré', t: 'Blanc pur', sw: ['#FBF9F5', '#E3DCD0'], ref: 'Plaque ciment 12,5 mm cintrée sur ossature, enduit + peinture façade blanc mat',
     pts: [`Bandeaux de rive ondulés, développé ${dev.toFixed(2)} ml par balcon`,
-          '10 rives au total (5 niveaux × 2 blocs) → ≈ ' + (dev * 10).toFixed(0) + ' ml linéaires',
-          'Retombée 45 cm — ≈ ' + (dev * 10 * 0.45).toFixed(0) + ' m² de surface développée, sous-face comprise',
+          'Balcons R+3 à R+6 × 2 blocs = 8 rives → ' + (dev * 8).toFixed(0) + ' ml',
+          'Acrotère de terrasse R+2, onde continue sur 17,50 m → 20 ml',
+          'Soit ≈ 99 ml au total ; retombée 45 cm → ≈ ' + (99 * 0.45).toFixed(0) + ' m² développés, sous-face comprise',
           'Rayon de cintrage mini ≈ 0,60 m — compatible plaque cintrée à sec'] },
   { n: 'Garde-corps verre + inox', t: 'Verre clair / inox brossé', sw: ['#C3D0D2', '#B7BEC2'], ref: 'Verre feuilleté 8.8.4 clair, montants et main courante inox 304 brossé Ø 42 mm',
     pts: ['Hauteur 1,10 m au-dessus du sol fini',
           'Le garde-corps suit l’onde de rive, à 5 cm en retrait du nu',
           'Montants tous les 1,55 m, fixation sur platine dans la dalle',
-          'Linéaire ≈ ' + (dev * 10).toFixed(0) + ' ml + 17,50 ml de terrasse R+2'] },
+          'Linéaire ≈ 99 ml, sur le même tracé que les bandeaux Aquapanel'] },
   { n: 'Brise-vue aluminium', t: 'Bronze anodisé', sw: ['#8A6E4C', '#5A4832'], ref: 'Lames aluminium anodisé bronze, ossature alu, fixation sur poteaux béton',
     pts: ['Vide central 1,80 m — lames verticales, du R+2 au niveau toiture (≈ 22 m²)',
           'Séparations d’intimité en bout de balcon, 1,30 m de haut',
@@ -33,7 +34,7 @@ const MAT = [
 
 const NOTES = [
   ['Découpage retenu', '0,55 + 6,75 + 0,55 + 1,80 + 0,55 + 6,75 + 0,55 = 17,50 m. L’ouverture libre est prise à 6,75 m pour boucler exactement les 17,50 m relevés — soit 7,30 m d’entraxe de poteaux. À confirmer selon ce que couvrent vos ~7 m.'],
-  ['Nombre de niveaux', 'RDC + R+1 en parking, R+2 à R+6 en logements — 5 rives ondulées, ce qui correspond aux photos. Hauteurs prises à 3,40 m au RDC et 3,06 m aux étages : à caler sur vos hauteurs réelles.'],
+  ['Nombre de niveaux', 'RDC + R+1 en parking, R+2 à R+6 en logements. Cela donne 5 lignes ondulées en façade — l’acrotère de la terrasse R+2, puis les balcons du R+3 au R+6 — ce qui correspond aux photos. Hauteurs prises à 3,40 m au RDC et 3,06 m aux étages : à caler sur vos hauteurs réelles.'],
   ['Onde de rive', 'Deux ondes par balcon, profondeur 1,30 m au creux et 3,00 m à la crête. C’est cette amplitude qui donne les ~10 ml de développé annoncés. Si la console de 3,00 m est trop profonde, on rapproche les ondes plutôt que de les aplatir.'],
   ['Terrasse R+2', 'Elle occupe toute la toiture du parking, soit 4,00 m de profondeur sur 17,50 m. Son acrotère reprend la même onde que les balcons pour que la lecture soit continue.'],
 ];

@@ -9,7 +9,7 @@ const E = elevation(P, { scale: 42, x0: 215, y0: 1092 });
 
 const LEG = [
   ['Monocouche gratté', 'Voiles, poteaux et acrotère. Teinte ivoire sablé, grain fin, joints creux horizontaux au droit de chaque plancher.'],
-  ['Aquapanel cintré', `Habillage des bandeaux de rive ondulés. Développé ≈ ${developpe().toFixed(1)} ml par balcon — 10 rives, soit ≈ ${(developpe() * 10).toFixed(0)} ml.`],
+  ['Aquapanel cintré', `Habillage des bandeaux de rive ondulés. ${developpe().toFixed(1)} ml par balcon × 8 balcons, plus l’acrotère de terrasse R+2 en onde continue : ≈ 99 ml.`],
   ['Garde-corps verre + inox', 'Verre feuilleté 8.8.4 clair, montants et main courante inox 304 brossé Ø 42 mm. Hauteur 1.10 m.'],
   ['Brise-vue aluminium', 'Vide central 1.80 m — lames verticales anodisées bronze, du R+2 au niveau toiture. Intimité des deux balcons en vis-à-vis.'],
   ['Porte-balcon aluminium', '2 vantaux coulissants, 1.80 m de large × 2.40 m de haut, rupture de pont thermique, double vitrage 4/16/4.'],
