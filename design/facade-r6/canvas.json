@@ -1,26 +1,115 @@
 {
   "pages": [
-    { "id": "page-1", "name": "Façade — Variante A" },
-    { "id": "page-2", "name": "Variantes B & C" }
+    {
+      "id": "page-1",
+      "name": "Façade — Variante A retenue"
+    },
+    {
+      "id": "page-2",
+      "name": "Variantes écartées"
+    }
   ],
   "artboards": [
-    { "file": "Main.dc.html",        "x": 0,    "y": 0,    "w": 1160, "h": 1800, "page": "page-1", "title": "Façade principale" },
-    { "file": "Vue.dc.html",         "x": 1260, "y": 0,    "w": 900,  "h": 1330, "page": "page-1", "title": "Rives ondulées — ambiance" },
-    { "file": "Coupe.dc.html",       "x": 2260, "y": 0,    "w": 900,  "h": 1440, "page": "page-1", "title": "Coupe A-A" },
-    { "file": "Plan-Balcon.dc.html", "x": 0,    "y": 1930, "w": 1120, "h": 1010, "page": "page-1", "title": "Plan balcon type" },
-    { "file": "Materiaux.dc.html",   "x": 1260, "y": 1930, "w": 940,  "h": 1370, "page": "page-1", "title": "Matériaux & hypothèses" },
-    { "file": "VarianteB.dc.html",   "x": 0,    "y": 0,    "w": 820,  "h": 1130, "page": "page-2", "title": "Variante B — Graphite & Verre" },
-    { "file": "VarianteC.dc.html",   "x": 920,  "y": 0,    "w": 820,  "h": 1130, "page": "page-2", "title": "Variante C — Rubans continus" }
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1160,
+      "h": 1800,
+      "page": "page-1",
+      "title": "Façade principale"
+    },
+    {
+      "file": "Vue.dc.html",
+      "x": 1260,
+      "y": 0,
+      "w": 900,
+      "h": 1330,
+      "page": "page-1",
+      "title": "Rives ondulées — ambiance"
+    },
+    {
+      "file": "Coupe.dc.html",
+      "x": 2260,
+      "y": 0,
+      "w": 900,
+      "h": 1440,
+      "page": "page-1",
+      "title": "Coupe A-A"
+    },
+    {
+      "file": "Plan-Balcon.dc.html",
+      "x": 0,
+      "y": 1930,
+      "w": 1120,
+      "h": 1010,
+      "page": "page-1",
+      "title": "Plan balcon type"
+    },
+    {
+      "file": "Materiaux.dc.html",
+      "x": 1260,
+      "y": 1930,
+      "w": 940,
+      "h": 1370,
+      "page": "page-1",
+      "title": "Matériaux & hypothèses"
+    },
+    {
+      "file": "VarianteB.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 820,
+      "h": 1130,
+      "page": "page-2",
+      "title": "Variante B — Graphite & Verre"
+    },
+    {
+      "file": "VarianteC.dc.html",
+      "x": 920,
+      "y": 0,
+      "w": 820,
+      "h": 1130,
+      "page": "page-2",
+      "title": "Variante C — Rubans continus"
+    }
   ],
   "annotations": [
-    { "id": "hyp-trame", "x": -390, "y": 0, "w": 330, "page": "page-1",
-      "text": "CE QUE J'AI SUPPOSÉ\n\n• 17,50 = 0,55 + 6,75 + 0,55 + 1,80 + 0,55 + 6,75 + 0,55\n• Tes « 7 m » = entraxe de poteaux (7,30) → ouverture libre 6,75\n• RDC + R+1 en parking (avancée 4,00 m)\n• R+2 à R+6 en logements = 5 rives ondulées\n• Hauteurs 3,40 m au RDC, 3,06 m aux étages\n\nDis-moi ce qui change et je reprends le dessin." },
-    { "id": "hyp-onde", "x": -390, "y": 560, "w": 330, "page": "page-1",
-      "text": "L'ONDE DE RIVE\n\n2 ondes par balcon, profondeur 1,30 m au creux et 3,00 m à la crête → développé 9,92 ml, soit tes ~10 ml.\n\nSi une console de 3,00 m est trop profonde, on passe à 3 ondes moins creuses : même développé, moins de porte-à-faux." },
-    { "id": "hyp-vide", "x": -390, "y": 980, "w": 330, "page": "page-1",
-      "text": "LE VIDE CENTRAL\n\n1,80 m, avec un balcon de chaque côté qui se font face. Je l'ai fermé par un brise-vue alu à lames verticales, du R+2 à la toiture : ça règle le vis-à-vis et ça donne à la façade son seul accent vertical." },
-    { "id": "choix", "x": -390, "y": 0, "w": 330, "page": "page-2",
-      "text": "POURQUOI DEUX AUTRES DIRECTIONS\n\nLa variante A (page précédente) est la proposition principale. B et C ne sont pas des finitions : ce sont deux partis différents sur les mêmes cotes.\n\nDis-moi laquelle on développe — ou ce que tu veux prendre de l'une et de l'autre." }
+    {
+      "id": "parti-trame",
+      "x": -390,
+      "y": 0,
+      "w": 330,
+      "page": "page-1",
+      "text": "PARTI ARRÊTÉ — 23.08.2026\n\n• 17,50 = 0,55 + 6,75 + 0,55 + 1,80 + 0,55 + 6,75 + 0,55\n• Ouverture libre 6,75 m, entraxe de poteaux 7,30 m\n• RDC + R+1 en parking, avancée 4,00 m\n• R+2 à R+6 en logements → 5 lignes ondulées\n• 3,40 m au RDC, 3,06 m aux étages → 22,76 m hors tout\n\nToutes les planches sont calées sur ces cotes."
+    },
+    {
+      "id": "parti-onde",
+      "x": -390,
+      "y": 560,
+      "w": 330,
+      "page": "page-1",
+      "text": "L'ONDE DE RIVE\n\n2 ondes par balcon, profondeur 1,30 m au creux et 3,00 m à la crête → développé 9,92 ml, soit les ~10 ml relevés.\n\nSeule réserve d'exécution : si la console de 3,00 m gêne le ferraillage, on passe à 3 ondes moins creuses — même développé, moins de porte-à-faux."
+    },
+    {
+      "id": "parti-vide",
+      "x": -390,
+      "y": 980,
+      "w": 330,
+      "page": "page-1",
+      "text": "LE VIDE CENTRAL\n\n1,80 m, avec un balcon de chaque côté qui se font face. Fermé par un brise-vue alu à lames verticales, du R+2 à la toiture : il règle le vis-à-vis et donne à la façade son seul accent vertical."
+    },
+    {
+      "id": "ecartees",
+      "x": -390,
+      "y": 0,
+      "w": 330,
+      "page": "page-2",
+      "text": "POUR MÉMOIRE\n\nDeux directions étudiées puis écartées au profit de la variante A. Elles restent ici comme trace de l'arbitrage — mêmes cotes, mêmes matériaux, parti d'expression différent.\n\nSi un point de l'une des deux vous intéresse encore, il peut être greffé sur la variante A."
+    }
   ],
-  "launch": { "view": "canvas", "page": "page-1" }
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  }
 }

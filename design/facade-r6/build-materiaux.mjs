@@ -33,10 +33,10 @@ const MAT = [
 ];
 
 const NOTES = [
-  ['Découpage retenu', '0,55 + 6,75 + 0,55 + 1,80 + 0,55 + 6,75 + 0,55 = 17,50 m. L’ouverture libre est prise à 6,75 m pour boucler exactement les 17,50 m relevés — soit 7,30 m d’entraxe de poteaux. À confirmer selon ce que couvrent vos ~7 m.'],
-  ['Nombre de niveaux', 'RDC + R+1 en parking, R+2 à R+6 en logements. Cela donne 5 lignes ondulées en façade — l’acrotère de la terrasse R+2, puis les balcons du R+3 au R+6 — ce qui correspond aux photos. Hauteurs prises à 3,40 m au RDC et 3,06 m aux étages : à caler sur vos hauteurs réelles.'],
-  ['Onde de rive', 'Deux ondes par balcon, profondeur 1,30 m au creux et 3,00 m à la crête. C’est cette amplitude qui donne les ~10 ml de développé annoncés. Si la console de 3,00 m est trop profonde, on rapproche les ondes plutôt que de les aplatir.'],
-  ['Terrasse R+2', 'Elle occupe toute la toiture du parking, soit 4,00 m de profondeur sur 17,50 m. Son acrotère reprend la même onde que les balcons pour que la lecture soit continue.'],
+  ['Découpage horizontal', '0,55 + 6,75 + 0,55 + 1,80 + 0,55 + 6,75 + 0,55 = 17,50 m. L’ouverture libre est arrêtée à 6,75 m entre nus de poteaux, soit 7,30 m d’entraxe — c’est la lecture retenue des ~7,00 m relevés, et elle boucle exactement la largeur de 17,50 m.'],
+  ['Niveaux et hauteurs', 'RDC + R+1 en parking, R+2 à R+6 en logements — cinq lignes ondulées en façade : l’acrotère de la terrasse R+2, puis les balcons du R+3 au R+6. Hauteurs sous plancher retenues : 3,40 m au RDC, 3,06 m à chaque étage, acrotère 1,00 m → 22,76 m hors tout.'],
+  ['Onde de rive', 'Deux ondes par balcon, profondeur 1,30 m au creux et 3,00 m à la crête — c’est cette amplitude qui produit les 9,92 ml de développé, conformes aux ~10 ml relevés. Variante d’exécution si la console de 3,00 m pose problème au ferraillage : trois ondes moins creuses, à développé équivalent.'],
+  ['Terrasse R+2', 'Toute la toiture du parking, soit 4,00 m de profondeur sur 17,50 m de large. Son acrotère reprend l’onde des balcons, au même pas, pour que la lecture de la façade soit continue du bas vers le haut.'],
 ];
 
 const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #F7F4ED; padding: 20px 22px 22px${wide ? '; grid-column: span 2' : ''}">
@@ -57,14 +57,14 @@ const card = (m, wide) => `<div style="border: 1px solid #D3C9B7; background: #F
 
 const body = `<div style="width: ${W}px; background: #F1EDE5">
 ${header({ w: W, kicker: 'Matériaux, finitions &amp; hypothèses', title: 'Palette de façade',
-  sub: 'Les quatre matériaux demandés, leur mise en œuvre et les quantités qui en découlent — puis les hypothèses que j’ai prises et qu’il faut confirmer.',
-  right: 'VARIANTE A<br>« IVOIRE &amp; BRONZE »<br>QUANTITÉS ESTIMATIVES' })}
+  sub: 'Les quatre matériaux demandés, leur mise en œuvre et les quantités qui en découlent — puis le parti dimensionnel arrêté, sur lequel s’appuient toutes les planches.',
+  right: 'VARIANTE A — RETENUE<br>« IVOIRE &amp; BRONZE »<br>QUANTITÉS ESTIMATIVES' })}
 <div style="padding: 28px 44px 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
   ${MAT.map((m, i) => card(m, i === MAT.length - 1)).join('\n  ')}
 </div>
 <div style="padding: 26px 44px 44px">
   <div class="rule" style="margin-bottom: 22px"></div>
-  <div class="eyebrow" style="margin-bottom: 16px">À confirmer avant de figer le dessin</div>
+  <div class="eyebrow" style="margin-bottom: 16px">Parti dimensionnel arrêté — validé le 23.08.2026</div>
   <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 34px">
     ${NOTES.map(([t, d]) => `<div>
       <div style="font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif; font-size: 13.5px; font-weight: 600">${t}</div>

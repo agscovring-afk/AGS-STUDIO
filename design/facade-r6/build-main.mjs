@@ -35,8 +35,8 @@ ${header({
   w: W,
   kicker: 'Immeuble R+6 · logements · Algérie',
   title: 'Façade principale',
-  sub: 'Variante A — « Ivoire &amp; Bronze ». Monocouche gratté, bandeaux de rive cintrés en Aquapanel, garde-corps verre feuilleté + inox brossé, brise-vue aluminium anodisé bronze.',
-  right: 'ÉCHELLE 1:100<br>COTES EN MÈTRES<br>NIVEAUX / NGF PROJET<br>ÉTAT PROJETÉ',
+  sub: 'Variante A « Ivoire &amp; Bronze » — direction retenue. Monocouche gratté, bandeaux de rive cintrés en Aquapanel, garde-corps verre feuilleté + inox brossé, brise-vue aluminium anodisé bronze.',
+  right: 'ÉCHELLE 1:100<br>COTES EN MÈTRES<br>NIVEAUX / NGF PROJET<br>VARIANTE A — RETENUE',
 })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">
 ${E.svg}
