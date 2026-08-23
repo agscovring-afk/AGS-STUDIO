@@ -193,16 +193,16 @@ g.push(coupe(1470, 1128, DPETIT, '3 · COUPE B-B — AU PETIT LOBE', 790, false)
 const LEG = [
   ['Bandeau de rive', 'Aquapanel cintré 12,5 mm sur ossature, retombée 0,45 m, finition blanche. Épaisseur d’habillage 0,20 m au nu de la dalle.'],
   ['Gorge LED', 'Profil aluminium encastré de 5 cm en sous-face du bandeau, ruban LED 3000 K IP65 — alimentation à prévoir dans la dalle avant habillage.'],
-  ['Garde-corps', 'Alternance 40 cm / 40 cm sur tout le développé : un panneau de verre feuilleté 8.8.4 teinté noir, plat, puis 40 cm de barreaudage inox Ø 16. Main courante inox Ø 42, h = 1,10 m.'],
+  ['Garde-corps', 'Variante à arrêter : tout verre feuilleté, tout inox, ou fer forgé — voir les perspectives. Le tracé et les fixations sont les mêmes dans les trois cas. Main courante Ø 42, h = 1,10 m.'],
   ['Porte-balcon', 'Aluminium TPR série 65 à rupture de pont thermique, RAL 7024, 2 vantaux coulissants, 1,80 × 2,20 m, double vitrage 4/16/4.'],
   ['Profil LED vertical', 'Encastré dans le trumeau entre les deux portes, 1,90 m de haut, même circuit que la gorge de rive.'],
-  ['Structure', 'Dalle 0,20 m, hauteur libre 3,06 m. Console nulle au nu de façade, 1,80 m au grand lobe, 1,10 m au petit — ferraillage à valider par le BET.'],
+  ['Structure', 'Dalle 0,20 m, hauteur libre 3,06 m. Console nulle au nu de façade, 1,80 m au grand lobe, 1,45 m au petit — ferraillage à valider par le BET.'],
 ];
 
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Détail · balcon type, niveau courant R+3 à R+8',
   title: 'Balcon — les quatre vues',
-  sub: 'Le même balcon vu de face depuis l’intérieur, coupé au grand lobe (1,80 m) et au petit lobe (1,10 m), et en plan. Les deux coupes montrent la même construction à ses deux profondeurs extrêmes : c’est là que se lit l’ondulation.',
+  sub: 'Le même balcon vu de face depuis l’intérieur, coupé au grand lobe (1,80 m) et au petit lobe (1,45 m), et en plan. Les deux coupes montrent la même construction à ses deux profondeurs extrêmes : c’est là que se lit l’ondulation.',
   right: 'A2 PAYSAGE · ÉCHELLE 1:25<br>COTES EN MÈTRES<br>BLOC DROIT — GAUCHE EN MIROIR' })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 <div style="padding: 10px 44px 34px">

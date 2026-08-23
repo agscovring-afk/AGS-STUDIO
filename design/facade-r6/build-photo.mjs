@@ -1,13 +1,20 @@
 import { writeFileSync } from 'node:fs';
 import { XS, LV, BLOCS, BALCONS, MIROIR, COL, FASCIA, GC, PBH, PBW, AVANCEE, RETRAIT,
          AXE, BV_EP, GCN, PBN, BALCON_NICHE_P, DALLE, ACROTERE,
+         FV_EP, FV_PANNEAU, FV_JOINT, CAD_L, CAD_EP, POTEAUX,
          depthAt, doors, gcSegments, developpe } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { makeCam, poly, SUN, SUNDIR, shadeN, castY, castZ, haze, norm, dot, sub, rgb2hex, hex2rgb } from './camera.mjs';
 
 const NUIT = process.argv.includes('--nuit');
-const W = 1280, H = 1780;
-const C = makeCam({ eye: [-6, 25, 1.60], look: [10, 0, 1.60], f: 1150, cx: 781, cy: 1530 });
+const ZOOM = process.argv.includes('--zoom');
+// Trois garde-corps a comparer, demandes le 24.08 : tout verre, fer forge,
+// tout inox. 'mixte' reste le 40/40 verre-inox du dossier.
+const GCTYPE = (process.argv.find((a) => a.startsWith('--gc=')) || '--gc=verre').slice(5);
+const W = ZOOM ? 1600 : 1280, H = ZOOM ? 1120 : 1780;
+const C = ZOOM
+  ? makeCam({ eye: [1.2, 16.5, 9.4], look: [13.5, 0, 9.4], f: 2150, cx: 1075, cy: 1470 })
+  : makeCam({ eye: [-6, 25, 1.60], look: [10, 0, 1.60], f: 1150, cx: 781, cy: 1530 });
 const P = C.P;
 const g = [];
 const px = (p) => { const q = P(p); return `${q[0]} ${q[1]}`; };
@@ -25,11 +32,13 @@ const MAT = NUIT ? {
   alu: '#23272B', verre: '#0E1418', inox: '#7F8A93', asphalte: '#1B1E22',
   trottoir: '#333840', ciel0: '#0B1A32', ciel1: '#1D3557', ciel2: '#3E5C7E',
   led: '#FFC46B', fenetre: '#FFD79A', horizon: '#2C4867',
+  trav: '#7E735F', alu7024: '#2B2F33',
 } : {
   mono: '#F4F1EA', beton: '#D9D5CB', aqua: '#FBFAF7', soffit: '#E7E3DA',
   alu: '#474B4E', verre: '#20272B', inox: '#C2C9CE', asphalte: '#8C8B85',
   trottoir: '#CFC9BC', ciel0: '#3D7FBE', ciel1: '#8FC0E4', ciel2: '#E4EFF6',
   led: '#F3D9A4', fenetre: '#2B3236', horizon: '#D8E6F0',
+  trav: '#C9B695', alu7024: '#474B4E',
 };
 const SH = NUIT ? { amb: 0.46, kd: 0.20, sky: 0.12, bounce: 0.07 } : { amb: 0.52, kd: 0.80, sky: 0.14, bounce: 0.11 };
 const S = (base, n, o = {}) => shadeN(base, n, { ...SH, ...o });
@@ -70,6 +79,18 @@ g.push(`<defs>
     </feDiffuseLighting>
     <feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.06" k2="0" k3="0" k4="-0.05"/>
   </filter>
+  <filter id="travertin" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035 1.25" numOctaves="5" seed="13" result="n"/>
+    <feDiffuseLighting in="n" lighting-color="#ffffff" surfaceScale="1.6" result="l">
+      <feDistantLight azimuth="212" elevation="48"/>
+    </feDiffuseLighting>
+    <feComposite in="l" in2="SourceGraphic" operator="arithmetic" k1="1.14" k2="0" k3="0" k4="-0.10"/>
+  </filter>
+  <linearGradient id="wallwash" x1="0" y1="1" x2="0" y2="0">
+    <stop offset="0" stop-color="#FFD9A0" stop-opacity="${NUIT ? 0.62 : 0.10}"/>
+    <stop offset="0.22" stop-color="#FFCE8C" stop-opacity="${NUIT ? 0.34 : 0.05}"/>
+    <stop offset="0.65" stop-color="#F5BE7C" stop-opacity="${NUIT ? 0.10 : 0}"/>
+    <stop offset="1" stop-color="#F5BE7C" stop-opacity="0"/></linearGradient>
   <filter id="beton2" x="0%" y="0%" width="100%" height="100%">
     <feTurbulence type="fractalNoise" baseFrequency="0.22" numOctaves="3" seed="11" result="n"/>
     <feDiffuseLighting in="n" lighting-color="#ffffff" surfaceScale="0.8" result="l">
@@ -226,6 +247,38 @@ g.push(face([[0, 0, LV.r2 - 0.4], [17.5, 0, LV.r2 - 0.4], [17.5, 0, LV.acr], [0,
 g.push(`<linearGradient id="aoV" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2B3138" stop-opacity="0.22"/><stop offset="1" stop-color="#2B3138" stop-opacity="0"/></linearGradient>`);
 g.push(face([[0, 0, LV.r2], [2.2, 0, LV.r2], [2.2, 0, LV.acr], [0, 0, LV.acr]], 'url(#aoV)'));
 
+// --- facade ventilee : les quatre poteaux habilles de travertin -------------
+// Le parement sort de 9 cm du nu sur ossature, lame d'air derriere. C'est le
+// retour lateral du parement, eclaire autrement que sa face, qui donne le
+// relief : sans lui un poteau habille ressemble a un aplat colle.
+{
+  const z0 = LV.r2 - 0.40, z1 = LV.acr;
+  for (const [pa, pb] of POTEAUX) {
+    // le parement deborde de 15 cm de part et d'autre du poteau : sans ce
+    // debord la bande disparait derriere le garde-corps du balcon
+    const a = Math.max(0, pa - 0.15), b = Math.min(17.5, pb + 0.15);
+    // face du parement, au nu + 9 cm
+    g.push(face([[a, FV_EP, z0], [b, FV_EP, z0], [b, FV_EP, z1], [a, FV_EP, z1]],
+      S(MAT.trav, NY), 'filter="url(#travertin)"'));
+    // retour gauche, seul visible depuis ce point de vue
+    g.push(face([[a, 0, z0], [a, FV_EP, z0], [a, FV_EP, z1], [a, 0, z1]],
+      S(MAT.trav, NX), 'filter="url(#travertin)"'));
+    // joints creux ouverts entre panneaux de 1,20 m
+    for (let z = z0 + FV_PANNEAU; z < z1; z += FV_PANNEAU) {
+      g.push(`<path d="${poly(C, [[a, FV_EP, z], [b, FV_EP, z]], false)}" stroke="${NUIT ? '#0B0F14' : '#5E574A'}" stroke-width="2" fill="none" opacity="0.72"/>`);
+      g.push(`<path d="${poly(C, [[a, FV_EP, z + FV_JOINT], [b, FV_EP, z + FV_JOINT]], false)}" stroke="${NUIT ? '#4A5460' : '#FBF6EA'}" stroke-width="1" fill="none" opacity="0.55"/>`);
+    }
+    // joint vertical au droit du retour, et arete vive
+    g.push(`<path d="${poly(C, [[a, FV_EP, z0], [a, FV_EP, z1]], false)}" stroke="${NUIT ? '#C6CED6' : '#FFFFFF'}" stroke-width="1.4" fill="none" opacity="0.55"/>`);
+    // ombre du parement sur le monocouche, a droite du poteau
+    if (!NUIT) g.push(strip([[b, 0, z0], [b, 0, z1]],
+      [castY([b, FV_EP, z0], 0), castY([b, FV_EP, z1], 0)], '#1A222C', 'opacity="0.30" filter="url(#flou3)"'));
+    // lechage lumineux depuis le pied : les projecteurs encastres au R+2
+    g.push(face([[a, FV_EP + 0.002, z0], [b, FV_EP + 0.002, z0], [b, FV_EP + 0.002, z0 + 9], [a, FV_EP + 0.002, z0 + 9]],
+      'url(#wallwash)'));
+  }
+}
+
 // --- joints creux au droit de chaque plancher -------------------------------
 for (const k of [2, 3, 4, 5, 6, 7, 8]) {
   const z = LV['r' + k];
@@ -281,12 +334,27 @@ const sunAt = (m, b, dm = 0.02) => {
 // passe 1 — menuiseries en retrait de 12 cm dans le mur
 for (const z of BALCONS) for (let b = 0; b < 2; b++) {
   for (const [a, bb] of doors(b ? XS.bayB : XS.bayA)) {
-    g.push(face([[a, 0, z + 0.03], [a, -0.12, z + 0.03], [a, -0.12, z + PBH], [a, 0, z + PBH]],
-      S(MAT.mono, [1, 0, 0], { kd: 0, amb: SH.amb * 0.74 })));
-    g.push(face([[bb, 0, z + 0.03], [bb, -0.12, z + 0.03], [bb, -0.12, z + PBH], [bb, 0, z + PBH]],
-      S(MAT.mono, NX, { kd: SH.kd * 0.5 })));
-    g.push(face([[a, -0.12, z + PBH], [bb, -0.12, z + PBH], [bb, 0, z + PBH], [a, 0, z + PBH]],
-      S(MAT.mono, NZm, { kd: 0, amb: SH.amb * 0.66 })));
+    const z0 = z + 0.03, z1 = z + PBH;
+    const A = a - CAD_L, B = bb + CAD_L, Z0 = z0 - CAD_L, Z1 = z1 + CAD_L;
+    // cadrage Alucobond RAL 7024 : un cadre en saillie de 5 cm autour de la baie
+    for (const q of [[[A, Z0], [B, Z0], [B, Z0 + CAD_L], [A, Z0 + CAD_L]],
+                     [[A, Z1 - CAD_L], [B, Z1 - CAD_L], [B, Z1], [A, Z1]],
+                     [[A, Z0 + CAD_L], [a, Z0 + CAD_L], [a, Z1 - CAD_L], [A, Z1 - CAD_L]],
+                     [[bb, Z0 + CAD_L], [B, Z0 + CAD_L], [B, Z1 - CAD_L], [bb, Z1 - CAD_L]]])
+      g.push(face(q.map(([x, zz]) => [x, CAD_EP, zz]), S(MAT.alu7024, NY, { kd: SH.kd * 1.05 })));
+    // retours du cadre : c'est eux qui donnent l'epaisseur
+    g.push(face([[A, 0, Z0], [A, CAD_EP, Z0], [A, CAD_EP, Z1], [A, 0, Z1]], S(MAT.alu7024, NX, { kd: SH.kd * 0.5 })));
+    g.push(face([[A, CAD_EP, Z1], [B, CAD_EP, Z1], [B, 0, Z1], [A, 0, Z1]], S(MAT.alu7024, NZ, { kd: SH.kd * 0.9 })));
+    g.push(face([[A, CAD_EP, Z0], [B, CAD_EP, Z0], [B, 0, Z0], [A, 0, Z0]], S(MAT.alu7024, NZm, { kd: 0, amb: SH.amb * 0.7 })));
+    if (!NUIT) g.push(strip([[B, 0, Z0], [B, 0, Z1]], [castY([B, CAD_EP, Z0], 0), castY([B, CAD_EP, Z1], 0)],
+      '#18202A', 'opacity="0.26" filter="url(#flou3)"'));
+    // tableau en retrait derriere le cadre
+    g.push(face([[a, CAD_EP, z0], [a, -0.12, z0], [a, -0.12, z1], [a, CAD_EP, z1]],
+      S(MAT.alu7024, [1, 0, 0], { kd: 0, amb: SH.amb * 0.6 })));
+    g.push(face([[bb, CAD_EP, z0], [bb, -0.12, z0], [bb, -0.12, z1], [bb, CAD_EP, z1]],
+      S(MAT.alu7024, NX, { kd: SH.kd * 0.45 })));
+    g.push(face([[a, -0.12, z1], [bb, -0.12, z1], [bb, CAD_EP, z1], [a, CAD_EP, z1]],
+      S(MAT.alu7024, NZm, { kd: 0, amb: SH.amb * 0.55 })));
     g.push(face([[a, -0.12, z + 0.03], [bb, -0.12, z + 0.03], [bb, -0.12, z + PBH], [a, -0.12, z + PBH]],
       NUIT && (Math.round(z * 3 + a)) % 3 ? 'url(#vitreLum)' : 'url(#vitre)'));
     if (!NUIT) g.push(face([[a, -0.118, z + 0.03], [bb, -0.118, z + 0.03], [bb, -0.118, z + PBH], [a, -0.118, z + PBH]], 'url(#refletCiel)'));
@@ -348,30 +416,76 @@ for (let li = BALCONS.length - 1; li >= 0; li--) {
         stroke-width="${NUIT ? 4.5 : 2}" fill="none" opacity="${NUIT ? 0.95 : 0.3}" ${NUIT ? 'filter="url(#bloom)"' : ''}/>`);
     }
 
-    // le garde-corps mixte, panneau par panneau
+    // le garde-corps — quatre ecritures possibles sur la meme rive
     {
       const hi = rive(b, z + GC, 0.10), lo = rive(b, z + 0.05, 0.10);
-      const idx = (m) => Math.max(0, Math.min(NS, Math.round((m - BLOCS[b][0]) / (BLOCS[b][1] - BLOCS[b][0]) * NS)));
-      for (const seg of gcSegments(b)) {
-        const i1 = idx(Math.min(seg.x1, seg.x2)), i2 = idx(Math.max(seg.x1, seg.x2));
-        if (i2 <= i1) continue;
-        if (seg.kind === 'verre') {
-          const mm = (seg.x1 + seg.x2) / 2, n = sunAt(mm, b);
-          const refl = Math.max(0, dot(n, [0, 1, 0]));
-          g.push(strip(hi.slice(i1, i2 + 1), lo.slice(i1, i2 + 1), NUIT ? '#070D13' : '#1E262D',
-            `opacity="${(0.60 - 0.18 * refl).toFixed(2)}"`));
-          g.push(strip(hi.slice(i1, i2 + 1), hi.slice(i1, i2 + 1).map(([x, y, zz]) => [x, y, zz - 0.34]),
-            NUIT ? '#2A3B4C' : '#B7D2E4', `opacity="${(0.12 + 0.34 * refl).toFixed(2)}"`));
-        } else {
-          for (let m = Math.min(seg.x1, seg.x2) + 0.055; m < Math.max(seg.x1, seg.x2) - 0.02; m += 0.11) {
-            const i = idx(m);
-            g.push(`<path d="${poly(C, [lo[i], hi[i]], false)}" stroke="${MAT.inox}" stroke-width="1.5" fill="none" opacity="0.92"/>`);
-          }
+      const [m1, m2] = BLOCS[b];
+      const idx = (m) => Math.max(0, Math.min(NS, Math.round((m - m1) / (m2 - m1) * NS)));
+      const barreau = (m, col, w) => {
+        const i = idx(m);
+        if (!hi[i] || !lo[i]) return;
+        g.push(`<path d="${poly(C, [lo[i], hi[i]], false)}" stroke="${col}" stroke-width="${w}" fill="none" opacity="0.95"/>`);
+      };
+      const panneauVerre = (x1, x2) => {
+        const i1 = idx(Math.min(x1, x2)), i2 = idx(Math.max(x1, x2));
+        if (i2 <= i1) return;
+        const n = sunAt((x1 + x2) / 2, b), refl = Math.max(0, dot(n, [0, 1, 0]));
+        g.push(strip(hi.slice(i1, i2 + 1), lo.slice(i1, i2 + 1), NUIT ? '#070D13' : '#1E262D',
+          `opacity="${(0.58 - 0.18 * refl).toFixed(2)}"`));
+        g.push(strip(hi.slice(i1, i2 + 1), hi.slice(i1, i2 + 1).map(([x, y, zz]) => [x, y, zz - 0.34]),
+          NUIT ? '#2A3B4C' : '#B7D2E4', `opacity="${(0.12 + 0.36 * refl).toFixed(2)}"`));
+        // pinces inox aux deux bouts du panneau
+        for (const i of [i1 + 1, i2 - 1]) {
+          if (!lo[i]) continue;
+          const q = P([lo[i][0], lo[i][1], lo[i][2] + 0.06]);
+          if (Number.isFinite(q[0])) g.push(`<circle cx="${q[0]}" cy="${q[1]}" r="${ZOOM ? 3.4 : 1.6}" fill="${MAT.inox}"/>`);
+        }
+      };
+
+      if (GCTYPE === 'verre') {
+        // tout verre : les memes cordes de 38 cm, sans barreaudage
+        for (const seg of gcSegments(b)) panneauVerre(seg.x1 + 0.012, seg.x2 - 0.012);
+      } else if (GCTYPE === 'inox') {
+        // tout inox : barreaudage continu au pas de 11 cm, deux lisses
+        for (let m = m1 + 0.06; m < m2 - 0.03; m += 0.11) barreau(m, MAT.inox, ZOOM ? 3.4 : 1.5);
+        for (const dz of [0.42, 0.78]) {
+          const l = rive(b, z + 0.05 + dz, 0.10);
+          g.push(`<path d="${poly(C, l, false)}" stroke="${MAT.inox}" stroke-width="${ZOOM ? 4 : 1.8}" fill="none" opacity="0.9"/>`);
+        }
+      } else if (GCTYPE === 'fer') {
+        // fer forge : barreaux plats, et un registre de volutes entre deux lisses
+        const FER = NUIT ? '#0E1216' : '#2B2C2E';
+        for (let m = m1 + 0.06; m < m2 - 0.03; m += 0.13) barreau(m, FER, ZOOM ? 4.2 : 1.9);
+        for (const dz of [0.30, 0.86]) {
+          const l = rive(b, z + 0.05 + dz, 0.10);
+          g.push(`<path d="${poly(C, l, false)}" stroke="${FER}" stroke-width="${ZOOM ? 6 : 2.6}" fill="none" opacity="0.95"/>`);
+        }
+        // les volutes : deux arcs opposes par module de 52 cm
+        for (let m = m1 + 0.26; m < m2 - 0.26; m += 0.52) {
+          const i0 = idx(m - 0.22), ic = idx(m), i1 = idx(m + 0.22);
+          if (!hi[i0] || !hi[i1]) continue;
+          const yA = z + 0.32, yB = z + 0.84;
+          const A = P([lo[i0][0], lo[i0][1], yA]), B = P([lo[ic][0], lo[ic][1], (yA + yB) / 2]), D = P([lo[i1][0], lo[i1][1], yA]);
+          const A2 = P([lo[i0][0], lo[i0][1], yB]), D2 = P([lo[i1][0], lo[i1][1], yB]);
+          if (![A, B, D, A2, D2].every((q) => Number.isFinite(q[0]))) continue;
+          const w = ZOOM ? 3.6 : 1.6;
+          g.push(`<path d="M ${A[0]} ${A[1]} Q ${B[0]} ${B[1]} ${D[0]} ${D[1]}" fill="none" stroke="${FER}" stroke-width="${w}"/>`);
+          g.push(`<path d="M ${A2[0]} ${A2[1]} Q ${B[0]} ${B[1]} ${D2[0]} ${D2[1]}" fill="none" stroke="${FER}" stroke-width="${w}"/>`);
+          g.push(`<circle cx="${B[0]}" cy="${B[1]}" r="${ZOOM ? 3.2 : 1.4}" fill="${FER}"/>`);
+        }
+      } else {
+        // mixte : 40 cm de verre, 40 cm d'inox, en alternance
+        for (const seg of gcSegments(b)) {
+          if (seg.kind === 'verre') panneauVerre(seg.x1 + 0.012, seg.x2 - 0.012);
+          else for (let m = Math.min(seg.x1, seg.x2) + 0.055; m < Math.max(seg.x1, seg.x2) - 0.02; m += 0.11)
+            barreau(m, MAT.inox, ZOOM ? 3.4 : 1.5);
         }
       }
-      g.push(`<path d="${poly(C, hi, false)}" stroke="${MAT.inox}" stroke-width="3" fill="none" stroke-linecap="round"/>`);
-      g.push(`<path d="${poly(C, hi.map(([x, y, zz]) => [x, y, zz - 0.012]), false)}" stroke="${NUIT ? '#C8D4DC' : '#FFFFFF'}" stroke-width="1" fill="none" opacity="0.7"/>`);
-      g.push(`<path d="${poly(C, lo, false)}" stroke="${NUIT ? '#0A1017' : '#6E7A84'}" stroke-width="1.2" fill="none" opacity="0.55"/>`);
+      // main courante, commune aux quatre
+      const MC = GCTYPE === 'fer' ? (NUIT ? '#161A1E' : '#33353A') : MAT.inox;
+      g.push(`<path d="${poly(C, hi, false)}" stroke="${MC}" stroke-width="${ZOOM ? 7 : 3}" fill="none" stroke-linecap="round"/>`);
+      g.push(`<path d="${poly(C, hi.map(([x, y, zz]) => [x, y, zz - 0.014]), false)}" stroke="${NUIT ? '#C8D4DC' : '#FFFFFF'}" stroke-width="${ZOOM ? 2 : 1}" fill="none" opacity="0.7"/>`);
+      g.push(`<path d="${poly(C, lo, false)}" stroke="${NUIT ? '#0A1017' : '#6E7A84'}" stroke-width="${ZOOM ? 2.6 : 1.2}" fill="none" opacity="0.55"/>`);
     }
   }
 }
@@ -559,19 +673,18 @@ g.push(`<rect x="0" y="0" width="${W}" height="${H}" filter="url(#grain)" opacit
 g.push(`</g>`);
 
 const svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display:block">${g.join('\n')}</svg>`;
-writeFileSync(NUIT ? 'photo-nuit.html' : 'photo-jour.html',
-  `<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:0;background:#000}</style></head><body>${svg}</body></html>`);
-
-// la meme image, montee en planche pour le dossier
+const stem = `photo-${NUIT ? 'nuit' : 'jour'}-${GCTYPE}${ZOOM ? '-zoom' : ''}`;
+writeFileSync(stem + '.html',
+  `<!doctype html><html><head><meta charset="utf-8"><style>@page{size:${(W / 96 * 25.4).toFixed(2)}mm ${(H / 96 * 25.4).toFixed(2)}mm;margin:0}html,body{margin:0;padding:0;background:${NUIT ? '#000' : '#fff'}}</style></head><body>${svg}</body></html>`);
+const NOMGC = { verre: 'garde-corps tout verre', fer: 'garde-corps en fer forgé',
+                inox: 'garde-corps tout inox', mixte: 'garde-corps mixte verre / inox' }[GCTYPE] || GCTYPE;
 const body = `<div style="width: ${W}px; background: ${NUIT ? '#0A0F18' : '#FFFFFF'}">
-${header({ w: W, kicker: NUIT ? 'Perspective · rue, de nuit' : 'Perspective · rue, de jour',
-  title: NUIT ? 'La courbe allumée' : 'L’immeuble depuis la rue',
-  sub: NUIT
-    ? `Même point de vue, la nuit. La gorge LED de 3000 K encastrée en sous-face de chaque bandeau dessine l’onde sur ${(developpe() * 12).toFixed(0)} ml, et lave la sous-face et le mur au-dessous. Objectif à décentrement : les verticales restent verticales.`
-    : `Objectif à décentrement, œil à 1,60 m, à 25 m du nu de façade. Soleil à 49° de hauteur, 32° à gauche de la normale : toutes les ombres portées sur la façade sont calculées depuis la géométrie des balcons, pas dessinées à la main.`,
-  right: (NUIT ? 'VUE DE NUIT' : 'VUE DE JOUR') + '<br>NON COTÉE<br>MONOCOUCHE BLANC · RAL 7024' })}
+${header({ w: W, kicker: `Perspective · ${ZOOM ? 'détail de façade' : 'rue'} · ${NUIT ? 'nuit' : 'jour'}`,
+  title: ZOOM ? 'Le détail, à hauteur de balcon' : 'L’immeuble depuis la rue',
+  sub: `${NOMGC.charAt(0).toUpperCase() + NOMGC.slice(1)}. Façade ventilée en travertin sur les quatre poteaux, saillie 13 cm sur ossature, joints creux ouverts tous les 1,20 m. Cadrage Alucobond RAL 7024 de 18 cm autour de chaque porte-balcon, en saillie de 5 cm. Onde de rive : grand lobe 1,80 m, creux 0,79 m, petit lobe 1,45 m — ${developpe().toFixed(2)} ml développés.`,
+  right: (NUIT ? 'VUE DE NUIT' : 'VUE DE JOUR') + '<br>NON COTÉE<br>' + NOMGC.toUpperCase() })}
 ${svg}
 </div>`;
-writeFileSync(NUIT ? 'Photo-Nuit.dc.html' : 'Photo-Jour.dc.html',
+writeFileSync(`Photo-${NUIT ? 'Nuit' : 'Jour'}-${GCTYPE}${ZOOM ? '-Zoom' : ''}.dc.html`,
   page({ body, props: JSON.stringify({ $preview: { width: W, height: H + 220 } }) }));
-console.log((NUIT ? 'photo-nuit' : 'photo-jour') + ' ok —', (svg.length / 1024).toFixed(0), 'Ko');
+console.log(stem, 'ok —', (svg.length / 1024).toFixed(0), 'Ko');

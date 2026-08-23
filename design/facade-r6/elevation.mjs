@@ -318,7 +318,7 @@ export function annotations(P, E) {
   };
   const nx = px(0), ny = 26;
   a.push(wave(nx, ny + 4, 74, 5));
-  a.push(txt(nx + 86, ny + 8, 'ONDE DE RIVE : L OMBRE PORTEE ET LE TRAIT POINTILLE DONNENT LA PROFONDEUR — GRAND LOBE 1.80 m, CREUX 0.79 m, PETIT LOBE 1.10 m',
+  a.push(txt(nx + 86, ny + 8, 'ONDE DE RIVE : L OMBRE PORTEE ET LE TRAIT POINTILLE DONNENT LA PROFONDEUR — GRAND LOBE 1.80 m, CREUX 0.79 m, PETIT LOBE 1.45 m',
     { size: 9.5, anchor: 'start', fill: P.dim, weight: 600, ls: '0.09em' }));
   a.push(`<path d="M ${nx} ${ny + 32} l 0 12 M ${nx} ${ny + 38} l 74 0 M ${nx + 74} ${ny + 38} l -6 -3.5 M ${nx + 74} ${ny + 38} l -6 3.5" fill="none" stroke="${P.ink}" stroke-width="1.4"/>`);
   a.push(txt(nx + 86, ny + 42, 'SOCLE PARKING RDC + R+1 EN AVANCEE DE 4.00 m SUR LE NU DE FACADE · VOIR PLANCHE « COUPE A-A »',

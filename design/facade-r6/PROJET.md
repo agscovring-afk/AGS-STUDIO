@@ -47,10 +47,10 @@ bloc gauche en est le miroir exact**.
 | 0,00 | 0,00 | naissance sur le poteau |
 | 1,96 | **1,80** | grand lobe |
 | 3,92 | **0,79** | creux médian, entre les deux portes |
-| 5,64 | **1,10** | petit lobe |
+| 5,64 | **1,45** | petit lobe — agrandi le 24.08, le client trouvait le premier trop timide |
 | 7,85 | 0,00 | retour sur le second poteau |
 
-**Développé 9,63 ml par balcon**, 12 balcons.
+**Développé 9,98 ml par balcon**, 12 balcons — soit les ~10 ml annoncés au départ.
 
 Le point qui a demandé trois tours : la rive **quitte le poteau
 perpendiculairement au nu**, comme un demi-cercle qui prend appui sur la
@@ -87,18 +87,22 @@ deux terrasses ; les balcons de la fente commencent au R+3.
 
 ## 4. Le garde-corps — arrêté le 23.08
 
-**40 cm de verre feuilleté 8.8.4, puis 40 cm de barreaudage inox Ø 16, en
-alternance sur tout le développé.** 24 panneaux par balcon, 12 de chaque,
-4,82 ml de chacun. Main courante inox Ø 42 continue à 1,10 m.
-Pas ajusté au centimètre près pour tomber juste sur les deux poteaux.
+La rive est suivie par **26 cordes de 38 cm** par balcon (le pas est arrondi
+au-dessus de 40 cm pour qu'aucun panneau ne dépasse cette valeur, et pour
+tomber juste sur les deux poteaux). Main courante Ø 42 continue à 1,10 m.
 
-**Point ouvert honnête, chiffré sur la planche G3** : un panneau plat de
-40 cm posé sur un rayon de 0,77 m s'écarte de la courbe théorique de
-**23 mm** au plus défavorable (5 à 10 mm partout ailleurs), et la rotation
-d'un panneau au suivant atteint **19°** — il faut des pinces à rotule, pas
-des pinces droites. La parade est chiffrée : passer à 20 cm dans les deux
-zones serrées ramène la flèche à 6 mm et la rotation à 9°.
-**Le client a vu le chiffre, il n'a pas encore tranché.**
+**Trois écritures sont sur la table depuis le 24.08, à arrêter :**
+- **tout verre feuilleté 8.8.4**, pinces inox — le plus discret, la courbe reste seule
+- **tout barreaudage inox Ø 16** au pas de 11 cm, deux lisses
+- **fer forgé** — barreaux plats au pas de 13 cm et un registre de volutes
+
+Les trois sont rendues, de jour et en vue rapprochée.
+
+**Point ouvert honnête, chiffré sur la planche G3** : un panneau de verre
+plat s'écarte de la courbe théorique de **17 mm** au plus défavorable
+(5 à 10 mm partout ailleurs), et la rotation d'un panneau au suivant atteint
+**23°** — il faut des pinces à rotule, pas des pinces droites. Ne concerne
+que la variante verre : l'inox et le fer forgé épousent n'importe quel rayon.
 
 ---
 
@@ -107,6 +111,8 @@ zones serrées ramène la flèche à 6 mm et la rotation à 9°.
 | | |
 |---|---|
 | Façade | monocouche **blanc**, grain fin gratté, joint creux 15 × 15 à chaque plancher |
+| Poteaux | **façade ventilée en travertin** sur ossature, saillie 13 cm, lame d'air, panneaux de 1,20 m à joints creux ouverts — les 4 poteaux, du R+2 à l'acrotère |
+| Cadrage des baies | **Alucobond RAL 7024**, bande de 18 cm en saillie de 5 cm autour de chaque porte-balcon |
 | Bandeaux de rive | Aquapanel Outdoor 12,5 mm sur ossature cintrée, retombée 0,45 m, habillage 0,20 m au nu de la dalle |
 | Éclairage | gorge LED 50 × 50 en sous-face de chaque bandeau, 3000 K IP65 + profil vertical 60 × 40 dans le trumeau, h 1,90 m |
 | Menuiseries | aluminium **TPR série 65** à rupture de pont thermique, **RAL 7024**, double vitrage 4/16/4 |
@@ -119,12 +125,12 @@ zones serrées ramène la flèche à 6 mm et la rotation à 9°.
 
 ## 6. Reste à trancher
 
-1. **La question de fond, jamais tranchée.** Les « 7 m » de baie donnés au
+1. **Le garde-corps** : tout verre, tout inox, ou fer forgé. Trois
+   perspectives rendues le 24.08, en attente du choix.
+2. **La question de fond, jamais tranchée.** Les « 7 m » de baie donnés au
    départ : est-ce l'**entraxe des poteaux** (retenu — donne 6,75 libre et
    17,50 au total, tout le dossier est calé dessus) ou la **largeur
    libre** (la façade passerait alors à 18,00 m et tout se décale) ?
-2. Le garde-corps : on reste à 40/40 partout, ou 20 cm dans les deux zones
-   serrées ? (voir § 4)
 3. Le garde-corps des balcons de la fente : à 0,70 m en arrière du nu comme
    dessiné, ou aligné sur la façade ? Si aligné, le creusement passe de
    1,50 à 0,80 m — une seule cote à changer.
@@ -210,6 +216,11 @@ Utile pour ne pas refaire les mêmes erreurs en reprenant :
   la profondeur, plus un trait pointillé qui trace le plan
 - la façade passait par les jetons de thème du canvas et sortait crème :
   le monocouche blanc et le RAL 7024 sont maintenant figés dans les planches
+- **24.08 — le client a rejeté le rendu en bloc** : petit lobe trop timide
+  (1,10 → 1,45), pas assez de détail visible, et il voulait de la matière.
+  D'où la vue rapprochée `--zoom`, la façade ventilée en travertin sur les
+  poteaux, et le cadrage Alucobond. Leçon : une vue d'ensemble à 700 px de
+  large ne peut pas montrer un détail de 5 cm — il faut les deux cadrages.
 
 ---
 

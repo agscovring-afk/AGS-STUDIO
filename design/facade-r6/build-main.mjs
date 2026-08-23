@@ -10,7 +10,7 @@ const E = elevation(P, { scale: 37, x0: 244, y0: 1240 });
 const LEG = [
   ['Monocouche blanc', 'Toute la façade en monocouche blanc, grain fin gratté. Joints creux horizontaux au droit de chaque plancher ; fonds de baie en retrait, légèrement plus sourds.'],
   ['Aquapanel cintré', `Bandeaux de rive ondulés, tracé relevé sur votre croquis. ${developpe().toFixed(2)} ml par balcon × 12 balcons (6 niveaux × 2 blocs) : ≈ ${(developpe() * 12).toFixed(0)} ml.`],
-  ['Garde-corps mixte inox + verre noir', 'Suit l’onde au pas de 40 cm : 40 cm de verre feuilleté teinté noir, 40 cm de barreaudage inox 304 Ø 16, en alternance sur tout le développé. À 40 cm le verre reste plat sur n’importe quel rayon. Main courante inox Ø 42 continue, h = 1,10 m.'],
+  ['Garde-corps mixte inox + verre noir', '26 panneaux de 38 cm par balcon, posés en cordes sur l’onde. Trois écritures à arrêter : tout verre feuilleté 8.8.4, tout barreaudage inox Ø 16, ou fer forgé à volutes. Main courante Ø 42 continue, h = 1,10 m.'],
   ['Brise-vue aluminium', '40 cm de large, sur l’axe du vide, ENTRE les deux petits balcons — pas en façade. Lames RAL 7024 du fond de la fente au garde-corps, du R+2 à la toiture : chaque voisin est chez lui.'],
   ['Porte-balcon aluminium', 'TPR série 65, RAL 7024 gris graphite. 2 vantaux coulissants, 1,80 m × 2,20 m, rupture de pont thermique, double vitrage 4/16/4.'],
   ['Balcons du vide central', 'Fente de 1,80 m creusée de 1,50 m. Au fond, deux petits balcons de 0,70 × 0,80 m, un par logement, porte-fenêtre de 0,70 m. Garde-corps en verre feuilleté, à 0,70 m en arrière du nu.'],

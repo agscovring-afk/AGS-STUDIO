@@ -150,7 +150,7 @@ const note = (m, dT, dL, label, col) => {
 };
 note(11.61, depthAt(11.61, 1) - 0.06, 0.40, 'GRAND LOBE — PROF. 1.80 m');
 note(13.57, depthAt(13.57, 1) - 0.06, 0.30, 'CREUX MEDIAN — PROF. 0.79 m');
-note(15.29, depthAt(15.29, 1) - 0.06, 0.40, 'PETIT LOBE — PROF. 1.10 m');
+note(15.29, depthAt(15.29, 1) - 0.06, 0.40, 'PETIT LOBE — PROF. 1.45 m');
 note(3.925, depthAt(3.925, 0) - 0.06, 0.66, 'BLOC GAUCHE = MIROIR DU BLOC DROIT');
 g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.5, fill: C.led, ls: '0.1em', weight: 700, anchor: 'start' }));
 
@@ -176,7 +176,7 @@ g.push(txt(px(1.30), py(0.34), 'GORGE LED + BANDEAU AQUAPANEL 18 cm', { size: 8.
 
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Plan · niveau courant R+3 à R+8',
-  title: 'Onde de rive relevée', sub: `Tracé corrigé sur votre trait noir du 23.08 : la rive quitte le poteau perpendiculairement au nu — elle naît sur la façade comme un demi-cercle — creuse un grand lobe de 1,80 m, remonte à 0,79 m entre les deux portes, creuse un petit lobe de 1,10 m, puis revient au nu de la même façon. Développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. Garde-corps en alternance 40 cm de verre / 40 cm d'inox sur tout le développé.`,
+  title: 'Onde de rive relevée', sub: `Tracé corrigé sur votre trait noir du 23.08 : la rive quitte le poteau perpendiculairement au nu — elle naît sur la façade comme un demi-cercle — creuse un grand lobe de 1,80 m, remonte à 0,79 m entre les deux portes, creuse un petit lobe de 1,45 m — agrandi le 24.08 — puis revient au nu de la même façon. Développé ${developpe().toFixed(2)} ml par balcon. Le bloc gauche est le miroir du bloc droit. Garde-corps : 26 panneaux de 38 cm, trois écritures au choix (tout verre, tout inox, fer forgé).`,
   right: 'A3 PAYSAGE · ÉCHELLE 1:50<br>COTES EN MÈTRES<br>TRACÉ RETENU' })}
 <svg viewBox="0 0 ${W} ${SVGH}" width="${W}" height="${SVGH}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;

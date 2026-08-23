@@ -73,7 +73,7 @@ const devVerre = Math.max(...iVerre.map((k) => devi[k] ?? 0));
     g.push(dimH(X(k * PAS), X((k + 1) * PAS), Y(-0.30), '0.40', { size: 8 }));
   }
   g.push(dimH(X(0), X(L), Y(-0.62), ' ', { size: 10.5 }));
-  g.push(txt(X(L / 2), Y(-0.75), `${L.toFixed(2)} ml développés — ${SEG.length} panneaux de ${(PAS * 100).toFixed(0)} cm : 12 de verre, 12 d’inox`, { size: 11, fill: D.ink, weight: 600, ls: '0.04em' }));
+  g.push(txt(X(L / 2), Y(-0.75), `${L.toFixed(2)} ml développés — ${SEG.length} cordes de ${(PAS * 100).toFixed(0)} cm`, { size: 11, fill: D.ink, weight: 600, ls: '0.04em' }));
   SEG.slice(0, 4).forEach((sg, k) => g.push(txt(X((k + 0.5) * PAS), Y(GC + 0.10),
     sg.kind === 'verre' ? 'VERRE' : 'INOX', { size: 8, fill: sg.kind === 'verre' ? D.verreL : D.inoxD, ls: '0.14em', weight: 700 })));
   g.push(detailTitle(150, 178, 'G0', 'GARDE-CORPS MIXTE — ÉLÉVATION DÉVELOPPÉE D’UN BALCON', 'ÉCHELLE 1:20 · DÉVELOPPÉ MIS À PLAT'));

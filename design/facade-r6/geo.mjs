@@ -99,7 +99,7 @@ export const ONDE = [
   [0.00, 0.00],   // au nu de façade, contre le poteau
   [1.96, 1.80],   // grand lobe
   [3.92, 0.79],   // creux médian, entre les deux portes
-  [5.64, 1.10],   // petit lobe
+  [5.64, 1.45],   // petit lobe — agrandi le 24.08 a la demande du client
   [7.85, 0.00],   // retour au nu, contre le second poteau
 ];
 
@@ -120,7 +120,7 @@ export function ondeAt(u) {
 }
 
 export const DMIN = 0.00, DCREUX = 0.79, DMAX = 1.80;   // au nu · creux médian · grand lobe
-export const DPETIT = 1.10;                            // petit lobe
+export const DPETIT = 1.45;                            // petit lobe
 
 export function depthAt(m, b) {
   const [a, z] = BLOCS[b];
@@ -150,6 +150,21 @@ export function rayonAt(u, h = 0.02) {
 // le rayon reste grand : en dessous de R_VERRE la fleche du panneau devient
 // visible, on passe au barreaudage inox qui epouse n'importe quel rayon.
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Facade ventilee et cadrages — ajoutes le 24.08.
+// Les quatre poteaux sortent du plan du monocouche : ils recoivent un
+// parement de travertin sur ossature, lame d'air ventilee derriere. Les
+// portes-balcon recoivent un cadrage en Alucobond RAL 7024, qui epaissit le
+// tableau et donne son ombre a la baie.
+// ---------------------------------------------------------------------------
+export const FV_EP = 0.13;      // saillie du parement ventile sur le nu
+export const FV_LAME = 0.04;    // lame d'air derriere le parement
+export const FV_PANNEAU = 1.20; // hauteur d'un panneau de travertin
+export const FV_JOINT = 0.008;  // joint creux ouvert entre panneaux
+export const CAD_L = 0.18;      // largeur du cadrage Alucobond autour de la baie
+export const CAD_EP = 0.05;     // saillie du cadrage sur le nu
+export const POTEAUX = [XS.c1, XS.c2, XS.c3, XS.c4];
+
 export const GC_PAS = 0.40;   // pas du garde-corps : 40 cm de verre, 40 cm d'inox
 
 // Table longueur developpee <-> abscisse locale, pour poser le garde-corps au
@@ -181,7 +196,8 @@ function uAtArc(T, tab) {
 // pres pour tomber juste sur les deux poteaux.
 export function gcSegmentsLocal() {
   const tab = arcTable(), L = tab.L;
-  const nb = Math.max(2, 2 * Math.round(L / (2 * GC_PAS)));   // nombre pair : verre aux deux bouts
+  // nombre pair, arrondi au-dessus : un panneau ne depasse jamais 40 cm
+  const nb = Math.max(2, 2 * Math.ceil(L / (2 * GC_PAS)));
   const pas = L / nb;
   const out = [];
   for (let k = 0; k < nb; k++)

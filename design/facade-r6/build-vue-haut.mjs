@@ -182,7 +182,7 @@ g.unshift(`<defs>
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Vue plongeante · dans le vide entre la terrasse R+2 et le balcon R+3',
   title: 'La terrasse, et le balcon au-dessus',
-  sub: `Bloc droit vu de dessus, l’œil à 15 m. En bas la terrasse du R+2 posée sur la toiture du parking, ses dalles sur plots et son garde-corps droit ; au milieu la fente de 1,80 m et ses deux petits balcons de 0,70 × 0,80 m séparés par le brise-vue de 40 cm ; au-dessus le balcon du R+3 dont la rive creuse un grand lobe de 1,80 m puis un petit de 1,10 m — ${developpe().toFixed(2)} ml de développé.`,
+  sub: `Bloc droit vu de dessus, l’œil à 15 m. En bas la terrasse du R+2 posée sur la toiture du parking, ses dalles sur plots et son garde-corps droit ; au milieu la fente de 1,80 m et ses deux petits balcons de 0,70 × 0,80 m séparés par le brise-vue de 40 cm ; au-dessus le balcon du R+3 dont la rive creuse un grand lobe de 1,80 m puis un petit de 1,45 m — ${developpe().toFixed(2)} ml de développé.`,
   right: 'VUE D’AMBIANCE<br>NON COTÉE<br>BLOC DROIT' })}
 <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;
