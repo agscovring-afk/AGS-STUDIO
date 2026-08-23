@@ -31,6 +31,7 @@ boucler exactement les 17,50 m relevés.
 | --- | --- |
 | `geo.mjs` | Géométrie partagée : cotes, niveaux, onde de rive, développé |
 | `svgkit.mjs` | Primitives de dessin technique (cotes, niveaux, renvois) |
+| `perspective.mjs` | Projection perspective à trois points des vues d'ambiance |
 | `page.mjs` | Gabarit commun des planches (typographie, bandeau de titre) |
 | `elevation.mjs` | Générateur d'élévation, paramétré par palette |
 | `build-*.mjs` | Un script par planche (`build-vue.mjs` sort le jour et la nuit) |
@@ -52,6 +53,16 @@ boucler exactement les 17,50 m relevés.
 - **Éclairage** : gorge LED de 5 cm en sous-face de chaque rive cintrée
   (≈ 99 ml), rampe verticale derrière les lames du vide central, bandeau
   lumineux au-dessus de l'entrée.
+
+## Vues d'ambiance
+
+Les vues jour et nuit sont construites sur une vraie projection à trois points
+(`perspective.mjs`) : caméra à 30 m du nu de façade, œil à 1,60 m, basculée de
+32° vers le haut. Chaque point est projeté depuis ses coordonnées réelles
+(X, distance caméra, altitude), la rive de balcon comprise — c'est ce qui donne
+son relief à l'onde : la crête, plus proche, monte dans l'image et découvre sa
+sous-face, le creux redescend. Les horizontales restent horizontales et les
+verticales convergent vers un point de fuite unique.
 
 ## Regénérer
 

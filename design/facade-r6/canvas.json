@@ -23,17 +23,17 @@
       "file": "Vue.dc.html",
       "x": 1260,
       "y": 0,
-      "w": 900,
-      "h": 1380,
+      "w": 1120,
+      "h": 1290,
       "page": "page-1",
       "title": "Rives ondulées — jour"
     },
     {
       "file": "Vue-Nuit.dc.html",
-      "x": 2260,
+      "x": 2480,
       "y": 0,
-      "w": 900,
-      "h": 1380,
+      "w": 1120,
+      "h": 1290,
       "page": "page-1",
       "title": "La courbe allumée — nuit"
     },

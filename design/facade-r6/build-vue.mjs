@@ -1,239 +1,218 @@
 import { writeFileSync } from 'node:fs';
 import { page, header } from './page.mjs';
 import { txt } from './svgkit.mjs';
-import { gcSegments } from './geo.mjs';
+import { LV, XS, BALCONS, FASCIA, GC, PBH, DMIN, DMAX, BAY, COL, depthAt, doors, gcSegments, BLOCS } from './geo.mjs';
+import { CAM, p, path, strip, quad } from './perspective.mjs';
 
-const W = 900, H = 1124, CX = 450;
+const W = 1120, H = 1086, N = 120;
+const DF = CAM.dFacade, DP = CAM.dParking;
+const VOID = [XS.vide[0], XS.vide[1]];
+const PIERS = [XS.c1, XS.c2, XS.c3, XS.c4];
+const LIT = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1];
 
-const U = (m) => m / 17.5;
-const PIERS = [[0, .55], [7.30, 7.85], [9.65, 10.20], [16.95, 17.50]].map(([a, b]) => [U(a), U(b)]);
-const BLOCS_M = [[0, 7.85], [9.65, 17.50]];
-const BLOCKS = BLOCS_M.map(([a, b]) => [U(a), U(b)]);
-const VOID = [U(7.85), U(9.65)];
-const DOORS = [[1.45, 3.25], [4.60, 6.40], [11.10, 12.90], [14.25, 16.05]].map(([a, b]) => [U(a), U(b)]);
-const LIT = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1];  // fenetres allumees, motif fixe
-
-// niveaux en contre-plongee : plus on monte, plus l'onde s'aplatit
-const L = [
-  { y: 772, hw: 374, A: 42, T: 21, B: 22, gc: 30, name: 'R+2', podium: true },
-  { y: 620, hw: 353, A: 35, T: 18, B: 18, gc: 26, name: 'R+3' },
-  { y: 494, hw: 335, A: 29, T: 16, B: 15, gc: 22, name: 'R+4' },
-  { y: 390, hw: 319, A: 24, T: 14, B: 12, gc: 19, name: 'R+5' },
-  { y: 304, hw: 305, A: 19, T: 12, B: 10, gc: 16, name: 'R+6' },
-];
-const ROOF = { y: 238, hw: 293 }, TOP = { y: 210, hw: 289 };
-
-const sx = (u, hw) => +(CX + (u - 0.5) * 2 * hw).toFixed(2);
-const bulge = (t, n = 2) => (1 - Math.cos(2 * Math.PI * n * t)) / 2;
-const poly = (pts) => pts.map(([x, y], i) => `${i ? 'L' : 'M'} ${x} ${y}`).join(' ');
-const N = 160;
-
-function rive(u1, u2, lv, lobes = 2) {
-  const top = [], bot = [];
-  for (let j = 0; j <= N; j++) {
-    const t = j / N, u = u1 + (u2 - u1) * t, b = bulge(t, lobes);
-    const x = sx(u, lv.hw), yt = lv.y + lv.A * b;
-    top.push([x, +yt.toFixed(2)]);
-    bot.push([x, +(yt + lv.T + lv.B * b).toFixed(2)]);
-  }
-  return { top, bot };
-}
-const band = (r) => `${poly(r.top)} L ${r.bot[N][0]} ${r.bot[N][1]} ${poly(r.bot.slice().reverse()).slice(1)} Z`;
-const ribbon = (a, b) => `${poly(a)} L ${b[b.length - 1][0]} ${b[b.length - 1][1]} ${poly(b.slice().reverse()).slice(1)} Z`;
-
-// Garde-corps mixte, decoupe sur les memes segments que l'elevation
-function gardeCorps(m1, m2, top, lv, P) {
+// profondeur de la rive a l'abscisse m, dans un bloc donne
+const depthOf = (m, [m1, m2]) => {
+  const a = m1 + COL, b = m2 - COL;
+  return (m < a || m > b) ? DMIN : depthAt((m - a) / (b - a));
+};
+const sample = (blk, fY, fZ) => {
   const out = [];
-  const idx = (m) => Math.max(0, Math.min(N, Math.round((m - m1) / (m2 - m1) * N)));
-  const up = top.map(([x, y]) => [x, +(y - lv.gc).toFixed(2)]);
-  for (const seg of gcSegments(m1, m2)) {
-    const i1 = idx(seg.x1), i2 = idx(seg.x2);
-    if (i2 <= i1) continue;
-    if (seg.kind === 'verre') {
-      out.push(`<path d="${ribbon(up.slice(i1, i2 + 1), top.slice(i1, i2 + 1))}" fill="url(#glg)"/>`);
-    } else {
-      for (let m = seg.x1 + 0.055; m < seg.x2 - 0.03; m += 0.11) {
-        const i = idx(m);
-        out.push(`<line x1="${up[i][0]}" y1="${up[i][1] + 2}" x2="${top[i][0]}" y2="${top[i][1]}" stroke="${P.inox}" stroke-width="1.5" opacity="0.95"/>`);
-      }
-    }
-    const ie = Math.min(N, i2);
-    out.push(`<line x1="${up[ie][0]}" y1="${up[ie][1]}" x2="${top[ie][0]}" y2="${top[ie][1]}" stroke="${P.inox}" stroke-width="2.2"/>`);
+  for (let i = 0; i <= N; i++) {
+    const m = blk[0] + (blk[1] - blk[0]) * i / N, d = depthOf(m, blk);
+    out.push(p(m, fY(d), fZ(d)));
   }
-  out.push(`<path d="${poly(up)}" fill="none" stroke="${P.inox}" stroke-width="2.8"/>`);
-  out.push(`<path d="${poly(up.map(([x, y]) => [x, y + 1.3]))}" fill="none" stroke="${P.rail}" stroke-width="1" opacity="0.85"/>`);
-  return out.join('\n');
-}
+  return out;
+};
+const at = (blk, m, fY, fZ) => { const d = depthOf(m, blk); return p(m, fY(d), fZ(d)); };
 
 // ---------------------------------------------------------------------------
-function buildSvg(night) {
-  const P = night
-    ? { wall: '#2B2C2C', wallSh: '#202223', deep: '#12100D', pier: '#3B3B38', aqua: '#F6EAD2',
-        aquaSh: '#8A7F6C', soffit: '#F3D9A6', accent: '#FFC272', accentDark: '#8A5F26',
-        glass: '#33454C', inox: '#8FA0A6', rail: '#E8F1F3', led: '#FFD9A0' }
-    : { wall: '#E6DDCD', wallSh: '#CFC2AA', deep: '#3A342C', pier: '#F0E9DC', aqua: '#FCFAF6',
-        aquaSh: '#D7CFC2', soffit: '#C4BAA9', accent: '#8A6E4C', accentDark: '#4E3F2C',
-        glass: '#9FB4B8', inox: '#C8CED0', rail: '#FFFFFF', led: '#F0DFBE' };
+function scene(night) {
+  const C = night
+    ? { wall: '#2C2D2D', wallSh: '#212324', bay: '#191B1C', pier: '#3D3D3A', aquaTop: '#5F5749',
+        aquaBot: '#F7EBD4', soffitN: '#FFE7B4', soffitF: '#A8783A', accent: '#E8A757', accentD: '#6E4A1C',
+        inox: '#93A4AA', rail: '#E9F2F4', glass: '#3A4E56', glassO: 0.5, sky: ['#070D18', '#101E32', '#22364C', '#2E4050'],
+        podium: '#26272A', podiumT: '#1A1B1E', ground: '#111214', ctx: '#0B0D10', ctxO: 0.85, lbl: '#B9C4CB' }
+    : { wall: '#E7DECE', wallSh: '#D3C6AE', bay: '#C7B99F', pier: '#F1EADD', aquaTop: '#FCFAF6',
+        aquaBot: '#DED6C7', soffitN: '#C9BFAD', soffitF: '#9B9080', accent: '#8A6E4C', accentD: '#4E3F2C',
+        inox: '#C8CED0', rail: '#FFFFFF', glass: '#A6BCC1', glassO: 0.55, sky: ['#5C8FBF', '#8FB6D6', '#C7D9E4', '#E5E4DC'],
+        podium: '#CFC3AC', podiumT: '#B4A78F', ground: '#9C917E', ctx: '#2E2A24', ctxO: 0.3, lbl: '#3A352E' };
   const g = [];
 
   g.push(`<defs>
   <linearGradient id="sky" x1="0" y1="0" x2="0.25" y2="1">
-    ${night
-      ? `<stop offset="0" stop-color="#070D18"/><stop offset="0.42" stop-color="#101E32"/>
-         <stop offset="0.78" stop-color="#22364C"/><stop offset="1" stop-color="#3D4A54"/>`
-      : `<stop offset="0" stop-color="#5C8FBF"/><stop offset="0.42" stop-color="#8FB6D6"/>
-         <stop offset="0.78" stop-color="#C7D9E4"/><stop offset="1" stop-color="#E5E4DC"/>`}
-  </linearGradient>
-  <linearGradient id="aqg" x1="0" y1="0" x2="0.06" y2="1">
-    ${night
-      ? `<stop offset="0" stop-color="#6D6455"/><stop offset="0.34" stop-color="#A79878"/><stop offset="1" stop-color="${P.aqua}"/>`
-      : `<stop offset="0" stop-color="${P.aqua}"/><stop offset="0.45" stop-color="#F0EBE1"/><stop offset="1" stop-color="${P.aquaSh}"/>`}
-  </linearGradient>
+    <stop offset="0" stop-color="${C.sky[0]}"/><stop offset="0.42" stop-color="${C.sky[1]}"/>
+    <stop offset="0.78" stop-color="${C.sky[2]}"/><stop offset="1" stop-color="${C.sky[3]}"/></linearGradient>
+  <linearGradient id="aq" x1="0" y1="0" x2="0.05" y2="1">
+    <stop offset="0" stop-color="${C.aquaTop}"/><stop offset="${night ? 0.38 : 0.55}" stop-color="${night ? '#A2937A' : '#F2EDE4'}"/>
+    <stop offset="1" stop-color="${C.aquaBot}"/></linearGradient>
   <linearGradient id="sof" x1="0" y1="0" x2="0" y2="1">
-    ${night
-      ? `<stop offset="0" stop-color="#FFE7B4"/><stop offset="1" stop-color="#B07E3C"/>`
-      : `<stop offset="0" stop-color="${P.soffit}"/><stop offset="1" stop-color="#9E9382"/>`}
-  </linearGradient>
-  <linearGradient id="glg" x1="0" y1="0" x2="0.3" y2="1">
-    ${night
-      ? `<stop offset="0" stop-color="#5C7580" stop-opacity="0.55"/><stop offset="1" stop-color="#22333A" stop-opacity="0.42"/>`
-      : `<stop offset="0" stop-color="#E4EDEE" stop-opacity="0.9"/><stop offset="1" stop-color="${P.glass}" stop-opacity="0.5"/>`}
-  </linearGradient>
-  <linearGradient id="wallg" x1="0" y1="0" x2="0.2" y2="1">
-    <stop offset="0" stop-color="${P.wall}"/><stop offset="1" stop-color="${P.wallSh}"/>
-  </linearGradient>
-  <filter id="bloom" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur stdDeviation="9"/>
-  </filter>
-  <filter id="bloomS" x="-80%" y="-80%" width="260%" height="260%">
-    <feGaussianBlur stdDeviation="4"/>
-  </filter>
+    <stop offset="0" stop-color="${C.soffitN}"/><stop offset="1" stop-color="${C.soffitF}"/></linearGradient>
+  <linearGradient id="gl" x1="0" y1="0" x2="0.3" y2="1">
+    <stop offset="0" stop-color="${night ? '#5E7681' : '#E7EFF0'}" stop-opacity="${C.glassO + 0.3}"/>
+    <stop offset="1" stop-color="${C.glass}" stop-opacity="${C.glassO}"/></linearGradient>
+  <filter id="bloom" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="9"/></filter>
+  <filter id="bloomS" x="-90%" y="-90%" width="280%" height="280%"><feGaussianBlur stdDeviation="4"/></filter>
 </defs>`);
-
   g.push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#sky)"/>`);
-  const bot = L[0];
 
-  // volume general
-  g.push(`<path d="M ${sx(0, TOP.hw)} ${TOP.y} L ${sx(1, TOP.hw)} ${TOP.y} L ${sx(1, bot.hw)} ${bot.y + 120} L ${sx(0, bot.hw)} ${bot.y + 120} Z" fill="url(#wallg)"/>`);
+  // ---- tour : nu de facade, vide central ouvert --------------------------
+  for (const blk of BLOCS) g.push(`<path d="${quad(blk[0], blk[1], DF, LV.r2, LV.acr)}" fill="${C.wall}"/>`);
 
-  // vide central : lames verticales bronze, retroeclairees la nuit
-  g.push(`<path d="M ${sx(VOID[0], TOP.hw)} ${TOP.y} L ${sx(VOID[1], TOP.hw)} ${TOP.y} L ${sx(VOID[1], bot.hw)} ${bot.y + 190} L ${sx(VOID[0], bot.hw)} ${bot.y + 190} Z" fill="${night ? '#3A2A12' : P.deep}"/>`);
-  if (night)
-    g.push(`<path d="M ${sx(VOID[0], TOP.hw)} ${TOP.y} L ${sx(VOID[1], TOP.hw)} ${TOP.y} L ${sx(VOID[1], bot.hw)} ${bot.y + 190} L ${sx(VOID[0], bot.hw)} ${bot.y + 190} Z" fill="#FFB74F" opacity="0.55" filter="url(#bloom)"/>`);
-  for (let k = 0; k <= 11; k++) {
-    const u = VOID[0] + (VOID[1] - VOID[0]) * (k + 0.5) / 12;
-    g.push(`<line x1="${sx(u, TOP.hw)}" y1="${TOP.y}" x2="${sx(u, bot.hw)}" y2="${bot.y + 190}" stroke="${P.accent}" stroke-width="3" opacity="0.92"/>`);
-    g.push(`<line x1="${sx(u, TOP.hw) + 1.6}" y1="${TOP.y}" x2="${sx(u, bot.hw) + 2}" y2="${bot.y + 190}" stroke="${P.accentDark}" stroke-width="1.4" opacity="0.9"/>`);
+  // vide central : fond sombre + lames verticales bronze
+  g.push(`<path d="${quad(VOID[0], VOID[1], DF + 0.9, LV.r2, LV.toit)}" fill="${night ? '#3A2A12' : '#2B2724'}"/>`);
+  if (night) g.push(`<path d="${quad(VOID[0], VOID[1], DF + 0.9, LV.r2, LV.toit)}" fill="#FFB74F" opacity="0.6" filter="url(#bloom)"/>`);
+  for (let m = VOID[0] + 0.075; m < VOID[1]; m += 0.15) {
+    g.push(`<path d="${path([p(m, DF, LV.r2), p(m, DF, LV.toit)])}" stroke="${C.accent}" stroke-width="3.2" fill="none"/>`);
+    g.push(`<path d="${path([p(m + 0.045, DF, LV.r2), p(m + 0.045, DF, LV.toit)])}" stroke="${C.accentD}" stroke-width="1.5" fill="none"/>`);
   }
 
-  // du plus lointain au plus proche
+  // ---- baies en retrait, menuiseries -------------------------------------
   let door = 0;
-  for (let i = L.length - 1; i >= 0; i--) {
-    const lv = L[i], up = i < L.length - 1 ? L[i + 1] : ROOF;
-    const hwW = lv.hw * 0.945;
-    const yTopWall = up.y + (up.T ?? 8) + 4, yBotWall = lv.y + lv.A * 0.15;
-
-    for (const [w1, w2] of BLOCKS)
-      g.push(`<path d="M ${sx(w1, up.hw * 0.945)} ${yTopWall} L ${sx(w2, up.hw * 0.945)} ${yTopWall} L ${sx(w2, hwW)} ${yBotWall} L ${sx(w1, hwW)} ${yBotWall} Z" fill="${P.wallSh}" opacity="0.92"/>`);
-    for (const [u1, u2] of DOORS) {
-      const a1 = sx(u1, hwW), a2 = sx(u2, hwW), b1 = sx(u1, up.hw * 0.945), b2 = sx(u2, up.hw * 0.945);
-      const d = `M ${b1} ${yTopWall + 5} L ${b2} ${yTopWall + 5} L ${a2} ${yBotWall - 3} L ${a1} ${yBotWall - 3} Z`;
-      const on = night && LIT[door % LIT.length];
-      if (on) g.push(`<path d="${d}" fill="#FFCE85" opacity="0.5" filter="url(#bloom)"/>`);
-      g.push(`<path d="${d}" fill="${on ? '#FFD9A2' : night ? '#171A1C' : '#2C3234'}"/>`);
-      g.push(`<path d="${d}" fill="none" stroke="${P.accent}" stroke-width="1.6" opacity="${night ? 0.7 : 1}"/>`);
-      g.push(`<line x1="${(b1 + b2) / 2}" y1="${yTopWall + 5}" x2="${(a1 + a2) / 2}" y2="${yBotWall - 3}" stroke="${night ? '#8A6E4C' : P.accent}" stroke-width="1.3" opacity="0.85"/>`);
-      door++;
-    }
-    for (const [u1, u2] of PIERS)
-      g.push(`<path d="M ${sx(u1, up.hw)} ${up.y} L ${sx(u2, up.hw)} ${up.y} L ${sx(u2, lv.hw)} ${lv.y + lv.A + 26} L ${sx(u1, lv.hw)} ${lv.y + lv.A + 26} Z" fill="${P.pier}" opacity="0.96"/>`);
-
-    if (!lv.podium) for (let b = 0; b < BLOCKS.length; b++) {
-      const [u1, u2] = BLOCKS[b], [m1, m2] = BLOCS_M[b];
-      const r = rive(u1, u2, lv);
-      g.push(gardeCorps(m1, m2, r.top, lv, P));
-      const under = r.bot.map(([x, y]) => [x, +(y + lv.T * 0.5 + lv.B * 0.55).toFixed(2)]);
-      if (night) g.push(`<path d="${ribbon(r.bot, under)}" fill="#FFD48F" opacity="0.75" filter="url(#bloom)"/>`);
-      g.push(`<path d="${ribbon(r.bot, under)}" fill="url(#sof)"/>`);
-      g.push(`<path d="${band(r)}" fill="url(#aqg)"/>`);
-      g.push(`<path d="${poly(r.top)}" fill="none" stroke="${night ? '#6C6250' : '#FFFFFF'}" stroke-width="1.4" opacity="0.85"/>`);
-      g.push(`<path d="${poly(r.bot)}" fill="none" stroke="${night ? '#FFF0CE' : P.aquaSh}" stroke-width="${night ? 2.2 : 1.2}"/>`);
-      if (night) g.push(`<path d="${poly(r.bot)}" fill="none" stroke="#FFE3AE" stroke-width="5" opacity="0.7" filter="url(#bloomS)"/>`);
-    }
-  }
-
-  // couronnement
-  g.push(`<path d="M ${sx(0, TOP.hw)} ${TOP.y} L ${sx(1, TOP.hw)} ${TOP.y} L ${sx(1, ROOF.hw)} ${ROOF.y} L ${sx(0, ROOF.hw)} ${ROOF.y} Z" fill="${P.pier}"/>`);
-  g.push(`<rect x="${sx(0, TOP.hw)}" y="${TOP.y}" width="${2 * TOP.hw}" height="7" fill="${P.accent}"/>`);
-
-  // socle parking, au premier plan
-  const pTop = 838, pBot = H, pHwT = 404, pHwB = 468;
-  g.push(`<path d="M ${sx(0, pHwT)} ${pTop} L ${sx(1, pHwT)} ${pTop} L ${sx(1, pHwB)} ${pBot} L ${sx(0, pHwB)} ${pBot} Z" fill="${night ? '#26272A' : '#CFC3AC'}"/>`);
-  g.push(`<rect x="${sx(0, pHwT)}" y="${pTop}" width="${2 * pHwT}" height="9" fill="${night ? '#1A1B1E' : '#B4A78F'}"/>`);
-  for (let k = 0; k < 5; k++) {
-    const yy = pTop + 28 + k * 22, f = (yy - pTop) / (pBot - pTop), hw = pHwT + (pHwB - pHwT) * f;
-    for (const [u1, u2] of [[U(0.55), U(7.30)], [U(7.85), U(9.65)], [U(10.20), U(16.95)]])
-      g.push(`<line x1="${sx(u1, hw)}" y1="${yy}" x2="${sx(u2, hw)}" y2="${yy}" stroke="${night ? '#6E5636' : P.accent}" stroke-width="6" opacity="${0.92 - k * 0.03}"/>`);
-  }
-  // les deux terrasses R+2, separees par le vide central laisse ouvert
-  for (let b = 0; b < BLOCKS.length; b++) {
-    const [u1, u2] = BLOCKS[b], [m1, m2] = BLOCS_M[b];
-    const lv = { ...L[0], hw: pHwT, A: 34, T: 17, B: 16, gc: 32 };
-    const r = rive(u1, u2, lv);
-    g.push(gardeCorps(m1, m2, r.top, lv, P));
-    const under = r.bot.map(([x, y]) => [x, y + 13]);
-    if (night) g.push(`<path d="${ribbon(r.bot, under)}" fill="#FFD48F" opacity="0.75" filter="url(#bloom)"/>`);
-    g.push(`<path d="${ribbon(r.bot, under)}" fill="url(#sof)"/>`);
-    g.push(`<path d="${band(r)}" fill="url(#aqg)"/>`);
-    g.push(`<path d="${poly(r.bot)}" fill="none" stroke="${night ? '#FFF0CE' : P.aquaSh}" stroke-width="${night ? 2.2 : 1.2}"/>`);
-    if (night) g.push(`<path d="${poly(r.bot)}" fill="none" stroke="#FFE3AE" stroke-width="5" opacity="0.7" filter="url(#bloomS)"/>`);
-  }
-
-  // bandeau alu + portes de garage
-  {
-    const yb = pTop + 156, f = (yb - pTop) / (pBot - pTop), hw = pHwT + (pHwB - pHwT) * f;
-    if (night) g.push(`<rect x="${sx(0, hw) - 20}" y="${yb - 6}" width="${2 * hw + 40}" height="24" fill="#FFCE85" opacity="0.6" filter="url(#bloom)"/>`);
-    g.push(`<rect x="${sx(0, hw) - 6}" y="${yb}" width="${2 * hw + 12}" height="9" fill="${night ? '#FFD9A2' : P.accent}"/>`);
-    g.push(`<path d="M ${sx(0, hw)} ${yb + 9} L ${sx(1, hw)} ${yb + 9} L ${sx(1, pHwB)} ${pBot} L ${sx(0, pHwB)} ${pBot} Z" fill="${night ? '#232427' : '#B7AB94'}"/>`);
-    for (const [u1, u2] of [[U(1.40), U(6.60)], [U(10.90), U(16.10)]]) {
-      g.push(`<path d="M ${sx(u1, hw)} ${yb + 22} L ${sx(u2, hw)} ${yb + 22} L ${sx(u2, pHwB)} ${pBot - 14} L ${sx(u1, pHwB)} ${pBot - 14} Z" fill="${night ? '#141517' : P.accentDark}"/>`);
-      for (let k = 1; k < 4; k++) {
-        const yy = yb + 22 + k * 22, ff = (yy - pTop) / (pBot - pTop), h2 = pHwT + (pHwB - pHwT) * ff;
-        g.push(`<line x1="${sx(u1, h2)}" y1="${yy}" x2="${sx(u2, h2)}" y2="${yy}" stroke="${night ? '#4A3B25' : P.accent}" stroke-width="1.6" opacity="0.7"/>`);
+  for (const z of [LV.r2, LV.r3, LV.r4, LV.r5, LV.r6]) {
+    for (const bay of [XS.bayA, XS.bayB]) {
+      g.push(`<path d="${quad(bay[0], bay[1], DF + 0.12, z, z + 2.61)}" fill="${C.bay}" opacity="${night ? 1 : 0.55}"/>`);
+      for (const [a, b] of doors(bay)) {
+        const d = quad(a, b, DF + 0.10, z, z + PBH);
+        const on = night && LIT[door % LIT.length];
+        if (on) g.push(`<path d="${d}" fill="#FFCE85" opacity="0.5" filter="url(#bloom)"/>`);
+        g.push(`<path d="${d}" fill="${on ? '#FFD9A2' : night ? '#15181A' : '#2E3436'}"/>`);
+        g.push(`<path d="${d}" fill="none" stroke="${C.accent}" stroke-width="1.7" opacity="${night ? 0.65 : 1}"/>`);
+        g.push(`<path d="${path([p((a + b) / 2, DF + 0.10, z), p((a + b) / 2, DF + 0.10, z + PBH)])}" stroke="${night ? '#8A6E4C' : C.accent}" stroke-width="1.3" fill="none" opacity="0.85"/>`);
+        door++;
       }
+      // brise-vue vertical d'intimite, en bout de balcon cote vide
+      const bx = bay === XS.bayA ? bay[1] - 0.14 : bay[0];
+      g.push(`<path d="${quad(bx, bx + 0.14, DF - DMIN, z, z + 2.30)}" fill="${C.accentD}"/>`);
     }
-    const e = `M ${sx(VOID[0], hw)} ${yb + 16} L ${sx(VOID[1], hw)} ${yb + 16} L ${sx(VOID[1], pHwB)} ${pBot - 14} L ${sx(VOID[0], pHwB)} ${pBot - 14} Z`;
-    if (night) g.push(`<path d="${e}" fill="#FFE0AE" opacity="0.8" filter="url(#bloom)"/>`);
-    g.push(`<path d="${e}" fill="${night ? '#FFEBC6' : '#E8D9BC'}"/>`);
-    g.push(`<rect x="0" y="${pBot - 14}" width="${W}" height="14" fill="${night ? '#1B1C1E' : '#9C917E'}"/>`);
   }
 
-  // contexte : mur de soutenement et talus qui enserrent la venelle
-  g.push(`<path d="M 0 ${H} L 0 ${H - 210} C 52 ${H - 188} 84 ${H - 128} 96 ${H} Z" fill="${night ? '#0C0E11' : '#2E2A24'}" opacity="${night ? 0.85 : 0.30}"/>`);
-  g.push(`<path d="M ${W} ${H} L ${W} ${H - 250} C ${W - 62} ${H - 214} ${W - 96} ${H - 120} ${W - 108} ${H} Z" fill="${night ? '#0C0E11' : '#2E2A24'}" opacity="${night ? 0.8 : 0.26}"/>`);
+  // ---- poteaux, acrotere, couvertine -------------------------------------
+  for (const [a, b] of PIERS) {
+    g.push(`<path d="${quad(a, b, DF - 0.06, LV.r2, LV.acr + 0.50)}" fill="${C.pier}"/>`);
+    g.push(`<path d="${quad(a, a + 0.05, DF - 0.07, LV.r2, LV.acr + 0.50)}" fill="#FFFFFF" opacity="${night ? 0.10 : 0.5}"/>`);
+    g.push(`<path d="${quad(b - 0.09, b, DF - 0.06, LV.r2, LV.acr + 0.50)}" fill="#000000" opacity="0.18"/>`);
+    g.push(`<path d="${quad(a, b, DF - 0.07, LV.acr + 0.40, LV.acr + 0.50)}" fill="${C.accent}"/>`);
+  }
+  for (const blk of BLOCS) {
+    g.push(`<path d="${quad(blk[0], blk[1], DF, LV.toit, LV.acr)}" fill="${C.wall}"/>`);
+    g.push(`<path d="${quad(blk[0], blk[1], DF - 0.02, LV.acr - 0.10, LV.acr)}" fill="${C.accent}"/>`);
+  }
 
-  L.forEach((lv) => {
-    const x = sx(1, lv.hw) + 16;
-    g.push(`<line x1="${sx(1, lv.hw) + 4}" y1="${lv.y + lv.A * 0.2}" x2="${x + 4}" y2="${lv.y + lv.A * 0.2}" stroke="${night ? '#8E9AA2' : '#2B2724'}" stroke-width="0.8" opacity="0.5"/>`);
-    g.push(txt(x + 10, lv.y + lv.A * 0.2 + 4, lv.name, { size: 10, anchor: 'start', weight: 600, fill: night ? '#B9C4CB' : '#3A352E', ls: '0.1em' }));
-  });
+  // ---- balcons ondules, du plus lointain (haut) au plus proche (bas) -----
+  const balcon = (blk, zs, Yfront, Yback) => {
+    const s = [];
+    const rTop = sample(blk, Yfront, () => zs + 0.02);
+    const rBot = sample(blk, Yfront, () => zs - FASCIA);
+    const sofF = blk.map ? null : null;
+    const sBack = sample(blk, () => Yback, () => zs - 0.20);
+    // sous-face : de la rive jusqu'au nu de facade (apparait SOUS le bandeau)
+    if (night) s.push(`<path d="${strip(rBot, sBack)}" fill="#FFD48F" opacity="0.8" filter="url(#bloom)"/>`);
+    s.push(`<path d="${strip(rBot, sBack)}" fill="url(#sof)"/>`);
+    // bandeau de rive Aquapanel
+    s.push(`<path d="${strip(rTop, rBot)}" fill="url(#aq)"/>`);
+    s.push(`<path d="${path(rBot)}" fill="none" stroke="${night ? '#FFF0CE' : C.aquaBot}" stroke-width="${night ? 2.4 : 1.3}"/>`);
+    if (night) s.push(`<path d="${path(rBot)}" fill="none" stroke="#FFE3AE" stroke-width="5.5" opacity="0.75" filter="url(#bloomS)"/>`);
+    s.push(`<path d="${path(rTop)}" fill="none" stroke="${night ? '#655C4C' : '#FFFFFF'}" stroke-width="1.3" opacity="0.8"/>`);
+    // joues de rive : retour du bandeau jusqu'au nu de facade
+    for (const m of [blk[0], blk[1]]) {
+      const d = depthOf(m, blk), Yf = Yfront(d);
+      s.push(`<path d="${path([p(m, Yf, zs + 0.02), p(m, Yback, zs + 0.02), p(m, Yback, zs - 0.20), p(m, Yf, zs - FASCIA)])} Z" fill="${night ? '#8E8065' : '#CFC5B2'}"/>`);
+    }
+    return s.join('\n');
+  };
+
+  const gardeCorps = (blk, zs, Yfront) => {
+    const s = [];
+    const Yg = (d) => Yfront(d) + 0.10;
+    const low = sample(blk, Yg, () => zs + 0.10);
+    const top = sample(blk, Yg, () => zs + GC);
+    const idx = (m) => Math.max(0, Math.min(N, Math.round((m - blk[0]) / (blk[1] - blk[0]) * N)));
+    for (const seg of gcSegments(blk[0], blk[1])) {
+      const i1 = idx(seg.x1), i2 = idx(seg.x2);
+      if (i2 <= i1) continue;
+      if (seg.kind === 'verre') {
+        const a = sample(blk, Yg, () => zs + 0.17).slice(i1, i2 + 1);
+        const b = sample(blk, Yg, () => zs + GC - 0.10).slice(i1, i2 + 1);
+        s.push(`<path d="${strip(b, a)}" fill="url(#gl)"/>`);
+        s.push(`<path d="${path(a)}" fill="none" stroke="${C.inox}" stroke-width="1.6"/>`);
+      } else {
+        for (let m = seg.x1 + 0.055; m < seg.x2 - 0.03; m += 0.11) {
+          const i = idx(m);
+          s.push(`<path d="${path([low[i], top[i]])}" stroke="${C.inox}" stroke-width="1.5" fill="none"/>`);
+        }
+      }
+      const ie = Math.min(N, i2);
+      s.push(`<path d="${path([low[ie], top[ie]])}" stroke="${C.inox}" stroke-width="2.4" fill="none"/>`);
+    }
+    s.push(`<path d="${path([low[0], top[0]])}" stroke="${C.inox}" stroke-width="2.4" fill="none"/>`);
+    s.push(`<path d="${path(top)}" fill="none" stroke="${C.inox}" stroke-width="3"/>`);
+    s.push(`<path d="${path(top.map(([x, y]) => [x, +(y + 1.4).toFixed(2)]))}" fill="none" stroke="${C.rail}" stroke-width="1.1" opacity="0.8"/>`);
+    return s.join('\n');
+  };
+
+  for (let i = BALCONS.length - 1; i >= 0; i--) {
+    const zs = BALCONS[i];
+    for (const blk of BLOCS) {
+      // ombre portee du balcon sur la facade en retrait
+      g.push(`<path d="${quad(blk[0], blk[1], DF + 0.06, zs - 1.15, zs - FASCIA)}" fill="#000000" opacity="${night ? 0.30 : 0.16}"/>`);
+      g.push(gardeCorps(blk, zs, (d) => DF - d));
+      g.push(balcon(blk, zs, (d) => DF - d, DF));
+    }
+  }
+
+  // ---- socle parking, au premier plan ------------------------------------
+  g.push(`<path d="${quad(0, 17.5, DP, -0.30, LV.r2)}" fill="${C.podium}"/>`);
+  g.push(`<path d="${quad(0, 17.5, DP, LV.r2 - 0.12, LV.r2)}" fill="${C.podiumT}"/>`);
+  for (const [a, b] of [[0.55, 7.30], [7.85, 9.65], [10.20, 16.95]])
+    for (let z = LV.r1 + 0.80; z < LV.r1 + 2.50; z += 0.30) {
+      g.push(`<path d="${quad(a, b, DP - 0.02, z, z + 0.16)}" fill="${night ? '#6E5636' : C.accent}" opacity="0.92"/>`);
+      g.push(`<path d="${quad(a, b, DP - 0.02, z - 0.06, z)}" fill="${night ? '#101113' : C.accentD}" opacity="0.55"/>`);
+    }
+  // bandeau alu + portes de garage + hall
+  if (night) g.push(`<path d="${quad(-0.3, 17.8, DP - 0.1, 3.05, 3.24)}" fill="#FFCE85" opacity="0.65" filter="url(#bloom)"/>`);
+  g.push(`<path d="${quad(-0.3, 17.8, DP - 0.1, 3.05, 3.22)}" fill="${night ? '#FFD9A2' : C.accent}"/>`);
+  for (const [a, b] of [[1.40, 6.60], [10.90, 16.10]]) {
+    g.push(`<path d="${quad(a, b, DP - 0.04, 0.35, 2.85)}" fill="${night ? '#141517' : C.accentD}"/>`);
+    for (let z = 0.77; z < 2.85; z += 0.42)
+      g.push(`<path d="${quad(a, b, DP - 0.05, z, z + 0.04)}" fill="${night ? '#4A3B25' : C.accent}" opacity="0.75"/>`);
+  }
+  const hall = quad(VOID[0] - 0.05, VOID[1] + 0.05, DP - 0.04, 0, 2.45);
+  if (night) g.push(`<path d="${hall}" fill="#FFE0AE" opacity="0.85" filter="url(#bloom)"/>`);
+  g.push(`<path d="${hall}" fill="${night ? '#FFEBC6' : '#E8D9BC'}"/>`);
+
+  // ---- les deux terrasses R+2 sur la toiture du parking -------------------
+  for (const blk of BLOCS) {
+    const Yf = (d) => DP + (DMAX - d);
+    g.push(gardeCorps(blk, LV.r2 + FASCIA, Yf));
+    g.push(balcon(blk, LV.r2 + FASCIA, Yf, DP + DMAX - DMIN + 0.9));
+  }
+
+  // ---- contexte : la venelle enserre le pied de l'immeuble ----------------
+  g.push(`<path d="M 0 ${H} L 0 ${H - 330} C 34 ${H - 288} 56 ${H - 156} 62 ${H} Z" fill="${C.ctx}" opacity="${C.ctxO}"/>`);
+  g.push(`<path d="M ${W} ${H} L ${W} ${H - 370} C ${W - 40} ${H - 322} ${W - 64} ${H - 148} ${W - 70} ${H} Z" fill="${C.ctx}" opacity="${C.ctxO * 0.92}"/>`);
+
+  // ---- reperes de niveau --------------------------------------------------
+  for (const [z, name] of [[LV.r2, 'R+2'], [LV.r3, 'R+3'], [LV.r4, 'R+4'], [LV.r5, 'R+5'], [LV.r6, 'R+6']]) {
+    const [x, y] = p(17.5, DF, z);
+    g.push(`<path d="${path([[x + 4, y], [x + 22, y]])}" stroke="${C.lbl}" stroke-width="0.8" opacity="0.5" fill="none"/>`);
+    g.push(txt(x + 28, y + 4, name, { size: 10, anchor: 'start', weight: 600, fill: C.lbl, ls: '0.1em' }));
+  }
   return g.join('\n');
 }
 
 const PLANCHES = [
   { file: 'Vue.dc.html', night: false, kicker: 'Ambiance · vue depuis la venelle', title: 'Rives ondulées',
-    sub: 'Contre-plongée depuis le pied de l’immeuble — lecture des bandeaux cintrés en Aquapanel, du garde-corps mixte inox / verre qui suit l’onde, et du filtre bronze du vide central.',
+    sub: 'Perspective à trois points depuis le pied de l’immeuble — bandeaux cintrés en Aquapanel, garde-corps mixte inox / verre qui suit l’onde, filtre bronze du vide central.',
     right: 'VUE D’AMBIANCE · JOUR<br>NON COTÉE<br>VARIANTE A' },
   { file: 'Vue-Nuit.dc.html', night: true, kicker: 'Ambiance · vue de nuit', title: 'La courbe allumée',
     sub: 'La gorge LED en sous-face lèche les 99 ml de rive cintrée : de nuit, la façade se réduit à cinq lignes de lumière qui ondulent, et à la faille centrale rétroéclairée.',
     right: 'VUE D’AMBIANCE · NUIT<br>NON COTÉE<br>VARIANTE A' },
 ];
-
 for (const pl of PLANCHES) {
   const body = `<div style="width: ${W}px; background: #F1EDE5">
 ${header({ w: W, kicker: pl.kicker, title: pl.title, sub: pl.sub, right: pl.right })}
-<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${buildSvg(pl.night)}</svg>
+<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${scene(pl.night)}</svg>
 </div>`;
-  writeFileSync(pl.file, page({ body, props: JSON.stringify({ $preview: { width: W, height: H + 260 } }) }));
+  writeFileSync(pl.file, page({ body, props: JSON.stringify({ $preview: { width: W, height: H + 250 } }) }));
   console.log(pl.file, 'ok');
 }
