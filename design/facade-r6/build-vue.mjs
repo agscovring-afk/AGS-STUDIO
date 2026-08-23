@@ -2,7 +2,7 @@ import { writeFileSync } from 'node:fs';
 import { page, header } from './page.mjs';
 import { txt } from './svgkit.mjs';
 import { LV, XS, BALCONS, FASCIA, GC, PBH, DMIN, DMAX, AVANCEE, RETRAIT,
-         AXE, BV_EP, JOUE, PBN, depthAt, doors, gcSegments, BLOCS } from './geo.mjs';
+         AXE, BV_EP, GCN, PBN, depthAt, doors, gcSegments, BLOCS } from './geo.mjs';
 import { CAM, p, path, strip, quad } from './perspective.mjs';
 
 const W = 1180, H = 1085, N = 130;
@@ -60,21 +60,22 @@ function scene(night) {
   // tendu en facade ; on le voit ici par la tranche, sur l'axe du vide)
   g.push(`<path d="${quad(VOID[0], VOID[1], DF + RETRAIT, LV.r2, LV.toit)}" fill="${night ? '#241C12' : '#8E8A80'}"/>`);
   for (const z of BALCONS) {
-    for (const [a, b] of [[VOID[0] + JOUE, AXE - BV_EP / 2], [AXE + BV_EP / 2, VOID[1] - JOUE]]) {
+    for (const [a, b] of [[VOID[0], AXE - BV_EP / 2], [AXE + BV_EP / 2, VOID[1]]]) {
       const c = (a + b) / 2, on = night;
       const d = quad(c - PBN / 2, c + PBN / 2, DF + RETRAIT, z + 0.02, z + PBH);
       if (on) g.push(`<path d="${d}" fill="#FFCE85" opacity="0.45" filter="url(#bloom)"/>`);
       g.push(`<path d="${d}" fill="${on ? '#FFD9A2' : '#2E3436'}"/>`);
       g.push(`<path d="${d}" fill="none" stroke="${C.accent}" stroke-width="1.5"/>`);
-      // dalle et garde-corps du balcon de niche, au nu de facade
-      g.push(`<path d="${quad(a, b, DF, z - 0.20, z)}" fill="${C.wall}"/>`);
-      g.push(`<path d="${quad(a, b, DF, z + 0.05, z + GC)}" fill="${C.glass}" opacity="0.35"/>`);
-      g.push(`<path d="${path([p(a, DF, z + GC), p(b, DF, z + GC)])}" stroke="${C.inox}" stroke-width="2.4" fill="none"/>`);
+      // dalle et garde-corps du balcon, 0,70 m en arriere du nu de facade
+      g.push(`<path d="${quad(a, b, DF + GCN, z - 0.20, z)}" fill="${C.wall}"/>`);
+      g.push(`<path d="${quad(a, b, DF + GCN, z + 0.05, z + GC)}" fill="${C.glass}" opacity="0.35"/>`);
+      g.push(`<path d="${path([p(a, DF + GCN, z + GC), p(b, DF + GCN, z + GC)])}" stroke="${C.inox}" stroke-width="2.4" fill="none"/>`);
     }
   }
   // le brise-vue separateur, sur l'axe, du R+2 a la toiture
-  g.push(`<path d="${quad(AXE - BV_EP / 2, AXE + BV_EP / 2, DF, LV.r2, LV.toit)}" fill="${C.accent}"/>`);
-  g.push(`<path d="${quad(AXE - BV_EP / 2, AXE - BV_EP / 2 + 0.04, DF, LV.r2, LV.toit)}" fill="${C.accentD}"/>`);
+  g.push(`<path d="${quad(AXE - BV_EP / 2, AXE + BV_EP / 2, DF + GCN, LV.r2, LV.toit)}" fill="${C.accent}"/>`);
+  for (let x = AXE - BV_EP / 2 + 0.05; x < AXE + BV_EP / 2 - 0.02; x += 0.10)
+    g.push(`<path d="${path([p(x, DF + GCN, LV.r2), p(x, DF + GCN, LV.toit)])}" stroke="${C.accentD}" stroke-width="2" fill="none"/>`);
 
   // ---- baies en retrait, menuiseries -------------------------------------
   let door = 0;
@@ -225,7 +226,7 @@ function scene(night) {
 
 const PLANCHES = [
   { file: 'Vue.dc.html', night: false, kicker: 'Ambiance · vue depuis la venelle', title: 'Rives ondulées',
-    sub: 'Perspective à trois points depuis le pied de l’immeuble — onde de rive relevée sur votre croquis, garde-corps mixte inox et verre noir, vide central creusé de 1,50 m : deux balcons côte à côte, le brise-vue entre eux.',
+    sub: 'Perspective à trois points depuis le pied de l’immeuble — onde de rive relevée sur votre croquis, garde-corps mixte inox et verre noir, fente centrale de 1,80 m creusée de 1,50 m : deux petits balcons de 0,70 × 0,80 m, le brise-vue de 40 cm entre eux.',
     right: 'VUE D’AMBIANCE · JOUR<br>NON COTÉE<br>VARIANTE A' },
   { file: 'Vue-Nuit.dc.html', night: true, kicker: 'Ambiance · vue de nuit', title: 'La courbe allumée',
     sub: 'La gorge LED en sous-face lèche les 108 ml de rive cintrée : de nuit, la façade se réduit à six lignes de lumière qui ondulent, et à la faille centrale rétroéclairée.',

@@ -22,7 +22,7 @@ const MAT = [
           '24 panneaux par bloc — 12 de verre (4,82 ml) et 12 d’inox (4,82 ml) ; à 40 cm la flèche du plat reste invisible sur la courbe',
           'Barreaux espacés de 11 cm ; linéaire total ≈ 116 ml, même tracé que les bandeaux Aquapanel'] },
   { n: 'Brise-vue aluminium', t: 'RAL 7024 gris graphite', sw: ['#474B4E', '#31353A'], ref: 'Lames aluminium RAL 7024, même teinte que les menuiseries, ossature alu, fixation sur poteaux béton',
-    pts: ['Vide central : le brise-vue est ENTRE les deux balcons, sur l’axe — 1,50 m de profondeur × 22,8 m de haut, du R+2 à la toiture (≈ 34 m²)',
+    pts: ['Vide central : brise-vue de 40 cm ENTRE les deux petits balcons, sur l’axe — 0,80 m de profondeur × 22,8 m de haut, du R+2 à la toiture (≈ 18 m²)',
           'Séparations d’intimité en bout de balcon, 1,30 m de haut',
           'Ventilation du parking R+1 — lames horizontales pare-vue (≈ 34 m²)'] },
   { n: 'Menuiseries aluminium', t: 'TPR série 65 · RAL 7024', sw: ['#474B4E', '#2C3234'], ref: 'Portes-balcon TPR série 65 à rupture de pont thermique, 2 vantaux coulissants, RAL 7024 gris graphite, double vitrage 4/16/4',

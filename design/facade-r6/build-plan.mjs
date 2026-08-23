@@ -1,6 +1,6 @@
 import { writeFileSync } from 'node:fs';
 import { XS, LV, BLOCS, MIROIR, DMIN, DCREUX, DMAX, COL, RETRAIT, PBW, PBH,
-         AXE, BV_EP, JOUE, BALCON_NICHE, PBN,
+         AXE, BV_EP, BALCON_NICHE, BALCON_NICHE_P, GCN, PBN,
          depthAt, ondeAt, doors, developpe, gcSegments } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { txt, dimH, dimV } from './svgkit.mjs';
@@ -53,37 +53,22 @@ for (let b = 0; b < 2; b++) {
   }
 }
 
-// ---- vide central : deux balcons cote a cote, brise-vue entre eux --------
-// Corrige le 23.08 sur votre annotation : chaque logement a son balcon dans le
-// vide ; le brise-vue n'est pas en facade, il est sur l'axe, entre les deux.
-{
-  const [n1, n2] = XS.vide, a = AXE;
-  g.push(`<rect x="${px(n1)}" y="${py(-RETRAIT)}" width="${wm(1.80)}" height="${wm(RETRAIT)}" fill="${C.niche}"/>`);
-  // joues beton de la niche et refend de fond, avec une porte par logement
-  for (const x of [n1, n2 - JOUE])
-    g.push(`<rect x="${px(x)}" y="${py(-RETRAIT)}" width="${wm(JOUE)}" height="${wm(RETRAIT)}" fill="${C.beton}"/>`);
-  const dw = PBN, half = [[n1 + JOUE, a - BV_EP / 2], [a + BV_EP / 2, n2 - JOUE]];
-  for (const [h1, h2] of half) {
-    const c = (h1 + h2) / 2;
-    g.push(`<rect x="${px(h1)}" y="${py(-RETRAIT)}" width="${wm(h2 - h1)}" height="${wm(JOUE)}" fill="${C.beton}"/>`);
-    g.push(`<rect x="${px(c - dw / 2)}" y="${py(-RETRAIT)}" width="${wm(dw)}" height="${wm(JOUE)}" fill="#FFFFFF"/>`);
-    g.push(`<rect x="${px(c - dw / 2)}" y="${py(-RETRAIT + 0.10)}" width="${wm(dw)}" height="${wm(0.06)}" fill="${C.accent}"/>`);
-    // garde-corps au nu de facade, un par balcon
-    g.push(`<rect x="${px(h1 + 0.04)}" y="${py(0) - wm(0.05)}" width="${wm(h2 - h1 - 0.08)}" height="${wm(0.05)}" fill="${C.glass}"/>`);
-    g.push(txt(px(c), py(-1.02), 'BALCON', { size: 7.5, fill: C.dim, ls: '0.1em', weight: 700 }));
-    g.push(txt(px(c), py(-0.86), `${BALCON_NICHE.toFixed(2)} × 1.50`, { size: 7, fill: C.dim, weight: 600 }));
-  }
-  // le brise-vue : sur l'axe, du fond de la niche au nu de facade
-  g.push(`<rect x="${px(a - BV_EP / 2)}" y="${py(-RETRAIT)}" width="${wm(BV_EP)}" height="${wm(RETRAIT)}" fill="${C.accent}"/>`);
-  for (let d = 0.12; d < RETRAIT - 0.04; d += 0.15)
-    g.push(`<rect x="${px(a - BV_EP / 2 - 0.02)}" y="${py(-RETRAIT + d)}" width="${wm(BV_EP + 0.04)}" height="${wm(0.05)}" fill="#FFFFFF" opacity="0.45"/>`);
-  g.push(txt(0, 0, 'BRISE-VUE RAL 7024 ENTRE LES DEUX BALCONS', { size: 8, fill: C.accent, ls: '0.1em', weight: 700, transform: `translate(${px(a) + 4} ${py(0.30)}) rotate(90)` }));
-}
-
 // ---- mur de facade, poteaux, menuiseries ---------------------------------
+const INT = -2.40;                       // profondeur d'interieur montree au plan
 for (const [m1, m2] of BLOCS) {
-  g.push(`<rect x="${px(m1)}" y="${py(-1.75)}" width="${wm(m2 - m1)}" height="${wm(1.45)}" fill="${C.int}"/>`);
+  g.push(`<rect x="${px(m1)}" y="${py(INT)}" width="${wm(m2 - m1)}" height="${wm(-INT - 0.30)}" fill="${C.int}"/>`);
   g.push(`<rect x="${px(m1)}" y="${py(-0.30)}" width="${wm(m2 - m1)}" height="${wm(0.30)}" fill="${C.beton}"/>`);
+}
+// Derriere le fond de niche : le logement. Confirme le 23.08 — la porte de
+// chaque balcon du vide s'ouvre depuis l'interieur, pas depuis un couloir.
+{
+  const [n1, n2] = XS.vide, back = -RETRAIT - 0.30;   // -1.80, dos du refend
+  g.push(`<rect x="${px(n1)}" y="${py(INT)}" width="${wm(n2 - n1)}" height="${wm(back - INT)}" fill="${C.int}"/>`);
+  // refend mitoyen : il prolonge le brise-vue vers l'interieur
+  g.push(`<rect x="${px(AXE - BV_EP / 2)}" y="${py(INT)}" width="${wm(BV_EP)}" height="${wm(back - INT)}" fill="${C.beton}"/>`);
+  for (const c of [(n1 + AXE - BV_EP / 2) / 2, (AXE + BV_EP / 2 + n2) / 2]) {
+    g.push(`<path d="M ${px(c - PBN / 2)} ${py(-RETRAIT)} A ${wm(PBN)} ${wm(PBN)} 0 0 ${c < AXE ? 0 : 1} ${px(c + (c < AXE ? -PBN / 2 : PBN / 2))} ${py(-RETRAIT - PBN)}" fill="none" stroke="${C.dim}" stroke-width="0.8" stroke-dasharray="4 3"/>`);
+  }
 }
 for (const [a, b] of [XS.c1, XS.c2, XS.c3, XS.c4])
   g.push(`<rect x="${px(a)}" y="${py(-0.55)}" width="${wm(b - a)}" height="${wm(0.55)}" fill="${C.beton}"/>`);
@@ -93,8 +78,56 @@ for (const bay of [XS.bayA, XS.bayB]) for (const [a, b] of doors(bay)) {
   g.push(`<rect x="${px(a + (b - a) / 2)}" y="${py(-0.07)}" width="${wm((b - a) / 2)}" height="${wm(0.07)}" fill="${C.accent}"/>`);
   g.push(txt(px((a + b) / 2), py(-0.42), 'PB 1.80 × 2.20', { size: 8.5, fill: C.dim, ls: '0.08em', weight: 700 }));
 }
-g.push(txt(px(3.925), py(-1.15), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18em', weight: 700 }));
-g.push(txt(px(13.575), py(-1.15), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18em', weight: 700 }));
+// ---- vide central : fente de 1,80, deux balcons au fond, brise-vue entre eux
+// Corrige les 23.08 : le brise-vue fait 40 cm et separe deux petits balcons de
+// 0,70 x 0,80 m ; leur garde-corps verre s'arrete a 0,70 m en arriere du nu, la
+// fente reste ouverte devant — c'est le « vide » de la facade.
+{
+  const [n1, n2] = XS.vide, a = AXE, back = -RETRAIT - 0.30;
+  const half = [[n1, a - BV_EP / 2], [a + BV_EP / 2, n2]];
+  for (const [h1, h2] of half) {
+    const c = (h1 + h2) / 2;
+    // dalle du balcon : de la porte (a 1,50) jusqu'a 0,70 du nu
+    g.push(`<rect x="${px(h1)}" y="${py(-RETRAIT)}" width="${wm(h2 - h1)}" height="${wm(BALCON_NICHE_P)}" fill="${C.dalle}"/>`);
+    g.push(`<rect x="${px(h1)}" y="${py(-RETRAIT)}" width="${wm(h2 - h1)}" height="${wm(BALCON_NICHE_P)}" fill="none" stroke="${C.dim}" stroke-width="0.7"/>`);
+    // refend de fond + porte-fenetre depuis le logement
+    g.push(`<rect x="${px(h1)}" y="${py(back)}" width="${wm(h2 - h1)}" height="${wm(0.30)}" fill="${C.beton}"/>`);
+    g.push(`<rect x="${px(c - PBN / 2)}" y="${py(back)}" width="${wm(PBN)}" height="${wm(0.32)}" fill="#FFFFFF"/>`);
+    g.push(`<rect x="${px(c - PBN / 2)}" y="${py(back + 0.12)}" width="${wm(PBN)}" height="${wm(0.06)}" fill="${C.accent}"/>`);
+    g.push(`<path d="M ${px(c - PBN / 2)} ${py(-RETRAIT)} A ${wm(PBN)} ${wm(PBN)} 0 0 ${c < a ? 0 : 1} ${px(c + (c < a ? -PBN / 2 : PBN / 2))} ${py(-RETRAIT - PBN)}" fill="none" stroke="${C.dim}" stroke-width="0.8" stroke-dasharray="4 3"/>`);
+    // garde-corps verre feuillete, a 0,70 m en arriere du nu
+    g.push(`<rect x="${px(h1 + 0.02)}" y="${py(-GCN) - wm(0.06)}" width="${wm(h2 - h1 - 0.04)}" height="${wm(0.06)}" fill="${C.glass}"/>`);
+    g.push(`<rect x="${px(h1 + 0.02)}" y="${py(-GCN) - wm(0.06)}" width="${wm(h2 - h1 - 0.04)}" height="${wm(0.06)}" fill="none" stroke="${C.inox}" stroke-width="0.8"/>`);
+  }
+  // le brise-vue : 40 cm sur l'axe, du fond de la fente au garde-corps
+  g.push(`<rect x="${px(a - BV_EP / 2)}" y="${py(-RETRAIT)}" width="${wm(BV_EP)}" height="${wm(BALCON_NICHE_P)}" fill="${C.accent}"/>`);
+  for (let d = 0.06; d < BALCON_NICHE_P - 0.03; d += 0.13)
+    g.push(`<rect x="${px(a - BV_EP / 2)}" y="${py(-RETRAIT + d)}" width="${wm(BV_EP)}" height="${wm(0.05)}" fill="#FFFFFF" opacity="0.38"/>`);
+  // cotes du vide
+  const yd = py(0.30);
+  g.push(dimH(px(n1), px(a - BV_EP / 2), yd, BALCON_NICHE.toFixed(2), { size: 8 }));
+  g.push(dimH(px(a - BV_EP / 2), px(a + BV_EP / 2), yd, BV_EP.toFixed(2), { size: 8 }));
+  g.push(dimH(px(a + BV_EP / 2), px(n2), yd, BALCON_NICHE.toFixed(2), { size: 8 }));
+  g.push(dimV(py(-RETRAIT), py(-GCN), px(a) - wm(1.02), BALCON_NICHE_P.toFixed(2), { size: 9 }));
+  g.push(dimV(py(-GCN), py(0), px(a) - wm(1.02), GCN.toFixed(2), { size: 9 }));
+}
+
+// ---- cartouche du vide central, dans le creux entre les deux rives -------
+{
+  const cx = px(AXE), y0 = py(2.06);
+  g.push(`<path d="M ${cx} ${py(0.06)} L ${cx} ${y0 - 13}" stroke="${C.dim}" stroke-width="0.8" stroke-dasharray="4 3"/>`);
+  g.push(`<circle cx="${cx}" cy="${py(0.06)}" r="2.4" fill="${C.dim}"/>`);
+  const rows = [
+    ['VIDE CENTRAL — FENTE DE 1,80 CREUSÉE DE 1,50', C.ink, 8.5],
+    ['2 petits balcons de 0,70 × 0,80 m, un par logement', C.dim, 8],
+    ['Brise-vue RAL 7024 de 40 cm sur l’axe, entre les deux', C.accent, 8],
+    ['Garde-corps verre à 0,70 m en arrière du nu ; porte 0,70 m', C.dim, 8],
+  ];
+  rows.forEach(([t, col, sz], i) => g.push(txt(cx, y0 + i * 15, t, { size: sz, fill: col, ls: i ? '0.02em' : '0.1em', weight: i ? 600 : 700 })));
+}
+
+g.push(txt(px(3.925), py(-1.55), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18em', weight: 700 }));
+g.push(txt(px(13.575), py(-1.55), 'LOGEMENT', { size: 10, fill: C.dim, ls: '0.18em', weight: 700 }));
 
 // ---- cotes ---------------------------------------------------------------
 const yc = py(DMAX) + 78;

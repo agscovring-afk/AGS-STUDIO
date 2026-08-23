@@ -33,17 +33,23 @@ export const MIROIR = [true, false];   // le croquis porte sur le bloc droit ; l
 //   = 3,26 m d'un nu superieur de dalle au suivant.
 // RDC + R+1 en parking, R+2 en terrasses, puis SIX niveaux de balcons ondules.
 // ---------------------------------------------------------------------------
-// Vide central. Precise le 23.08 : ce n'est pas un simple panneau de brise-vue
-// tendu en facade, ce sont DEUX balcons cote a cote, un par logement, et le
-// brise-vue se dresse ENTRE EUX. La niche de 1,80 m se creuse de 1,50 m ; le
-// brise-vue est sur l'axe, du fond de la niche jusqu'au nu de facade, et monte
-// sur toute la hauteur d'etage : chaque voisin est chez lui.
+// Vide central. Precise les 23.08 : ce n'est pas un panneau de brise-vue tendu
+// en facade. C'est une fente de 1,80 m creusee de 1,50 m dans la facade — le
+// « vide » — et au fond de cette fente, DEUX petits balcons cote a cote, un par
+// logement, avec le brise-vue ENTRE EUX.
+//   . le fond de la fente, a 1,50 m du nu : le mur du logement et sa porte
+//   . le balcon : 0,80 m de profondeur depuis la porte  -> son garde-corps
+//     verre s'arrete a 0,70 m en arriere du nu de facade
+//   . le brise-vue : 40 cm de large, sur l'axe, du fond au garde-corps, sur
+//     toute la hauteur d'etage
 // ---------------------------------------------------------------------------
 export const AXE = 8.75;              // axe du vide, mitoyen des deux logements
-export const BV_EP = 0.12;            // epaisseur du brise-vue separateur
-export const JOUE = 0.30;             // epaisseur des joues beton de la niche
-export const BALCON_NICHE = (1.80 - BV_EP) / 2;   // 0.84 m de large par balcon
-export const PBN = 0.90;              // porte-fenetre de ces balcons, 0.90 m
+export const BV_EP = 0.40;            // largeur du brise-vue separateur
+export const JOUE = 0.00;             // pas de joue : les flancs sont ceux des blocs
+export const BALCON_NICHE = (1.80 - BV_EP) / 2;   // 0.70 m de large par balcon
+export const BALCON_NICHE_P = 0.80;   // profondeur, de la porte au garde-corps
+export const GCN = 0.70;              // recul du garde-corps = 1.50 - 0.80
+export const PBN = 0.70;              // porte-fenetre de ces balcons
 
 export const HSP = 3.06;       // hauteur libre sous dalle, etages courants
 export const HSP_RDC = 2.60;   // hauteur libre du RDC

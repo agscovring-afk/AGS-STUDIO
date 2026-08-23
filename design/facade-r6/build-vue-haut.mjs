@@ -1,6 +1,6 @@
 import { writeFileSync } from 'node:fs';
 import { XS, LV, BLOCS, FASCIA, GC, PBH, AVANCEE, RETRAIT,
-         AXE, BV_EP, JOUE, PBN, depthAt, doors, gcSegments, developpe } from './geo.mjs';
+         AXE, BV_EP, GCN, PBN, depthAt, doors, gcSegments, developpe } from './geo.mjs';
 import { page, header } from './page.mjs';
 import { txt } from './svgkit.mjs';
 
@@ -46,19 +46,19 @@ g.push(`<path d="${quad(XS.vide[0], M2, DF, LV.r4 + 0.4, DF, LV.r2)}" fill="url(
 g.push(`<path d="${quad(XS.vide[0], XS.vide[1], DF + RETRAIT, LV.r4 + 0.4, DF + RETRAIT, LV.r2)}" fill="${C.wallSh}"/>`);
 g.push(`<path d="${quad(XS.vide[0], XS.vide[0], DF, LV.r4 + 0.4, DF + RETRAIT, LV.r2)}" fill="${C.wallSh}" opacity="0.7"/>`);
 for (const z of [LV.r3]) {
-  for (const [a, b] of [[XS.vide[0] + JOUE, AXE - BV_EP / 2], [AXE + BV_EP / 2, XS.vide[1] - JOUE]]) {
+  for (const [a, b] of [[XS.vide[0], AXE - BV_EP / 2], [AXE + BV_EP / 2, XS.vide[1]]]) {
     const c = (a + b) / 2;
     g.push(`<path d="${quad(c - PBN / 2, c + PBN / 2, DF + RETRAIT, z + PBH, DF + RETRAIT, z)}" fill="url(#vitg)"/>`);
-    g.push(`<path d="${dalle(a, b, DF, DF + RETRAIT, z)}" fill="${C.dalleB}"/>`);
-    g.push(gcDroit(a, b, DF, DF, z));
+    g.push(`<path d="${dalle(a, b, DF + GCN, DF + RETRAIT, z)}" fill="${C.dalleB}"/>`);
+    g.push(gcDroit(a, b, DF + GCN, DF + GCN, z));
   }
 }
 // le brise-vue separateur : sur l'axe, du fond de la niche au nu de facade
 // sa joue, vue de biais : plan perpendiculaire au nu, de la facade au fond de niche
-g.push(`<path d="${path([P(AXE, DF, LV.r4 + 0.4), P(AXE, DF + RETRAIT, LV.r4 + 0.4), P(AXE, DF + RETRAIT, LV.r2), P(AXE, DF, LV.r2)])} Z" fill="${C.accentD}"/>`);
-g.push(`<path d="${quad(AXE - BV_EP / 2, AXE + BV_EP / 2, DF, LV.r4 + 0.4, DF, LV.r2)}" fill="${C.accent}"/>`);
+g.push(`<path d="${path([P(AXE, DF + GCN, LV.r4 + 0.4), P(AXE, DF + RETRAIT, LV.r4 + 0.4), P(AXE, DF + RETRAIT, LV.r2), P(AXE, DF + GCN, LV.r2)])} Z" fill="${C.accentD}"/>`);
+g.push(`<path d="${quad(AXE - BV_EP / 2, AXE + BV_EP / 2, DF + GCN, LV.r4 + 0.4, DF + GCN, LV.r2)}" fill="${C.accent}"/>`);
 for (let z = LV.r2 + 0.2; z < LV.r4 + 0.4; z += 0.2)
-  g.push(line(P(AXE, DF, z), P(AXE, DF + RETRAIT, z), '#FFFFFF', 1, 0.25));
+  g.push(line(P(AXE, DF + GCN, z), P(AXE, DF + RETRAIT, z), '#FFFFFF', 1, 0.25));
 g.push(txt(...P(AXE + 0.5, DF + RETRAIT, LV.r4 + 0.1), 'BRISE-VUE ENTRE LES 2 BALCONS', { size: 8.5, fill: C.dim, ls: '0.1em', weight: 700, anchor: 'start' }));
 
 // menuiseries du R+2 et du R+3 — alu TPR RAL 7024, verre reflechissant
@@ -182,7 +182,7 @@ g.unshift(`<defs>
 const body = `<div style="width: ${W}px; background: #FFFFFF">
 ${header({ w: W, kicker: 'Vue plongeante · dans le vide entre la terrasse R+2 et le balcon R+3',
   title: 'La terrasse, et le balcon au-dessus',
-  sub: `Bloc droit vu de dessus, l’œil à 15 m. En bas la terrasse du R+2 posée sur la toiture du parking, ses dalles sur plots et son garde-corps droit ; au milieu le vide de 1,80 m, deux balcons côte à côte séparés par le brise-vue ; au-dessus le balcon du R+3 dont la rive creuse un grand lobe de 1,80 m puis un petit de 1,10 m — ${developpe().toFixed(2)} ml de développé.`,
+  sub: `Bloc droit vu de dessus, l’œil à 15 m. En bas la terrasse du R+2 posée sur la toiture du parking, ses dalles sur plots et son garde-corps droit ; au milieu la fente de 1,80 m et ses deux petits balcons de 0,70 × 0,80 m séparés par le brise-vue de 40 cm ; au-dessus le balcon du R+3 dont la rive creuse un grand lobe de 1,80 m puis un petit de 1,10 m — ${developpe().toFixed(2)} ml de développé.`,
   right: 'VUE D’AMBIANCE<br>NON COTÉE<br>BLOC DROIT' })}
 <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display: block">${g.join('\n')}</svg>
 </div>`;

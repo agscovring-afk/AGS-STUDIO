@@ -185,11 +185,11 @@ export function elevation(P, o = {}) {
   // que la tranche de 12 cm ; le reste du vide s'ouvre sur les deux balcons et
   // sur le fond de niche, 1,50 m en arriere du nu.
   {
-    const [n1, n2] = XS.vide, hb = [[n1 + JOUE, AXE - BV_EP / 2], [AXE + BV_EP / 2, n2 - JOUE]];
-    g.push(R(n1, n2, LV.r2, LV.toit, P.wallDeep));                        // fond de niche, en retrait
-    g.push(R(n1, n2, LV.r2, LV.toit, '#000000', 'opacity="0.22"'));       // ombre propre du retrait
-    g.push(R(n1, n1 + JOUE, LV.r2, LV.toit, '#000000', 'opacity="0.16"')); // joues beton
-    g.push(R(n2 - JOUE, n2, LV.r2, LV.toit, '#000000', 'opacity="0.10"'));
+    const [n1, n2] = XS.vide, hb = [[n1, AXE - BV_EP / 2], [AXE + BV_EP / 2, n2]];
+    g.push(R(n1, n2, LV.r2, LV.toit, P.wallDeep));                        // fond de fente, a 1,50 m
+    g.push(R(n1, n2, LV.r2, LV.toit, '#000000', 'opacity="0.30"'));       // la fente est dans l'ombre
+    g.push(R(n1, n1 + 0.22, LV.r2, LV.toit, '#000000', 'opacity="0.20"')); // flancs des deux blocs
+    g.push(R(n2 - 0.22, n2, LV.r2, LV.toit, '#000000', 'opacity="0.14"'));
     for (const h of BALCONS) {
       // portes-fenetres au fond de la niche, une par logement
       for (const [a, b] of hb) {
@@ -197,15 +197,16 @@ export function elevation(P, o = {}) {
         g.push(R(c - PBN / 2, c + PBN / 2, h + 0.02, h + PBH, P.glass));
         g.push(R(c - PBN / 2, c + PBN / 2, h + 0.02, h + PBH, 'none', `stroke="${P.accentDark}" stroke-width="1"`));
       }
-      // dalle de chaque balcon de niche, vue au nu de facade
-      g.push(R(n1 + JOUE, n2 - JOUE, h - 0.20, h, P.wall));
-      g.push(R(n1 + JOUE, n2 - JOUE, h - 0.28, h - 0.20, '#000000', 'opacity="0.18"'));
+      // dalle de chaque balcon, 0,80 m de profondeur, 0,70 m en arriere du nu
+      g.push(R(n1, n2, h - 0.20, h, P.wall, 'opacity="0.88"'));
+      g.push(R(n1, n2, h - 0.30, h - 0.20, '#000000', 'opacity="0.22"'));
       // garde-corps au nu, un par balcon
       for (const [a, b] of hb) g.push(gcDroit(a + 0.03, b - 0.03, h));
     }
-    // le brise-vue : sur l'axe, vu par la tranche — 12 cm du R+2 a la toiture
+    // le brise-vue : 40 cm sur l'axe, entre les deux balcons, du R+2 a la toiture
     g.push(R(AXE - BV_EP / 2, AXE + BV_EP / 2, LV.r2, LV.toit, P.accent));
-    g.push(R(AXE - BV_EP / 2, AXE - BV_EP / 2 + 0.035, LV.r2, LV.toit, P.accentDark));
+    for (let x = AXE - BV_EP / 2 + 0.05; x < AXE + BV_EP / 2 - 0.02; x += 0.10)
+      g.push(`<line x1="${px(x)}" y1="${py(LV.r2)}" x2="${px(x)}" y2="${py(LV.toit)}" stroke="${P.accentDark}" stroke-width="1.6" opacity="0.85"/>`);
     g.push(R(n1, n2, LV.r2, LV.toit, 'none', `stroke="${P.accentDark}" stroke-width="1.2"`));
   }
 
