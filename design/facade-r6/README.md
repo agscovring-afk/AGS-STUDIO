@@ -38,7 +38,7 @@ boucler exactement les 17,50 m relevés.
 | `*.dc.html` | Planches générées (artboards du canvas) |
 | `canvas.json` | Mise en page du canvas, pages et notes |
 | `preview.mjs` | Sort une planche en HTML simple pour contrôle local |
-| `renders/` | Vues d'ambiance exportées en PNG (jour / nuit) |
+| `renders/` | Vues d'ambiance en PNG et gabarits en PNG + PDF A3 |
 
 ## Parti retenu
 
@@ -64,10 +64,24 @@ son relief à l'onde : la crête, plus proche, monte dans l'image et découvre s
 sous-face, le creux redescend. Les horizontales restent horizontales et les
 verticales convergent vers un point de fuite unique.
 
+## Gabarits à dessiner
+
+`build-gabarits.mjs` sort deux planches A3 paysage à l'échelle 1:50 (96 px/pouce,
+un carreau de 0,25 m) destinées à être imprimées ou annotées à l'écran :
+
+- **Gabarit-Onde** — niveau courant, la zone de balcon laissée vide avec le tracé
+  actuel en repère léger, pour redessiner la rive.
+- **Gabarit-Terrasse** — niveau R+2, la dalle du parking et le vide central
+  posés comme limites dures, le reste libre.
+
+Les PDF sont produits par Chromium (`--print-to-pdf` avec `@page { size: A3
+landscape; margin: 0 }`) ; le conteneur est bridé à 1118 px de haut pour tenir
+sur une seule page.
+
 ## Regénérer
 
 ```sh
-for b in main vue coupe plan materiaux variantes; do node build-$b.mjs; done
+for b in main vue coupe plan materiaux variantes gabarits; do node build-$b.mjs; done
 ```
 
 Puis re-seeder le canvas avec `seed-canvas.mjs` de la skill `design`.

@@ -6,6 +6,10 @@
     },
     {
       "id": "page-2",
+      "name": "Gabarits à dessiner"
+    },
+    {
+      "id": "page-3",
       "name": "Variantes écartées"
     }
   ],
@@ -70,7 +74,7 @@
       "y": 0,
       "w": 820,
       "h": 1130,
-      "page": "page-2",
+      "page": "page-3",
       "title": "Variante B — Graphite & Verre"
     },
     {
@@ -79,8 +83,28 @@
       "y": 0,
       "w": 820,
       "h": 1130,
-      "page": "page-2",
+      "page": "page-3",
       "title": "Variante C — Rubans continus"
+    },
+    {
+      "file": "Gabarit-Onde.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1587,
+      "h": 1123,
+      "page": "page-2",
+      "title": "Gabarit — onde de rive",
+      "print": "fixed"
+    },
+    {
+      "file": "Gabarit-Terrasse.dc.html",
+      "x": 1687,
+      "y": 0,
+      "w": 1587,
+      "h": 1123,
+      "page": "page-2",
+      "title": "Gabarit — terrasses R+2",
+      "print": "fixed"
     }
   ],
   "annotations": [
@@ -121,12 +145,20 @@
       "x": -390,
       "y": 0,
       "w": 330,
-      "page": "page-2",
+      "page": "page-3",
       "text": "POUR MÉMOIRE\n\nDeux directions étudiées puis écartées au profit de la variante A. Elles restent ici comme trace de l'arbitrage — mêmes cotes, mêmes matériaux, parti d'expression différent.\n\nSi un point de l'une des deux vous intéresse encore, il peut être greffé sur la variante A."
+    },
+    {
+      "id": "gabarits",
+      "x": -390,
+      "y": 0,
+      "w": 330,
+      "page": "page-2",
+      "text": "À DESSINER\n\nDeux planches A3 à l'échelle 1:50, un carreau = 0,25 m.\n\nCe qui est en noir est figé : mur, poteaux, portes-balcon, vide central, limite de dalle du parking. Le reste est libre.\n\nImprime, dessine à la main, renvoie une photo — ou dessine directement sur l'image. Je relève les cotes sur ton tracé et je remets tout le dossier à jour."
     }
   ],
   "launch": {
     "view": "canvas",
-    "page": "page-1"
+    "page": "page-2"
   }
 }
