@@ -1,8 +1,0 @@
-{
-    "tests": [
-        "Tender CRUD",
-        "Document Upload",
-        "BOQ Processing",
-        "AI Analysis"
-    ]
-}

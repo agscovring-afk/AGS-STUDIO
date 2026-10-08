@@ -1,3 +1,32 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives / backups / dumps (keep source in git, not snapshots)
+*.zip
+*.bundle
+*.bak
+*.backup
+*.old
+*_backup.py
+*_tree.txt
+AGS_PROJECT_REPORT.txt
 project_summary.txt
+
+# Generated reports and runtime outputs
+reports/
+build_reports/
+night_build/
+night_worker/
+autonomous_build_report.json
+autonomous_production_test.json
+upgrade_report.json

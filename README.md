@@ -27,3 +27,21 @@ Create a sample company:
 ```bash
 python -m app.main create-company --legal-name "Legal Ltd" --commercial-name "Legal" --code COM-00001
 ```
+
+## Project layout
+
+- `app/` - the ERP application (models, repositories, services, UI, AI engine)
+- `ags/` - the AGS CLI / plugin runtime (`python ags.py`)
+- `agents/`, `generators/`, `templates/` - code-generation agents and Jinja templates
+- `generated/` - modules produced by the generators
+- `data/` - project memory and analysis files read by the AI tools
+- `scripts/` - one-off helper scripts (night builders, installers, demos)
+- `tests/` - pytest suite (`python -m pytest`)
+- `docs/` - requirements, vision and design documents
+
+Generated outputs (`reports/`, `night_build/`, `night_worker/`, `*.db`, `__pycache__/`,
+archives and `*_backup.py` files) are ignored by git. Create the local database with:
+
+```bash
+python -m app.database.run_migrations
+```

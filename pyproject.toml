@@ -1,0 +1,16 @@
+[project]
+name = "ags-studio"
+version = "0.1.0"
+description = "AGS ERP V2 - Desktop ERP for aluminium, glass and construction companies"
+requires-python = ">=3.11"
+dependencies = [
+    "customtkinter",
+    "argon2-cffi",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
